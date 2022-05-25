@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"module": "CommonJS",
+		"declaration": true,
+		"outDir": "./lib",
+		"strict": true,
+		"jsx": "react-jsx",
+		"esModuleInterop": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "**/__tests__/*", "src/examples/*"]
+}
