@@ -6,7 +6,7 @@ import { getColor, getDistance, toPx, useEasyFlexTheme } from '../utils';
 const StyledBaseButton = styled.button<{
 	'data-align'?: IAlignItems;
 	'data-align-self'?: IAlignSelf;
-	'data-background-color'?: string;
+	'data-background-color': string;
 	'data-color'?: string;
 	'data-full-width'?: '100%';
 	'data-grow'?: number;
@@ -25,8 +25,7 @@ const StyledBaseButton = styled.button<{
 	outline: none;
 	align-items: ${({ 'data-align': align }) => align};
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
-	background-color: ${({ 'data-background-color': backgroundColor }) =>
-		backgroundColor === undefined ? 'transparent' : backgroundColor};
+	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	color: ${({ 'data-color': color }) => color};
 	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
 	flex-grow: ${({ 'data-grow': grow }) => (grow === undefined ? undefined : grow)};
@@ -80,8 +79,8 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 }) => {
 	const theme = useEasyFlexTheme();
 
-	const processedBackgroundColor = useMemo<string | undefined>(
-		() => (backgroundColor === undefined ? undefined : getColor(theme, backgroundColor)),
+	const processedBackgroundColor = useMemo<string>(
+		() => (backgroundColor === undefined ? 'transparent' : getColor(theme, backgroundColor)),
 		[theme, backgroundColor]
 	);
 
