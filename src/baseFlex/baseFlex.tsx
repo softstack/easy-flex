@@ -38,13 +38,13 @@ const style = css<{
 	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
 	column-gap: ${({ 'data-column-gap': columnGap }) => columnGap};
 	row-gap: ${({ 'data-row-gap': rowGap }) => rowGap};
-	flex-grow: ${({ 'data-grow': grow }) => (grow === undefined ? undefined : grow)};
+	flex-grow: ${({ 'data-grow': grow }) => grow};
 	margin-left: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
 	margin-right: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
 	padding-left: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
 	padding-right: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
 	justify-content: ${({ 'data-justify': justify }) => justify};
-	flex-shrink: ${({ 'data-shrink': shrink }) => (shrink === undefined ? undefined : shrink)};
+	flex-shrink: ${({ 'data-shrink': shrink }) => shrink};
 	margin-top: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
 	margin-bottom: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
 	padding-top: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};

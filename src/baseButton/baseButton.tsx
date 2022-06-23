@@ -28,13 +28,13 @@ const StyledBaseButton = styled.button<{
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	color: ${({ 'data-color': color }) => color};
 	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
-	flex-grow: ${({ 'data-grow': grow }) => (grow === undefined ? undefined : grow)};
+	flex-grow: ${({ 'data-grow': grow }) => grow};
 	margin-left: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
 	margin-right: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
 	padding-left: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
 	padding-right: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
 	justify-content: ${({ 'data-justify': justify }) => justify};
-	flex-shrink: ${({ 'data-shrink': shrink }) => (shrink === undefined ? undefined : shrink)};
+	flex-shrink: ${({ 'data-shrink': shrink }) => shrink};
 	margin-top: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
 	margin-bottom: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
 	padding-top: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};

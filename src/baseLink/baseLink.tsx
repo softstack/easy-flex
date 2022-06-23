@@ -12,7 +12,7 @@ const StyledBaseLink = styled.a<{
 	box-sizing: border-box;
 	text-decoration: none;
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
-	color: ${({ 'data-color': color }) => (color === undefined ? undefined : color)};
+	color: ${({ 'data-color': color }) => color};
 	margin-left: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
 	margin-right: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
 	margin-top: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
