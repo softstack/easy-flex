@@ -81,24 +81,24 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 
 	const processedBackgroundColor = useMemo<string>(
 		() => (backgroundColor === undefined ? 'transparent' : getColor(theme, backgroundColor)),
-		[theme, backgroundColor]
+		[backgroundColor, theme]
 	);
 
 	const processedColor = useMemo<string | undefined>(
 		() => (color === undefined ? undefined : getColor(theme, color)),
-		[theme, color]
+		[color, theme]
 	);
 
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
 	const processedHorizontalMargin = useMemo<string>(
 		() => toPx(getDistance(theme, horizontalMargin)),
-		[theme, horizontalMargin]
+		[horizontalMargin, theme]
 	);
 
 	const processedHorizontalPadding = useMemo<string>(
 		() => toPx(getDistance(theme, horizontalPadding)),
-		[theme, horizontalPadding]
+		[horizontalPadding, theme]
 	);
 
 	const processedVerticalMargin = useMemo<string>(

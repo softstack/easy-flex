@@ -12,6 +12,7 @@ export const EasyFlexProvider: FC<IEasyFlexProviderProps> = ({ children, theme }
 		() => ({
 			...initialFlexTheme,
 			...theme,
+			flipThreshold: { ...initialFlexTheme.flipThreshold, ...theme.flipThreshold },
 			distance: { ...initialFlexTheme.distance, ...theme.distance },
 			fontSize: { ...initialFlexTheme.fontSize, ...theme.fontSize },
 			fontWeight: { ...initialFlexTheme.fontWeight, ...theme.fontWeight },

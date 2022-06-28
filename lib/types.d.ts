@@ -1,6 +1,8 @@
 export declare type IDeepPartial<T> = T extends object ? {
     [P in keyof T]?: IDeepPartial<T[P]>;
 } : T;
+declare type IBaseSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
+declare type ISizeType = 'px' | 'rem';
 export declare type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 export declare type IAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IAlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
@@ -9,14 +11,36 @@ export declare type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'norm
 export declare type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 export declare type IFontStyle = 'italic' | 'normal';
 export declare type IFlipDirection = 'flip' | 'reverse' | 'flip-reverse';
+export declare type IFlipThreshold = IBaseSize;
 export declare type IBaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
-export declare type IDistance = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
-export declare type IFontSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
+export declare type IDistance = IBaseSize;
+export declare type IFontSize = IBaseSize;
 export declare type IFontWeight = 'normal' | 'semibold' | 'bold';
-export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError';
+export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter';
 export interface IEasyFlexTheme {
-    flipDirection: boolean;
+    fallbackFlipThreshold: number;
+    flipThreshold: {
+        '8xs': number;
+        '7xs': number;
+        '6xs': number;
+        '5xs': number;
+        '4xs': number;
+        '3xs': number;
+        xxs: number;
+        xs: number;
+        s: number;
+        m: number;
+        l: number;
+        xl: number;
+        xxl: number;
+        '3xl': number;
+        '4xl': number;
+        '5xl': number;
+        '6xl': number;
+        '7xl': number;
+        '8xl': number;
+    };
     distance: {
         '8xs': number;
         '7xs': number;
@@ -38,6 +62,7 @@ export interface IEasyFlexTheme {
         '7xl': number;
         '8xl': number;
     };
+    fontSizeType: ISizeType;
     fontSize: {
         '8xs': number;
         '7xs': number;
@@ -71,12 +96,20 @@ export interface IEasyFlexTheme {
         quaternary: string;
         quinary: string;
         senary: string;
+        warning: string;
+        error: string;
+        header: string;
+        footer: string;
         primaryText: string;
         secondaryText: string;
         tertiaryText: string;
         quaternaryText: string;
         quinaryText: string;
         senaryText: string;
+        warningText: string;
+        errorText: string;
+        headerText: string;
+        footerText: string;
         primaryBackground: string;
         secondaryBackground: string;
         tertiaryBackground: string;
@@ -85,6 +118,8 @@ export interface IEasyFlexTheme {
         senaryBackground: string;
         warningBackground: string;
         errorBackground: string;
+        headerBackground: string;
+        footerBackground: string;
         onPrimary: string;
         onSecondary: string;
         onTertiary: string;
@@ -93,6 +128,9 @@ export interface IEasyFlexTheme {
         onSenary: string;
         onWarning: string;
         onError: string;
+        onHeader: string;
+        onFooter: string;
     };
 }
 export declare type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;
+export {};

@@ -1,6 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { EasyFlexContext } from './constants';
-import { IColor, IDistance, IEasyFlexTheme, IFontSize, IFontWeight } from './types';
+import { IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
 
 export const toPx = (value: number): string => `${value}px`;
 
@@ -29,9 +29,31 @@ export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: number | IFontW
 
 export const getColor = (theme: IEasyFlexTheme, color: IColor): string => {
 	if (color === 'inherit') {
-		return 'inherit';
+		return color;
 	}
 	return theme.color[color];
 };
 
+export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold) =>
+	theme.flipThreshold[flipThreshold];
+
 export const useEasyFlexTheme = () => useContext(EasyFlexContext);
+
+export const useDimensions = (): { height: number; width: number } => {
+	const [height, setHeight] = useState(window.innerHeight);
+	const [width, setWidth] = useState(window.innerWidth);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setHeight(window.innerHeight);
+			setWidth(window.innerWidth);
+		};
+		window.addEventListener('resize', handleResize);
+
+		return () => window.removeEventListener('resize', handleResize);
+	}, [setHeight, setWidth]);
+
+	const dimensions = useMemo(() => ({ height, width }), [height, width]);
+
+	return dimensions;
+};

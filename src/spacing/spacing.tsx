@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
-import { IDistance } from '../types';
-import { getDistance, toPx, useEasyFlexTheme } from '../utils';
+import { IDistance, IFlipThreshold } from '../types';
+import { getDistance, getFlipThreshold, toPx, useDimensions, useEasyFlexTheme } from '../utils';
 
 const StyledSpacing = styled.div<{ 'data-horizontal': string; 'data-vertical': string }>`
 	display: flex;
@@ -20,27 +20,42 @@ const StyledSpacing = styled.div<{ 'data-horizontal': string; 'data-vertical': s
 export interface ISpacingProps extends HTMLAttributes<HTMLDivElement> {
 	flip?: boolean;
 	flipDirection?: boolean;
+	flipThreshold?: IFlipThreshold;
 	horizontal?: IDistance | number;
 	vertical?: IDistance | number;
 }
 
-export const Spacing: FC<ISpacingProps> = ({ flip, flipDirection = false, horizontal = 0, vertical = 0, ...props }) => {
+export const Spacing: FC<ISpacingProps> = ({
+	flip,
+	flipDirection = false,
+	flipThreshold,
+	horizontal = 0,
+	vertical = 0,
+	...props
+}) => {
 	const theme = useEasyFlexTheme();
+	const { width } = useDimensions();
 
 	const processedHorizontal = useMemo<string>(
 		() =>
-			flipDirection && (flip || (flip === undefined && theme.flipDirection))
+			flipDirection &&
+			(flip ||
+				(flip === undefined &&
+					(flipThreshold ? width < getFlipThreshold(theme, flipThreshold) : width < theme.fallbackFlipThreshold)))
 				? toPx(getDistance(theme, vertical))
 				: toPx(getDistance(theme, horizontal)),
-		[theme, flip, flipDirection, horizontal, vertical]
+		[flip, flipDirection, flipThreshold, horizontal, theme, vertical, width]
 	);
 
 	const processedVertical = useMemo<string>(
 		() =>
-			flipDirection && (flip || (flip === undefined && theme.flipDirection))
+			flipDirection &&
+			(flip ||
+				(flip === undefined &&
+					(flipThreshold ? width < getFlipThreshold(theme, flipThreshold) : width < theme.fallbackFlipThreshold)))
 				? toPx(getDistance(theme, horizontal))
 				: toPx(getDistance(theme, vertical)),
-		[theme, flip, flipDirection, horizontal, vertical]
+		[flip, flipDirection, flipThreshold, horizontal, theme, vertical, width]
 	);
 
 	return <StyledSpacing data-horizontal={processedHorizontal} data-vertical={processedVertical} {...props} />;

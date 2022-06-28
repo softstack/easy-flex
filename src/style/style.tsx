@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { IColor, IFontSize, IFontStyle, IFontWeight } from '../types';
-import { getColor, getFontSize, getFontWeight, toRem, useEasyFlexTheme } from '../utils';
+import { getColor, getFontSize, getFontWeight, toPx, toRem, useEasyFlexTheme } from '../utils';
 
 const StyledStyle = styled.span<{
 	'data-color'?: string;
@@ -27,17 +27,23 @@ export const Style: FC<IStyleProps> = ({ color, fontSize, fontWeight, italic, ch
 
 	const processedColor = useMemo<string | undefined>(
 		() => (color === undefined ? undefined : getColor(theme, color)),
-		[theme, color]
+		[color, theme]
 	);
 
-	const processedFontSize = useMemo<string | undefined>(
-		() => (fontSize === undefined ? undefined : toRem(getFontSize(theme, fontSize))),
-		[theme, fontSize]
-	);
+	const processedFontSize = useMemo<string | undefined>(() => {
+		if (fontSize === undefined) {
+			return fontSize;
+		}
+		const fontSizeValue = getFontSize(theme, fontSize);
+		if (theme.fontSizeType === 'rem') {
+			return toRem(fontSizeValue);
+		}
+		return toPx(fontSizeValue);
+	}, [fontSize, theme]);
 
 	const processedFontWeight = useMemo<string | number | undefined>(
 		() => (fontWeight === undefined ? undefined : getFontWeight(theme, fontWeight)),
-		[theme, fontWeight]
+		[fontWeight, theme]
 	);
 
 	const fontStyle = useMemo<IFontStyle | undefined>(

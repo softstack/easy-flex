@@ -110,22 +110,28 @@ export const Text: FC<ITextProps> = ({
 }) => {
 	const theme = useEasyFlexTheme();
 
-	const processedColor = useMemo<string>(() => getColor(theme, color), [theme, color]);
+	const processedColor = useMemo<string>(() => getColor(theme, color), [color, theme]);
 
-	const processedFontSize = useMemo<string>(() => toRem(getFontSize(theme, fontSize)), [theme, fontSize]);
+	const processedFontSize = useMemo<string>(() => {
+		const fontSizeValue = getFontSize(theme, fontSize);
+		if (theme.fontSizeType === 'rem') {
+			return toRem(fontSizeValue);
+		}
+		return toPx(fontSizeValue);
+	}, [fontSize, theme]);
 
-	const processedFontWeight = useMemo<string | number>(() => getFontWeight(theme, fontWeight), [theme, fontWeight]);
+	const processedFontWeight = useMemo<string | number>(() => getFontWeight(theme, fontWeight), [fontWeight, theme]);
 
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
 	const processedHorizontalMargin = useMemo<string>(
 		() => toPx(getDistance(theme, horizontalMargin)),
-		[theme, horizontalMargin]
+		[horizontalMargin, theme]
 	);
 
 	const processedHorizontalPadding = useMemo<string>(
 		() => toPx(getDistance(theme, horizontalPadding)),
-		[theme, horizontalPadding]
+		[horizontalPadding, theme]
 	);
 
 	const fontStyle = useMemo<IFontStyle | undefined>(

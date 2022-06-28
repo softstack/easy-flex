@@ -132,12 +132,12 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 
 	const processedBackgroundColor = useMemo<string | undefined>(
 		() => (backgroundColor === undefined ? undefined : getColor(theme, backgroundColor)),
-		[theme, backgroundColor]
+		[backgroundColor, theme]
 	);
 
 	const processedColor = useMemo<string | undefined>(
 		() => (color === undefined ? undefined : getColor(theme, color)),
-		[theme, color]
+		[color, theme]
 	);
 
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
@@ -153,7 +153,7 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 			default:
 				undefined;
 		}
-	}, [theme, flexDirection, gap]);
+	}, [flexDirection, gap, theme]);
 
 	const rowGap = useMemo(() => {
 		if (gap === undefined) {
@@ -166,16 +166,16 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 			default:
 				undefined;
 		}
-	}, [theme, flexDirection, gap]);
+	}, [flexDirection, gap, theme]);
 
 	const processedHorizontalMargin = useMemo<string>(
 		() => toPx(getDistance(theme, horizontalMargin)),
-		[theme, horizontalMargin]
+		[horizontalMargin, theme]
 	);
 
 	const processedHorizontalPadding = useMemo<string>(
 		() => toPx(getDistance(theme, horizontalPadding)),
-		[theme, horizontalPadding]
+		[horizontalPadding, theme]
 	);
 
 	const processedVerticalMargin = useMemo<string>(

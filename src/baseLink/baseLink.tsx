@@ -40,12 +40,12 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 
 	const processedColor = useMemo<string | undefined>(
 		() => (color === undefined ? undefined : getColor(theme, color)),
-		[theme, color]
+		[color, theme]
 	);
 
 	const processedHorizontalMargin = useMemo<string>(
 		() => toPx(getDistance(theme, horizontalMargin)),
-		[theme, horizontalMargin]
+		[horizontalMargin, theme]
 	);
 
 	const target = useMemo(() => (newTab ? '_blank' : undefined), [newTab]);
