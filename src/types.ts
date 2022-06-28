@@ -210,6 +210,7 @@ export interface IEasyFlexTheme {
 		errorBackground: string;
 		headerBackground: string;
 		footerBackground: string;
+		modalBackground: string;
 		onPrimary: string;
 		onSecondary: string;
 		onTertiary: string;
@@ -221,6 +222,7 @@ export interface IEasyFlexTheme {
 		onHeader: string;
 		onFooter: string;
 	};
+	modalRootId: string;
 }
 
 export type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;

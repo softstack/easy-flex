@@ -103,6 +103,7 @@ export const initialFlexTheme: IEasyFlexTheme = {
 		errorBackground: '#dc3545',
 		headerBackground: '#fff',
 		footerBackground: '#fff',
+		modalBackground: 'rgba(0, 0, 0, 0.5)',
 		onPrimary: '#fff',
 		onSecondary: '#fff',
 		onTertiary: '#fff',
@@ -114,6 +115,7 @@ export const initialFlexTheme: IEasyFlexTheme = {
 		onHeader: '#fff',
 		onFooter: '#fff',
 	},
+	modalRootId: 'modal-root',
 };
 
 export const EasyFlexContext = createContext(initialFlexTheme);
