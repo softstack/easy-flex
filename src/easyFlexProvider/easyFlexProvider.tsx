@@ -17,6 +17,7 @@ export const EasyFlexProvider: FC<IEasyFlexProviderProps> = ({ children, theme }
 			fontSize: { ...initialFlexTheme.fontSize, ...theme.fontSize },
 			fontWeight: { ...initialFlexTheme.fontWeight, ...theme.fontWeight },
 			color: { ...initialFlexTheme.color, ...theme.color },
+			modal: { ...initialFlexTheme.modal, ...theme.modal },
 		}),
 		[theme]
 	);

@@ -1,6 +1,7 @@
 export * from './baseButton/baseButton';
 export * from './baseFlex/baseFlex';
 export * from './baseLink/baseLink';
+export * from './baseModal/baseModal';
 export * from './col/col';
 export * from './constants';
 export * from './easyFlexProvider/easyFlexProvider';

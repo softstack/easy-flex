@@ -1,6 +1,7 @@
-import { FC } from 'react';
-import { IColProps } from '../col/col';
-interface IBaseModalProps extends IColProps {
+import { FC, HTMLAttributes } from 'react';
+interface IBaseModalProps extends HTMLAttributes<HTMLDivElement> {
+    keepChildInside?: boolean;
+    blur?: boolean | number;
     onClose: () => void;
 }
 export declare const BaseModal: FC<IBaseModalProps>;

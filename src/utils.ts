@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { EasyFlexContext } from './constants';
 import { IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
 
@@ -40,20 +40,19 @@ export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThre
 export const useEasyFlexTheme = () => useContext(EasyFlexContext);
 
 export const useDimensions = (): { height: number; width: number } => {
-	const [height, setHeight] = useState(window.innerHeight);
-	const [width, setWidth] = useState(window.innerWidth);
+	const [dimensions, setDimensions] = useState<{ height: number; width: number }>({
+		height: window.innerHeight,
+		width: window.innerWidth,
+	});
 
 	useEffect(() => {
 		const handleResize = () => {
-			setHeight(window.innerHeight);
-			setWidth(window.innerWidth);
+			setDimensions({ height: window.innerHeight, width: window.innerWidth });
 		};
 		window.addEventListener('resize', handleResize);
 
 		return () => window.removeEventListener('resize', handleResize);
-	}, [setHeight, setWidth]);
-
-	const dimensions = useMemo(() => ({ height, width }), [height, width]);
+	});
 
 	return dimensions;
 };

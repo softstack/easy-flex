@@ -11,7 +11,7 @@
 	"homepage": "https://github.com/chainsulting/easyflex",
 	"scripts": {
 		"test": "",
-		"build": "tsc",
+		"build": "rm ./lib/* -rf && tsc",
 		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
 		"prepare": "npm run build",
