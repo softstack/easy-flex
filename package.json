@@ -11,10 +11,10 @@
 	"homepage": "https://github.com/chainsulting/easyflex",
 	"scripts": {
 		"test": "",
-		"build": "rm ./lib/* -rf && tsc",
+		"build": "tsc",
 		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
-		"prepare": "npm run build",
+		"prepare": "rm ./lib/* -rf && npm run build",
 		"prepublishOnly": "npm test && npm run lint",
 		"preversion": "npm run lint",
 		"version": "npm run format && git add -A src",
