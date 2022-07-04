@@ -9,6 +9,7 @@ const Background = styled.div<{
 	'data-max-child-width'?: string;
 }>`
 	display: flex;
+	box-sizing: border-box;
 	position: fixed;
 	top: 0;
 	left: 0;

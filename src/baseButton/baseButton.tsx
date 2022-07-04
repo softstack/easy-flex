@@ -18,8 +18,8 @@ const StyledBaseButton = styled.button<{
 	'data-vertical-padding': string;
 }>`
 	display: flex;
-	flex-direction: row;
 	box-sizing: border-box;
+	flex-direction: row;
 	border: none;
 	cursor: pointer;
 	outline: none;

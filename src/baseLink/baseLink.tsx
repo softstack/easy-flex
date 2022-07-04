@@ -9,6 +9,7 @@ const StyledBaseLink = styled.a<{
 	'data-horizontal-margin': string;
 	'data-vertical-margin': string;
 }>`
+	display: flex;
 	box-sizing: border-box;
 	text-decoration: none;
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};

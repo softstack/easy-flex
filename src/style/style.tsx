@@ -4,11 +4,15 @@ import { IColor, IFontSize, IFontStyle, IFontWeight } from '../types';
 import { getColor, getFontSize, getFontWeight, toPx, toRem, useEasyFlexTheme } from '../utils';
 
 const StyledStyle = styled.span<{
+	'data-background-color'?: string;
 	'data-color'?: string;
 	'data-font-size'?: string;
 	'data-font-weight'?: string | number;
 	'data-font-style'?: IFontStyle;
 }>`
+	display: flex;
+	box-sizing: border-box;
+	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	color: ${({ 'data-color': color }) => color};
 	font-size: ${({ 'data-font-size': fontSize }) => fontSize};
 	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
@@ -16,14 +20,20 @@ const StyledStyle = styled.span<{
 `;
 
 export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
+	backgroundColor?: IColor;
 	color?: IColor;
 	fontSize?: number | IFontSize;
 	fontWeight?: number | IFontWeight;
 	italic?: boolean;
 }
 
-export const Style: FC<IStyleProps> = ({ color, fontSize, fontWeight, italic, children }) => {
+export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontWeight, italic, children }) => {
 	const theme = useEasyFlexTheme();
+
+	const processedBackgroundColor = useMemo<string | undefined>(
+		() => (backgroundColor === undefined ? undefined : getColor(theme, backgroundColor)),
+		[backgroundColor, theme]
+	);
 
 	const processedColor = useMemo<string | undefined>(
 		() => (color === undefined ? undefined : getColor(theme, color)),
@@ -53,6 +63,7 @@ export const Style: FC<IStyleProps> = ({ color, fontSize, fontWeight, italic, ch
 
 	return (
 		<StyledStyle
+			data-background-color={processedBackgroundColor}
 			data-color={processedColor}
 			data-font-size={processedFontSize}
 			data-font-weight={processedFontWeight}
