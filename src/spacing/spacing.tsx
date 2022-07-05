@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { IDistance, IFlipThreshold } from '../types';
-import { getDistance, getFlipThreshold, toPx, useDimensions, useEasyFlexTheme } from '../utils';
+import { getDistance, getFlipThreshold, toPx, useDimension, useEasyFlexTheme } from '../utils';
 
 const StyledSpacing = styled.div<{ 'data-horizontal': string; 'data-vertical': string }>`
 	display: flex;
@@ -34,7 +34,7 @@ export const Spacing: FC<ISpacingProps> = ({
 	...props
 }) => {
 	const theme = useEasyFlexTheme();
-	const { width } = useDimensions();
+	const { width } = useDimension();
 
 	const processedHorizontal = useMemo<string>(
 		() =>

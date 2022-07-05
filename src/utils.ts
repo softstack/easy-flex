@@ -39,7 +39,7 @@ export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThre
 
 export const useEasyFlexTheme = () => useContext(EasyFlexContext);
 
-export const useDimensions = (): { height: number; width: number } => {
+export const useDimension = (): { height: number; width: number } => {
 	const [height, setHeight] = useState(window.innerHeight);
 	const [bodyWidth, setBodyWidth] = useState(document.body.clientWidth);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -69,4 +69,131 @@ export const useDimensions = (): { height: number; width: number } => {
 	);
 
 	return dimensions;
+};
+
+export const useColor = <T = string | undefined>(
+	color: IColor | undefined,
+	fallback: T
+): T extends undefined ? string | T : string => {
+	const theme = useEasyFlexTheme();
+
+	const processedColor = useMemo<string | T>(
+		() => (color === undefined ? fallback : getColor(theme, color)),
+		[color, fallback, theme]
+	);
+
+	return processedColor as T extends undefined ? string | T : string;
+};
+
+export const useDistance = ({
+	marginBottom,
+	marginLeft,
+	marginRight,
+	marginTop,
+	marginX,
+	marginY,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+	paddingTop,
+	paddingX,
+	paddingY,
+}: {
+	marginBottom?: IDistance | number;
+	marginLeft?: IDistance | number;
+	marginRight?: IDistance | number;
+	marginTop?: IDistance | number;
+	marginX?: IDistance | number;
+	marginY?: IDistance | number;
+	paddingBottom?: IDistance | number;
+	paddingLeft?: IDistance | number;
+	paddingRight?: IDistance | number;
+	paddingTop?: IDistance | number;
+	paddingX?: IDistance | number;
+	paddingY?: IDistance | number;
+}): {
+	marginBottom: string;
+	marginLeft: string;
+	marginRight: string;
+	marginTop: string;
+	paddingBottom: string;
+	paddingLeft: string;
+	paddingRight: string;
+	paddingTop: string;
+} => {
+	const theme = useEasyFlexTheme();
+
+	const processedMarginBottom = useMemo<string>(
+		() => toPx(getDistance(theme, marginBottom ?? marginY ?? 0)),
+		[marginBottom, marginY, theme]
+	);
+
+	const processedMarginLeft = useMemo<string>(
+		() => toPx(getDistance(theme, marginLeft ?? marginX ?? 0)),
+		[marginLeft, marginX, theme]
+	);
+
+	const processedMarginRight = useMemo<string>(
+		() => toPx(getDistance(theme, marginRight ?? marginX ?? 0)),
+		[marginRight, marginX, theme]
+	);
+
+	const processedMarginTop = useMemo<string>(
+		() => toPx(getDistance(theme, marginTop ?? marginY ?? 0)),
+		[marginTop, marginY, theme]
+	);
+
+	const processedPaddingBottom = useMemo<string>(
+		() => toPx(getDistance(theme, paddingBottom ?? paddingY ?? 0)),
+		[paddingBottom, paddingY, theme]
+	);
+
+	const processedPaddingLeft = useMemo<string>(
+		() => toPx(getDistance(theme, paddingLeft ?? paddingX ?? 0)),
+		[paddingLeft, paddingX, theme]
+	);
+
+	const processedPaddingRight = useMemo<string>(
+		() => toPx(getDistance(theme, paddingRight ?? paddingX ?? 0)),
+		[paddingRight, paddingX, theme]
+	);
+
+	const processedPaddingTop = useMemo<string>(
+		() => toPx(getDistance(theme, paddingTop ?? paddingY ?? 0)),
+		[paddingTop, paddingY, theme]
+	);
+
+	const distance = useMemo<{
+		marginBottom: string;
+		marginLeft: string;
+		marginRight: string;
+		marginTop: string;
+		paddingBottom: string;
+		paddingLeft: string;
+		paddingRight: string;
+		paddingTop: string;
+	}>(
+		() => ({
+			marginBottom: processedMarginBottom,
+			marginLeft: processedMarginLeft,
+			marginRight: processedMarginRight,
+			marginTop: processedMarginTop,
+			paddingBottom: processedPaddingBottom,
+			paddingLeft: processedPaddingLeft,
+			paddingRight: processedPaddingRight,
+			paddingTop: processedPaddingTop,
+		}),
+		[
+			processedMarginBottom,
+			processedMarginLeft,
+			processedMarginRight,
+			processedMarginTop,
+			processedPaddingBottom,
+			processedPaddingLeft,
+			processedPaddingRight,
+			processedPaddingTop,
+		]
+	);
+
+	return distance;
 };

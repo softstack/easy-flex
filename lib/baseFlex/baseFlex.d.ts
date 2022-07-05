@@ -10,11 +10,19 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     fullWidth?: boolean;
     gap?: number | IDistance;
     grow?: number;
-    horizontalMargin?: IDistance | number;
-    horizontalPadding?: IDistance | number;
     justify?: IJustifyContent;
+    marginBottom?: IDistance | number;
+    marginLeft?: IDistance | number;
+    marginRight?: IDistance | number;
+    marginTop?: IDistance | number;
+    marginX?: IDistance | number;
+    marginY?: IDistance | number;
+    paddingBottom?: IDistance | number;
+    paddingLeft?: IDistance | number;
+    paddingRight?: IDistance | number;
+    paddingTop?: IDistance | number;
+    paddingX?: IDistance | number;
+    paddingY?: IDistance | number;
     shrink?: number;
-    verticalMargin?: IDistance | number;
-    verticalPadding?: IDistance | number;
 }
 export declare const BaseFlex: FC<IBaseFlexProps>;

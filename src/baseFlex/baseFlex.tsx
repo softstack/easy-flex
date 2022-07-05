@@ -9,7 +9,7 @@ import {
 	IFlexDirection,
 	IJustifyContent,
 } from '../types';
-import { getColor, getDistance, toPx, useEasyFlexTheme } from '../utils';
+import { getDistance, toPx, useColor, useDistance, useEasyFlexTheme } from '../utils';
 
 const style = css<{
 	'data-align'?: IAlignItems;
@@ -21,12 +21,16 @@ const style = css<{
 	'data-column-gap'?: string;
 	'data-row-gap'?: string;
 	'data-grow'?: number;
-	'data-horizontal-margin': string;
-	'data-horizontal-padding': string;
 	'data-justify'?: IJustifyContent;
+	'data-margin-bottom': string;
+	'data-margin-left': string;
+	'data-margin-right': string;
+	'data-margin-top': string;
+	'data-padding-bottom': string;
+	'data-padding-left': string;
+	'data-padding-right': string;
+	'data-padding-top': string;
 	'data-shrink'?: number;
-	'data-vertical-margin': string;
-	'data-vertical-padding': string;
 }>`
 	display: flex;
 	box-sizing: border-box;
@@ -39,16 +43,16 @@ const style = css<{
 	column-gap: ${({ 'data-column-gap': columnGap }) => columnGap};
 	row-gap: ${({ 'data-row-gap': rowGap }) => rowGap};
 	flex-grow: ${({ 'data-grow': grow }) => grow};
-	margin-left: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	margin-right: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	padding-left: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
-	padding-right: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
 	justify-content: ${({ 'data-justify': justify }) => justify};
+	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};
+	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
+	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
+	margin-top: ${({ 'data-margin-top': marginTop }) => marginTop};
+	padding-bottom: ${({ 'data-padding-bottom': paddingBottom }) => paddingBottom};
+	padding-left: ${({ 'data-padding-left': paddingLeft }) => paddingLeft};
+	padding-right: ${({ 'data-padding-right': paddingRight }) => paddingRight};
+	padding-top: ${({ 'data-padding-top': paddingTop }) => paddingTop};
 	flex-shrink: ${({ 'data-shrink': shrink }) => shrink};
-	margin-top: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
-	margin-bottom: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
-	padding-top: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};
-	padding-bottom: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};
 `;
 
 const Article = styled.article`
@@ -101,12 +105,20 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
 	fullWidth?: boolean;
 	gap?: number | IDistance;
 	grow?: number;
-	horizontalMargin?: IDistance | number;
-	horizontalPadding?: IDistance | number;
 	justify?: IJustifyContent;
+	marginBottom?: IDistance | number;
+	marginLeft?: IDistance | number;
+	marginRight?: IDistance | number;
+	marginTop?: IDistance | number;
+	marginX?: IDistance | number;
+	marginY?: IDistance | number;
+	paddingBottom?: IDistance | number;
+	paddingLeft?: IDistance | number;
+	paddingRight?: IDistance | number;
+	paddingTop?: IDistance | number;
+	paddingX?: IDistance | number;
+	paddingY?: IDistance | number;
 	shrink?: number;
-	verticalMargin?: IDistance | number;
-	verticalPadding?: IDistance | number;
 }
 
 export const BaseFlex: FC<IBaseFlexProps> = ({
@@ -120,25 +132,27 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 	fullWidth = false,
 	gap,
 	grow,
-	horizontalMargin = 0,
-	horizontalPadding = 0,
 	justify,
+	marginBottom,
+	marginLeft,
+	marginRight,
+	marginTop,
+	marginX,
+	marginY,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+	paddingTop,
+	paddingX,
+	paddingY,
 	shrink,
-	verticalMargin = 0,
-	verticalPadding = 0,
 	...props
 }) => {
 	const theme = useEasyFlexTheme();
 
-	const processedBackgroundColor = useMemo<string | undefined>(
-		() => (backgroundColor === undefined ? undefined : getColor(theme, backgroundColor)),
-		[backgroundColor, theme]
-	);
+	const processedBackgroundColor = useColor(backgroundColor, undefined);
 
-	const processedColor = useMemo<string | undefined>(
-		() => (color === undefined ? undefined : getColor(theme, color)),
-		[color, theme]
-	);
+	const processedColor = useColor(color, undefined);
 
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
@@ -168,25 +182,20 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 		}
 	}, [flexDirection, gap, theme]);
 
-	const processedHorizontalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, horizontalMargin)),
-		[horizontalMargin, theme]
-	);
-
-	const processedHorizontalPadding = useMemo<string>(
-		() => toPx(getDistance(theme, horizontalPadding)),
-		[horizontalPadding, theme]
-	);
-
-	const processedVerticalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, verticalMargin)),
-		[theme, verticalMargin]
-	);
-
-	const processedVerticalPadding = useMemo<string>(
-		() => toPx(getDistance(theme, verticalPadding)),
-		[theme, verticalPadding]
-	);
+	const distance = useDistance({
+		marginBottom,
+		marginLeft,
+		marginRight,
+		marginTop,
+		marginX,
+		marginY,
+		paddingBottom,
+		paddingLeft,
+		paddingRight,
+		paddingTop,
+		paddingX,
+		paddingY,
+	});
 
 	const Element = useMemo(() => {
 		switch (element) {
@@ -224,12 +233,16 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 			data-column-gap={columnGap}
 			data-row-gap={rowGap}
 			data-grow={grow}
-			data-horizontal-margin={processedHorizontalMargin}
-			data-horizontal-padding={processedHorizontalPadding}
 			data-justify={justify}
+			data-margin-bottom={distance.marginBottom}
+			data-margin-left={distance.marginLeft}
+			data-margin-right={distance.marginRight}
+			data-margin-top={distance.marginTop}
+			data-padding-bottom={distance.paddingBottom}
+			data-padding-left={distance.paddingLeft}
+			data-padding-right={distance.paddingRight}
+			data-padding-top={distance.paddingTop}
 			data-shrink={shrink}
-			data-vertical-margin={processedVerticalMargin}
-			data-vertical-padding={processedVerticalPadding}
 			{...props}
 		>
 			{children}

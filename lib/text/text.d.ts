@@ -8,11 +8,19 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     fontSize?: number | IFontSize;
     fontWeight?: number | IFontWeight;
     fullWidth?: boolean;
-    horizontalMargin?: IDistance | number;
-    horizontalPadding?: IDistance | number;
     italic?: boolean;
-    verticalMargin?: IDistance | number;
-    verticalPadding?: IDistance | number;
+    marginBottom?: IDistance | number;
+    marginLeft?: IDistance | number;
+    marginRight?: IDistance | number;
+    marginTop?: IDistance | number;
+    marginX?: IDistance | number;
+    marginY?: IDistance | number;
+    paddingBottom?: IDistance | number;
+    paddingLeft?: IDistance | number;
+    paddingRight?: IDistance | number;
+    paddingTop?: IDistance | number;
+    paddingX?: IDistance | number;
+    paddingY?: IDistance | number;
     wordBreak?: IWordBreak;
 }
 export declare const Text: FC<ITextProps>;

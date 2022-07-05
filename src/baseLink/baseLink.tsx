@@ -1,67 +1,73 @@
 import React, { FC, useMemo } from 'react';
 import styled from 'styled-components';
 import { IAlignSelf, IColor, IDistance } from '../types';
-import { getColor, getDistance, toPx, useEasyFlexTheme } from '../utils';
+import { useColor, useDistance } from '../utils';
 
 const StyledBaseLink = styled.a<{
 	'data-align-self'?: IAlignSelf;
 	'data-color'?: string;
-	'data-horizontal-margin': string;
-	'data-vertical-margin': string;
+	'data-margin-bottom': string;
+	'data-margin-left': string;
+	'data-margin-right': string;
+	'data-margin-top': string;
 }>`
 	display: flex;
 	box-sizing: border-box;
 	text-decoration: none;
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	color: ${({ 'data-color': color }) => color};
-	margin-left: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	margin-right: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	margin-top: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
-	margin-bottom: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
+	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};
+	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
+	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
+	margin-top: ${({ 'data-margin-top': marginTop }) => marginTop};
 `;
 
 export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	alignSelf?: IAlignSelf;
 	color?: IColor;
-	horizontalMargin?: IDistance | number;
+	marginBottom?: IDistance | number;
+	marginLeft?: IDistance | number;
+	marginRight?: IDistance | number;
+	marginTop?: IDistance | number;
+	marginX?: IDistance | number;
+	marginY?: IDistance | number;
 	newTab?: boolean;
-	verticalMargin?: IDistance | number;
 }
 
 export const BaseLink: FC<IBaseLinkProps> = ({
 	alignSelf,
 	children,
 	color,
-	horizontalMargin = 0,
+	marginBottom,
+	marginLeft,
+	marginRight,
+	marginTop,
+	marginX,
+	marginY,
 	newTab,
-	verticalMargin = 0,
 	...props
 }) => {
-	const theme = useEasyFlexTheme();
-
-	const processedColor = useMemo<string | undefined>(
-		() => (color === undefined ? undefined : getColor(theme, color)),
-		[color, theme]
-	);
-
-	const processedHorizontalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, horizontalMargin)),
-		[horizontalMargin, theme]
-	);
+	const processedColor = useColor(color, undefined);
 
 	const target = useMemo(() => (newTab ? '_blank' : undefined), [newTab]);
 
-	const processedVerticalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, verticalMargin)),
-		[theme, verticalMargin]
-	);
+	const distance = useDistance({
+		marginBottom,
+		marginLeft,
+		marginRight,
+		marginTop,
+		marginX,
+		marginY,
+	});
 
 	return (
 		<StyledBaseLink
 			data-align-self={alignSelf}
 			data-color={processedColor}
-			data-horizontal-margin={processedHorizontalMargin}
-			data-vertical-margin={processedVerticalMargin}
+			data-margin-bottom={distance.marginBottom}
+			data-margin-left={distance.marginLeft}
+			data-margin-right={distance.marginRight}
+			data-margin-top={distance.marginTop}
 			rel="noopener noreferrer"
 			target={target}
 			{...props}

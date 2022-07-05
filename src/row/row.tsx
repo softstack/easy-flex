@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { BaseFlex, IBaseFlexProps } from '../baseFlex/baseFlex';
 import { IFlexDirection, IFlipDirection, IFlipThreshold } from '../types';
-import { getFlipThreshold, useDimensions, useEasyFlexTheme } from '../utils';
+import { getFlipThreshold, useDimension, useEasyFlexTheme } from '../utils';
 
 export interface IRowProps extends IBaseFlexProps {
 	flip?: boolean;
@@ -11,7 +11,7 @@ export interface IRowProps extends IBaseFlexProps {
 
 export const Row: FC<IRowProps> = ({ children, flip, flipDirection, flipThreshold, ...props }) => {
 	const theme = useEasyFlexTheme();
-	const { width } = useDimensions();
+	const { width } = useDimension();
 
 	const flexDirection = useMemo<IFlexDirection>(() => {
 		if (

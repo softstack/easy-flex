@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, FC, useMemo } from 'react';
 import styled from 'styled-components';
 import { IAlignItems, IAlignSelf, IColor, IDistance, IJustifyContent } from '../types';
-import { getColor, getDistance, toPx, useEasyFlexTheme } from '../utils';
+import { useColor, useDistance } from '../utils';
 
 const StyledBaseButton = styled.button<{
 	'data-align'?: IAlignItems;
@@ -10,12 +10,16 @@ const StyledBaseButton = styled.button<{
 	'data-color'?: string;
 	'data-full-width'?: '100%';
 	'data-grow'?: number;
-	'data-horizontal-margin': string;
-	'data-horizontal-padding': string;
 	'data-justify'?: IJustifyContent;
+	'data-margin-bottom': string;
+	'data-margin-left': string;
+	'data-margin-right': string;
+	'data-margin-top': string;
+	'data-padding-bottom': string;
+	'data-padding-left': string;
+	'data-padding-right': string;
+	'data-padding-top': string;
 	'data-shrink'?: number;
-	'data-vertical-margin': string;
-	'data-vertical-padding': string;
 }>`
 	display: flex;
 	box-sizing: border-box;
@@ -29,16 +33,16 @@ const StyledBaseButton = styled.button<{
 	color: ${({ 'data-color': color }) => color};
 	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
 	flex-grow: ${({ 'data-grow': grow }) => grow};
-	margin-left: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	margin-right: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	padding-left: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
-	padding-right: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
 	justify-content: ${({ 'data-justify': justify }) => justify};
+	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};
+	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
+	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
+	margin-top: ${({ 'data-margin-top': marginTop }) => marginTop};
+	padding-bottom: ${({ 'data-padding-bottom': paddingBottom }) => paddingBottom};
+	padding-left: ${({ 'data-padding-left': paddingLeft }) => paddingLeft};
+	padding-right: ${({ 'data-padding-right': paddingRight }) => paddingRight};
+	padding-top: ${({ 'data-padding-top': paddingTop }) => paddingTop};
 	flex-shrink: ${({ 'data-shrink': shrink }) => shrink};
-	margin-top: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
-	margin-bottom: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
-	padding-top: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};
-	padding-bottom: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};
 `;
 
 export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -48,17 +52,34 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	color?: IColor;
 	fullWidth?: boolean;
 	grow?: number;
-	horizontalMargin?: IDistance | number;
-	horizontalPadding?: IDistance | number;
 	justify?: IJustifyContent;
+	marginBottom?: IDistance | number;
+	marginLeft?: IDistance | number;
+	marginRight?: IDistance | number;
+	marginTop?: IDistance | number;
+	marginX?: IDistance | number;
+	marginY?: IDistance | number;
+	paddingBottom?: IDistance | number;
+	paddingLeft?: IDistance | number;
+	paddingRight?: IDistance | number;
+	paddingTop?: IDistance | number;
+	paddingX?: IDistance | number;
+	paddingY?: IDistance | number;
 	shrink?: number;
-	verticalMargin?: IDistance | number;
-	verticalPadding?: IDistance | number;
 }
 
 export type IExternalBaseButtonProps = Omit<
 	IBaseButtonProps,
-	'align' | 'backgroundColor' | 'color' | 'horizontalPadding' | 'verticalPadding' | 'justify'
+	| 'align'
+	| 'backgroundColor'
+	| 'color'
+	| 'justify'
+	| 'paddingBottom'
+	| 'paddingLeft'
+	| 'paddingRight'
+	| 'paddingTop'
+	| 'paddingX'
+	| 'paddingY'
 >;
 
 export const BaseButton: FC<IBaseButtonProps> = ({
@@ -69,47 +90,42 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 	color,
 	fullWidth = false,
 	grow,
-	horizontalMargin = 0,
-	horizontalPadding = 0,
 	justify,
+	marginBottom,
+	marginLeft,
+	marginRight,
+	marginTop,
+	marginX,
+	marginY,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+	paddingTop,
+	paddingX,
+	paddingY,
 	shrink,
-	verticalMargin = 0,
-	verticalPadding = 0,
 	...props
 }) => {
-	const theme = useEasyFlexTheme();
+	const processedBackgroundColor = useColor(backgroundColor, 'transparent');
 
-	const processedBackgroundColor = useMemo<string>(
-		() => (backgroundColor === undefined ? 'transparent' : getColor(theme, backgroundColor)),
-		[backgroundColor, theme]
-	);
-
-	const processedColor = useMemo<string | undefined>(
-		() => (color === undefined ? undefined : getColor(theme, color)),
-		[color, theme]
-	);
+	const processedColor = useColor(color, undefined);
 
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
-	const processedHorizontalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, horizontalMargin)),
-		[horizontalMargin, theme]
-	);
-
-	const processedHorizontalPadding = useMemo<string>(
-		() => toPx(getDistance(theme, horizontalPadding)),
-		[horizontalPadding, theme]
-	);
-
-	const processedVerticalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, verticalMargin)),
-		[theme, verticalMargin]
-	);
-
-	const processedVerticalPadding = useMemo<string>(
-		() => toPx(getDistance(theme, verticalPadding)),
-		[theme, verticalPadding]
-	);
+	const distance = useDistance({
+		marginBottom,
+		marginLeft,
+		marginRight,
+		marginTop,
+		marginX,
+		marginY,
+		paddingBottom,
+		paddingLeft,
+		paddingRight,
+		paddingTop,
+		paddingX,
+		paddingY,
+	});
 
 	return (
 		<StyledBaseButton
@@ -119,12 +135,16 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 			data-color={processedColor}
 			data-full-width={processedFullWidth}
 			data-grow={grow}
-			data-horizontal-margin={processedHorizontalMargin}
-			data-horizontal-padding={processedHorizontalPadding}
 			data-justify={justify}
+			data-margin-bottom={distance.marginBottom}
+			data-margin-left={distance.marginLeft}
+			data-margin-right={distance.marginRight}
+			data-margin-top={distance.marginTop}
+			data-padding-bottom={distance.paddingBottom}
+			data-padding-left={distance.paddingLeft}
+			data-padding-right={distance.paddingRight}
+			data-padding-top={distance.paddingTop}
 			data-shrink={shrink}
-			data-vertical-margin={processedVerticalMargin}
-			data-vertical-padding={processedVerticalPadding}
 			{...props}
 		>
 			{children}

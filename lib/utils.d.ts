@@ -7,7 +7,31 @@ export declare const getFontWeight: (theme: IEasyFlexTheme, fontWeight: number |
 export declare const getColor: (theme: IEasyFlexTheme, color: IColor) => string;
 export declare const getFlipThreshold: (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold) => number;
 export declare const useEasyFlexTheme: () => IEasyFlexTheme;
-export declare const useDimensions: () => {
+export declare const useDimension: () => {
     height: number;
     width: number;
+};
+export declare const useColor: <T = string | undefined>(color: IColor | undefined, fallback: T) => T extends undefined ? string | T : string;
+export declare const useDistance: ({ marginBottom, marginLeft, marginRight, marginTop, marginX, marginY, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingX, paddingY, }: {
+    marginBottom?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    marginLeft?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    marginRight?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    marginTop?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    marginX?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    marginY?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    paddingBottom?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    paddingLeft?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    paddingRight?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    paddingTop?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    paddingX?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    paddingY?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+}) => {
+    marginBottom: string;
+    marginLeft: string;
+    marginRight: string;
+    marginTop: string;
+    paddingBottom: string;
+    paddingLeft: string;
+    paddingRight: string;
+    paddingTop: string;
 };

@@ -11,7 +11,7 @@ import {
 	ITextElement,
 	IWordBreak,
 } from '../types';
-import { getColor, getDistance, getFontSize, getFontWeight, toPx, toRem, useEasyFlexTheme } from '../utils';
+import { getFontSize, getFontWeight, toPx, toRem, useColor, useDistance, useEasyFlexTheme } from '../utils';
 
 const style = css<{
 	'data-align'?: ITextAlign;
@@ -20,11 +20,15 @@ const style = css<{
 	'data-font-size': string;
 	'data-font-weight': string | number;
 	'data-full-width'?: '100%';
-	'data-horizontal-margin': string;
-	'data-horizontal-padding': string;
 	'data-font-style'?: IFontStyle;
-	'data-vertical-margin': string;
-	'data-vertical-padding': string;
+	'data-margin-bottom': string;
+	'data-margin-left': string;
+	'data-margin-right': string;
+	'data-margin-top': string;
+	'data-padding-bottom': string;
+	'data-padding-left': string;
+	'data-padding-right': string;
+	'data-padding-top': string;
 	'data-word-break'?: IWordBreak;
 }>`
 	display: flex;
@@ -35,15 +39,15 @@ const style = css<{
 	font-size: ${({ 'data-font-size': fontSize }) => fontSize};
 	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
 	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
-	margin-left: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	margin-right: ${({ 'data-horizontal-margin': horizontalMargin }) => horizontalMargin};
-	padding-left: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
-	padding-right: ${({ 'data-horizontal-padding': horizontalPadding }) => horizontalPadding};
 	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
-	margin-top: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
-	margin-bottom: ${({ 'data-vertical-margin': verticalMargin }) => verticalMargin};
-	padding-top: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};
-	padding-bottom: ${({ 'data-vertical-padding': verticalPadding }) => verticalPadding};
+	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};
+	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
+	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
+	margin-top: ${({ 'data-margin-top': marginTop }) => marginTop};
+	padding-bottom: ${({ 'data-padding-bottom': paddingBottom }) => paddingBottom};
+	padding-left: ${({ 'data-padding-left': paddingLeft }) => paddingLeft};
+	padding-right: ${({ 'data-padding-right': paddingRight }) => paddingRight};
+	padding-top: ${({ 'data-padding-top': paddingTop }) => paddingTop};
 	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
 `;
 
@@ -83,11 +87,19 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 	fontSize?: number | IFontSize;
 	fontWeight?: number | IFontWeight;
 	fullWidth?: boolean;
-	horizontalMargin?: IDistance | number;
-	horizontalPadding?: IDistance | number;
 	italic?: boolean;
-	verticalMargin?: IDistance | number;
-	verticalPadding?: IDistance | number;
+	marginBottom?: IDistance | number;
+	marginLeft?: IDistance | number;
+	marginRight?: IDistance | number;
+	marginTop?: IDistance | number;
+	marginX?: IDistance | number;
+	marginY?: IDistance | number;
+	paddingBottom?: IDistance | number;
+	paddingLeft?: IDistance | number;
+	paddingRight?: IDistance | number;
+	paddingTop?: IDistance | number;
+	paddingX?: IDistance | number;
+	paddingY?: IDistance | number;
 	wordBreak?: IWordBreak;
 }
 
@@ -100,17 +112,25 @@ export const Text: FC<ITextProps> = ({
 	fontSize = 'm',
 	fontWeight = 'normal',
 	fullWidth,
-	horizontalMargin = 0,
-	horizontalPadding = 0,
 	italic,
-	verticalMargin = 0,
-	verticalPadding = 0,
+	marginBottom,
+	marginLeft,
+	marginRight,
+	marginTop,
+	marginX,
+	marginY,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+	paddingTop,
+	paddingX,
+	paddingY,
 	wordBreak,
 	...props
 }) => {
 	const theme = useEasyFlexTheme();
 
-	const processedColor = useMemo<string>(() => getColor(theme, color), [color, theme]);
+	const processedColor = useColor(color, '');
 
 	const processedFontSize = useMemo<string>(() => {
 		const fontSizeValue = getFontSize(theme, fontSize);
@@ -124,30 +144,25 @@ export const Text: FC<ITextProps> = ({
 
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
-	const processedHorizontalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, horizontalMargin)),
-		[horizontalMargin, theme]
-	);
-
-	const processedHorizontalPadding = useMemo<string>(
-		() => toPx(getDistance(theme, horizontalPadding)),
-		[horizontalPadding, theme]
-	);
-
 	const fontStyle = useMemo<IFontStyle | undefined>(
 		() => (italic === undefined ? undefined : italic ? 'italic' : 'normal'),
 		[italic]
 	);
 
-	const processedVerticalMargin = useMemo<string>(
-		() => toPx(getDistance(theme, verticalMargin)),
-		[theme, verticalMargin]
-	);
-
-	const processedVerticalPadding = useMemo<string>(
-		() => toPx(getDistance(theme, verticalPadding)),
-		[theme, verticalPadding]
-	);
+	const distance = useDistance({
+		marginBottom,
+		marginLeft,
+		marginRight,
+		marginTop,
+		marginX,
+		marginY,
+		paddingBottom,
+		paddingLeft,
+		paddingRight,
+		paddingTop,
+		paddingX,
+		paddingY,
+	});
 
 	const Element = useMemo(() => {
 		switch (element) {
@@ -176,11 +191,15 @@ export const Text: FC<ITextProps> = ({
 			data-font-size={processedFontSize}
 			data-font-weight={processedFontWeight}
 			data-full-width={processedFullWidth}
-			data-horizontal-margin={processedHorizontalMargin}
-			data-horizontal-padding={processedHorizontalPadding}
 			data-font-style={fontStyle}
-			data-vertical-margin={processedVerticalMargin}
-			data-vertical-padding={processedVerticalPadding}
+			data-margin-bottom={distance.marginBottom}
+			data-margin-left={distance.marginLeft}
+			data-margin-right={distance.marginRight}
+			data-margin-top={distance.marginTop}
+			data-padding-bottom={distance.paddingBottom}
+			data-padding-left={distance.paddingLeft}
+			data-padding-right={distance.paddingRight}
+			data-padding-top={distance.paddingTop}
 			data-word-break={wordBreak}
 			{...props}
 		>

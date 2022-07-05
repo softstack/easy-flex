@@ -7,12 +7,20 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     color?: IColor;
     fullWidth?: boolean;
     grow?: number;
-    horizontalMargin?: IDistance | number;
-    horizontalPadding?: IDistance | number;
     justify?: IJustifyContent;
+    marginBottom?: IDistance | number;
+    marginLeft?: IDistance | number;
+    marginRight?: IDistance | number;
+    marginTop?: IDistance | number;
+    marginX?: IDistance | number;
+    marginY?: IDistance | number;
+    paddingBottom?: IDistance | number;
+    paddingLeft?: IDistance | number;
+    paddingRight?: IDistance | number;
+    paddingTop?: IDistance | number;
+    paddingX?: IDistance | number;
+    paddingY?: IDistance | number;
     shrink?: number;
-    verticalMargin?: IDistance | number;
-    verticalPadding?: IDistance | number;
 }
-export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'color' | 'horizontalPadding' | 'verticalPadding' | 'justify'>;
+export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'color' | 'justify' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingX' | 'paddingY'>;
 export declare const BaseButton: FC<IBaseButtonProps>;

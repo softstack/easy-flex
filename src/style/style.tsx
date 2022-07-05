@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { IColor, IFontSize, IFontStyle, IFontWeight } from '../types';
-import { getColor, getFontSize, getFontWeight, toPx, toRem, useEasyFlexTheme } from '../utils';
+import { getFontSize, getFontWeight, toPx, toRem, useColor, useEasyFlexTheme } from '../utils';
 
 const StyledStyle = styled.span<{
 	'data-background-color'?: string;
@@ -30,15 +30,9 @@ export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
 export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontWeight, italic, children }) => {
 	const theme = useEasyFlexTheme();
 
-	const processedBackgroundColor = useMemo<string | undefined>(
-		() => (backgroundColor === undefined ? undefined : getColor(theme, backgroundColor)),
-		[backgroundColor, theme]
-	);
+	const processedBackgroundColor = useColor(backgroundColor, undefined);
 
-	const processedColor = useMemo<string | undefined>(
-		() => (color === undefined ? undefined : getColor(theme, color)),
-		[color, theme]
-	);
+	const processedColor = useColor(color, undefined);
 
 	const processedFontSize = useMemo<string | undefined>(() => {
 		if (fontSize === undefined) {
