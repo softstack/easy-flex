@@ -51,7 +51,7 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 
 	const target = useMemo(() => (newTab ? '_blank' : undefined), [newTab]);
 
-	const distance = useDistance({
+	const { margin } = useDistance({
 		marginBottom,
 		marginLeft,
 		marginRight,
@@ -64,10 +64,10 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 		<StyledBaseLink
 			data-align-self={alignSelf}
 			data-color={processedColor}
-			data-margin-bottom={distance.marginBottom}
-			data-margin-left={distance.marginLeft}
-			data-margin-right={distance.marginRight}
-			data-margin-top={distance.marginTop}
+			data-margin-bottom={margin.bottom}
+			data-margin-left={margin.left}
+			data-margin-right={margin.right}
+			data-margin-top={margin.top}
 			rel="noopener noreferrer"
 			target={target}
 			{...props}

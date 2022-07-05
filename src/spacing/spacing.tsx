@@ -3,60 +3,64 @@ import styled from 'styled-components';
 import { IDistance, IFlipThreshold } from '../types';
 import { getDistance, getFlipThreshold, toPx, useDimension, useEasyFlexTheme } from '../utils';
 
-const StyledSpacing = styled.div<{ 'data-horizontal': string; 'data-vertical': string }>`
+const StyledSpacing = styled.div<{ 'data-height': string; 'data-width': string }>`
 	display: flex;
 	box-sizing: border-box;
 	background-color: transparent;
 	margin: 0;
 	padding: 0;
-	min-width: ${({ 'data-horizontal': horizontal }) => horizontal};
-	width: ${({ 'data-horizontal': horizontal }) => horizontal};
-	max-width: ${({ 'data-horizontal': horizontal }) => horizontal};
-	min-height: ${({ 'data-vertical': vertical }) => vertical};
-	height: ${({ 'data-vertical': vertical }) => vertical};
-	max-height: ${({ 'data-vertical': vertical }) => vertical};
+	min-height: ${({ 'data-height': height }) => height};
+	height: ${({ 'data-height': height }) => height};
+	max-height: ${({ 'data-height': height }) => height};
+	min-width: ${({ 'data-width': width }) => width};
+	width: ${({ 'data-width': width }) => width};
+	max-width: ${({ 'data-width': width }) => width};
 `;
 
 export interface ISpacingProps extends HTMLAttributes<HTMLDivElement> {
 	flip?: boolean;
 	flipDirection?: boolean;
 	flipThreshold?: IFlipThreshold;
-	horizontal?: IDistance | number;
-	vertical?: IDistance | number;
+	height?: IDistance | number;
+	width?: IDistance | number;
 }
 
 export const Spacing: FC<ISpacingProps> = ({
 	flip,
 	flipDirection = false,
 	flipThreshold,
-	horizontal = 0,
-	vertical = 0,
+	height = 0,
+	width = 0,
 	...props
 }) => {
 	const theme = useEasyFlexTheme();
-	const { width } = useDimension();
+	const { width: displayWidth } = useDimension();
 
-	const processedHorizontal = useMemo<string>(
+	const processedHeight = useMemo<string>(
 		() =>
 			flipDirection &&
 			(flip ||
 				(flip === undefined &&
-					(flipThreshold ? width < getFlipThreshold(theme, flipThreshold) : width < theme.fallbackFlipThreshold)))
-				? toPx(getDistance(theme, vertical))
-				: toPx(getDistance(theme, horizontal)),
-		[flip, flipDirection, flipThreshold, horizontal, theme, vertical, width]
+					(flipThreshold
+						? displayWidth < getFlipThreshold(theme, flipThreshold)
+						: displayWidth < theme.fallbackFlipThreshold)))
+				? toPx(getDistance(theme, width))
+				: toPx(getDistance(theme, height)),
+		[displayWidth, flip, flipDirection, flipThreshold, height, theme, width]
 	);
 
-	const processedVertical = useMemo<string>(
+	const processedWidth = useMemo<string>(
 		() =>
 			flipDirection &&
 			(flip ||
 				(flip === undefined &&
-					(flipThreshold ? width < getFlipThreshold(theme, flipThreshold) : width < theme.fallbackFlipThreshold)))
-				? toPx(getDistance(theme, horizontal))
-				: toPx(getDistance(theme, vertical)),
-		[flip, flipDirection, flipThreshold, horizontal, theme, vertical, width]
+					(flipThreshold
+						? displayWidth < getFlipThreshold(theme, flipThreshold)
+						: displayWidth < theme.fallbackFlipThreshold)))
+				? toPx(getDistance(theme, height))
+				: toPx(getDistance(theme, width)),
+		[displayWidth, flip, flipDirection, flipThreshold, height, theme, width]
 	);
 
-	return <StyledSpacing data-horizontal={processedHorizontal} data-vertical={processedVertical} {...props} />;
+	return <StyledSpacing data-height={processedHeight} data-width={processedWidth} {...props} />;
 };

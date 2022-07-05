@@ -26,12 +26,16 @@ export declare const useDistance: ({ marginBottom, marginLeft, marginRight, marg
     paddingX?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     paddingY?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
 }) => {
-    marginBottom: string;
-    marginLeft: string;
-    marginRight: string;
-    marginTop: string;
-    paddingBottom: string;
-    paddingLeft: string;
-    paddingRight: string;
-    paddingTop: string;
+    margin: {
+        bottom: string;
+        left: string;
+        right: string;
+        top: string;
+    };
+    padding: {
+        bottom: string;
+        left: string;
+        right: string;
+        top: string;
+    };
 };

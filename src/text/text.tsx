@@ -149,7 +149,7 @@ export const Text: FC<ITextProps> = ({
 		[italic]
 	);
 
-	const distance = useDistance({
+	const { margin, padding } = useDistance({
 		marginBottom,
 		marginLeft,
 		marginRight,
@@ -192,14 +192,14 @@ export const Text: FC<ITextProps> = ({
 			data-font-weight={processedFontWeight}
 			data-full-width={processedFullWidth}
 			data-font-style={fontStyle}
-			data-margin-bottom={distance.marginBottom}
-			data-margin-left={distance.marginLeft}
-			data-margin-right={distance.marginRight}
-			data-margin-top={distance.marginTop}
-			data-padding-bottom={distance.paddingBottom}
-			data-padding-left={distance.paddingLeft}
-			data-padding-right={distance.paddingRight}
-			data-padding-top={distance.paddingTop}
+			data-margin-bottom={margin.bottom}
+			data-margin-left={margin.left}
+			data-margin-right={margin.right}
+			data-margin-top={margin.top}
+			data-padding-bottom={padding.bottom}
+			data-padding-left={padding.left}
+			data-padding-right={padding.right}
+			data-padding-top={padding.top}
 			data-word-break={wordBreak}
 			{...props}
 		>

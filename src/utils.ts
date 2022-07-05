@@ -34,7 +34,7 @@ export const getColor = (theme: IEasyFlexTheme, color: IColor): string => {
 	return theme.color[color];
 };
 
-export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold) =>
+export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold): number =>
 	theme.flipThreshold[flipThreshold];
 
 export const useEasyFlexTheme = () => useContext(EasyFlexContext);
@@ -63,12 +63,12 @@ export const useDimension = (): { height: number; width: number } => {
 		};
 	});
 
-	const dimensions = useMemo(
+	const dimension = useMemo(
 		() => ({ height, width: Math.min(bodyWidth, windowWidth) }),
 		[height, bodyWidth, windowWidth]
 	);
 
-	return dimensions;
+	return dimension;
 };
 
 export const useColor = <T = string | undefined>(
@@ -112,14 +112,18 @@ export const useDistance = ({
 	paddingX?: IDistance | number;
 	paddingY?: IDistance | number;
 }): {
-	marginBottom: string;
-	marginLeft: string;
-	marginRight: string;
-	marginTop: string;
-	paddingBottom: string;
-	paddingLeft: string;
-	paddingRight: string;
-	paddingTop: string;
+	margin: {
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
+	};
+	padding: {
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
+	};
 } => {
 	const theme = useEasyFlexTheme();
 
@@ -163,36 +167,55 @@ export const useDistance = ({
 		[paddingTop, paddingY, theme]
 	);
 
-	const distance = useMemo<{
-		marginBottom: string;
-		marginLeft: string;
-		marginRight: string;
-		marginTop: string;
-		paddingBottom: string;
-		paddingLeft: string;
-		paddingRight: string;
-		paddingTop: string;
+	const margin = useMemo<{
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
 	}>(
 		() => ({
-			marginBottom: processedMarginBottom,
-			marginLeft: processedMarginLeft,
-			marginRight: processedMarginRight,
-			marginTop: processedMarginTop,
-			paddingBottom: processedPaddingBottom,
-			paddingLeft: processedPaddingLeft,
-			paddingRight: processedPaddingRight,
-			paddingTop: processedPaddingTop,
+			bottom: processedMarginBottom,
+			left: processedMarginLeft,
+			right: processedMarginRight,
+			top: processedMarginTop,
 		}),
-		[
-			processedMarginBottom,
-			processedMarginLeft,
-			processedMarginRight,
-			processedMarginTop,
-			processedPaddingBottom,
-			processedPaddingLeft,
-			processedPaddingRight,
-			processedPaddingTop,
-		]
+		[processedMarginBottom, processedMarginLeft, processedMarginRight, processedMarginTop]
+	);
+
+	const padding = useMemo<{
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
+	}>(
+		() => ({
+			bottom: processedPaddingBottom,
+			left: processedPaddingLeft,
+			right: processedPaddingRight,
+			top: processedPaddingTop,
+		}),
+		[processedPaddingBottom, processedPaddingLeft, processedPaddingRight, processedPaddingTop]
+	);
+
+	const distance = useMemo<{
+		margin: {
+			bottom: string;
+			left: string;
+			right: string;
+			top: string;
+		};
+		padding: {
+			bottom: string;
+			left: string;
+			right: string;
+			top: string;
+		};
+	}>(
+		() => ({
+			margin,
+			padding,
+		}),
+		[margin, padding]
 	);
 
 	return distance;

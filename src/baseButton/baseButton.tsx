@@ -112,7 +112,7 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
-	const distance = useDistance({
+	const { margin, padding } = useDistance({
 		marginBottom,
 		marginLeft,
 		marginRight,
@@ -136,14 +136,14 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 			data-full-width={processedFullWidth}
 			data-grow={grow}
 			data-justify={justify}
-			data-margin-bottom={distance.marginBottom}
-			data-margin-left={distance.marginLeft}
-			data-margin-right={distance.marginRight}
-			data-margin-top={distance.marginTop}
-			data-padding-bottom={distance.paddingBottom}
-			data-padding-left={distance.paddingLeft}
-			data-padding-right={distance.paddingRight}
-			data-padding-top={distance.paddingTop}
+			data-margin-bottom={margin.bottom}
+			data-margin-left={margin.left}
+			data-margin-right={margin.right}
+			data-margin-top={margin.top}
+			data-padding-bottom={padding.bottom}
+			data-padding-left={padding.left}
+			data-padding-right={padding.right}
+			data-padding-top={padding.top}
 			data-shrink={shrink}
 			{...props}
 		>
