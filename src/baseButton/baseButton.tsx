@@ -11,14 +11,14 @@ const StyledBaseButton = styled.button<{
 	'data-full-width'?: '100%';
 	'data-grow'?: number;
 	'data-justify'?: IJustifyContent;
-	'data-margin-bottom': string;
-	'data-margin-left': string;
-	'data-margin-right': string;
-	'data-margin-top': string;
-	'data-padding-bottom': string;
-	'data-padding-left': string;
-	'data-padding-right': string;
-	'data-padding-top': string;
+	'data-margin-bottom'?: string;
+	'data-margin-left'?: string;
+	'data-margin-right'?: string;
+	'data-margin-top'?: string;
+	'data-padding-bottom'?: string;
+	'data-padding-left'?: string;
+	'data-padding-right'?: string;
+	'data-padding-top'?: string;
 	'data-shrink'?: number;
 }>`
 	display: flex;

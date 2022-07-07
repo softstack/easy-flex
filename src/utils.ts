@@ -2,6 +2,13 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { EasyFlexContext } from './constants';
 import { IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
 
+export const ifDefined = <T, U>(value: T, fn: (value: Exclude<T, undefined | null>) => U): U | undefined => {
+	if (value === undefined || value === null) {
+		return undefined;
+	}
+	return fn(value as Exclude<T, undefined | null>);
+};
+
 export const toPx = (value: number): string => `${value}px`;
 
 export const toRem = (value: number): string => `${value}rem`;
@@ -29,7 +36,7 @@ export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: number | IFontW
 
 export const getColor = (theme: IEasyFlexTheme, color: IColor): string => {
 	if (color === 'inherit') {
-		return color;
+		return 'inherit';
 	}
 	return theme.color[color];
 };
@@ -113,65 +120,65 @@ export const useDistance = ({
 	paddingY?: IDistance | number;
 }): {
 	margin: {
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: string | undefined;
+		left: string | undefined;
+		right: string | undefined;
+		top: string | undefined;
 	};
 	padding: {
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: string | undefined;
+		left: string | undefined;
+		right: string | undefined;
+		top: string | undefined;
 	};
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedMarginBottom = useMemo<string>(
-		() => toPx(getDistance(theme, marginBottom ?? marginY ?? 0)),
+	const processedMarginBottom = useMemo<string | undefined>(
+		() => ifDefined(marginBottom ?? marginY, (margin) => toPx(getDistance(theme, margin))),
 		[marginBottom, marginY, theme]
 	);
 
-	const processedMarginLeft = useMemo<string>(
-		() => toPx(getDistance(theme, marginLeft ?? marginX ?? 0)),
+	const processedMarginLeft = useMemo<string | undefined>(
+		() => ifDefined(marginLeft ?? marginX, (margin) => toPx(getDistance(theme, margin))),
 		[marginLeft, marginX, theme]
 	);
 
-	const processedMarginRight = useMemo<string>(
-		() => toPx(getDistance(theme, marginRight ?? marginX ?? 0)),
+	const processedMarginRight = useMemo<string | undefined>(
+		() => ifDefined(marginRight ?? marginX, (margin) => toPx(getDistance(theme, margin))),
 		[marginRight, marginX, theme]
 	);
 
-	const processedMarginTop = useMemo<string>(
-		() => toPx(getDistance(theme, marginTop ?? marginY ?? 0)),
+	const processedMarginTop = useMemo<string | undefined>(
+		() => ifDefined(marginTop ?? marginY, (margin) => toPx(getDistance(theme, margin))),
 		[marginTop, marginY, theme]
 	);
 
-	const processedPaddingBottom = useMemo<string>(
-		() => toPx(getDistance(theme, paddingBottom ?? paddingY ?? 0)),
+	const processedPaddingBottom = useMemo<string | undefined>(
+		() => ifDefined(paddingBottom ?? paddingY, (margin) => toPx(getDistance(theme, margin))),
 		[paddingBottom, paddingY, theme]
 	);
 
-	const processedPaddingLeft = useMemo<string>(
-		() => toPx(getDistance(theme, paddingLeft ?? paddingX ?? 0)),
+	const processedPaddingLeft = useMemo<string | undefined>(
+		() => ifDefined(paddingLeft ?? paddingX, (margin) => toPx(getDistance(theme, margin))),
 		[paddingLeft, paddingX, theme]
 	);
 
-	const processedPaddingRight = useMemo<string>(
-		() => toPx(getDistance(theme, paddingRight ?? paddingX ?? 0)),
+	const processedPaddingRight = useMemo<string | undefined>(
+		() => ifDefined(paddingRight ?? paddingX, (margin) => toPx(getDistance(theme, margin))),
 		[paddingRight, paddingX, theme]
 	);
 
-	const processedPaddingTop = useMemo<string>(
-		() => toPx(getDistance(theme, paddingTop ?? paddingY ?? 0)),
+	const processedPaddingTop = useMemo<string | undefined>(
+		() => ifDefined(paddingTop ?? paddingY, (margin) => toPx(getDistance(theme, margin))),
 		[paddingTop, paddingY, theme]
 	);
 
 	const margin = useMemo<{
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: string | undefined;
+		left: string | undefined;
+		right: string | undefined;
+		top: string | undefined;
 	}>(
 		() => ({
 			bottom: processedMarginBottom,
@@ -183,10 +190,10 @@ export const useDistance = ({
 	);
 
 	const padding = useMemo<{
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: string | undefined;
+		left: string | undefined;
+		right: string | undefined;
+		top: string | undefined;
 	}>(
 		() => ({
 			bottom: processedPaddingBottom,
@@ -199,16 +206,16 @@ export const useDistance = ({
 
 	const distance = useMemo<{
 		margin: {
-			bottom: string;
-			left: string;
-			right: string;
-			top: string;
+			bottom: string | undefined;
+			left: string | undefined;
+			right: string | undefined;
+			top: string | undefined;
 		};
 		padding: {
-			bottom: string;
-			left: string;
-			right: string;
-			top: string;
+			bottom: string | undefined;
+			left: string | undefined;
+			right: string | undefined;
+			top: string | undefined;
 		};
 	}>(
 		() => ({

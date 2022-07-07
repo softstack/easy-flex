@@ -19,7 +19,7 @@ const StyledSpacing = styled.div<{ 'data-height': string; 'data-width': string }
 
 export interface ISpacingProps extends HTMLAttributes<HTMLDivElement> {
 	flip?: boolean;
-	flipDirection?: boolean;
+	flipEnabled?: boolean;
 	flipThreshold?: IFlipThreshold;
 	height?: IDistance | number;
 	width?: IDistance | number;
@@ -27,7 +27,7 @@ export interface ISpacingProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Spacing: FC<ISpacingProps> = ({
 	flip,
-	flipDirection = false,
+	flipEnabled = false,
 	flipThreshold,
 	height = 0,
 	width = 0,
@@ -38,28 +38,28 @@ export const Spacing: FC<ISpacingProps> = ({
 
 	const processedHeight = useMemo<string>(
 		() =>
-			flipDirection &&
+			flipEnabled &&
 			(flip ||
 				(flip === undefined &&
-					(flipThreshold
+					(flipThreshold !== undefined
 						? displayWidth < getFlipThreshold(theme, flipThreshold)
 						: displayWidth < theme.fallbackFlipThreshold)))
 				? toPx(getDistance(theme, width))
 				: toPx(getDistance(theme, height)),
-		[displayWidth, flip, flipDirection, flipThreshold, height, theme, width]
+		[displayWidth, flip, flipEnabled, flipThreshold, height, theme, width]
 	);
 
 	const processedWidth = useMemo<string>(
 		() =>
-			flipDirection &&
+			flipEnabled &&
 			(flip ||
 				(flip === undefined &&
-					(flipThreshold
+					(flipThreshold !== undefined
 						? displayWidth < getFlipThreshold(theme, flipThreshold)
 						: displayWidth < theme.fallbackFlipThreshold)))
 				? toPx(getDistance(theme, height))
 				: toPx(getDistance(theme, width)),
-		[displayWidth, flip, flipDirection, flipThreshold, height, theme, width]
+		[displayWidth, flip, flipEnabled, flipThreshold, height, theme, width]
 	);
 
 	return <StyledSpacing data-height={processedHeight} data-width={processedWidth} {...props} />;

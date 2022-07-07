@@ -1,4 +1,5 @@
 import { IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
+export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => U | undefined;
 export declare const toPx: (value: number) => string;
 export declare const toRem: (value: number) => string;
 export declare const getDistance: (theme: IEasyFlexTheme, distance: number | IDistance) => number;
@@ -27,15 +28,15 @@ export declare const useDistance: ({ marginBottom, marginLeft, marginRight, marg
     paddingY?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
 }) => {
     margin: {
-        bottom: string;
-        left: string;
-        right: string;
-        top: string;
+        bottom: string | undefined;
+        left: string | undefined;
+        right: string | undefined;
+        top: string | undefined;
     };
     padding: {
-        bottom: string;
-        left: string;
-        right: string;
-        top: string;
+        bottom: string | undefined;
+        left: string | undefined;
+        right: string | undefined;
+        top: string | undefined;
     };
 };

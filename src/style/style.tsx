@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { IColor, IFontSize, IFontStyle, IFontWeight } from '../types';
-import { getFontSize, getFontWeight, toPx, toRem, useColor, useEasyFlexTheme } from '../utils';
+import { getFontSize, getFontWeight, ifDefined, toPx, toRem, useColor, useEasyFlexTheme } from '../utils';
 
 const StyledStyle = styled.span<{
 	'data-background-color'?: string;
@@ -36,7 +36,7 @@ export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontW
 
 	const processedFontSize = useMemo<string | undefined>(() => {
 		if (fontSize === undefined) {
-			return fontSize;
+			return undefined;
 		}
 		const fontSizeValue = getFontSize(theme, fontSize);
 		if (theme.fontSizeType === 'rem') {
@@ -46,12 +46,12 @@ export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontW
 	}, [fontSize, theme]);
 
 	const processedFontWeight = useMemo<string | number | undefined>(
-		() => (fontWeight === undefined ? undefined : getFontWeight(theme, fontWeight)),
+		() => ifDefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
 		[fontWeight, theme]
 	);
 
 	const fontStyle = useMemo<IFontStyle | undefined>(
-		() => (italic === undefined ? undefined : italic ? 'italic' : 'normal'),
+		() => ifDefined(italic, (italic) => (italic ? 'italic' : 'normal')),
 		[italic]
 	);
 

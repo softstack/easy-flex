@@ -11,24 +11,24 @@ import {
 	ITextElement,
 	IWordBreak,
 } from '../types';
-import { getFontSize, getFontWeight, toPx, toRem, useColor, useDistance, useEasyFlexTheme } from '../utils';
+import { getFontSize, getFontWeight, ifDefined, toPx, toRem, useColor, useDistance, useEasyFlexTheme } from '../utils';
 
 const style = css<{
 	'data-align'?: ITextAlign;
 	'data-align-self'?: IAlignSelf;
-	'data-color'?: string;
+	'data-color': string;
 	'data-font-size': string;
 	'data-font-weight': string | number;
 	'data-full-width'?: '100%';
 	'data-font-style'?: IFontStyle;
-	'data-margin-bottom': string;
-	'data-margin-left': string;
-	'data-margin-right': string;
-	'data-margin-top': string;
-	'data-padding-bottom': string;
-	'data-padding-left': string;
-	'data-padding-right': string;
-	'data-padding-top': string;
+	'data-margin-bottom'?: string;
+	'data-margin-left'?: string;
+	'data-margin-right'?: string;
+	'data-margin-top'?: string;
+	'data-padding-bottom'?: string;
+	'data-padding-left'?: string;
+	'data-padding-right'?: string;
+	'data-padding-top'?: string;
 	'data-word-break'?: IWordBreak;
 }>`
 	display: flex;
@@ -145,7 +145,7 @@ export const Text: FC<ITextProps> = ({
 	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
 	const fontStyle = useMemo<IFontStyle | undefined>(
-		() => (italic === undefined ? undefined : italic ? 'italic' : 'normal'),
+		() => ifDefined(italic, (italic) => (italic ? 'italic' : 'normal')),
 		[italic]
 	);
 

@@ -6,10 +6,10 @@ import { useColor, useDistance } from '../utils';
 const StyledBaseLink = styled.a<{
 	'data-align-self'?: IAlignSelf;
 	'data-color'?: string;
-	'data-margin-bottom': string;
-	'data-margin-left': string;
-	'data-margin-right': string;
-	'data-margin-top': string;
+	'data-margin-bottom'?: string;
+	'data-margin-left'?: string;
+	'data-margin-right'?: string;
+	'data-margin-top'?: string;
 }>`
 	display: flex;
 	box-sizing: border-box;
@@ -44,7 +44,7 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 	marginTop,
 	marginX,
 	marginY,
-	newTab,
+	newTab = false,
 	...props
 }) => {
 	const processedColor = useColor(color, undefined);

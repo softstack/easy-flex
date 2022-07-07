@@ -15,10 +15,12 @@ export const Col: FC<IColProps> = ({ children, flip, flipDirection, flipThreshol
 
 	const flexDirection = useMemo<IFlexDirection>(() => {
 		if (
-			flipDirection &&
+			flipDirection !== undefined &&
 			(flip ||
 				(flip === undefined &&
-					(flipThreshold ? width < getFlipThreshold(theme, flipThreshold) : width < theme.fallbackFlipThreshold)))
+					(flipThreshold !== undefined
+						? width < getFlipThreshold(theme, flipThreshold)
+						: width < theme.fallbackFlipThreshold)))
 		) {
 			switch (flipDirection) {
 				case 'flip':

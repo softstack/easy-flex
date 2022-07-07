@@ -22,14 +22,14 @@ const style = css<{
 	'data-row-gap'?: string;
 	'data-grow'?: number;
 	'data-justify'?: IJustifyContent;
-	'data-margin-bottom': string;
-	'data-margin-left': string;
-	'data-margin-right': string;
-	'data-margin-top': string;
-	'data-padding-bottom': string;
-	'data-padding-left': string;
-	'data-padding-right': string;
-	'data-padding-top': string;
+	'data-margin-bottom'?: string;
+	'data-margin-left'?: string;
+	'data-margin-right'?: string;
+	'data-margin-top'?: string;
+	'data-padding-bottom'?: string;
+	'data-padding-left'?: string;
+	'data-padding-right'?: string;
+	'data-padding-top'?: string;
 	'data-shrink'?: number;
 }>`
 	display: flex;
@@ -160,26 +160,20 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 		if (gap === undefined) {
 			return undefined;
 		}
-		switch (flexDirection) {
-			case 'row':
-			case 'row-reverse':
-				return toPx(getDistance(theme, gap));
-			default:
-				undefined;
+		if (flexDirection === 'row' || flexDirection === 'row-reverse') {
+			return toPx(getDistance(theme, gap));
 		}
+		return undefined;
 	}, [flexDirection, gap, theme]);
 
 	const rowGap = useMemo(() => {
 		if (gap === undefined) {
 			return undefined;
 		}
-		switch (flexDirection) {
-			case 'column':
-			case 'column-reverse':
-				return toPx(getDistance(theme, gap));
-			default:
-				undefined;
+		if (flexDirection === 'column' || flexDirection === 'column-reverse') {
+			return toPx(getDistance(theme, gap));
 		}
+		return undefined;
 	}, [flexDirection, gap, theme]);
 
 	const { margin, padding } = useDistance({
