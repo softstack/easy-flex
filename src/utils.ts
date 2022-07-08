@@ -2,11 +2,58 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { EasyFlexContext } from './constants';
 import { IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
 
-export const ifDefined = <T, U>(value: T, fn: (value: Exclude<T, undefined | null>) => U): U | undefined => {
-	if (value === undefined || value === null) {
-		return undefined;
+export const ifDefined = <T, U>(
+	value: T,
+	fn: (value: Exclude<T, null | undefined>) => U
+): T extends null & undefined
+	? U | null | undefined
+	: T extends null
+	? U | null
+	: T extends undefined
+	? U | undefined
+	: U => {
+	if (value === null) {
+		return null as T extends null & undefined
+			? U | null | undefined
+			: T extends null
+			? U | null
+			: T extends undefined
+			? U | undefined
+			: U;
 	}
-	return fn(value as Exclude<T, undefined | null>);
+	if (value === undefined) {
+		return undefined as T extends null & undefined
+			? U | null | undefined
+			: T extends null
+			? U | null
+			: T extends undefined
+			? U | undefined
+			: U;
+	}
+	return fn(value as Exclude<T, undefined | null>) as T extends null & undefined
+		? U | null | undefined
+		: T extends null
+		? U | null
+		: T extends undefined
+		? U | undefined
+		: U;
+};
+
+export const ifNotNull = <T, U>(value: T, fn: (value: Exclude<T, null>) => U): T extends null ? U | null : U => {
+	if (value === null) {
+		return null as T extends null ? U | null : U;
+	}
+	return fn(value as Exclude<T, null>) as T extends null ? U | null : U;
+};
+
+export const ifNotUndefined = <T, U>(
+	value: T,
+	fn: (value: Exclude<T, undefined>) => U
+): T extends undefined ? U | undefined : U => {
+	if (value === undefined) {
+		return undefined as T extends undefined ? U | undefined : U;
+	}
+	return fn(value as Exclude<T, undefined>) as T extends undefined ? U | undefined : U;
 };
 
 export const toPx = (value: number): string => `${value}px`;
@@ -135,42 +182,42 @@ export const useDistance = ({
 	const theme = useEasyFlexTheme();
 
 	const processedMarginBottom = useMemo<string | undefined>(
-		() => ifDefined(marginBottom ?? marginY, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(marginBottom ?? marginY, (margin) => toPx(getDistance(theme, margin))),
 		[marginBottom, marginY, theme]
 	);
 
 	const processedMarginLeft = useMemo<string | undefined>(
-		() => ifDefined(marginLeft ?? marginX, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(marginLeft ?? marginX, (margin) => toPx(getDistance(theme, margin))),
 		[marginLeft, marginX, theme]
 	);
 
 	const processedMarginRight = useMemo<string | undefined>(
-		() => ifDefined(marginRight ?? marginX, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(marginRight ?? marginX, (margin) => toPx(getDistance(theme, margin))),
 		[marginRight, marginX, theme]
 	);
 
 	const processedMarginTop = useMemo<string | undefined>(
-		() => ifDefined(marginTop ?? marginY, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(marginTop ?? marginY, (margin) => toPx(getDistance(theme, margin))),
 		[marginTop, marginY, theme]
 	);
 
 	const processedPaddingBottom = useMemo<string | undefined>(
-		() => ifDefined(paddingBottom ?? paddingY, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(paddingBottom ?? paddingY, (margin) => toPx(getDistance(theme, margin))),
 		[paddingBottom, paddingY, theme]
 	);
 
 	const processedPaddingLeft = useMemo<string | undefined>(
-		() => ifDefined(paddingLeft ?? paddingX, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(paddingLeft ?? paddingX, (margin) => toPx(getDistance(theme, margin))),
 		[paddingLeft, paddingX, theme]
 	);
 
 	const processedPaddingRight = useMemo<string | undefined>(
-		() => ifDefined(paddingRight ?? paddingX, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(paddingRight ?? paddingX, (margin) => toPx(getDistance(theme, margin))),
 		[paddingRight, paddingX, theme]
 	);
 
 	const processedPaddingTop = useMemo<string | undefined>(
-		() => ifDefined(paddingTop ?? paddingY, (margin) => toPx(getDistance(theme, margin))),
+		() => ifNotUndefined(paddingTop ?? paddingY, (margin) => toPx(getDistance(theme, margin))),
 		[paddingTop, paddingY, theme]
 	);
 

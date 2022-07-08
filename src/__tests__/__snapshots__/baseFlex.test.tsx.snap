@@ -8,13 +8,7 @@ exports[`<BaseFlex /> should have margin-bottom and margin-top not equal 0px 1`]
   display: flex;
   box-sizing: border-box;
   margin-bottom: 12px;
-  margin-left: 0px;
-  margin-right: 0px;
   margin-top: 12px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 0px;
 }
 
 <body>
@@ -22,13 +16,7 @@ exports[`<BaseFlex /> should have margin-bottom and margin-top not equal 0px 1`]
     <div
       class="c0"
       data-margin-bottom="12px"
-      data-margin-left="0px"
-      data-margin-right="0px"
       data-margin-top="12px"
-      data-padding-bottom="0px"
-      data-padding-left="0px"
-      data-padding-right="0px"
-      data-padding-top="0px"
     />
   </div>
 </body>
@@ -41,28 +29,12 @@ exports[`<BaseFlex /> should have the basic css settings 1`] = `
   display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 0px;
 }
 
 <body>
   <div>
     <div
       class="c0"
-      data-margin-bottom="0px"
-      data-margin-left="0px"
-      data-margin-right="0px"
-      data-margin-top="0px"
-      data-padding-bottom="0px"
-      data-padding-left="0px"
-      data-padding-right="0px"
-      data-padding-top="0px"
     />
   </div>
 </body>

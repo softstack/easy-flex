@@ -1,5 +1,7 @@
 import { IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
-export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => U | undefined;
+export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => T extends never ? U | null | undefined : T extends null ? U | null : T extends undefined ? U | undefined : U;
+export declare const ifNotNull: <T, U>(value: T, fn: (value: Exclude<T, null>) => U) => T extends null ? U | null : U;
+export declare const ifNotUndefined: <T, U>(value: T, fn: (value: Exclude<T, undefined>) => U) => T extends undefined ? U | undefined : U;
 export declare const toPx: (value: number) => string;
 export declare const toRem: (value: number) => string;
 export declare const getDistance: (theme: IEasyFlexTheme, distance: number | IDistance) => number;

@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { IColor, IFontSize, IFontStyle, IFontWeight } from '../types';
-import { getFontSize, getFontWeight, ifDefined, toPx, toRem, useColor, useEasyFlexTheme } from '../utils';
+import { getFontSize, getFontWeight, ifNotUndefined, toPx, toRem, useColor, useEasyFlexTheme } from '../utils';
 
 const StyledStyle = styled.span<{
 	'data-background-color'?: string;
@@ -46,12 +46,12 @@ export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontW
 	}, [fontSize, theme]);
 
 	const processedFontWeight = useMemo<string | number | undefined>(
-		() => ifDefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
+		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
 		[fontWeight, theme]
 	);
 
 	const fontStyle = useMemo<IFontStyle | undefined>(
-		() => ifDefined(italic, (italic) => (italic ? 'italic' : 'normal')),
+		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
 		[italic]
 	);
 
