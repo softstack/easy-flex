@@ -43,7 +43,7 @@ export const Spacing: FC<ISpacingProps> = ({
 				(flip === undefined &&
 					(flipThreshold !== undefined
 						? displayWidth < getFlipThreshold(theme, flipThreshold)
-						: displayWidth < theme.fallbackFlipThreshold)))
+						: displayWidth < theme.flip.fallbackThreshold)))
 				? toPx(getDistance(theme, width))
 				: toPx(getDistance(theme, height)),
 		[displayWidth, flip, flipEnabled, flipThreshold, height, theme, width]
@@ -56,7 +56,7 @@ export const Spacing: FC<ISpacingProps> = ({
 				(flip === undefined &&
 					(flipThreshold !== undefined
 						? displayWidth < getFlipThreshold(theme, flipThreshold)
-						: displayWidth < theme.fallbackFlipThreshold)))
+						: displayWidth < theme.flip.fallbackThreshold)))
 				? toPx(getDistance(theme, height))
 				: toPx(getDistance(theme, width)),
 		[displayWidth, flip, flipEnabled, flipThreshold, height, theme, width]

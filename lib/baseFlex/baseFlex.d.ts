@@ -1,9 +1,12 @@
 import { FC, HTMLAttributes } from 'react';
-import { IAlignItems, IAlignSelf, IBaseFlexElement, IColor, IDistance, IFlexDirection, IJustifyContent } from '../types';
+import { IAlignItems, IAlignSelf, IBaseFlexElement, IBorderRadius, IBorderWidth, IColor, IDistance, IFlexDirection, IJustifyContent } from '../types';
 export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     align?: IAlignItems;
     alignSelf?: IAlignSelf;
     backgroundColor?: IColor;
+    borderColor?: IColor;
+    borderRadius?: IBorderRadius | number;
+    borderWidth?: IBorderWidth | number;
     color?: IColor;
     element?: IBaseFlexElement;
     flexDirection?: IFlexDirection;

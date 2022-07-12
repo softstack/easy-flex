@@ -20,7 +20,7 @@ export const Col: FC<IColProps> = ({ children, flip, flipDirection, flipThreshol
 				(flip === undefined &&
 					(flipThreshold !== undefined
 						? width < getFlipThreshold(theme, flipThreshold)
-						: width < theme.fallbackFlipThreshold)))
+						: width < theme.flip.fallbackThreshold)))
 		) {
 			switch (flipDirection) {
 				case 'flip':

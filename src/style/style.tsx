@@ -39,7 +39,7 @@ export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontW
 			return undefined;
 		}
 		const fontSizeValue = getFontSize(theme, fontSize);
-		if (theme.fontSizeType === 'rem') {
+		if (theme.font.sizeType === 'rem') {
 			return toRem(fontSizeValue);
 		}
 		return toPx(fontSizeValue);

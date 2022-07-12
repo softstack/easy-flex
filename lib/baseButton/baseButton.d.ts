@@ -1,9 +1,12 @@
 import { ButtonHTMLAttributes, FC } from 'react';
-import { IAlignItems, IAlignSelf, IColor, IDistance, IJustifyContent } from '../types';
+import { IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IJustifyContent } from '../types';
 export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     align?: IAlignItems;
     alignSelf?: IAlignSelf;
     backgroundColor?: IColor;
+    borderColor?: IColor;
+    borderRadius?: IBorderRadius | number;
+    borderWidth?: IBorderWidth | number;
     color?: IColor;
     fullWidth?: boolean;
     grow?: number;

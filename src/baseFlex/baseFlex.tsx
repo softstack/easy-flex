@@ -4,17 +4,32 @@ import {
 	IAlignItems,
 	IAlignSelf,
 	IBaseFlexElement,
+	IBorderRadius,
+	IBorderWidth,
 	IColor,
 	IDistance,
 	IFlexDirection,
 	IJustifyContent,
 } from '../types';
-import { getDistance, toPx, useColor, useDistance, useEasyFlexTheme } from '../utils';
+import {
+	getBorderRadius,
+	getBorderWidth,
+	getDistance,
+	ifNotUndefined,
+	toPx,
+	useColor,
+	useDistance,
+	useEasyFlexTheme,
+} from '../utils';
 
 const style = css<{
 	'data-align'?: IAlignItems;
 	'data-align-self'?: IAlignSelf;
 	'data-background-color'?: string;
+	'data-border-color'?: string;
+	'data-border-radius'?: string;
+	'data-border-style'?: 'solid';
+	'data-border-width'?: string;
 	'data-color'?: string;
 	'data-flex-direction'?: IFlexDirection;
 	'data-full-width'?: '100%';
@@ -37,6 +52,10 @@ const style = css<{
 	align-items: ${({ 'data-align': align }) => align};
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
+	border-color: ${({ 'data-border-color': borderColor }) => borderColor};
+	border-radius: ${({ 'data-border-radius': borderRadius }) => borderRadius};
+	border-style: ${({ 'data-border-style': borderStyle }) => borderStyle};
+	border-width: ${({ 'data-border-width': borderWidth }) => borderWidth};
 	color: ${({ 'data-color': color }) => color};
 	flex-direction: ${({ 'data-flex-direction': flexDirection }) => flexDirection};
 	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
@@ -99,6 +118,9 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
 	align?: IAlignItems;
 	alignSelf?: IAlignSelf;
 	backgroundColor?: IColor;
+	borderColor?: IColor;
+	borderRadius?: IBorderRadius | number;
+	borderWidth?: IBorderWidth | number;
 	color?: IColor;
 	element?: IBaseFlexElement;
 	flexDirection?: IFlexDirection;
@@ -125,6 +147,9 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 	align,
 	alignSelf,
 	backgroundColor,
+	borderColor,
+	borderRadius,
+	borderWidth,
 	children,
 	color,
 	element = 'div',
@@ -151,6 +176,20 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 	const theme = useEasyFlexTheme();
 
 	const processedBackgroundColor = useColor(backgroundColor, undefined);
+
+	const processedBorderColor = useColor(borderColor, undefined);
+
+	const processedBorderRadius = useMemo<string | undefined>(
+		() => ifNotUndefined(borderRadius, (borderRadius) => toPx(getBorderRadius(theme, borderRadius))),
+		[borderRadius, theme]
+	);
+
+	const processedBorderStyle = useMemo<'solid' | undefined>(() => (borderWidth ? 'solid' : undefined), [borderWidth]);
+
+	const processedBorderWidth = useMemo<string | undefined>(
+		() => ifNotUndefined(borderWidth, (borderWidth) => toPx(getBorderWidth(theme, borderWidth))),
+		[borderWidth, theme]
+	);
 
 	const processedColor = useColor(color, undefined);
 
@@ -221,6 +260,10 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 			data-align={align}
 			data-align-self={alignSelf}
 			data-background-color={processedBackgroundColor}
+			data-border-color={processedBorderColor}
+			data-border-radius={processedBorderRadius}
+			data-border-style={processedBorderStyle}
+			data-border-width={processedBorderWidth}
 			data-color={processedColor}
 			data-flex-direction={flexDirection}
 			data-full-width={processedFullWidth}

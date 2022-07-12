@@ -2,92 +2,49 @@ export declare type IDeepPartial<T> = T extends object ? {
     [P in keyof T]?: IDeepPartial<T[P]>;
 } : T;
 declare type IBaseSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
+interface IBaseSizeNumber {
+    '8xs': number;
+    '7xs': number;
+    '6xs': number;
+    '5xs': number;
+    '4xs': number;
+    '3xs': number;
+    xxs: number;
+    xs: number;
+    s: number;
+    m: number;
+    l: number;
+    xl: number;
+    xxl: number;
+    '3xl': number;
+    '4xl': number;
+    '5xl': number;
+    '6xl': number;
+    '7xl': number;
+    '8xl': number;
+}
 declare type ISizeType = 'px' | 'rem';
-export declare type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 export declare type IAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IAlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
-export declare type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
+export declare type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 export declare type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
-export declare type IFontStyle = 'italic' | 'normal';
+export declare type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
+export declare type IBaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
+export declare type IBorderRadius = IBaseSize;
+export declare type IBorderWidth = IBaseSize;
+export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'modal' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'modalText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'modalBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter' | 'onModal' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'quanternaryBorder' | 'senaryBorder' | 'warningBorder' | 'errorBorder' | 'headerBorder' | 'footerBorder' | 'modalBorder';
+export declare type IDistance = IBaseSize;
 export declare type IFlipDirection = 'flip' | 'reverse' | 'flip-reverse';
 export declare type IFlipThreshold = IBaseSize;
-export declare type IBaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
-export declare type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
-export declare type IDistance = IBaseSize;
 export declare type IFontSize = IBaseSize;
+export declare type IFontStyle = 'italic' | 'normal';
 export declare type IFontWeight = 'normal' | 'semibold' | 'bold';
-export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter';
+export declare type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 export interface IEasyFlexTheme {
-    fallbackFlipThreshold: number;
-    flipThreshold: {
-        '8xs': number;
-        '7xs': number;
-        '6xs': number;
-        '5xs': number;
-        '4xs': number;
-        '3xs': number;
-        xxs: number;
-        xs: number;
-        s: number;
-        m: number;
-        l: number;
-        xl: number;
-        xxl: number;
-        '3xl': number;
-        '4xl': number;
-        '5xl': number;
-        '6xl': number;
-        '7xl': number;
-        '8xl': number;
-    };
-    distance: {
-        '8xs': number;
-        '7xs': number;
-        '6xs': number;
-        '5xs': number;
-        '4xs': number;
-        '3xs': number;
-        xxs: number;
-        xs: number;
-        s: number;
-        m: number;
-        l: number;
-        xl: number;
-        xxl: number;
-        '3xl': number;
-        '4xl': number;
-        '5xl': number;
-        '6xl': number;
-        '7xl': number;
-        '8xl': number;
-    };
-    fontSizeType: ISizeType;
-    fontSize: {
-        '8xs': number;
-        '7xs': number;
-        '6xs': number;
-        '5xs': number;
-        '4xs': number;
-        '3xs': number;
-        xxs: number;
-        xs: number;
-        s: number;
-        m: number;
-        l: number;
-        xl: number;
-        xxl: number;
-        '3xl': number;
-        '4xl': number;
-        '5xl': number;
-        '6xl': number;
-        '7xl': number;
-        '8xl': number;
-    };
-    fontWeight: {
-        normal: number | string;
-        semibold: number | string;
-        bold: number | string;
+    border: {
+        radius: IBaseSizeNumber;
+        width: IBaseSizeNumber;
     };
     color: {
         primary: string;
@@ -100,6 +57,7 @@ export interface IEasyFlexTheme {
         error: string;
         header: string;
         footer: string;
+        modal: string;
         primaryText: string;
         secondaryText: string;
         tertiaryText: string;
@@ -110,6 +68,7 @@ export interface IEasyFlexTheme {
         errorText: string;
         headerText: string;
         footerText: string;
+        modalText: string;
         primaryBackground: string;
         secondaryBackground: string;
         tertiaryBackground: string;
@@ -120,6 +79,7 @@ export interface IEasyFlexTheme {
         errorBackground: string;
         headerBackground: string;
         footerBackground: string;
+        modalBackground: string;
         onPrimary: string;
         onSecondary: string;
         onTertiary: string;
@@ -130,6 +90,32 @@ export interface IEasyFlexTheme {
         onError: string;
         onHeader: string;
         onFooter: string;
+        onModal: string;
+        primaryBorder: string;
+        secondaryBorder: string;
+        tertiaryBorder: string;
+        quanternaryBorder: string;
+        quinaryBorder: string;
+        senaryBorder: string;
+        warningBorder: string;
+        errorBorder: string;
+        headerBorder: string;
+        footerBorder: string;
+        modalBorder: string;
+    };
+    distance: IBaseSizeNumber;
+    flip: {
+        fallbackThreshold: number;
+        threshold: IBaseSizeNumber;
+    };
+    font: {
+        sizeType: ISizeType;
+        size: IBaseSizeNumber;
+        weight: {
+            normal: number | string;
+            semibold: number | string;
+            bold: number | string;
+        };
     };
     modal: {
         backgroundColor: string;

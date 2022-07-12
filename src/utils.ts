@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { EasyFlexContext } from './constants';
-import { IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
+import { IBorderRadius, IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
 
 export const ifDefined = <T, U>(
 	value: T,
@@ -60,38 +60,42 @@ export const toPx = (value: number): string => `${value}px`;
 
 export const toRem = (value: number): string => `${value}rem`;
 
-export const getDistance = (theme: IEasyFlexTheme, distance: number | IDistance): number => {
-	if (typeof distance === 'number') {
-		return distance;
-	}
-	return theme.distance[distance];
-};
+export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: number | IBorderRadius) =>
+	typeof borderRadius === 'number' ? borderRadius : theme.border.radius[borderRadius];
 
-export const getFontSize = (theme: IEasyFlexTheme, fontSize: number | IFontSize): number => {
-	if (typeof fontSize === 'number') {
-		return fontSize;
-	}
-	return theme.fontSize[fontSize];
-};
+export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: number | IBorderRadius) =>
+	typeof borderWidth === 'number' ? borderWidth : theme.border.radius[borderWidth];
 
-export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: number | IFontWeight): number | string => {
-	if (typeof fontWeight === 'number') {
-		return fontWeight;
-	}
-	return theme.fontWeight[fontWeight];
-};
+export const getColor = (theme: IEasyFlexTheme, color: IColor): string =>
+	color === 'inherit' ? 'inherit' : theme.color[color];
 
-export const getColor = (theme: IEasyFlexTheme, color: IColor): string => {
-	if (color === 'inherit') {
-		return 'inherit';
-	}
-	return theme.color[color];
-};
+export const getDistance = (theme: IEasyFlexTheme, distance: number | IDistance): number =>
+	typeof distance === 'number' ? distance : theme.distance[distance];
 
 export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold): number =>
-	theme.flipThreshold[flipThreshold];
+	theme.flip.threshold[flipThreshold];
+
+export const getFontSize = (theme: IEasyFlexTheme, fontSize: number | IFontSize): number =>
+	typeof fontSize === 'number' ? fontSize : theme.font.size[fontSize];
+
+export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: number | IFontWeight): number | string =>
+	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
 export const useEasyFlexTheme = () => useContext(EasyFlexContext);
+
+export const useColor = <T = string | undefined>(
+	color: IColor | undefined,
+	fallback: T
+): T extends undefined ? string | T : string => {
+	const theme = useEasyFlexTheme();
+
+	const processedColor = useMemo<string | T>(
+		() => (color === undefined ? fallback : getColor(theme, color)),
+		[color, fallback, theme]
+	);
+
+	return processedColor as T extends undefined ? string | T : string;
+};
 
 export const useDimension = (): { height: number; width: number } => {
 	const [height, setHeight] = useState(window.innerHeight);
@@ -123,20 +127,6 @@ export const useDimension = (): { height: number; width: number } => {
 	);
 
 	return dimension;
-};
-
-export const useColor = <T = string | undefined>(
-	color: IColor | undefined,
-	fallback: T
-): T extends undefined ? string | T : string => {
-	const theme = useEasyFlexTheme();
-
-	const processedColor = useMemo<string | T>(
-		() => (color === undefined ? fallback : getColor(theme, color)),
-		[color, fallback, theme]
-	);
-
-	return processedColor as T extends undefined ? string | T : string;
 };
 
 export const useDistance = ({

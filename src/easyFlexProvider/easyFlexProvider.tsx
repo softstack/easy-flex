@@ -12,11 +12,28 @@ export const EasyFlexProvider: FC<IEasyFlexProviderProps> = ({ children, theme }
 		() => ({
 			...initialFlexTheme,
 			...theme,
-			flipThreshold: { ...initialFlexTheme.flipThreshold, ...theme.flipThreshold },
-			distance: { ...initialFlexTheme.distance, ...theme.distance },
-			fontSize: { ...initialFlexTheme.fontSize, ...theme.fontSize },
-			fontWeight: { ...initialFlexTheme.fontWeight, ...theme.fontWeight },
+			border: {
+				...initialFlexTheme.border,
+				...theme.border,
+				radius: { ...initialFlexTheme.border.radius, ...theme.border?.radius },
+				width: { ...initialFlexTheme.border.width, ...theme.border?.width },
+			},
 			color: { ...initialFlexTheme.color, ...theme.color },
+			distance: { ...initialFlexTheme.distance, ...theme.distance },
+			flip: {
+				...initialFlexTheme.flip,
+				...theme.flip,
+				threshold: { ...initialFlexTheme.flip.threshold, ...theme.flip?.threshold },
+			},
+			font: {
+				...initialFlexTheme.font,
+				...theme.font,
+				size: { ...initialFlexTheme.font.size, ...theme.font?.size },
+				weight: {
+					...initialFlexTheme.font.weight,
+					...theme.font?.weight,
+				},
+			},
 			modal: { ...initialFlexTheme.modal, ...theme.modal },
 		}),
 		[theme]
