@@ -146,7 +146,7 @@ export type IColor =
 
 export type IDistance = IBaseSize;
 
-export type IFlipDirection = 'flip' | 'reverse' | 'flip-reverse';
+export type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
 export type IFlipThreshold = IBaseSize;
 
@@ -154,9 +154,13 @@ export type IFontSize = IBaseSize;
 
 export type IFontStyle = 'italic' | 'normal';
 
-export type IFontWeight = 'normal' | 'semibold' | 'bold';
+export type IFontWeight = 'bold' | 'normal' | 'semibold';
+
+export type IHeight = IBaseSize;
 
 export type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+
+export type IWidth = IBaseSize;
 
 // Custom end
 
@@ -236,11 +240,12 @@ export interface IEasyFlexTheme {
 			bold: number | string;
 		};
 	};
-
+	height: IBaseSizeNumber;
 	modal: {
 		backgroundColor: string;
 		blur: number;
 	};
+	width: IBaseSizeNumber;
 }
 
 export type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;

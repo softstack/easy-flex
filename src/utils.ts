@@ -1,6 +1,16 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { EasyFlexContext } from './constants';
-import { IBorderRadius, IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight } from './types';
+import {
+	IBorderRadius,
+	IColor,
+	IDistance,
+	IEasyFlexTheme,
+	IFlipThreshold,
+	IFontSize,
+	IFontWeight,
+	IHeight,
+	IWidth,
+} from './types';
 
 export const ifDefined = <T, U>(
 	value: T,
@@ -60,26 +70,32 @@ export const toPx = (value: number): string => `${value}px`;
 
 export const toRem = (value: number): string => `${value}rem`;
 
-export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: number | IBorderRadius) =>
+export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: IBorderRadius | number) =>
 	typeof borderRadius === 'number' ? borderRadius : theme.border.radius[borderRadius];
 
-export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: number | IBorderRadius) =>
+export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: IBorderRadius | number) =>
 	typeof borderWidth === 'number' ? borderWidth : theme.border.radius[borderWidth];
 
 export const getColor = (theme: IEasyFlexTheme, color: IColor): string =>
 	color === 'inherit' ? 'inherit' : theme.color[color];
 
-export const getDistance = (theme: IEasyFlexTheme, distance: number | IDistance): number =>
+export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | number): number =>
 	typeof distance === 'number' ? distance : theme.distance[distance];
 
 export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold): number =>
 	theme.flip.threshold[flipThreshold];
 
-export const getFontSize = (theme: IEasyFlexTheme, fontSize: number | IFontSize): number =>
+export const getFontSize = (theme: IEasyFlexTheme, fontSize: IFontSize | number): number =>
 	typeof fontSize === 'number' ? fontSize : theme.font.size[fontSize];
 
-export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: number | IFontWeight): number | string =>
+export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | number): number | string =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
+
+export const getHeight = (theme: IEasyFlexTheme, height: IHeight | number): number =>
+	typeof height === 'number' ? height : theme.height[height];
+
+export const getWidth = (theme: IEasyFlexTheme, width: IWidth | number): number =>
+	typeof width === 'number' ? width : theme.width[width];
 
 export const useEasyFlexTheme = () => useContext(EasyFlexContext);
 
@@ -98,33 +114,20 @@ export const useColor = <T = string | undefined>(
 };
 
 export const useDimension = (): { height: number; width: number } => {
-	const [height, setHeight] = useState(window.innerHeight);
-	const [bodyWidth, setBodyWidth] = useState(document.body.clientWidth);
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [height, setHeight] = useState(document.documentElement.clientHeight);
+	const [width, setWidth] = useState(document.documentElement.clientWidth);
 
 	useEffect(() => {
-		const handleResize = () => {
-			setHeight(window.innerHeight);
-			setWindowWidth(window.innerWidth);
-		};
-		window.addEventListener('resize', handleResize);
-
-		// Width via ResizeObserver too because the browser's scrollbar does not influence window.innerWidth
-		const resizeObserver = new ResizeObserver((entries) => {
-			setBodyWidth(entries[0].contentRect.width);
+		const resizeObserver = new ResizeObserver(() => {
+			setHeight(document.documentElement.clientHeight);
+			setWidth(document.documentElement.clientWidth);
 		});
-		resizeObserver.observe(document.body);
+		resizeObserver.observe(document.documentElement);
 
-		return () => {
-			window.removeEventListener('resize', handleResize);
-			resizeObserver.disconnect();
-		};
+		return () => resizeObserver.disconnect();
 	});
 
-	const dimension = useMemo(
-		() => ({ height, width: Math.min(bodyWidth, windowWidth) }),
-		[height, bodyWidth, windowWidth]
-	);
+	const dimension = useMemo(() => ({ height, width }), [height, width]);
 
 	return dimension;
 };
@@ -263,4 +266,84 @@ export const useDistance = ({
 	);
 
 	return distance;
+};
+
+export const useSize = ({
+	fullHeight,
+	fullWidth,
+	height,
+	heightMax,
+	heightMin,
+	width,
+	widthMax,
+	widthMin,
+}: {
+	fullHeight: boolean;
+	fullWidth: boolean;
+	height?: IHeight | number;
+	heightMax?: IHeight | number;
+	heightMin?: IHeight | number;
+	width?: IWidth | number;
+	widthMax?: IWidth | number;
+	widthMin?: IWidth | number;
+}): {
+	height: string | undefined;
+	heightMax: string | undefined;
+	heightMin: string | undefined;
+	width: string | undefined;
+	widthMax: string | undefined;
+	widthMin: string | undefined;
+} => {
+	const theme = useEasyFlexTheme();
+
+	const processedHeight = useMemo<string | undefined>(
+		() => (fullHeight ? '100%' : ifNotUndefined(height, (height) => toPx(getHeight(theme, height)))),
+		[fullHeight, height, theme]
+	);
+
+	const processedHeightMax = useMemo<string | undefined>(
+		() => ifNotUndefined(heightMax, (heightMax) => toPx(getHeight(theme, heightMax))),
+		[heightMax, theme]
+	);
+
+	const processedHeightMin = useMemo<string | undefined>(
+		() => ifNotUndefined(heightMin, (heightMin) => toPx(getHeight(theme, heightMin))),
+		[heightMin, theme]
+	);
+
+	const processedWidth = useMemo<string | undefined>(
+		() => (fullWidth ? '100%' : ifNotUndefined(width, (width) => toPx(getWidth(theme, width)))),
+		[fullWidth, theme, width]
+	);
+
+	const processedWidthMax = useMemo<string | undefined>(
+		() => ifNotUndefined(widthMax, (widthMax) => toPx(getWidth(theme, widthMax))),
+		[theme, widthMax]
+	);
+
+	const processedWidthMin = useMemo<string | undefined>(
+		() => ifNotUndefined(widthMin, (widthMin) => toPx(getWidth(theme, widthMin))),
+		[theme, widthMin]
+	);
+
+	const size = useMemo<{
+		height: string | undefined;
+		heightMax: string | undefined;
+		heightMin: string | undefined;
+		width: string | undefined;
+		widthMax: string | undefined;
+		widthMin: string | undefined;
+	}>(
+		() => ({
+			height: processedHeight,
+			heightMax: processedHeightMax,
+			heightMin: processedHeightMin,
+			width: processedWidth,
+			widthMax: processedWidthMax,
+			widthMin: processedWidthMin,
+		}),
+		[processedHeight, processedHeightMax, processedHeightMin, processedWidth, processedWidthMax, processedWidthMin]
+	);
+
+	return size;
 };

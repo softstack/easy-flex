@@ -35,12 +35,14 @@ export declare type IBorderRadius = IBaseSize;
 export declare type IBorderWidth = IBaseSize;
 export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'modal' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'modalText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'modalBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter' | 'onModal' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'quanternaryBorder' | 'senaryBorder' | 'warningBorder' | 'errorBorder' | 'headerBorder' | 'footerBorder' | 'modalBorder';
 export declare type IDistance = IBaseSize;
-export declare type IFlipDirection = 'flip' | 'reverse' | 'flip-reverse';
+export declare type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 export declare type IFlipThreshold = IBaseSize;
 export declare type IFontSize = IBaseSize;
 export declare type IFontStyle = 'italic' | 'normal';
-export declare type IFontWeight = 'normal' | 'semibold' | 'bold';
+export declare type IFontWeight = 'bold' | 'normal' | 'semibold';
+export declare type IHeight = IBaseSize;
 export declare type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+export declare type IWidth = IBaseSize;
 export interface IEasyFlexTheme {
     border: {
         radius: IBaseSizeNumber;
@@ -117,10 +119,12 @@ export interface IEasyFlexTheme {
             bold: number | string;
         };
     };
+    height: IBaseSizeNumber;
     modal: {
         backgroundColor: string;
         blur: number;
     };
+    width: IBaseSizeNumber;
 }
 export declare type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;
 export {};

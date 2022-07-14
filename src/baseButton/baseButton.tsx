@@ -1,6 +1,16 @@
 import React, { ButtonHTMLAttributes, FC, useMemo } from 'react';
 import styled from 'styled-components';
-import { IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IJustifyContent } from '../types';
+import {
+	IAlignItems,
+	IAlignSelf,
+	IBorderRadius,
+	IBorderWidth,
+	IColor,
+	IDistance,
+	IHeight,
+	IJustifyContent,
+	IWidth,
+} from '../types';
 import {
 	getBorderRadius,
 	getBorderWidth,
@@ -9,6 +19,7 @@ import {
 	useColor,
 	useDistance,
 	useEasyFlexTheme,
+	useSize,
 } from '../utils';
 
 const StyledBaseButton = styled.button<{
@@ -20,8 +31,10 @@ const StyledBaseButton = styled.button<{
 	'data-border-style'?: 'solid';
 	'data-border-width'?: string;
 	'data-color'?: string;
-	'data-full-width'?: '100%';
 	'data-grow'?: number;
+	'data-height'?: string;
+	'data-height-max'?: string;
+	'data-height-min'?: string;
 	'data-justify'?: IJustifyContent;
 	'data-margin-bottom'?: string;
 	'data-margin-left'?: string;
@@ -32,6 +45,9 @@ const StyledBaseButton = styled.button<{
 	'data-padding-right'?: string;
 	'data-padding-top'?: string;
 	'data-shrink'?: number;
+	'data-width'?: string;
+	'data-width-max'?: string;
+	'data-width-min'?: string;
 }>`
 	display: flex;
 	box-sizing: border-box;
@@ -47,8 +63,10 @@ const StyledBaseButton = styled.button<{
 	border-style: ${({ 'data-border-style': borderStyle }) => borderStyle};
 	border-width: ${({ 'data-border-width': borderWidth }) => borderWidth};
 	color: ${({ 'data-color': color }) => color};
-	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
 	flex-grow: ${({ 'data-grow': grow }) => grow};
+	height: ${({ 'data-height': height }) => height};
+	max-height: ${({ 'data-height-max': heightMax }) => heightMax};
+	min-height: ${({ 'data-height-min': heightMin }) => heightMin};
 	justify-content: ${({ 'data-justify': justify }) => justify};
 	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};
 	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
@@ -59,6 +77,9 @@ const StyledBaseButton = styled.button<{
 	padding-right: ${({ 'data-padding-right': paddingRight }) => paddingRight};
 	padding-top: ${({ 'data-padding-top': paddingTop }) => paddingTop};
 	flex-shrink: ${({ 'data-shrink': shrink }) => shrink};
+	width: ${({ 'data-width': width }) => width};
+	max-width: ${({ 'data-width-max': widthMax }) => widthMax};
+	min-width: ${({ 'data-width-min': widthMin }) => widthMin};
 `;
 
 export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -69,8 +90,10 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	borderRadius?: IBorderRadius | number;
 	borderWidth?: IBorderWidth | number;
 	color?: IColor;
+	fullHeight?: boolean;
 	fullWidth?: boolean;
 	grow?: number;
+	height?: IHeight | number;
 	justify?: IJustifyContent;
 	marginBottom?: IDistance | number;
 	marginLeft?: IDistance | number;
@@ -78,6 +101,10 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	marginTop?: IDistance | number;
 	marginX?: IDistance | number;
 	marginY?: IDistance | number;
+	maxHeight?: IHeight | number;
+	maxWidth?: IWidth | number;
+	minHeight?: IHeight | number;
+	minWidth?: IWidth | number;
 	paddingBottom?: IDistance | number;
 	paddingLeft?: IDistance | number;
 	paddingRight?: IDistance | number;
@@ -85,6 +112,7 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	paddingX?: IDistance | number;
 	paddingY?: IDistance | number;
 	shrink?: number;
+	width?: IWidth | number;
 }
 
 export type IExternalBaseButtonProps = Omit<
@@ -110,8 +138,10 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 	borderWidth,
 	children,
 	color,
+	fullHeight = false,
 	fullWidth = false,
 	grow,
+	height,
 	justify,
 	marginBottom,
 	marginLeft,
@@ -119,6 +149,10 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 	marginTop,
 	marginX,
 	marginY,
+	maxHeight,
+	maxWidth,
+	minHeight,
+	minWidth,
 	paddingBottom,
 	paddingLeft,
 	paddingRight,
@@ -126,6 +160,7 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 	paddingX,
 	paddingY,
 	shrink,
+	width,
 	...props
 }) => {
 	const theme = useEasyFlexTheme();
@@ -148,8 +183,6 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 
 	const processedColor = useColor(color, undefined);
 
-	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
-
 	const { margin, padding } = useDistance({
 		marginBottom,
 		marginLeft,
@@ -165,6 +198,17 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 		paddingY,
 	});
 
+	const size = useSize({
+		fullHeight,
+		fullWidth,
+		height,
+		heightMax: maxHeight,
+		heightMin: minHeight,
+		width,
+		widthMax: maxWidth,
+		widthMin: minWidth,
+	});
+
 	return (
 		<StyledBaseButton
 			data-align={align}
@@ -175,8 +219,10 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 			data-border-style={processedBorderStyle}
 			data-border-width={processedBorderWidth}
 			data-color={processedColor}
-			data-full-width={processedFullWidth}
 			data-grow={grow}
+			data-height={size.height}
+			data-height-max={size.heightMax}
+			data-height-min={size.heightMin}
 			data-justify={justify}
 			data-margin-bottom={margin.bottom}
 			data-margin-left={margin.left}
@@ -187,6 +233,9 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 			data-padding-right={padding.right}
 			data-padding-top={padding.top}
 			data-shrink={shrink}
+			data-width={size.width}
+			data-width-max={size.widthMax}
+			data-width-min={size.widthMin}
 			{...props}
 		>
 			{children}

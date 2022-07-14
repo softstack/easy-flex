@@ -1,13 +1,15 @@
 import { FC, HTMLAttributes } from 'react';
-import { IAlignSelf, IColor, IDistance, IFontSize, IFontWeight, ITextAlign, ITextElement, IWordBreak } from '../types';
+import { IAlignSelf, IColor, IDistance, IFontSize, IFontWeight, IHeight, ITextAlign, ITextElement, IWidth, IWordBreak } from '../types';
 export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     align?: ITextAlign;
     alignSelf?: IAlignSelf;
     color?: IColor;
     element?: ITextElement;
-    fontSize?: number | IFontSize;
-    fontWeight?: number | IFontWeight;
+    fontSize?: IFontSize | number;
+    fontWeight?: IFontWeight | number;
+    fullHeight?: boolean;
     fullWidth?: boolean;
+    height?: IHeight | number;
     italic?: boolean;
     marginBottom?: IDistance | number;
     marginLeft?: IDistance | number;
@@ -15,12 +17,17 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     marginTop?: IDistance | number;
     marginX?: IDistance | number;
     marginY?: IDistance | number;
+    maxHeight?: IHeight | number;
+    maxWidth?: IWidth | number;
+    minHeight?: IHeight | number;
+    minWidth?: IWidth | number;
     paddingBottom?: IDistance | number;
     paddingLeft?: IDistance | number;
     paddingRight?: IDistance | number;
     paddingTop?: IDistance | number;
     paddingX?: IDistance | number;
     paddingY?: IDistance | number;
+    width?: IWidth | number;
     wordBreak?: IWordBreak;
 }
 export declare const Text: FC<ITextProps>;

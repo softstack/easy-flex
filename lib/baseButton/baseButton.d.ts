@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, FC } from 'react';
-import { IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IJustifyContent } from '../types';
+import { IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IHeight, IJustifyContent, IWidth } from '../types';
 export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     align?: IAlignItems;
     alignSelf?: IAlignSelf;
@@ -8,8 +8,10 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     borderRadius?: IBorderRadius | number;
     borderWidth?: IBorderWidth | number;
     color?: IColor;
+    fullHeight?: boolean;
     fullWidth?: boolean;
     grow?: number;
+    height?: IHeight | number;
     justify?: IJustifyContent;
     marginBottom?: IDistance | number;
     marginLeft?: IDistance | number;
@@ -17,6 +19,10 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     marginTop?: IDistance | number;
     marginX?: IDistance | number;
     marginY?: IDistance | number;
+    maxHeight?: IHeight | number;
+    maxWidth?: IWidth | number;
+    minHeight?: IHeight | number;
+    minWidth?: IWidth | number;
     paddingBottom?: IDistance | number;
     paddingLeft?: IDistance | number;
     paddingRight?: IDistance | number;
@@ -24,6 +30,7 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     paddingX?: IDistance | number;
     paddingY?: IDistance | number;
     shrink?: number;
+    width?: IWidth | number;
 }
 export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'color' | 'justify' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingX' | 'paddingY'>;
 export declare const BaseButton: FC<IBaseButtonProps>;

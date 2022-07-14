@@ -7,8 +7,10 @@ import {
 	IFontSize,
 	IFontStyle,
 	IFontWeight,
+	IHeight,
 	ITextAlign,
 	ITextElement,
+	IWidth,
 	IWordBreak,
 } from '../types';
 import {
@@ -20,6 +22,7 @@ import {
 	useColor,
 	useDistance,
 	useEasyFlexTheme,
+	useSize,
 } from '../utils';
 
 const style = css<{
@@ -28,8 +31,10 @@ const style = css<{
 	'data-color': string;
 	'data-font-size': string;
 	'data-font-weight': string | number;
-	'data-full-width'?: '100%';
 	'data-font-style'?: IFontStyle;
+	'data-height'?: string;
+	'data-height-max'?: string;
+	'data-height-min'?: string;
 	'data-margin-bottom'?: string;
 	'data-margin-left'?: string;
 	'data-margin-right'?: string;
@@ -38,6 +43,9 @@ const style = css<{
 	'data-padding-left'?: string;
 	'data-padding-right'?: string;
 	'data-padding-top'?: string;
+	'data-width'?: string;
+	'data-width-max'?: string;
+	'data-width-min'?: string;
 	'data-word-break'?: IWordBreak;
 }>`
 	display: flex;
@@ -47,8 +55,10 @@ const style = css<{
 	color: ${({ 'data-color': color }) => color};
 	font-size: ${({ 'data-font-size': fontSize }) => fontSize};
 	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
-	width: ${({ 'data-full-width': fullWidth }) => fullWidth};
 	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
+	height: ${({ 'data-height': height }) => height};
+	max-height: ${({ 'data-height-max': heightMax }) => heightMax};
+	min-height: ${({ 'data-height-min': heightMin }) => heightMin};
 	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};
 	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
 	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
@@ -57,6 +67,9 @@ const style = css<{
 	padding-left: ${({ 'data-padding-left': paddingLeft }) => paddingLeft};
 	padding-right: ${({ 'data-padding-right': paddingRight }) => paddingRight};
 	padding-top: ${({ 'data-padding-top': paddingTop }) => paddingTop};
+	width: ${({ 'data-width': width }) => width};
+	max-width: ${({ 'data-width-max': widthMax }) => widthMax};
+	min-width: ${({ 'data-width-min': widthMin }) => widthMin};
 	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
 `;
 
@@ -93,9 +106,11 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 	alignSelf?: IAlignSelf;
 	color?: IColor;
 	element?: ITextElement;
-	fontSize?: number | IFontSize;
-	fontWeight?: number | IFontWeight;
+	fontSize?: IFontSize | number;
+	fontWeight?: IFontWeight | number;
+	fullHeight?: boolean;
 	fullWidth?: boolean;
+	height?: IHeight | number;
 	italic?: boolean;
 	marginBottom?: IDistance | number;
 	marginLeft?: IDistance | number;
@@ -103,12 +118,17 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 	marginTop?: IDistance | number;
 	marginX?: IDistance | number;
 	marginY?: IDistance | number;
+	maxHeight?: IHeight | number;
+	maxWidth?: IWidth | number;
+	minHeight?: IHeight | number;
+	minWidth?: IWidth | number;
 	paddingBottom?: IDistance | number;
 	paddingLeft?: IDistance | number;
 	paddingRight?: IDistance | number;
 	paddingTop?: IDistance | number;
 	paddingX?: IDistance | number;
 	paddingY?: IDistance | number;
+	width?: IWidth | number;
 	wordBreak?: IWordBreak;
 }
 
@@ -120,7 +140,9 @@ export const Text: FC<ITextProps> = ({
 	element = 'p',
 	fontSize = 'm',
 	fontWeight = 'normal',
-	fullWidth,
+	fullHeight = false,
+	fullWidth = false,
+	height,
 	italic,
 	marginBottom,
 	marginLeft,
@@ -128,12 +150,17 @@ export const Text: FC<ITextProps> = ({
 	marginTop,
 	marginX,
 	marginY,
+	maxHeight,
+	maxWidth,
+	minHeight,
+	minWidth,
 	paddingBottom,
 	paddingLeft,
 	paddingRight,
 	paddingTop,
 	paddingX,
 	paddingY,
+	width,
 	wordBreak,
 	...props
 }) => {
@@ -150,8 +177,6 @@ export const Text: FC<ITextProps> = ({
 	}, [fontSize, theme]);
 
 	const processedFontWeight = useMemo<string | number>(() => getFontWeight(theme, fontWeight), [fontWeight, theme]);
-
-	const processedFullWidth = useMemo<'100%' | undefined>(() => (fullWidth ? '100%' : undefined), [fullWidth]);
 
 	const fontStyle = useMemo<IFontStyle | undefined>(
 		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
@@ -171,6 +196,17 @@ export const Text: FC<ITextProps> = ({
 		paddingTop,
 		paddingX,
 		paddingY,
+	});
+
+	const size = useSize({
+		fullHeight,
+		fullWidth,
+		height,
+		heightMax: maxHeight,
+		heightMin: minHeight,
+		width,
+		widthMax: maxWidth,
+		widthMin: minWidth,
 	});
 
 	const Element = useMemo(() => {
@@ -199,8 +235,10 @@ export const Text: FC<ITextProps> = ({
 			data-color={processedColor}
 			data-font-size={processedFontSize}
 			data-font-weight={processedFontWeight}
-			data-full-width={processedFullWidth}
 			data-font-style={fontStyle}
+			data-height={size.height}
+			data-height-max={size.heightMax}
+			data-height-min={size.heightMin}
 			data-margin-bottom={margin.bottom}
 			data-margin-left={margin.left}
 			data-margin-right={margin.right}
@@ -209,6 +247,9 @@ export const Text: FC<ITextProps> = ({
 			data-padding-left={padding.left}
 			data-padding-right={padding.right}
 			data-padding-top={padding.top}
+			data-width={size.width}
+			data-width-max={size.widthMax}
+			data-width-min={size.widthMin}
 			data-word-break={wordBreak}
 			{...props}
 		>

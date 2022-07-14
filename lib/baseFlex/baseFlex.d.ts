@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes } from 'react';
-import { IAlignItems, IAlignSelf, IBaseFlexElement, IBorderRadius, IBorderWidth, IColor, IDistance, IFlexDirection, IJustifyContent } from '../types';
+import { IAlignItems, IAlignSelf, IBaseFlexElement, IBorderRadius, IBorderWidth, IColor, IDistance, IFlexDirection, IHeight, IJustifyContent, IWidth } from '../types';
 export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     align?: IAlignItems;
     alignSelf?: IAlignSelf;
@@ -10,9 +10,11 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     color?: IColor;
     element?: IBaseFlexElement;
     flexDirection?: IFlexDirection;
+    fullHeight?: boolean;
     fullWidth?: boolean;
-    gap?: number | IDistance;
+    gap?: IDistance | number;
     grow?: number;
+    height?: IHeight | number;
     justify?: IJustifyContent;
     marginBottom?: IDistance | number;
     marginLeft?: IDistance | number;
@@ -20,6 +22,10 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     marginTop?: IDistance | number;
     marginX?: IDistance | number;
     marginY?: IDistance | number;
+    maxHeight?: IHeight | number;
+    maxWidth?: IWidth | number;
+    minHeight?: IHeight | number;
+    minWidth?: IWidth | number;
     paddingBottom?: IDistance | number;
     paddingLeft?: IDistance | number;
     paddingRight?: IDistance | number;
@@ -27,5 +33,6 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     paddingX?: IDistance | number;
     paddingY?: IDistance | number;
     shrink?: number;
+    width?: IWidth | number;
 }
 export declare const BaseFlex: FC<IBaseFlexProps>;

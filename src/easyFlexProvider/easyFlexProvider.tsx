@@ -34,7 +34,9 @@ export const EasyFlexProvider: FC<IEasyFlexProviderProps> = ({ children, theme }
 					...theme.font?.weight,
 				},
 			},
+			height: { ...initialFlexTheme.height, ...theme.height },
 			modal: { ...initialFlexTheme.modal, ...theme.modal },
+			width: { ...initialFlexTheme.width, ...theme.width },
 		}),
 		[theme]
 	);
