@@ -143,6 +143,7 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
 	grow?: number;
 	height?: IHeight | number;
 	justify?: IJustifyContent;
+	margin?: IDistance | number;
 	marginBottom?: IDistance | number;
 	marginLeft?: IDistance | number;
 	marginRight?: IDistance | number;
@@ -153,6 +154,7 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
 	maxWidth?: IWidth | number;
 	minHeight?: IHeight | number;
 	minWidth?: IWidth | number;
+	padding?: IDistance | number;
 	paddingBottom?: IDistance | number;
 	paddingLeft?: IDistance | number;
 	paddingRight?: IDistance | number;
@@ -180,6 +182,7 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 	grow,
 	height,
 	justify,
+	margin,
 	marginBottom,
 	marginLeft,
 	marginRight,
@@ -190,6 +193,7 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 	maxWidth,
 	minHeight,
 	minWidth,
+	padding,
 	paddingBottom,
 	paddingLeft,
 	paddingRight,
@@ -240,13 +244,15 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 		return undefined;
 	}, [flexDirection, gap, theme]);
 
-	const { margin, padding } = useDistance({
+	const distance = useDistance({
+		margin,
 		marginBottom,
 		marginLeft,
 		marginRight,
 		marginTop,
 		marginX,
 		marginY,
+		padding,
 		paddingBottom,
 		paddingLeft,
 		paddingRight,
@@ -309,14 +315,14 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 			data-height-max={size.heightMax}
 			data-height-min={size.heightMin}
 			data-justify={justify}
-			data-margin-bottom={margin.bottom}
-			data-margin-left={margin.left}
-			data-margin-right={margin.right}
-			data-margin-top={margin.top}
-			data-padding-bottom={padding.bottom}
-			data-padding-left={padding.left}
-			data-padding-right={padding.right}
-			data-padding-top={padding.top}
+			data-margin-bottom={distance.margin.bottom}
+			data-margin-left={distance.margin.left}
+			data-margin-right={distance.margin.right}
+			data-margin-top={distance.margin.top}
+			data-padding-bottom={distance.padding.bottom}
+			data-padding-left={distance.padding.left}
+			data-padding-right={distance.padding.right}
+			data-padding-top={distance.padding.top}
 			data-shrink={shrink}
 			data-width={size.width}
 			data-width-max={size.widthMax}

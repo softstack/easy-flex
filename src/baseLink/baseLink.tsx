@@ -6,12 +6,12 @@ import { useColor, useDistance } from '../utils';
 const StyledBaseLink = styled.a<{
 	'data-align-self'?: IAlignSelf;
 	'data-color'?: string;
+	'data-hover-color'?: string;
 	'data-margin-bottom'?: string;
 	'data-margin-left'?: string;
 	'data-margin-right'?: string;
 	'data-margin-top'?: string;
 }>`
-	display: flex;
 	box-sizing: border-box;
 	text-decoration: none;
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
@@ -20,11 +20,17 @@ const StyledBaseLink = styled.a<{
 	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
 	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
 	margin-top: ${({ 'data-margin-top': marginTop }) => marginTop};
+
+	&:hover {
+		color: ${({ 'data-hover-color': hoverColor }) => hoverColor};
+	}
 `;
 
 export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	alignSelf?: IAlignSelf;
 	color?: IColor;
+	hoverColor?: IColor;
+	margin?: IDistance | number;
 	marginBottom?: IDistance | number;
 	marginLeft?: IDistance | number;
 	marginRight?: IDistance | number;
@@ -38,6 +44,8 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 	alignSelf,
 	children,
 	color,
+	hoverColor,
+	margin,
 	marginBottom,
 	marginLeft,
 	marginRight,
@@ -49,9 +57,12 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 }) => {
 	const processedColor = useColor(color, undefined);
 
+	const processedHoverColor = useColor(hoverColor, undefined);
+
 	const target = useMemo(() => (newTab ? '_blank' : undefined), [newTab]);
 
-	const { margin } = useDistance({
+	const distance = useDistance({
+		margin,
 		marginBottom,
 		marginLeft,
 		marginRight,
@@ -64,10 +75,11 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 		<StyledBaseLink
 			data-align-self={alignSelf}
 			data-color={processedColor}
-			data-margin-bottom={margin.bottom}
-			data-margin-left={margin.left}
-			data-margin-right={margin.right}
-			data-margin-top={margin.top}
+			data-hover-color={processedHoverColor}
+			data-margin-bottom={distance.margin.bottom}
+			data-margin-left={distance.margin.left}
+			data-margin-right={distance.margin.right}
+			data-margin-top={distance.margin.top}
 			rel="noopener noreferrer"
 			target={target}
 			{...props}

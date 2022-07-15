@@ -11,6 +11,7 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     fullWidth?: boolean;
     height?: IHeight | number;
     italic?: boolean;
+    margin?: IDistance | number;
     marginBottom?: IDistance | number;
     marginLeft?: IDistance | number;
     marginRight?: IDistance | number;
@@ -21,6 +22,7 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     maxWidth?: IWidth | number;
     minHeight?: IHeight | number;
     minWidth?: IWidth | number;
+    padding?: IDistance | number;
     paddingBottom?: IDistance | number;
     paddingLeft?: IDistance | number;
     paddingRight?: IDistance | number;

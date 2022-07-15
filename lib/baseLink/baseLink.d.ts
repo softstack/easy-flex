@@ -3,6 +3,8 @@ import { IAlignSelf, IColor, IDistance } from '../types';
 export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     alignSelf?: IAlignSelf;
     color?: IColor;
+    hoverColor?: IColor;
+    margin?: IDistance | number;
     marginBottom?: IDistance | number;
     marginLeft?: IDistance | number;
     marginRight?: IDistance | number;

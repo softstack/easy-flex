@@ -10,7 +10,6 @@ const style = css<{
 	'data-font-weight'?: string | number;
 	'data-font-style'?: IFontStyle;
 }>`
-	display: flex;
 	box-sizing: border-box;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	color: ${({ 'data-color': color }) => color};
@@ -80,10 +79,6 @@ const U = styled.u`
 `;
 
 const Var = styled.var`
-	${style}
-`;
-
-const Wbr = styled.wbr`
 	${style}
 `;
 
@@ -166,8 +161,6 @@ export const Style: FC<IStyleProps> = ({
 				return U;
 			case 'var':
 				return Var;
-			case 'wbr':
-				return Wbr;
 		}
 	}, [element]);
 

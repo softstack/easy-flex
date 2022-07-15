@@ -16,6 +16,7 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     grow?: number;
     height?: IHeight | number;
     justify?: IJustifyContent;
+    margin?: IDistance | number;
     marginBottom?: IDistance | number;
     marginLeft?: IDistance | number;
     marginRight?: IDistance | number;
@@ -26,6 +27,7 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     maxWidth?: IWidth | number;
     minHeight?: IHeight | number;
     minWidth?: IWidth | number;
+    padding?: IDistance | number;
     paddingBottom?: IDistance | number;
     paddingLeft?: IDistance | number;
     paddingRight?: IDistance | number;

@@ -19,13 +19,15 @@ export declare const useDimension: () => {
     height: number;
     width: number;
 };
-export declare const useDistance: ({ marginBottom, marginLeft, marginRight, marginTop, marginX, marginY, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingX, paddingY, }: {
+export declare const useDistance: ({ margin, marginBottom, marginLeft, marginRight, marginTop, marginX, marginY, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingX, paddingY, }: {
+    margin?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     marginBottom?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     marginLeft?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     marginRight?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     marginTop?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     marginX?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     marginY?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    padding?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     paddingBottom?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     paddingLeft?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
     paddingRight?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
