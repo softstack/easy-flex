@@ -41,6 +41,7 @@ export declare type IFontSize = IBaseSize;
 export declare type IFontStyle = 'italic' | 'normal';
 export declare type IFontWeight = 'bold' | 'normal' | 'semibold';
 export declare type IHeight = IBaseSize;
+export declare type IStyleElement = 'b' | 'cite' | 'code' | 'em' | 'i' | 'kbd' | 'mark' | 's' | 'samp' | 'small' | 'span' | 'strong' | 'sub' | 'sup' | 'u' | 'var' | 'wbr';
 export declare type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 export declare type IWidth = IBaseSize;
 export interface IEasyFlexTheme {

@@ -158,6 +158,25 @@ export type IFontWeight = 'bold' | 'normal' | 'semibold';
 
 export type IHeight = IBaseSize;
 
+export type IStyleElement =
+	| 'b'
+	| 'cite'
+	| 'code'
+	| 'em'
+	| 'i'
+	| 'kbd'
+	| 'mark'
+	| 's'
+	| 'samp'
+	| 'small'
+	| 'span'
+	| 'strong'
+	| 'sub'
+	| 'sup'
+	| 'u'
+	| 'var'
+	| 'wbr';
+
 export type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
 export type IWidth = IBaseSize;

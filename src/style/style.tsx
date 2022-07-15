@@ -1,9 +1,9 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
-import styled from 'styled-components';
-import { IColor, IFontSize, IFontStyle, IFontWeight } from '../types';
+import styled, { css } from 'styled-components';
+import { IColor, IFontSize, IFontStyle, IFontWeight, IStyleElement } from '../types';
 import { getFontSize, getFontWeight, ifNotUndefined, toPx, toRem, useColor, useEasyFlexTheme } from '../utils';
 
-const StyledStyle = styled.span<{
+const style = css<{
 	'data-background-color'?: string;
 	'data-color'?: string;
 	'data-font-size'?: string;
@@ -19,15 +19,92 @@ const StyledStyle = styled.span<{
 	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
 `;
 
+const B = styled.b`
+	${style}
+`;
+
+const Cite = styled.cite`
+	${style}
+`;
+
+const Code = styled.code`
+	${style}
+`;
+
+const Em = styled.em`
+	${style}
+`;
+
+const I = styled.i`
+	${style}
+`;
+
+const Kbd = styled.kbd`
+	${style}
+`;
+
+const Mark = styled.mark`
+	${style}
+`;
+
+const S = styled.s`
+	${style}
+`;
+
+const Samp = styled.samp`
+	${style}
+`;
+
+const Small = styled.small`
+	${style}
+`;
+
+const Span = styled.span`
+	${style}
+`;
+
+const Strong = styled.strong`
+	${style}
+`;
+
+const Sub = styled.sub`
+	${style}
+`;
+
+const Sup = styled.sup`
+	${style}
+`;
+
+const U = styled.u`
+	${style}
+`;
+
+const Var = styled.var`
+	${style}
+`;
+
+const Wbr = styled.wbr`
+	${style}
+`;
+
 export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
 	backgroundColor?: IColor;
 	color?: IColor;
+	element?: IStyleElement;
 	fontSize?: IFontSize | number;
 	fontWeight?: IFontWeight | number;
 	italic?: boolean;
 }
 
-export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontWeight, italic, children }) => {
+export const Style: FC<IStyleProps> = ({
+	backgroundColor,
+	color,
+	element = 'span',
+	fontSize,
+	fontWeight,
+	italic,
+	children,
+}) => {
 	const theme = useEasyFlexTheme();
 
 	const processedBackgroundColor = useColor(backgroundColor, undefined);
@@ -55,8 +132,47 @@ export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontW
 		[italic]
 	);
 
+	const Element = useMemo(() => {
+		switch (element) {
+			case 'b':
+				return B;
+			case 'cite':
+				return Cite;
+			case 'code':
+				return Code;
+			case 'em':
+				return Em;
+			case 'i':
+				return I;
+			case 'kbd':
+				return Kbd;
+			case 'mark':
+				return Mark;
+			case 's':
+				return S;
+			case 'samp':
+				return Samp;
+			case 'small':
+				return Small;
+			case 'span':
+				return Span;
+			case 'strong':
+				return Strong;
+			case 'sub':
+				return Sub;
+			case 'sup':
+				return Sup;
+			case 'u':
+				return U;
+			case 'var':
+				return Var;
+			case 'wbr':
+				return Wbr;
+		}
+	}, [element]);
+
 	return (
-		<StyledStyle
+		<Element
 			data-background-color={processedBackgroundColor}
 			data-color={processedColor}
 			data-font-size={processedFontSize}
@@ -64,6 +180,6 @@ export const Style: FC<IStyleProps> = ({ backgroundColor, color, fontSize, fontW
 			data-font-wtyle={fontStyle}
 		>
 			{children}
-		</StyledStyle>
+		</Element>
 	);
 };
