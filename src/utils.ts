@@ -118,14 +118,14 @@ export const useDimension = (): { height: number; width: number } => {
 	const [width, setWidth] = useState(document.documentElement.clientWidth);
 
 	useEffect(() => {
-		const resizeObserver = new ResizeObserver(() => {
+		const handleResize = () => {
 			setHeight(document.documentElement.clientHeight);
 			setWidth(document.documentElement.clientWidth);
-		});
-		resizeObserver.observe(document.documentElement);
+		};
+		window.addEventListener('resize', handleResize);
 
-		return () => resizeObserver.disconnect();
-	});
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
 
 	const dimension = useMemo(() => ({ height, width }), [height, width]);
 
