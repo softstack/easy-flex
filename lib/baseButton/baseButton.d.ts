@@ -34,5 +34,5 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     shrink?: number;
     width?: IWidth | number;
 }
-export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'color' | 'justify' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingX' | 'paddingY'>;
+export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'borderColor' | 'borderRadius' | 'borderWidth' | 'color' | 'justify' | 'padding' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingX' | 'paddingY'>;
 export declare const BaseButton: FC<IBaseButtonProps>;

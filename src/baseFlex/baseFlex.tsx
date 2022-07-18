@@ -234,7 +234,7 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 		return undefined;
 	}, [flexDirection, gap, theme]);
 
-	const rowGap = useMemo(() => {
+	const rowGap = useMemo<string | undefined>(() => {
 		if (gap === undefined) {
 			return undefined;
 		}

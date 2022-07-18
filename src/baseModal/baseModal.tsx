@@ -36,7 +36,7 @@ interface IBaseModalProps extends HTMLAttributes<HTMLDivElement> {
 export const BaseModal: FC<IBaseModalProps> = ({ children, keepChildInside = false, blur, onClose, ...props }) => {
 	const theme = useEasyFlexTheme();
 
-	const backgroundElement = useRef(null);
+	const backgroundElement = useRef<HTMLDivElement>(null);
 
 	const handleClick = useCallback(
 		(event: MouseEvent<HTMLDivElement>) => {
@@ -47,9 +47,9 @@ export const BaseModal: FC<IBaseModalProps> = ({ children, keepChildInside = fal
 		[onClose]
 	);
 
-	const maxChildHeight = useMemo<string | undefined>(() => (keepChildInside ? '100vh' : undefined), [keepChildInside]);
+	const maxChildHeight = useMemo<'100vh' | undefined>(() => (keepChildInside ? '100vh' : undefined), [keepChildInside]);
 
-	const maxChildWidth = useMemo<string | undefined>(() => (keepChildInside ? '100vw' : undefined), [keepChildInside]);
+	const maxChildWidth = useMemo<'100vw' | undefined>(() => (keepChildInside ? '100vw' : undefined), [keepChildInside]);
 
 	useEffect(() => {
 		if (typeof blur === 'number' || (blur !== false && theme.modal.blur)) {

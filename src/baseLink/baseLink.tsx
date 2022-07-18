@@ -43,7 +43,7 @@ export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorEle
 export const BaseLink: FC<IBaseLinkProps> = ({
 	alignSelf,
 	children,
-	color,
+	color = 'inherit',
 	hoverColor,
 	margin,
 	marginBottom,
@@ -59,7 +59,7 @@ export const BaseLink: FC<IBaseLinkProps> = ({
 
 	const processedHoverColor = useColor(hoverColor, undefined);
 
-	const target = useMemo(() => (newTab ? '_blank' : undefined), [newTab]);
+	const target = useMemo<'_blank' | undefined>(() => (newTab ? '_blank' : undefined), [newTab]);
 
 	const distance = useDistance({
 		margin,

@@ -121,8 +121,12 @@ export type IExternalBaseButtonProps = Omit<
 	IBaseButtonProps,
 	| 'align'
 	| 'backgroundColor'
+	| 'borderColor'
+	| 'borderRadius'
+	| 'borderWidth'
 	| 'color'
 	| 'justify'
+	| 'padding'
 	| 'paddingBottom'
 	| 'paddingLeft'
 	| 'paddingRight'

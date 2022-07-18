@@ -3,7 +3,7 @@ import { BaseFlex, IBaseFlexProps } from '../baseFlex/baseFlex';
 import { IFlexDirection, IFlipDirection, IFlipThreshold } from '../types';
 import { getFlipThreshold, useDimension, useEasyFlexTheme } from '../utils';
 
-export interface IRowProps extends IBaseFlexProps {
+export interface IRowProps extends Omit<IBaseFlexProps, 'flexDirection'> {
 	flip?: boolean;
 	flipDirection?: IFlipDirection;
 	flipThreshold?: IFlipThreshold;

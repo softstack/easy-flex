@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IBaseFlexProps } from '../baseFlex/baseFlex';
 import { IFlipDirection, IFlipThreshold } from '../types';
-export interface IRowProps extends IBaseFlexProps {
+export interface IRowProps extends Omit<IBaseFlexProps, 'flexDirection'> {
     flip?: boolean;
     flipDirection?: IFlipDirection;
     flipThreshold?: IFlipThreshold;
