@@ -18,7 +18,9 @@ const mergeDeep = <T,>(a: T, b: IDeepPartial<T>): T => {
 };
 
 export interface IEasyFlexProviderProps {
+	/** The component's children. */
 	children?: ReactNode;
+	/** Gets merged with the default theme. */
 	theme: IDeepPartial<IEasyFlexTheme>;
 }
 

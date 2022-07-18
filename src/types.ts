@@ -6,7 +6,7 @@ export type IDeepPartial<T> = T extends object
 
 // Base start
 
-type IBaseSize =
+export type IBaseSize =
 	| '8xs'
 	| '7xs'
 	| '6xs'
@@ -27,7 +27,7 @@ type IBaseSize =
 	| '7xl'
 	| '8xl';
 
-interface IBaseSizeNumber {
+export interface IBaseSizeNumber {
 	'8xs': number;
 	'7xs': number;
 	'6xs': number;
@@ -49,7 +49,7 @@ interface IBaseSizeNumber {
 	'8xl': number;
 }
 
-type ISizeType = 'px' | 'rem';
+export type ISizeType = 'px' | 'rem';
 
 // Base end
 

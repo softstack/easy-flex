@@ -20,20 +20,20 @@ export declare const useDimension: () => {
     width: number;
 };
 export declare const useDistance: ({ margin, marginBottom, marginLeft, marginRight, marginTop, marginX, marginY, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingX, paddingY, }: {
-    margin?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    marginBottom?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    marginLeft?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    marginRight?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    marginTop?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    marginX?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    marginY?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    padding?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    paddingBottom?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    paddingLeft?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    paddingRight?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    paddingTop?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    paddingX?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    paddingY?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    margin?: number | import("./types").IBaseSize | undefined;
+    marginBottom?: number | import("./types").IBaseSize | undefined;
+    marginLeft?: number | import("./types").IBaseSize | undefined;
+    marginRight?: number | import("./types").IBaseSize | undefined;
+    marginTop?: number | import("./types").IBaseSize | undefined;
+    marginX?: number | import("./types").IBaseSize | undefined;
+    marginY?: number | import("./types").IBaseSize | undefined;
+    padding?: number | import("./types").IBaseSize | undefined;
+    paddingBottom?: number | import("./types").IBaseSize | undefined;
+    paddingLeft?: number | import("./types").IBaseSize | undefined;
+    paddingRight?: number | import("./types").IBaseSize | undefined;
+    paddingTop?: number | import("./types").IBaseSize | undefined;
+    paddingX?: number | import("./types").IBaseSize | undefined;
+    paddingY?: number | import("./types").IBaseSize | undefined;
 }) => {
     margin: {
         bottom: string | undefined;
@@ -51,12 +51,12 @@ export declare const useDistance: ({ margin, marginBottom, marginLeft, marginRig
 export declare const useSize: ({ fullHeight, fullWidth, height, heightMax, heightMin, width, widthMax, widthMin, }: {
     fullHeight: boolean;
     fullWidth: boolean;
-    height?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    heightMax?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    heightMin?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    width?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    widthMax?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
-    widthMin?: number | ("s" | "8xs" | "7xs" | "6xs" | "5xs" | "4xs" | "3xs" | "xxs" | "xs" | "m" | "l" | "xl" | "xxl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl") | undefined;
+    height?: number | import("./types").IBaseSize | undefined;
+    heightMax?: number | import("./types").IBaseSize | undefined;
+    heightMin?: number | import("./types").IBaseSize | undefined;
+    width?: number | import("./types").IBaseSize | undefined;
+    widthMax?: number | import("./types").IBaseSize | undefined;
+    widthMin?: number | import("./types").IBaseSize | undefined;
 }) => {
     height: string | undefined;
     heightMax: string | undefined;

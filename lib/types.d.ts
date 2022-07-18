@@ -1,8 +1,8 @@
 export declare type IDeepPartial<T> = T extends object ? {
     [P in keyof T]?: IDeepPartial<T[P]>;
 } : T;
-declare type IBaseSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
-interface IBaseSizeNumber {
+export declare type IBaseSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
+export interface IBaseSizeNumber {
     '8xs': number;
     '7xs': number;
     '6xs': number;
@@ -23,7 +23,7 @@ interface IBaseSizeNumber {
     '7xl': number;
     '8xl': number;
 }
-declare type ISizeType = 'px' | 'rem';
+export declare type ISizeType = 'px' | 'rem';
 export declare type IAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IAlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
@@ -128,4 +128,3 @@ export interface IEasyFlexTheme {
     width: IBaseSizeNumber;
 }
 export declare type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;
-export {};
