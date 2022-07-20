@@ -36,16 +36,16 @@ export declare const useDistance: ({ margin, marginBottom, marginLeft, marginRig
     paddingY?: number | import("./types").IBaseSize | undefined;
 }) => {
     margin: {
-        bottom: string | undefined;
-        left: string | undefined;
-        right: string | undefined;
-        top: string | undefined;
+        bottom: string;
+        left: string;
+        right: string;
+        top: string;
     };
     padding: {
-        bottom: string | undefined;
-        left: string | undefined;
-        right: string | undefined;
-        top: string | undefined;
+        bottom: string;
+        left: string;
+        right: string;
+        top: string;
     };
 };
 export declare const useSize: ({ fullHeight, fullWidth, height, heightMax, heightMin, width, widthMax, widthMin, }: {

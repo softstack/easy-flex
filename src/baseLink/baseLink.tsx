@@ -7,13 +7,14 @@ const StyledBaseLink = styled.a<{
 	'data-align-self'?: IAlignSelf;
 	'data-color'?: string;
 	'data-hover-color'?: string;
-	'data-margin-bottom'?: string;
-	'data-margin-left'?: string;
-	'data-margin-right'?: string;
-	'data-margin-top'?: string;
+	'data-margin-bottom': string;
+	'data-margin-left': string;
+	'data-margin-right': string;
+	'data-margin-top': string;
 }>`
 	box-sizing: border-box;
 	text-decoration: none;
+	padding: 0;
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	color: ${({ 'data-color': color }) => color};
 	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};

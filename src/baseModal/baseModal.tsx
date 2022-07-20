@@ -20,6 +20,8 @@ const Background = styled.div<{
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	align-items: center;
 	justify-content: center;
+	margin: 0;
+	padding: 0;
 
 	& :only-child {
 		max-height: ${({ 'data-max-child-height': maxChildHeight }) => maxChildHeight};

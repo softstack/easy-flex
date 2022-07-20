@@ -164,65 +164,65 @@ export const useDistance = ({
 	paddingY?: IDistance | number;
 }): {
 	margin: {
-		bottom: string | undefined;
-		left: string | undefined;
-		right: string | undefined;
-		top: string | undefined;
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
 	};
 	padding: {
-		bottom: string | undefined;
-		left: string | undefined;
-		right: string | undefined;
-		top: string | undefined;
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
 	};
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedMarginBottom = useMemo<string | undefined>(
-		() => ifNotUndefined(marginBottom ?? marginY ?? margin, (margin) => toPx(getDistance(theme, margin))),
+	const processedMarginBottom = useMemo<string>(
+		() => toPx(getDistance(theme, marginBottom ?? marginY ?? margin ?? 0)),
 		[margin, marginBottom, marginY, theme]
 	);
 
-	const processedMarginLeft = useMemo<string | undefined>(
-		() => ifNotUndefined(marginLeft ?? marginX ?? margin, (margin) => toPx(getDistance(theme, margin))),
+	const processedMarginLeft = useMemo<string>(
+		() => toPx(getDistance(theme, marginLeft ?? marginX ?? margin ?? 0)),
 		[margin, marginLeft, marginX, theme]
 	);
 
-	const processedMarginRight = useMemo<string | undefined>(
-		() => ifNotUndefined(marginRight ?? marginX ?? margin, (margin) => toPx(getDistance(theme, margin))),
+	const processedMarginRight = useMemo<string>(
+		() => toPx(getDistance(theme, marginRight ?? marginX ?? margin ?? 0)),
 		[margin, marginRight, marginX, theme]
 	);
 
-	const processedMarginTop = useMemo<string | undefined>(
-		() => ifNotUndefined(marginTop ?? marginY ?? margin, (margin) => toPx(getDistance(theme, margin))),
+	const processedMarginTop = useMemo<string>(
+		() => toPx(getDistance(theme, marginTop ?? marginY ?? margin ?? 0)),
 		[margin, marginTop, marginY, theme]
 	);
 
-	const processedPaddingBottom = useMemo<string | undefined>(
-		() => ifNotUndefined(paddingBottom ?? paddingY ?? padding, (margin) => toPx(getDistance(theme, margin))),
+	const processedPaddingBottom = useMemo<string>(
+		() => toPx(getDistance(theme, paddingBottom ?? paddingY ?? padding ?? 0)),
 		[padding, paddingBottom, paddingY, theme]
 	);
 
-	const processedPaddingLeft = useMemo<string | undefined>(
-		() => ifNotUndefined(paddingLeft ?? paddingX ?? padding, (margin) => toPx(getDistance(theme, margin))),
+	const processedPaddingLeft = useMemo<string>(
+		() => toPx(getDistance(theme, paddingLeft ?? paddingX ?? padding ?? 0)),
 		[padding, paddingLeft, paddingX, theme]
 	);
 
-	const processedPaddingRight = useMemo<string | undefined>(
-		() => ifNotUndefined(paddingRight ?? paddingX ?? padding, (margin) => toPx(getDistance(theme, margin))),
+	const processedPaddingRight = useMemo<string>(
+		() => toPx(getDistance(theme, paddingRight ?? paddingX ?? padding ?? 0)),
 		[padding, paddingRight, paddingX, theme]
 	);
 
-	const processedPaddingTop = useMemo<string | undefined>(
-		() => ifNotUndefined(paddingTop ?? paddingY ?? padding, (margin) => toPx(getDistance(theme, margin))),
+	const processedPaddingTop = useMemo<string>(
+		() => toPx(getDistance(theme, paddingTop ?? paddingY ?? padding ?? 0)),
 		[padding, paddingTop, paddingY, theme]
 	);
 
 	const processedMargin = useMemo<{
-		bottom: string | undefined;
-		left: string | undefined;
-		right: string | undefined;
-		top: string | undefined;
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
 	}>(
 		() => ({
 			bottom: processedMarginBottom,
@@ -234,10 +234,10 @@ export const useDistance = ({
 	);
 
 	const processedPadding = useMemo<{
-		bottom: string | undefined;
-		left: string | undefined;
-		right: string | undefined;
-		top: string | undefined;
+		bottom: string;
+		left: string;
+		right: string;
+		top: string;
 	}>(
 		() => ({
 			bottom: processedPaddingBottom,
@@ -250,16 +250,16 @@ export const useDistance = ({
 
 	const distance = useMemo<{
 		margin: {
-			bottom: string | undefined;
-			left: string | undefined;
-			right: string | undefined;
-			top: string | undefined;
+			bottom: string;
+			left: string;
+			right: string;
+			top: string;
 		};
 		padding: {
-			bottom: string | undefined;
-			left: string | undefined;
-			right: string | undefined;
-			top: string | undefined;
+			bottom: string;
+			left: string;
+			right: string;
+			top: string;
 		};
 	}>(
 		() => ({
