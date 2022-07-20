@@ -54,7 +54,6 @@ const StyledBaseButton = styled.button<{
 	flex-direction: row;
 	border: none;
 	cursor: pointer;
-	outline: none;
 	align-items: ${({ 'data-align': align }) => align};
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
@@ -80,6 +79,10 @@ const StyledBaseButton = styled.button<{
 	width: ${({ 'data-width': width }) => width};
 	max-width: ${({ 'data-width-max': widthMax }) => widthMax};
 	min-width: ${({ 'data-width-min': widthMin }) => widthMin};
+
+	&:focus:not(:focus-visible) {
+		outline: 0;
+	}
 `;
 
 export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

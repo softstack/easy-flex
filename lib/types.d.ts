@@ -120,11 +120,13 @@ export interface IEasyFlexTheme {
             bold: number | string;
         };
     };
-    height: IBaseSizeNumber;
     modal: {
         backgroundColor: string;
         blur: number;
     };
-    width: IBaseSizeNumber;
+    size: {
+        height: IBaseSizeNumber;
+        width: IBaseSizeNumber;
+    };
 }
 export declare type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;

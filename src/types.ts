@@ -258,12 +258,14 @@ export interface IEasyFlexTheme {
 			bold: number | string;
 		};
 	};
-	height: IBaseSizeNumber;
 	modal: {
 		backgroundColor: string;
 		blur: number;
 	};
-	width: IBaseSizeNumber;
+	size: {
+		height: IBaseSizeNumber;
+		width: IBaseSizeNumber;
+	};
 }
 
 export type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;

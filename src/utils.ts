@@ -92,10 +92,10 @@ export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | n
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
 export const getHeight = (theme: IEasyFlexTheme, height: IHeight | number): number =>
-	typeof height === 'number' ? height : theme.height[height];
+	typeof height === 'number' ? height : theme.size.height[height];
 
 export const getWidth = (theme: IEasyFlexTheme, width: IWidth | number): number =>
-	typeof width === 'number' ? width : theme.width[width];
+	typeof width === 'number' ? width : theme.size.width[width];
 
 export const useEasyFlexTheme = () => useContext(EasyFlexContext);
 
