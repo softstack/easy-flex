@@ -33,7 +33,7 @@ export declare type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'norm
 export declare type IBaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type IBorderRadius = IBaseSize;
 export declare type IBorderWidth = IBaseSize;
-export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'modal' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'modalText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'modalBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter' | 'onModal' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'quanternaryBorder' | 'senaryBorder' | 'warningBorder' | 'errorBorder' | 'headerBorder' | 'footerBorder' | 'modalBorder';
+export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'modal' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'modalText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'modalBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter' | 'onModal' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'quaternaryBorder' | 'senaryBorder' | 'warningBorder' | 'errorBorder' | 'headerBorder' | 'footerBorder' | 'modalBorder';
 export declare type IDistance = IBaseSize;
 export declare type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 export declare type IFlipThreshold = IBaseSize;
@@ -97,7 +97,7 @@ export interface IEasyFlexTheme {
         primaryBorder: string;
         secondaryBorder: string;
         tertiaryBorder: string;
-        quanternaryBorder: string;
+        quaternaryBorder: string;
         quinaryBorder: string;
         senaryBorder: string;
         warningBorder: string;

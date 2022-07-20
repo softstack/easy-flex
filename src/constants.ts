@@ -94,7 +94,7 @@ export const initialFlexTheme: IEasyFlexTheme = {
 		primaryBorder: '#aaa',
 		secondaryBorder: '#aaa',
 		tertiaryBorder: '#aaa',
-		quanternaryBorder: '#aaa',
+		quaternaryBorder: '#aaa',
 		quinaryBorder: '#aaa',
 		senaryBorder: '#aaa',
 		warningBorder: '#aaa',

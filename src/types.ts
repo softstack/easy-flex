@@ -136,7 +136,7 @@ export type IColor =
 	| 'primaryBorder'
 	| 'secondaryBorder'
 	| 'tertiaryBorder'
-	| 'quanternaryBorder'
+	| 'quaternaryBorder'
 	| 'senaryBorder'
 	| 'warningBorder'
 	| 'errorBorder'
@@ -235,7 +235,7 @@ export interface IEasyFlexTheme {
 		primaryBorder: string;
 		secondaryBorder: string;
 		tertiaryBorder: string;
-		quanternaryBorder: string;
+		quaternaryBorder: string;
 		quinaryBorder: string;
 		senaryBorder: string;
 		warningBorder: string;

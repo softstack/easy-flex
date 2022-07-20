@@ -74,7 +74,7 @@ export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: IBorderRadi
 	typeof borderRadius === 'number' ? borderRadius : theme.border.radius[borderRadius];
 
 export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: IBorderRadius | number) =>
-	typeof borderWidth === 'number' ? borderWidth : theme.border.radius[borderWidth];
+	typeof borderWidth === 'number' ? borderWidth : theme.border.width[borderWidth];
 
 export const getColor = (theme: IEasyFlexTheme, color: IColor): string =>
 	color === 'inherit' ? 'inherit' : theme.color[color];
