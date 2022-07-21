@@ -123,6 +123,8 @@ export interface IEasyFlexTheme {
     modal: {
         backgroundColor: string;
         blur: number;
+        blurElementId: string;
+        containerElementId: string;
     };
     size: {
         height: IBaseSizeNumber;

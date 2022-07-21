@@ -60,7 +60,7 @@ export const BaseModal: FC<IBaseModalProps> = ({ children, keepChildInside = fal
 		if (typeof blur === 'number' || (blur !== false && theme.modal.blur)) {
 			const styleElement = document.createElement('style');
 			styleElement.textContent = `
-				#root {
+				#${theme.modal.blurElementId} {
 					filter: blur(${typeof blur === 'number' ? toPx(blur) : toPx(theme.modal.blur)})
 				}
 			`;
@@ -71,6 +71,11 @@ export const BaseModal: FC<IBaseModalProps> = ({ children, keepChildInside = fal
 			};
 		}
 	}, [blur, theme]);
+
+	const container = useMemo<HTMLElement>(
+		() => document.getElementById(theme.modal.containerElementId) ?? document.body,
+		[theme]
+	);
 
 	return createPortal(
 		<Background
@@ -83,6 +88,6 @@ export const BaseModal: FC<IBaseModalProps> = ({ children, keepChildInside = fal
 		>
 			{children}
 		</Background>,
-		document.body
+		container
 	);
 };

@@ -181,6 +181,8 @@ export const initialFlexTheme: IEasyFlexTheme = {
 	modal: {
 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		blur: 0,
+		blurElementId: 'root',
+		containerElementId: '',
 	},
 	size: {
 		height: {
