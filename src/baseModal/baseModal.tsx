@@ -10,6 +10,7 @@ const Background = styled.div<{
 }>`
 	display: flex;
 	box-sizing: border-box;
+	flex-direction: row;
 	position: fixed;
 	top: 0;
 	left: 0;

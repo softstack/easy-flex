@@ -11,7 +11,7 @@
 	"homepage": "https://github.com/chainsulting/easyflex",
 	"scripts": {
 		"test": "jest",
-		"doc": "typedoc",
+		"doc": "typedoc --gitRevision main",
 		"build": "tsc",
 		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
