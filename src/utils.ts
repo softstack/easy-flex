@@ -5,10 +5,10 @@ import {
 	IColor,
 	IDistance,
 	IEasyFlexTheme,
-	IFlipThreshold,
 	IFontSize,
 	IFontWeight,
 	IHeight,
+	IViewportThreshold,
 	IWidth,
 } from './types';
 
@@ -82,9 +82,6 @@ export const getColor = (theme: IEasyFlexTheme, color: IColor): string =>
 export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | number): number =>
 	typeof distance === 'number' ? distance : theme.distance[distance];
 
-export const getFlipThreshold = (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold): number =>
-	theme.flip.threshold[flipThreshold];
-
 export const getFontSize = (theme: IEasyFlexTheme, fontSize: IFontSize | number): number =>
 	typeof fontSize === 'number' ? fontSize : theme.font.size[fontSize];
 
@@ -93,6 +90,9 @@ export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | n
 
 export const getHeight = (theme: IEasyFlexTheme, height: IHeight | number): number =>
 	typeof height === 'number' ? height : theme.size.height[height];
+
+export const getViewportThreshold = (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold): number =>
+	theme.viewport.threshold[viewportThreshold];
 
 export const getWidth = (theme: IEasyFlexTheme, width: IWidth | number): number =>
 	typeof width === 'number' ? width : theme.size.width[width];
@@ -114,8 +114,8 @@ export const useColor = <T = string | undefined>(
 };
 
 export const useDimension = (): { height: number; width: number } => {
-	const [height, setHeight] = useState(document.documentElement.clientHeight);
-	const [width, setWidth] = useState(document.documentElement.clientWidth);
+	const [height, setHeight] = useState<number>(document.documentElement.clientHeight);
+	const [width, setWidth] = useState<number>(document.documentElement.clientWidth);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -127,7 +127,10 @@ export const useDimension = (): { height: number; width: number } => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
-	const dimension = useMemo(() => ({ height, width }), [height, width]);
+	const dimension = useMemo<{
+		height: number;
+		width: number;
+	}>(() => ({ height, width }), [height, width]);
 
 	return dimension;
 };
@@ -350,4 +353,79 @@ export const useSize = ({
 	);
 
 	return size;
+};
+
+export const useViewport = (): {
+	fallback: boolean;
+	'8xs': boolean;
+	'7xs': boolean;
+	'6xs': boolean;
+	'5xs': boolean;
+	'4xs': boolean;
+	'3xs': boolean;
+	xxs: boolean;
+	xs: boolean;
+	s: boolean;
+	m: boolean;
+	l: boolean;
+	xl: boolean;
+	xxl: boolean;
+	'3xl': boolean;
+	'4xl': boolean;
+	'5xl': boolean;
+	'6xl': boolean;
+	'7xl': boolean;
+	'8xl': boolean;
+} => {
+	const theme = useEasyFlexTheme();
+	const { width } = useDimension();
+
+	const viewport = useMemo<{
+		fallback: boolean;
+		'8xs': boolean;
+		'7xs': boolean;
+		'6xs': boolean;
+		'5xs': boolean;
+		'4xs': boolean;
+		'3xs': boolean;
+		xxs: boolean;
+		xs: boolean;
+		s: boolean;
+		m: boolean;
+		l: boolean;
+		xl: boolean;
+		xxl: boolean;
+		'3xl': boolean;
+		'4xl': boolean;
+		'5xl': boolean;
+		'6xl': boolean;
+		'7xl': boolean;
+		'8xl': boolean;
+	}>(
+		() => ({
+			fallback: width < theme.viewport.fallbackThreshold,
+			'8xs': width < getViewportThreshold(theme, '8xs'),
+			'7xs': width < getViewportThreshold(theme, '7xs'),
+			'6xs': width < getViewportThreshold(theme, '6xs'),
+			'5xs': width < getViewportThreshold(theme, '5xs'),
+			'4xs': width < getViewportThreshold(theme, '4xs'),
+			'3xs': width < getViewportThreshold(theme, '3xs'),
+			xxs: width < getViewportThreshold(theme, 'xxs'),
+			xs: width < getViewportThreshold(theme, 'xs'),
+			s: width < getViewportThreshold(theme, 's'),
+			m: width < getViewportThreshold(theme, 'm'),
+			l: width < getViewportThreshold(theme, 'l'),
+			xl: width < getViewportThreshold(theme, 'xl'),
+			xxl: width < getViewportThreshold(theme, 'xxl'),
+			'3xl': width < getViewportThreshold(theme, '3xl'),
+			'4xl': width < getViewportThreshold(theme, '4xl'),
+			'5xl': width < getViewportThreshold(theme, '5xl'),
+			'6xl': width < getViewportThreshold(theme, '6xl'),
+			'7xl': width < getViewportThreshold(theme, '7xl'),
+			'8xl': width < getViewportThreshold(theme, '8xl'),
+		}),
+		[theme, width]
+	);
+
+	return viewport;
 };

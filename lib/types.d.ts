@@ -36,13 +36,13 @@ export declare type IBorderWidth = IBaseSize;
 export declare type IColor = 'inherit' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'modal' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'quaternaryText' | 'quinaryText' | 'senaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'modalText' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'quaternaryBackground' | 'quinaryBackground' | 'senaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'modalBackground' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onQuaternary' | 'onQuinary' | 'onSenary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter' | 'onModal' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'quaternaryBorder' | 'senaryBorder' | 'warningBorder' | 'errorBorder' | 'headerBorder' | 'footerBorder' | 'modalBorder';
 export declare type IDistance = IBaseSize;
 export declare type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
-export declare type IFlipThreshold = IBaseSize;
 export declare type IFontSize = IBaseSize;
 export declare type IFontStyle = 'italic' | 'normal';
 export declare type IFontWeight = 'bold' | 'normal' | 'semibold';
 export declare type IHeight = IBaseSize;
 export declare type IStyleElement = 'b' | 'cite' | 'code' | 'em' | 'i' | 'kbd' | 'mark' | 's' | 'samp' | 'small' | 'span' | 'strong' | 'sub' | 'sup' | 'u' | 'var';
 export declare type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+export declare type IViewportThreshold = IBaseSize;
 export declare type IWidth = IBaseSize;
 export interface IEasyFlexTheme {
     border: {
@@ -107,10 +107,6 @@ export interface IEasyFlexTheme {
         modalBorder: string;
     };
     distance: IBaseSizeNumber;
-    flip: {
-        fallbackThreshold: number;
-        threshold: IBaseSizeNumber;
-    };
     font: {
         sizeType: ISizeType;
         size: IBaseSizeNumber;
@@ -129,6 +125,10 @@ export interface IEasyFlexTheme {
     size: {
         height: IBaseSizeNumber;
         width: IBaseSizeNumber;
+    };
+    viewport: {
+        fallbackThreshold: number;
+        threshold: IBaseSizeNumber;
     };
 }
 export declare type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;

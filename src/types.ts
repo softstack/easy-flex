@@ -148,8 +148,6 @@ export type IDistance = IBaseSize;
 
 export type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
-export type IFlipThreshold = IBaseSize;
-
 export type IFontSize = IBaseSize;
 
 export type IFontStyle = 'italic' | 'normal';
@@ -177,6 +175,8 @@ export type IStyleElement =
 	| 'var';
 
 export type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+
+export type IViewportThreshold = IBaseSize;
 
 export type IWidth = IBaseSize;
 
@@ -245,10 +245,6 @@ export interface IEasyFlexTheme {
 		modalBorder: string;
 	};
 	distance: IBaseSizeNumber;
-	flip: {
-		fallbackThreshold: number;
-		threshold: IBaseSizeNumber;
-	};
 	font: {
 		sizeType: ISizeType;
 		size: IBaseSizeNumber;
@@ -267,6 +263,10 @@ export interface IEasyFlexTheme {
 	size: {
 		height: IBaseSizeNumber;
 		width: IBaseSizeNumber;
+	};
+	viewport: {
+		fallbackThreshold: number;
+		threshold: IBaseSizeNumber;
 	};
 }
 

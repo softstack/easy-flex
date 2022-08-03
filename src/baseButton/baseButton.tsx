@@ -80,6 +80,10 @@ const StyledBaseButton = styled.button<{
 	max-width: ${({ 'data-width-max': widthMax }) => widthMax};
 	min-width: ${({ 'data-width-min': widthMin }) => widthMin};
 
+	&:disabled {
+		cursor: not-allowed;
+	}
+
 	&:focus:not(:focus-visible) {
 		outline: 0;
 	}

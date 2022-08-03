@@ -1,4 +1,4 @@
-import { IBorderRadius, IColor, IDistance, IEasyFlexTheme, IFlipThreshold, IFontSize, IFontWeight, IHeight, IWidth } from './types';
+import { IBorderRadius, IColor, IDistance, IEasyFlexTheme, IFontSize, IFontWeight, IHeight, IViewportThreshold, IWidth } from './types';
 export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => T extends never ? U | null | undefined : T extends null ? U | null : T extends undefined ? U | undefined : U;
 export declare const ifNotNull: <T, U>(value: T, fn: (value: Exclude<T, null>) => U) => T extends null ? U | null : U;
 export declare const ifNotUndefined: <T, U>(value: T, fn: (value: Exclude<T, undefined>) => U) => T extends undefined ? U | undefined : U;
@@ -8,10 +8,10 @@ export declare const getBorderRadius: (theme: IEasyFlexTheme, borderRadius: IBor
 export declare const getBorderWidth: (theme: IEasyFlexTheme, borderWidth: IBorderRadius | number) => number;
 export declare const getColor: (theme: IEasyFlexTheme, color: IColor) => string;
 export declare const getDistance: (theme: IEasyFlexTheme, distance: IDistance | number) => number;
-export declare const getFlipThreshold: (theme: IEasyFlexTheme, flipThreshold: IFlipThreshold) => number;
 export declare const getFontSize: (theme: IEasyFlexTheme, fontSize: IFontSize | number) => number;
 export declare const getFontWeight: (theme: IEasyFlexTheme, fontWeight: IFontWeight | number) => number | string;
 export declare const getHeight: (theme: IEasyFlexTheme, height: IHeight | number) => number;
+export declare const getViewportThreshold: (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold) => number;
 export declare const getWidth: (theme: IEasyFlexTheme, width: IWidth | number) => number;
 export declare const useEasyFlexTheme: () => IEasyFlexTheme;
 export declare const useColor: <T = string | undefined>(color: IColor | undefined, fallback: T) => T extends undefined ? string | T : string;
@@ -64,4 +64,26 @@ export declare const useSize: ({ fullHeight, fullWidth, height, heightMax, heigh
     width: string | undefined;
     widthMax: string | undefined;
     widthMin: string | undefined;
+};
+export declare const useViewport: () => {
+    fallback: boolean;
+    '8xs': boolean;
+    '7xs': boolean;
+    '6xs': boolean;
+    '5xs': boolean;
+    '4xs': boolean;
+    '3xs': boolean;
+    xxs: boolean;
+    xs: boolean;
+    s: boolean;
+    m: boolean;
+    l: boolean;
+    xl: boolean;
+    xxl: boolean;
+    '3xl': boolean;
+    '4xl': boolean;
+    '5xl': boolean;
+    '6xl': boolean;
+    '7xl': boolean;
+    '8xl': boolean;
 };
