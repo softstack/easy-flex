@@ -1,8 +1,12 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { EasyFlexContext } from './constants';
+import { baseColors, EasyFlexContext } from './constants';
 import {
+	IBaseColor,
 	IBorderRadius,
 	IColor,
+	IColorCode,
+	IColorKeyword,
+	IColorName,
 	IDistance,
 	IEasyFlexTheme,
 	IFontSize,
@@ -11,6 +15,8 @@ import {
 	IViewportThreshold,
 	IWidth,
 } from './types';
+
+export const isIBaseColor = (color: IColor): color is IBaseColor => baseColors.includes(color);
 
 export const ifDefined = <T, U>(
 	value: T,
@@ -77,7 +83,7 @@ export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: IBorderRadius
 	typeof borderWidth === 'number' ? borderWidth : theme.border.width[borderWidth];
 
 export const getColor = (theme: IEasyFlexTheme, color: IColor): string =>
-	color === 'inherit' ? 'inherit' : theme.color[color];
+	isIBaseColor(color) ? theme.color[color] : color;
 
 export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | number): number =>
 	typeof distance === 'number' ? distance : theme.distance[distance];
@@ -99,10 +105,10 @@ export const getWidth = (theme: IEasyFlexTheme, width: IWidth | number): number 
 
 export const useEasyFlexTheme = (): IEasyFlexTheme => useContext(EasyFlexContext);
 
-export const useColor = <T extends string | undefined>(
+export const useColor = <T extends IColorCode | IColorKeyword | IColorName | undefined>(
 	color: IColor | undefined,
 	fallback: T
-): T extends string ? string : string | undefined => {
+): T extends IColorCode | IColorKeyword | IColorName ? string : string | undefined => {
 	const theme = useEasyFlexTheme();
 
 	const processedColor = useMemo<string | undefined>(
@@ -110,7 +116,7 @@ export const useColor = <T extends string | undefined>(
 		[color, fallback, theme]
 	);
 
-	return processedColor as T extends string ? string : string | undefined;
+	return processedColor as T extends IColorCode | IColorKeyword | IColorName ? string : string | undefined;
 };
 
 export const useDimension = (): { height: number; width: number } => {

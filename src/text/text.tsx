@@ -14,12 +14,12 @@ import {
 	IWordBreak,
 } from '../types';
 import {
+	getColor,
 	getFontSize,
 	getFontWeight,
 	ifNotUndefined,
 	toPx,
 	toRem,
-	useColor,
 	useDistance,
 	useEasyFlexTheme,
 	useSize,
@@ -199,7 +199,7 @@ export const Text: FC<ITextProps> = ({
 }) => {
 	const theme = useEasyFlexTheme();
 
-	const processedColor = useColor(color, '');
+	const processedColor = useMemo<string>(() => getColor(theme, color), [color, theme]);
 
 	const processedFontSize = useMemo<string>(() => {
 		const fontSizeValue = getFontSize(theme, fontSize);
