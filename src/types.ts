@@ -63,6 +63,8 @@ export type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse'
 
 export type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 
+export type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
+
 export type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 
 export type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';

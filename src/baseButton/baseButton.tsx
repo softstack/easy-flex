@@ -9,6 +9,7 @@ import {
 	IDistance,
 	IHeight,
 	IJustifyContent,
+	IOverflow,
 	IWidth,
 } from '../types';
 import {
@@ -40,6 +41,9 @@ const StyledBaseButton = styled.button<{
 	'data-margin-left': string;
 	'data-margin-right': string;
 	'data-margin-top': string;
+	'data-overflow'?: IOverflow;
+	'data-overflow-x'?: IOverflow;
+	'data-overflow-y'?: IOverflow;
 	'data-padding-bottom': string;
 	'data-padding-left': string;
 	'data-padding-right': string;
@@ -71,6 +75,9 @@ const StyledBaseButton = styled.button<{
 	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
 	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
 	margin-top: ${({ 'data-margin-top': marginTop }) => marginTop};
+	overflow: ${({ 'data-overflow': overflow }) => overflow};
+	overflow-x: ${({ 'data-overflow-x': overflowX }) => overflowX};
+	overflow-y: ${({ 'data-overflow-y': overflowY }) => overflowY};
 	padding-bottom: ${({ 'data-padding-bottom': paddingBottom }) => paddingBottom};
 	padding-left: ${({ 'data-padding-left': paddingLeft }) => paddingLeft};
 	padding-right: ${({ 'data-padding-right': paddingRight }) => paddingRight};
@@ -136,6 +143,13 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	minHeight?: IHeight | number;
 	/** Component's minimum width. */
 	minWidth?: IWidth | number;
+	/** Component's overflow behaviour. */
+	overflow?: IOverflow;
+	/** Component's verflow behaviour on left and right edges. */
+	overflowX?: IOverflow;
+	/** Component's overflow behaviour on top and bottom edges. */
+	overflowY?: IOverflow;
+	/** Padding of all sides. */
 	/** Component's padding of all sides. */
 	padding?: IDistance | number;
 	/** Component's bottom padding. */
@@ -199,6 +213,9 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 	maxWidth,
 	minHeight,
 	minWidth,
+	overflow,
+	overflowX,
+	overflowY,
 	padding,
 	paddingBottom,
 	paddingLeft,
@@ -277,6 +294,9 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 			data-margin-left={distance.margin.left}
 			data-margin-right={distance.margin.right}
 			data-margin-top={distance.margin.top}
+			data-overflow={overflow}
+			data-overflow-x={overflowX}
+			data-overflow-y={overflowY}
 			data-padding-bottom={distance.padding.bottom}
 			data-padding-left={distance.padding.left}
 			data-padding-right={distance.padding.right}

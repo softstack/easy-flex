@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes } from 'react';
-import { IAlignItems, IAlignSelf, IBaseFlexElement, IBorderRadius, IBorderWidth, IColor, IDistance, IFlexDirection, IHeight, IJustifyContent, IWidth } from '../types';
+import { IAlignItems, IAlignSelf, IBaseFlexElement, IBorderRadius, IBorderWidth, IColor, IDistance, IFlexDirection, IHeight, IJustifyContent, IOverflow, IWidth } from '../types';
 export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     /** The alignment of the component's children on the cross axis. */
     align?: IAlignItems;
@@ -53,6 +53,12 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     minHeight?: IHeight | number;
     /** Component's minimum width. */
     minWidth?: IWidth | number;
+    /** Component's overflow behaviour. */
+    overflow?: IOverflow;
+    /** Component's verflow behaviour on left and right edges. */
+    overflowX?: IOverflow;
+    /** Component's overflow behaviour on top and bottom edges. */
+    overflowY?: IOverflow;
     /** Padding of all sides. */
     padding?: IDistance | number;
     /** Component's bottom padding. */

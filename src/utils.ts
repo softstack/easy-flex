@@ -49,21 +49,21 @@ export const ifDefined = <T, U>(
 		: U;
 };
 
-export const ifNotNull = <T, U>(value: T, fn: (value: Exclude<T, null>) => U): T extends null ? U | null : U => {
+export const ifNotNull = <T, U>(value: T, fn: (value: Exclude<T, null>) => U): T extends null ? null : U => {
 	if (value === null) {
-		return null as T extends null ? U | null : U;
+		return null as T extends null ? null : U;
 	}
-	return fn(value as Exclude<T, null>) as T extends null ? U | null : U;
+	return fn(value as Exclude<T, null>) as T extends null ? null : U;
 };
 
 export const ifNotUndefined = <T, U>(
 	value: T,
 	fn: (value: Exclude<T, undefined>) => U
-): T extends undefined ? U | undefined : U => {
+): T extends undefined ? undefined : U => {
 	if (value === undefined) {
-		return undefined as T extends undefined ? U | undefined : U;
+		return undefined as T extends undefined ? undefined : U;
 	}
-	return fn(value as Exclude<T, undefined>) as T extends undefined ? U | undefined : U;
+	return fn(value as Exclude<T, undefined>) as T extends undefined ? undefined : U;
 };
 
 export const toPx = (value: number): string => `${value}px`;
@@ -97,20 +97,20 @@ export const getViewportThreshold = (theme: IEasyFlexTheme, viewportThreshold: I
 export const getWidth = (theme: IEasyFlexTheme, width: IWidth | number): number =>
 	typeof width === 'number' ? width : theme.size.width[width];
 
-export const useEasyFlexTheme = () => useContext(EasyFlexContext);
+export const useEasyFlexTheme = (): IEasyFlexTheme => useContext(EasyFlexContext);
 
-export const useColor = <T = string | undefined>(
+export const useColor = <T extends string | undefined>(
 	color: IColor | undefined,
 	fallback: T
-): T extends undefined ? string | T : string => {
+): T extends string ? string : string | undefined => {
 	const theme = useEasyFlexTheme();
 
-	const processedColor = useMemo<string | T>(
+	const processedColor = useMemo<string | undefined>(
 		() => (color === undefined ? fallback : getColor(theme, color)),
 		[color, fallback, theme]
 	);
 
-	return processedColor as T extends undefined ? string | T : string;
+	return processedColor as T extends string ? string : string | undefined;
 };
 
 export const useDimension = (): { height: number; width: number } => {

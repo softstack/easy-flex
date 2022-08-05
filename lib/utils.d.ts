@@ -1,7 +1,7 @@
 import { IBorderRadius, IColor, IDistance, IEasyFlexTheme, IFontSize, IFontWeight, IHeight, IViewportThreshold, IWidth } from './types';
 export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => T extends never ? U | null | undefined : T extends null ? U | null : T extends undefined ? U | undefined : U;
-export declare const ifNotNull: <T, U>(value: T, fn: (value: Exclude<T, null>) => U) => T extends null ? U | null : U;
-export declare const ifNotUndefined: <T, U>(value: T, fn: (value: Exclude<T, undefined>) => U) => T extends undefined ? U | undefined : U;
+export declare const ifNotNull: <T, U>(value: T, fn: (value: Exclude<T, null>) => U) => T extends null ? null : U;
+export declare const ifNotUndefined: <T, U>(value: T, fn: (value: Exclude<T, undefined>) => U) => T extends undefined ? undefined : U;
 export declare const toPx: (value: number) => string;
 export declare const toRem: (value: number) => string;
 export declare const getBorderRadius: (theme: IEasyFlexTheme, borderRadius: IBorderRadius | number) => number;
@@ -14,7 +14,7 @@ export declare const getHeight: (theme: IEasyFlexTheme, height: IHeight | number
 export declare const getViewportThreshold: (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold) => number;
 export declare const getWidth: (theme: IEasyFlexTheme, width: IWidth | number) => number;
 export declare const useEasyFlexTheme: () => IEasyFlexTheme;
-export declare const useColor: <T = string | undefined>(color: IColor | undefined, fallback: T) => T extends undefined ? string | T : string;
+export declare const useColor: <T extends string | undefined>(color: IColor | undefined, fallback: T) => T extends string ? string : string | undefined;
 export declare const useDimension: () => {
     height: number;
     width: number;

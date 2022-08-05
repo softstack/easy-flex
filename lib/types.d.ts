@@ -28,6 +28,7 @@ export declare type IAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-sta
 export declare type IAlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
 export declare type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
+export declare type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
 export declare type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 export declare type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
 export declare type IBaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';

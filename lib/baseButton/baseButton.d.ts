@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, FC } from 'react';
-import { IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IHeight, IJustifyContent, IWidth } from '../types';
+import { IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IHeight, IJustifyContent, IOverflow, IWidth } from '../types';
 export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     /** The alignment of the component's children on the cross axis. */
     align?: IAlignItems;
@@ -47,6 +47,13 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     minHeight?: IHeight | number;
     /** Component's minimum width. */
     minWidth?: IWidth | number;
+    /** Component's overflow behaviour. */
+    overflow?: IOverflow;
+    /** Component's verflow behaviour on left and right edges. */
+    overflowX?: IOverflow;
+    /** Component's overflow behaviour on top and bottom edges. */
+    overflowY?: IOverflow;
+    /** Padding of all sides. */
     /** Component's padding of all sides. */
     padding?: IDistance | number;
     /** Component's bottom padding. */
