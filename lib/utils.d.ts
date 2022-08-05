@@ -11,7 +11,7 @@ export declare const getDistance: (theme: IEasyFlexTheme, distance: IDistance | 
 export declare const getFontSize: (theme: IEasyFlexTheme, fontSize: IFontSize | number) => number;
 export declare const getFontWeight: (theme: IEasyFlexTheme, fontWeight: IFontWeight | number) => number | string;
 export declare const getHeight: (theme: IEasyFlexTheme, height: IHeight | number) => number;
-export declare const getViewportThreshold: (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold) => number;
+export declare const getViewportThreshold: (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold | number) => number;
 export declare const getWidth: (theme: IEasyFlexTheme, width: IWidth | number) => number;
 export declare const useEasyFlexTheme: () => IEasyFlexTheme;
 export declare const useColor: <T extends string | undefined>(color: IColor | undefined, fallback: T) => T extends string ? string : string | undefined;

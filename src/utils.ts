@@ -91,8 +91,8 @@ export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | n
 export const getHeight = (theme: IEasyFlexTheme, height: IHeight | number): number =>
 	typeof height === 'number' ? height : theme.size.height[height];
 
-export const getViewportThreshold = (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold): number =>
-	theme.viewport.threshold[viewportThreshold];
+export const getViewportThreshold = (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold | number): number =>
+	typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold];
 
 export const getWidth = (theme: IEasyFlexTheme, width: IWidth | number): number =>
 	typeof width === 'number' ? width : theme.size.width[width];
