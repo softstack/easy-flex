@@ -6,6 +6,7 @@ import {
 	IBorderRadius,
 	IColor,
 	ICssColor,
+	ICssFontWeight,
 	IDistance,
 	IEasyFlexTheme,
 	IFontSize,
@@ -109,7 +110,7 @@ export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | IAbsolu
 export const getFontSize = (theme: IEasyFlexTheme, fontSize: IFontSize | ISize): ISize =>
 	isISize(fontSize) ? fontSize : theme.font.size[fontSize];
 
-export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | number): number | string =>
+export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | number): ICssFontWeight | number =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
 export const getHeight = (theme: IEasyFlexTheme, height: IHeight | ISize): ISize =>

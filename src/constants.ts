@@ -204,6 +204,7 @@ export const initialFlexTheme: IEasyFlexTheme = {
 			'8xl': '6rem',
 		},
 		weight: {
+			light: 100,
 			normal: 'normal',
 			semibold: 550,
 			bold: 'bold',

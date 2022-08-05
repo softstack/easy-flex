@@ -1,13 +1,13 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { IColor, ICssColor, IFontSize, IFontStyle, IFontWeight, ISize, IStyleElement } from '../types';
+import { IColor, ICssColor, ICssFontWeight, IFontSize, IFontStyle, IFontWeight, ISize, IStyleElement } from '../types';
 import { getFontSize, getFontWeight, ifNotUndefined, useColor, useEasyFlexTheme } from '../utils';
 
 const style = css<{
 	'data-background-color'?: ICssColor;
 	'data-color'?: ICssColor;
 	'data-font-size'?: ISize;
-	'data-font-weight'?: string | number;
+	'data-font-weight'?: ICssFontWeight | number;
 	'data-font-style'?: IFontStyle;
 }>`
 	box-sizing: border-box;
@@ -117,7 +117,7 @@ export const Style: FC<IStyleProps> = ({
 		[fontSize, theme]
 	);
 
-	const processedFontWeight = useMemo<string | number | undefined>(
+	const processedFontWeight = useMemo<ICssFontWeight | number | undefined>(
 		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
 		[fontWeight, theme]
 	);

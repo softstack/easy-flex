@@ -73,6 +73,7 @@ export interface ISizeRangeSize {
 export declare type IAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IAlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 export declare type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
+export declare type ICssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
 export declare type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 export declare type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
 export declare type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
@@ -162,9 +163,10 @@ export interface IEasyFlexTheme {
     font: {
         size: ISizeRangeSize;
         weight: {
-            normal: number | string;
-            semibold: number | string;
-            bold: number | string;
+            light: ICssFontWeight | number;
+            normal: ICssFontWeight | number;
+            semibold: ICssFontWeight | number;
+            bold: ICssFontWeight | number;
         };
     };
     modal: {

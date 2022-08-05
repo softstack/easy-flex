@@ -5,6 +5,7 @@ import {
 	IAlignSelf,
 	IColor,
 	ICssColor,
+	ICssFontWeight,
 	IDistance,
 	IFontSize,
 	IFontStyle,
@@ -14,7 +15,7 @@ import {
 	ITextAlign,
 	ITextElement,
 	IWidth,
-	IWordBreak
+	IWordBreak,
 } from '../types';
 import { getColor, getFontSize, getFontWeight, ifNotUndefined, useDistance, useEasyFlexTheme, useSize } from '../utils';
 
@@ -23,7 +24,7 @@ const style = css<{
 	'data-align-self'?: IAlignSelf;
 	'data-color': ICssColor;
 	'data-font-size': ISize;
-	'data-font-weight': string | number;
+	'data-font-weight': ICssFontWeight | number;
 	'data-font-style'?: IFontStyle;
 	'data-height'?: ISize;
 	'data-height-max'?: ISize;
@@ -196,7 +197,10 @@ export const Text: FC<ITextProps> = ({
 
 	const processedFontSize = useMemo<ISize>(() => getFontSize(theme, fontSize), [fontSize, theme]);
 
-	const processedFontWeight = useMemo<string | number>(() => getFontWeight(theme, fontWeight), [fontWeight, theme]);
+	const processedFontWeight = useMemo<ICssFontWeight | number>(
+		() => getFontWeight(theme, fontWeight),
+		[fontWeight, theme]
+	);
 
 	const fontStyle = useMemo<IFontStyle | undefined>(
 		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),

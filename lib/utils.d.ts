@@ -1,4 +1,4 @@
-import { IAbsoluteSize, IBaseColor, IBorderRadius, IColor, ICssColor, IDistance, IEasyFlexTheme, IFontSize, IFontWeight, IHeight, IPercent, IPx, IRem, ISize, IViewportThreshold, IWidth } from './types';
+import { IAbsoluteSize, IBaseColor, IBorderRadius, IColor, ICssColor, ICssFontWeight, IDistance, IEasyFlexTheme, IFontSize, IFontWeight, IHeight, IPercent, IPx, IRem, ISize, IViewportThreshold, IWidth } from './types';
 export declare const isIBaseColor: (color: IColor) => color is IBaseColor;
 export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => T extends never ? U | null | undefined : T extends null ? U | null : T extends undefined ? U | undefined : U;
 export declare const ifNotNull: <T, U>(value: T, fn: (value: Exclude<T, null>) => U) => T extends null ? null : U;
@@ -16,7 +16,7 @@ export declare const getBorderWidth: (theme: IEasyFlexTheme, borderWidth: IBorde
 export declare const getColor: (theme: IEasyFlexTheme, color: IColor) => ICssColor;
 export declare const getDistance: (theme: IEasyFlexTheme, distance: IDistance | IAbsoluteSize) => IAbsoluteSize;
 export declare const getFontSize: (theme: IEasyFlexTheme, fontSize: IFontSize | ISize) => ISize;
-export declare const getFontWeight: (theme: IEasyFlexTheme, fontWeight: IFontWeight | number) => number | string;
+export declare const getFontWeight: (theme: IEasyFlexTheme, fontWeight: IFontWeight | number) => ICssFontWeight | number;
 export declare const getHeight: (theme: IEasyFlexTheme, height: IHeight | ISize) => ISize;
 export declare const getViewportThreshold: (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold | number) => number;
 export declare const getWidth: (theme: IEasyFlexTheme, width: IWidth | ISize) => ISize;
