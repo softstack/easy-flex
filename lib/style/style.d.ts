@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes } from 'react';
-import { IColor, IFontSize, IFontWeight, IStyleElement } from '../types';
+import { IColor, IFontSize, IFontWeight, ISize, IStyleElement } from '../types';
 export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
     /** Component's background color. */
     backgroundColor?: IColor;
@@ -8,7 +8,7 @@ export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
     /** Component's html tag. */
     element?: IStyleElement;
     /** Component's font size. */
-    fontSize?: IFontSize | number;
+    fontSize?: IFontSize | ISize;
     /** Component's font weight. */
     fontWeight?: IFontWeight | number;
     /** If true, the text style is set to italic. */

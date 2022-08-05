@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, FC } from 'react';
-import { IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IHeight, IJustifyContent, IOverflow, IWidth } from '../types';
+import { IAbsoluteSize, IAlignItems, IAlignSelf, IBorderRadius, IBorderWidth, IColor, IDistance, IHeight, IJustifyContent, IOverflow, ISize, IWidth } from '../types';
 export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     /** The alignment of the component's children on the cross axis. */
     align?: IAlignItems;
@@ -10,9 +10,9 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     /** Component's border color. */
     borderColor?: IColor;
     /** Component's border radius. */
-    borderRadius?: IBorderRadius | number;
+    borderRadius?: IBorderRadius | IAbsoluteSize;
     /** Component's border width. */
-    borderWidth?: IBorderWidth | number;
+    borderWidth?: IBorderWidth | IAbsoluteSize;
     /** Component's color. */
     color?: IColor;
     /** Sets the component's height to 100% if true. */
@@ -22,31 +22,31 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     /** Component's flex grow. */
     grow?: number;
     /** Component's height. */
-    height?: IHeight | number;
+    height?: IHeight | ISize;
     /** Sets how the browser distributes space between and around the component's children along the main axis. */
     justify?: IJustifyContent;
     /** Component's margin of all sides. */
-    margin?: IDistance | number;
+    margin?: IDistance | IAbsoluteSize;
     /** Component's bottom margin. */
-    marginBottom?: IDistance | number;
+    marginBottom?: IDistance | IAbsoluteSize;
     /** Component's left margin. */
-    marginLeft?: IDistance | number;
+    marginLeft?: IDistance | IAbsoluteSize;
     /** Component's right margin. */
-    marginRight?: IDistance | number;
+    marginRight?: IDistance | IAbsoluteSize;
     /** Component's top margin. */
-    marginTop?: IDistance | number;
+    marginTop?: IDistance | IAbsoluteSize;
     /** Component's left and right margin. */
-    marginX?: IDistance | number;
+    marginX?: IDistance | IAbsoluteSize;
     /** Component's top and bottom margin. */
-    marginY?: IDistance | number;
+    marginY?: IDistance | IAbsoluteSize;
     /** Component's maximum height. */
-    maxHeight?: IHeight | number;
+    maxHeight?: IHeight | ISize;
     /** Component's maximum width. */
-    maxWidth?: IWidth | number;
+    maxWidth?: IWidth | ISize;
     /** Component's miniumum height. */
-    minHeight?: IHeight | number;
+    minHeight?: IHeight | ISize;
     /** Component's minimum width. */
-    minWidth?: IWidth | number;
+    minWidth?: IWidth | ISize;
     /** Component's overflow behaviour. */
     overflow?: IOverflow;
     /** Component's verflow behaviour on left and right edges. */
@@ -55,23 +55,23 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     overflowY?: IOverflow;
     /** Padding of all sides. */
     /** Component's padding of all sides. */
-    padding?: IDistance | number;
+    padding?: IDistance | IAbsoluteSize;
     /** Component's bottom padding. */
-    paddingBottom?: IDistance | number;
+    paddingBottom?: IDistance | IAbsoluteSize;
     /** Component's left padding. */
-    paddingLeft?: IDistance | number;
+    paddingLeft?: IDistance | IAbsoluteSize;
     /** Component's right padding. */
-    paddingRight?: IDistance | number;
+    paddingRight?: IDistance | IAbsoluteSize;
     /** Component's top padding. */
-    paddingTop?: IDistance | number;
+    paddingTop?: IDistance | IAbsoluteSize;
     /** Component's left and right padding. */
-    paddingX?: IDistance | number;
+    paddingX?: IDistance | IAbsoluteSize;
     /** Component's top and bottom padding. */
-    paddingY?: IDistance | number;
+    paddingY?: IDistance | IAbsoluteSize;
     /** Component's flex shrink. */
     shrink?: number;
     /** Component's width. */
-    width?: IWidth | number;
+    width?: IWidth | ISize;
 }
 export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'borderColor' | 'borderRadius' | 'borderWidth' | 'color' | 'justify' | 'padding' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingX' | 'paddingY'>;
 export declare const BaseButton: FC<IBaseButtonProps>;

@@ -1,17 +1,20 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { baseColors, EasyFlexContext } from './constants';
 import {
+	IAbsoluteSize,
 	IBaseColor,
 	IBorderRadius,
 	IColor,
-	IColorCode,
-	IColorKeyword,
-	IColorName,
+	ICssColor,
 	IDistance,
 	IEasyFlexTheme,
 	IFontSize,
 	IFontWeight,
 	IHeight,
+	IPercent,
+	IPx,
+	IRem,
+	ISize,
 	IViewportThreshold,
 	IWidth,
 } from './types';
@@ -72,51 +75,66 @@ export const ifNotUndefined = <T, U>(
 	return fn(value as Exclude<T, undefined>) as T extends undefined ? undefined : U;
 };
 
-export const toPx = (value: number): string => `${value}px`;
+export const toIPercent = (value: number): IPercent => `${value}%`;
 
-export const toRem = (value: number): string => `${value}rem`;
+export const toIPx = (value: number): IPx => `${value}px`;
 
-export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: IBorderRadius | number) =>
-	typeof borderRadius === 'number' ? borderRadius : theme.border.radius[borderRadius];
+export const toIRem = (value: number): IRem => `${value}rem`;
 
-export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: IBorderRadius | number) =>
-	typeof borderWidth === 'number' ? borderWidth : theme.border.width[borderWidth];
+export const isIPercent = (value: unknown): value is IPx =>
+	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?%$/) : false;
 
-export const getColor = (theme: IEasyFlexTheme, color: IColor): string =>
+export const isIPx = (value: unknown): value is IPx =>
+	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?px$/) : false;
+
+export const isIRem = (value: unknown): value is IRem =>
+	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?rem$/) : false;
+
+export const isIAbsoluteSize = (value: unknown): value is IAbsoluteSize => isIPx(value) || isIRem(value);
+
+export const isISize = (value: unknown): value is ISize => isIPercent(value) || isIAbsoluteSize(value);
+
+export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: IBorderRadius | IAbsoluteSize): IAbsoluteSize =>
+	isIAbsoluteSize(borderRadius) ? borderRadius : theme.border.radius[borderRadius];
+
+export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: IBorderRadius | IAbsoluteSize): IAbsoluteSize =>
+	isIAbsoluteSize(borderWidth) ? borderWidth : theme.border.width[borderWidth];
+
+export const getColor = (theme: IEasyFlexTheme, color: IColor): ICssColor =>
 	isIBaseColor(color) ? theme.color[color] : color;
 
-export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | number): number =>
-	typeof distance === 'number' ? distance : theme.distance[distance];
+export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | IAbsoluteSize): IAbsoluteSize =>
+	isIAbsoluteSize(distance) ? distance : theme.distance[distance];
 
-export const getFontSize = (theme: IEasyFlexTheme, fontSize: IFontSize | number): number =>
-	typeof fontSize === 'number' ? fontSize : theme.font.size[fontSize];
+export const getFontSize = (theme: IEasyFlexTheme, fontSize: IFontSize | ISize): ISize =>
+	isISize(fontSize) ? fontSize : theme.font.size[fontSize];
 
 export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | number): number | string =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
-export const getHeight = (theme: IEasyFlexTheme, height: IHeight | number): number =>
-	typeof height === 'number' ? height : theme.size.height[height];
+export const getHeight = (theme: IEasyFlexTheme, height: IHeight | ISize): ISize =>
+	isISize(height) ? height : theme.size.height[height];
 
 export const getViewportThreshold = (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold | number): number =>
 	typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold];
 
-export const getWidth = (theme: IEasyFlexTheme, width: IWidth | number): number =>
-	typeof width === 'number' ? width : theme.size.width[width];
+export const getWidth = (theme: IEasyFlexTheme, width: IWidth | ISize): ISize =>
+	isISize(width) ? width : theme.size.width[width];
 
 export const useEasyFlexTheme = (): IEasyFlexTheme => useContext(EasyFlexContext);
 
-export const useColor = <T extends IColorCode | IColorKeyword | IColorName | undefined>(
+export const useColor = <T extends ICssColor | undefined>(
 	color: IColor | undefined,
 	fallback: T
-): T extends IColorCode | IColorKeyword | IColorName ? string : string | undefined => {
+): T extends ICssColor ? ICssColor : ICssColor | undefined => {
 	const theme = useEasyFlexTheme();
 
-	const processedColor = useMemo<string | undefined>(
+	const processedColor = useMemo<ICssColor | undefined>(
 		() => (color === undefined ? fallback : getColor(theme, color)),
 		[color, fallback, theme]
 	);
 
-	return processedColor as T extends IColorCode | IColorKeyword | IColorName ? string : string | undefined;
+	return processedColor as T extends ICssColor ? ICssColor : ICssColor | undefined;
 };
 
 export const useDimension = (): { height: number; width: number } => {
@@ -157,81 +175,81 @@ export const useDistance = ({
 	paddingX,
 	paddingY,
 }: {
-	margin?: IDistance | number;
-	marginBottom?: IDistance | number;
-	marginLeft?: IDistance | number;
-	marginRight?: IDistance | number;
-	marginTop?: IDistance | number;
-	marginX?: IDistance | number;
-	marginY?: IDistance | number;
-	padding?: IDistance | number;
-	paddingBottom?: IDistance | number;
-	paddingLeft?: IDistance | number;
-	paddingRight?: IDistance | number;
-	paddingTop?: IDistance | number;
-	paddingX?: IDistance | number;
-	paddingY?: IDistance | number;
+	margin?: IDistance | IAbsoluteSize;
+	marginBottom?: IDistance | IAbsoluteSize;
+	marginLeft?: IDistance | IAbsoluteSize;
+	marginRight?: IDistance | IAbsoluteSize;
+	marginTop?: IDistance | IAbsoluteSize;
+	marginX?: IDistance | IAbsoluteSize;
+	marginY?: IDistance | IAbsoluteSize;
+	padding?: IDistance | IAbsoluteSize;
+	paddingBottom?: IDistance | IAbsoluteSize;
+	paddingLeft?: IDistance | IAbsoluteSize;
+	paddingRight?: IDistance | IAbsoluteSize;
+	paddingTop?: IDistance | IAbsoluteSize;
+	paddingX?: IDistance | IAbsoluteSize;
+	paddingY?: IDistance | IAbsoluteSize;
 }): {
 	margin: {
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: IAbsoluteSize;
+		left: IAbsoluteSize;
+		right: IAbsoluteSize;
+		top: IAbsoluteSize;
 	};
 	padding: {
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: IAbsoluteSize;
+		left: IAbsoluteSize;
+		right: IAbsoluteSize;
+		top: IAbsoluteSize;
 	};
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedMarginBottom = useMemo<string>(
-		() => toPx(getDistance(theme, marginBottom ?? marginY ?? margin ?? 0)),
+	const processedMarginBottom = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, marginBottom ?? marginY ?? margin ?? '0px'),
 		[margin, marginBottom, marginY, theme]
 	);
 
-	const processedMarginLeft = useMemo<string>(
-		() => toPx(getDistance(theme, marginLeft ?? marginX ?? margin ?? 0)),
+	const processedMarginLeft = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, marginLeft ?? marginX ?? margin ?? '0px'),
 		[margin, marginLeft, marginX, theme]
 	);
 
-	const processedMarginRight = useMemo<string>(
-		() => toPx(getDistance(theme, marginRight ?? marginX ?? margin ?? 0)),
+	const processedMarginRight = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, marginRight ?? marginX ?? margin ?? '0px'),
 		[margin, marginRight, marginX, theme]
 	);
 
-	const processedMarginTop = useMemo<string>(
-		() => toPx(getDistance(theme, marginTop ?? marginY ?? margin ?? 0)),
+	const processedMarginTop = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, marginTop ?? marginY ?? margin ?? '0px'),
 		[margin, marginTop, marginY, theme]
 	);
 
-	const processedPaddingBottom = useMemo<string>(
-		() => toPx(getDistance(theme, paddingBottom ?? paddingY ?? padding ?? 0)),
+	const processedPaddingBottom = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, paddingBottom ?? paddingY ?? padding ?? '0px'),
 		[padding, paddingBottom, paddingY, theme]
 	);
 
-	const processedPaddingLeft = useMemo<string>(
-		() => toPx(getDistance(theme, paddingLeft ?? paddingX ?? padding ?? 0)),
+	const processedPaddingLeft = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, paddingLeft ?? paddingX ?? padding ?? '0px'),
 		[padding, paddingLeft, paddingX, theme]
 	);
 
-	const processedPaddingRight = useMemo<string>(
-		() => toPx(getDistance(theme, paddingRight ?? paddingX ?? padding ?? 0)),
+	const processedPaddingRight = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, paddingRight ?? paddingX ?? padding ?? '0px'),
 		[padding, paddingRight, paddingX, theme]
 	);
 
-	const processedPaddingTop = useMemo<string>(
-		() => toPx(getDistance(theme, paddingTop ?? paddingY ?? padding ?? 0)),
+	const processedPaddingTop = useMemo<IAbsoluteSize>(
+		() => getDistance(theme, paddingTop ?? paddingY ?? padding ?? '0px'),
 		[padding, paddingTop, paddingY, theme]
 	);
 
 	const processedMargin = useMemo<{
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: IAbsoluteSize;
+		left: IAbsoluteSize;
+		right: IAbsoluteSize;
+		top: IAbsoluteSize;
 	}>(
 		() => ({
 			bottom: processedMarginBottom,
@@ -243,10 +261,10 @@ export const useDistance = ({
 	);
 
 	const processedPadding = useMemo<{
-		bottom: string;
-		left: string;
-		right: string;
-		top: string;
+		bottom: IAbsoluteSize;
+		left: IAbsoluteSize;
+		right: IAbsoluteSize;
+		top: IAbsoluteSize;
 	}>(
 		() => ({
 			bottom: processedPaddingBottom,
@@ -259,16 +277,16 @@ export const useDistance = ({
 
 	const distance = useMemo<{
 		margin: {
-			bottom: string;
-			left: string;
-			right: string;
-			top: string;
+			bottom: IAbsoluteSize;
+			left: IAbsoluteSize;
+			right: IAbsoluteSize;
+			top: IAbsoluteSize;
 		};
 		padding: {
-			bottom: string;
-			left: string;
-			right: string;
-			top: string;
+			bottom: IAbsoluteSize;
+			left: IAbsoluteSize;
+			right: IAbsoluteSize;
+			top: IAbsoluteSize;
 		};
 	}>(
 		() => ({
@@ -293,59 +311,59 @@ export const useSize = ({
 }: {
 	fullHeight: boolean;
 	fullWidth: boolean;
-	height?: IHeight | number;
-	heightMax?: IHeight | number;
-	heightMin?: IHeight | number;
-	width?: IWidth | number;
-	widthMax?: IWidth | number;
-	widthMin?: IWidth | number;
+	height?: IHeight | ISize;
+	heightMax?: IHeight | ISize;
+	heightMin?: IHeight | ISize;
+	width?: IWidth | ISize;
+	widthMax?: IWidth | ISize;
+	widthMin?: IWidth | ISize;
 }): {
-	height: string | undefined;
-	heightMax: string | undefined;
-	heightMin: string | undefined;
-	width: string | undefined;
-	widthMax: string | undefined;
-	widthMin: string | undefined;
+	height: ISize | undefined;
+	heightMax: ISize | undefined;
+	heightMin: ISize | undefined;
+	width: ISize | undefined;
+	widthMax: ISize | undefined;
+	widthMin: ISize | undefined;
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedHeight = useMemo<string | undefined>(
-		() => (fullHeight ? '100%' : ifNotUndefined(height, (height) => toPx(getHeight(theme, height)))),
+	const processedHeight = useMemo<ISize | undefined>(
+		() => (fullHeight ? '100%' : ifNotUndefined(height, (height) => getHeight(theme, height))),
 		[fullHeight, height, theme]
 	);
 
-	const processedHeightMax = useMemo<string | undefined>(
-		() => ifNotUndefined(heightMax, (heightMax) => toPx(getHeight(theme, heightMax))),
+	const processedHeightMax = useMemo<ISize | undefined>(
+		() => ifNotUndefined(heightMax, (heightMax) => getHeight(theme, heightMax)),
 		[heightMax, theme]
 	);
 
-	const processedHeightMin = useMemo<string | undefined>(
-		() => ifNotUndefined(heightMin, (heightMin) => toPx(getHeight(theme, heightMin))),
+	const processedHeightMin = useMemo<ISize | undefined>(
+		() => ifNotUndefined(heightMin, (heightMin) => getHeight(theme, heightMin)),
 		[heightMin, theme]
 	);
 
-	const processedWidth = useMemo<string | undefined>(
-		() => (fullWidth ? '100%' : ifNotUndefined(width, (width) => toPx(getWidth(theme, width)))),
+	const processedWidth = useMemo<ISize | undefined>(
+		() => (fullWidth ? '100%' : ifNotUndefined(width, (width) => getWidth(theme, width))),
 		[fullWidth, theme, width]
 	);
 
-	const processedWidthMax = useMemo<string | undefined>(
-		() => ifNotUndefined(widthMax, (widthMax) => toPx(getWidth(theme, widthMax))),
+	const processedWidthMax = useMemo<ISize | undefined>(
+		() => ifNotUndefined(widthMax, (widthMax) => getWidth(theme, widthMax)),
 		[theme, widthMax]
 	);
 
-	const processedWidthMin = useMemo<string | undefined>(
-		() => ifNotUndefined(widthMin, (widthMin) => toPx(getWidth(theme, widthMin))),
+	const processedWidthMin = useMemo<ISize | undefined>(
+		() => ifNotUndefined(widthMin, (widthMin) => getWidth(theme, widthMin)),
 		[theme, widthMin]
 	);
 
 	const size = useMemo<{
-		height: string | undefined;
-		heightMax: string | undefined;
-		heightMin: string | undefined;
-		width: string | undefined;
-		widthMax: string | undefined;
-		widthMin: string | undefined;
+		height: ISize | undefined;
+		heightMax: ISize | undefined;
+		heightMin: ISize | undefined;
+		width: ISize | undefined;
+		widthMax: ISize | undefined;
+		widthMin: ISize | undefined;
 	}>(
 		() => ({
 			height: processedHeight,

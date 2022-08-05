@@ -6,7 +6,17 @@ export type IDeepPartial<T> = T extends object
 
 // Base start
 
-export type IBaseSize =
+export type IPercent = `${number}%`;
+
+export type IPx = `${number}px`;
+
+export type IRem = `${number}rem`;
+
+export type IAbsoluteSize = IPx | IRem;
+
+export type ISize = IPercent | IAbsoluteSize;
+
+export type ISizeRange =
 	| '8xs'
 	| '7xs'
 	| '6xs'
@@ -27,7 +37,7 @@ export type IBaseSize =
 	| '7xl'
 	| '8xl';
 
-export interface IBaseSizeNumber {
+export interface ISizeRangeNumber {
 	'8xs': number;
 	'7xs': number;
 	'6xs': number;
@@ -49,7 +59,49 @@ export interface IBaseSizeNumber {
 	'8xl': number;
 }
 
-export type ISizeType = 'px' | 'rem';
+export interface ISizeRangeAbsoluteSize {
+	'8xs': IAbsoluteSize;
+	'7xs': IAbsoluteSize;
+	'6xs': IAbsoluteSize;
+	'5xs': IAbsoluteSize;
+	'4xs': IAbsoluteSize;
+	'3xs': IAbsoluteSize;
+	xxs: IAbsoluteSize;
+	xs: IAbsoluteSize;
+	s: IAbsoluteSize;
+	m: IAbsoluteSize;
+	l: IAbsoluteSize;
+	xl: IAbsoluteSize;
+	xxl: IAbsoluteSize;
+	'3xl': IAbsoluteSize;
+	'4xl': IAbsoluteSize;
+	'5xl': IAbsoluteSize;
+	'6xl': IAbsoluteSize;
+	'7xl': IAbsoluteSize;
+	'8xl': IAbsoluteSize;
+}
+
+export interface ISizeRangeSize {
+	'8xs': ISize;
+	'7xs': ISize;
+	'6xs': ISize;
+	'5xs': ISize;
+	'4xs': ISize;
+	'3xs': ISize;
+	xxs: ISize;
+	xs: ISize;
+	s: ISize;
+	m: ISize;
+	l: ISize;
+	xl: ISize;
+	xxl: ISize;
+	'3xl': ISize;
+	'4xl': ISize;
+	'5xl': ISize;
+	'6xl': ISize;
+	'7xl': ISize;
+	'8xl': ISize;
+}
 
 // Base end
 
@@ -85,9 +137,9 @@ export type IBaseFlexElement =
 	| 'section'
 	| 'summary';
 
-export type IBorderRadius = IBaseSize;
+export type IBorderRadius = ISizeRange;
 
-export type IBorderWidth = IBaseSize;
+export type IBorderWidth = ISizeRange;
 
 export type IBaseColor =
 	| 'primary'
@@ -326,19 +378,21 @@ export type IColorName =
 	| 'yellow' // #ffff00
 	| 'yellowgreen'; // #9acd32
 
-export type IColor = IBaseColor | IColorCode | IColorKeyword | IColorName;
+export type ICssColor = IColorCode | IColorKeyword | IColorName;
 
-export type IDistance = IBaseSize;
+export type IColor = IBaseColor | ICssColor;
+
+export type IDistance = ISizeRange;
 
 export type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
-export type IFontSize = IBaseSize;
+export type IFontSize = ISizeRange;
 
 export type IFontStyle = 'italic' | 'normal';
 
 export type IFontWeight = 'bold' | 'normal' | 'semibold';
 
-export type IHeight = IBaseSize;
+export type IHeight = ISizeRange;
 
 export type IStyleElement =
 	| 'b'
@@ -360,78 +414,77 @@ export type IStyleElement =
 
 export type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
-export type IViewportThreshold = IBaseSize;
+export type IViewportThreshold = ISizeRange;
 
-export type IWidth = IBaseSize;
+export type IWidth = ISizeRange;
 
 // Custom end
 
 export interface IEasyFlexTheme {
 	border: {
-		radius: IBaseSizeNumber;
-		width: IBaseSizeNumber;
+		radius: ISizeRangeAbsoluteSize;
+		width: ISizeRangeAbsoluteSize;
 	};
 	color: {
-		primary: IColorCode | IColorKeyword | IColorName;
-		secondary: IColorCode | IColorKeyword | IColorName;
-		tertiary: IColorCode | IColorKeyword | IColorName;
-		quaternary: IColorCode | IColorKeyword | IColorName;
-		quinary: IColorCode | IColorKeyword | IColorName;
-		senary: IColorCode | IColorKeyword | IColorName;
-		warning: IColorCode | IColorKeyword | IColorName;
-		error: IColorCode | IColorKeyword | IColorName;
-		header: IColorCode | IColorKeyword | IColorName;
-		footer: IColorCode | IColorKeyword | IColorName;
-		modal: IColorCode | IColorKeyword | IColorName;
-		primaryText: IColorCode | IColorKeyword | IColorName;
-		secondaryText: IColorCode | IColorKeyword | IColorName;
-		tertiaryText: IColorCode | IColorKeyword | IColorName;
-		quaternaryText: IColorCode | IColorKeyword | IColorName;
-		quinaryText: IColorCode | IColorKeyword | IColorName;
-		senaryText: IColorCode | IColorKeyword | IColorName;
-		warningText: IColorCode | IColorKeyword | IColorName;
-		errorText: IColorCode | IColorKeyword | IColorName;
-		headerText: IColorCode | IColorKeyword | IColorName;
-		footerText: IColorCode | IColorKeyword | IColorName;
-		modalText: IColorCode | IColorKeyword | IColorName;
-		primaryBackground: IColorCode | IColorKeyword | IColorName;
-		secondaryBackground: IColorCode | IColorKeyword | IColorName;
-		tertiaryBackground: IColorCode | IColorKeyword | IColorName;
-		quaternaryBackground: IColorCode | IColorKeyword | IColorName;
-		quinaryBackground: IColorCode | IColorKeyword | IColorName;
-		senaryBackground: IColorCode | IColorKeyword | IColorName;
-		warningBackground: IColorCode | IColorKeyword | IColorName;
-		errorBackground: IColorCode | IColorKeyword | IColorName;
-		headerBackground: IColorCode | IColorKeyword | IColorName;
-		footerBackground: IColorCode | IColorKeyword | IColorName;
-		modalBackground: IColorCode | IColorKeyword | IColorName;
-		onPrimary: IColorCode | IColorKeyword | IColorName;
-		onSecondary: IColorCode | IColorKeyword | IColorName;
-		onTertiary: IColorCode | IColorKeyword | IColorName;
-		onQuaternary: IColorCode | IColorKeyword | IColorName;
-		onQuinary: IColorCode | IColorKeyword | IColorName;
-		onSenary: IColorCode | IColorKeyword | IColorName;
-		onWarning: IColorCode | IColorKeyword | IColorName;
-		onError: IColorCode | IColorKeyword | IColorName;
-		onHeader: IColorCode | IColorKeyword | IColorName;
-		onFooter: IColorCode | IColorKeyword | IColorName;
-		onModal: IColorCode | IColorKeyword | IColorName;
-		primaryBorder: IColorCode | IColorKeyword | IColorName;
-		secondaryBorder: IColorCode | IColorKeyword | IColorName;
-		tertiaryBorder: IColorCode | IColorKeyword | IColorName;
-		quaternaryBorder: IColorCode | IColorKeyword | IColorName;
-		quinaryBorder: IColorCode | IColorKeyword | IColorName;
-		senaryBorder: IColorCode | IColorKeyword | IColorName;
-		warningBorder: IColorCode | IColorKeyword | IColorName;
-		errorBorder: IColorCode | IColorKeyword | IColorName;
-		headerBorder: IColorCode | IColorKeyword | IColorName;
-		footerBorder: IColorCode | IColorKeyword | IColorName;
-		modalBorder: IColorCode | IColorKeyword | IColorName;
+		primary: ICssColor;
+		secondary: ICssColor;
+		tertiary: ICssColor;
+		quaternary: ICssColor;
+		quinary: ICssColor;
+		senary: ICssColor;
+		warning: ICssColor;
+		error: ICssColor;
+		header: ICssColor;
+		footer: ICssColor;
+		modal: ICssColor;
+		primaryText: ICssColor;
+		secondaryText: ICssColor;
+		tertiaryText: ICssColor;
+		quaternaryText: ICssColor;
+		quinaryText: ICssColor;
+		senaryText: ICssColor;
+		warningText: ICssColor;
+		errorText: ICssColor;
+		headerText: ICssColor;
+		footerText: ICssColor;
+		modalText: ICssColor;
+		primaryBackground: ICssColor;
+		secondaryBackground: ICssColor;
+		tertiaryBackground: ICssColor;
+		quaternaryBackground: ICssColor;
+		quinaryBackground: ICssColor;
+		senaryBackground: ICssColor;
+		warningBackground: ICssColor;
+		errorBackground: ICssColor;
+		headerBackground: ICssColor;
+		footerBackground: ICssColor;
+		modalBackground: ICssColor;
+		onPrimary: ICssColor;
+		onSecondary: ICssColor;
+		onTertiary: ICssColor;
+		onQuaternary: ICssColor;
+		onQuinary: ICssColor;
+		onSenary: ICssColor;
+		onWarning: ICssColor;
+		onError: ICssColor;
+		onHeader: ICssColor;
+		onFooter: ICssColor;
+		onModal: ICssColor;
+		primaryBorder: ICssColor;
+		secondaryBorder: ICssColor;
+		tertiaryBorder: ICssColor;
+		quaternaryBorder: ICssColor;
+		quinaryBorder: ICssColor;
+		senaryBorder: ICssColor;
+		warningBorder: ICssColor;
+		errorBorder: ICssColor;
+		headerBorder: ICssColor;
+		footerBorder: ICssColor;
+		modalBorder: ICssColor;
 	};
-	distance: IBaseSizeNumber;
+	distance: ISizeRangeAbsoluteSize;
 	font: {
-		sizeType: ISizeType;
-		size: IBaseSizeNumber;
+		size: ISizeRangeSize;
 		weight: {
 			normal: number | string;
 			semibold: number | string;
@@ -439,18 +492,18 @@ export interface IEasyFlexTheme {
 		};
 	};
 	modal: {
-		backgroundColor: string;
-		blur: number;
+		backgroundColor: ICssColor;
+		blur: IAbsoluteSize;
 		blurElementId: string;
 		containerElementId: string;
 	};
 	size: {
-		height: IBaseSizeNumber;
-		width: IBaseSizeNumber;
+		height: ISizeRangeAbsoluteSize;
+		width: ISizeRangeAbsoluteSize;
 	};
 	viewport: {
 		fallbackThreshold: number;
-		threshold: IBaseSizeNumber;
+		threshold: ISizeRangeNumber;
 	};
 }
 

@@ -1,16 +1,16 @@
 import React, { FC, useMemo } from 'react';
 import styled from 'styled-components';
-import { IAlignSelf, IColor, IDistance } from '../types';
+import { IAbsoluteSize, IAlignSelf, IColor, ICssColor, IDistance } from '../types';
 import { useColor, useDistance } from '../utils';
 
 const StyledBaseLink = styled.a<{
 	'data-align-self'?: IAlignSelf;
-	'data-color'?: string;
-	'data-hover-color'?: string;
-	'data-margin-bottom': string;
-	'data-margin-left': string;
-	'data-margin-right': string;
-	'data-margin-top': string;
+	'data-color'?: ICssColor;
+	'data-hover-color'?: ICssColor;
+	'data-margin-bottom': IAbsoluteSize;
+	'data-margin-left': IAbsoluteSize;
+	'data-margin-right': IAbsoluteSize;
+	'data-margin-top': IAbsoluteSize;
 }>`
 	box-sizing: border-box;
 	text-decoration: none;
@@ -35,19 +35,19 @@ export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorEle
 	/** Component's hover color. */
 	hoverColor?: IColor;
 	/** Component's margin of all sides. */
-	margin?: IDistance | number;
+	margin?: IDistance | IAbsoluteSize;
 	/** Component's bottom margin. */
-	marginBottom?: IDistance | number;
+	marginBottom?: IDistance | IAbsoluteSize;
 	/** Component's left margin. */
-	marginLeft?: IDistance | number;
+	marginLeft?: IDistance | IAbsoluteSize;
 	/** Component's right margin. */
-	marginRight?: IDistance | number;
+	marginRight?: IDistance | IAbsoluteSize;
 	/** Component's top margin. */
-	marginTop?: IDistance | number;
+	marginTop?: IDistance | IAbsoluteSize;
 	/** Component's left and right margin. */
-	marginX?: IDistance | number;
+	marginX?: IDistance | IAbsoluteSize;
 	/** Component's top and bottom margin. */
-	marginY?: IDistance | number;
+	marginY?: IDistance | IAbsoluteSize;
 	/** If true, the link is opened in a new tab. */
 	newTab?: boolean;
 }

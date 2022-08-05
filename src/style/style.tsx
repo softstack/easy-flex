@@ -1,12 +1,12 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { IColor, IFontSize, IFontStyle, IFontWeight, IStyleElement } from '../types';
-import { getFontSize, getFontWeight, ifNotUndefined, toPx, toRem, useColor, useEasyFlexTheme } from '../utils';
+import { IColor, ICssColor, IFontSize, IFontStyle, IFontWeight, ISize, IStyleElement } from '../types';
+import { getFontSize, getFontWeight, ifNotUndefined, useColor, useEasyFlexTheme } from '../utils';
 
 const style = css<{
-	'data-background-color'?: string;
-	'data-color'?: string;
-	'data-font-size'?: string;
+	'data-background-color'?: ICssColor;
+	'data-color'?: ICssColor;
+	'data-font-size'?: ISize;
 	'data-font-weight'?: string | number;
 	'data-font-style'?: IFontStyle;
 }>`
@@ -90,7 +90,7 @@ export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
 	/** Component's html tag. */
 	element?: IStyleElement;
 	/** Component's font size. */
-	fontSize?: IFontSize | number;
+	fontSize?: IFontSize | ISize;
 	/** Component's font weight. */
 	fontWeight?: IFontWeight | number;
 	/** If true, the text style is set to italic. */
@@ -112,16 +112,10 @@ export const Style: FC<IStyleProps> = ({
 
 	const processedColor = useColor(color, undefined);
 
-	const processedFontSize = useMemo<string | undefined>(() => {
-		if (fontSize === undefined) {
-			return undefined;
-		}
-		const fontSizeValue = getFontSize(theme, fontSize);
-		if (theme.font.sizeType === 'rem') {
-			return toRem(fontSizeValue);
-		}
-		return toPx(fontSizeValue);
-	}, [fontSize, theme]);
+	const processedFontSize = useMemo<ISize | undefined>(
+		() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
+		[fontSize, theme]
+	);
 
 	const processedFontWeight = useMemo<string | number | undefined>(
 		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),

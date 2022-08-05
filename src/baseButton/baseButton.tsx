@@ -1,22 +1,24 @@
 import React, { ButtonHTMLAttributes, FC, useMemo } from 'react';
 import styled from 'styled-components';
 import {
+	IAbsoluteSize,
 	IAlignItems,
 	IAlignSelf,
 	IBorderRadius,
 	IBorderWidth,
 	IColor,
+	ICssColor,
 	IDistance,
 	IHeight,
 	IJustifyContent,
 	IOverflow,
+	ISize,
 	IWidth,
 } from '../types';
 import {
 	getBorderRadius,
 	getBorderWidth,
 	ifNotUndefined,
-	toPx,
 	useColor,
 	useDistance,
 	useEasyFlexTheme,
@@ -26,32 +28,32 @@ import {
 const StyledBaseButton = styled.button<{
 	'data-align'?: IAlignItems;
 	'data-align-self'?: IAlignSelf;
-	'data-background-color': string;
-	'data-border-color'?: string;
-	'data-border-radius'?: string;
+	'data-background-color': ICssColor;
+	'data-border-color'?: ICssColor;
+	'data-border-radius'?: IAbsoluteSize;
 	'data-border-style'?: 'solid';
-	'data-border-width'?: string;
-	'data-color'?: string;
+	'data-border-width'?: IAbsoluteSize;
+	'data-color'?: ICssColor;
 	'data-grow'?: number;
-	'data-height'?: string;
-	'data-height-max'?: string;
-	'data-height-min'?: string;
+	'data-height'?: ISize;
+	'data-height-max'?: ISize;
+	'data-height-min'?: ISize;
 	'data-justify'?: IJustifyContent;
-	'data-margin-bottom': string;
-	'data-margin-left': string;
-	'data-margin-right': string;
-	'data-margin-top': string;
+	'data-margin-bottom': IAbsoluteSize;
+	'data-margin-left': IAbsoluteSize;
+	'data-margin-right': IAbsoluteSize;
+	'data-margin-top': IAbsoluteSize;
 	'data-overflow'?: IOverflow;
 	'data-overflow-x'?: IOverflow;
 	'data-overflow-y'?: IOverflow;
-	'data-padding-bottom': string;
-	'data-padding-left': string;
-	'data-padding-right': string;
-	'data-padding-top': string;
+	'data-padding-bottom': IAbsoluteSize;
+	'data-padding-left': IAbsoluteSize;
+	'data-padding-right': IAbsoluteSize;
+	'data-padding-top': IAbsoluteSize;
 	'data-shrink'?: number;
-	'data-width'?: string;
-	'data-width-max'?: string;
-	'data-width-min'?: string;
+	'data-width'?: ISize;
+	'data-width-max'?: ISize;
+	'data-width-min'?: ISize;
 }>`
 	display: flex;
 	box-sizing: border-box;
@@ -106,9 +108,9 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	/** Component's border color. */
 	borderColor?: IColor;
 	/** Component's border radius. */
-	borderRadius?: IBorderRadius | number;
+	borderRadius?: IBorderRadius | IAbsoluteSize;
 	/** Component's border width. */
-	borderWidth?: IBorderWidth | number;
+	borderWidth?: IBorderWidth | IAbsoluteSize;
 	/** Component's color. */
 	color?: IColor;
 	/** Sets the component's height to 100% if true. */
@@ -118,31 +120,31 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	/** Component's flex grow. */
 	grow?: number;
 	/** Component's height. */
-	height?: IHeight | number;
+	height?: IHeight | ISize;
 	/** Sets how the browser distributes space between and around the component's children along the main axis. */
 	justify?: IJustifyContent;
 	/** Component's margin of all sides. */
-	margin?: IDistance | number;
+	margin?: IDistance | IAbsoluteSize;
 	/** Component's bottom margin. */
-	marginBottom?: IDistance | number;
+	marginBottom?: IDistance | IAbsoluteSize;
 	/** Component's left margin. */
-	marginLeft?: IDistance | number;
+	marginLeft?: IDistance | IAbsoluteSize;
 	/** Component's right margin. */
-	marginRight?: IDistance | number;
+	marginRight?: IDistance | IAbsoluteSize;
 	/** Component's top margin. */
-	marginTop?: IDistance | number;
+	marginTop?: IDistance | IAbsoluteSize;
 	/** Component's left and right margin. */
-	marginX?: IDistance | number;
+	marginX?: IDistance | IAbsoluteSize;
 	/** Component's top and bottom margin. */
-	marginY?: IDistance | number;
+	marginY?: IDistance | IAbsoluteSize;
 	/** Component's maximum height. */
-	maxHeight?: IHeight | number;
+	maxHeight?: IHeight | ISize;
 	/** Component's maximum width. */
-	maxWidth?: IWidth | number;
+	maxWidth?: IWidth | ISize;
 	/** Component's miniumum height. */
-	minHeight?: IHeight | number;
+	minHeight?: IHeight | ISize;
 	/** Component's minimum width. */
-	minWidth?: IWidth | number;
+	minWidth?: IWidth | ISize;
 	/** Component's overflow behaviour. */
 	overflow?: IOverflow;
 	/** Component's verflow behaviour on left and right edges. */
@@ -151,23 +153,23 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	overflowY?: IOverflow;
 	/** Padding of all sides. */
 	/** Component's padding of all sides. */
-	padding?: IDistance | number;
+	padding?: IDistance | IAbsoluteSize;
 	/** Component's bottom padding. */
-	paddingBottom?: IDistance | number;
+	paddingBottom?: IDistance | IAbsoluteSize;
 	/** Component's left padding. */
-	paddingLeft?: IDistance | number;
+	paddingLeft?: IDistance | IAbsoluteSize;
 	/** Component's right padding. */
-	paddingRight?: IDistance | number;
+	paddingRight?: IDistance | IAbsoluteSize;
 	/** Component's top padding. */
-	paddingTop?: IDistance | number;
+	paddingTop?: IDistance | IAbsoluteSize;
 	/** Component's left and right padding. */
-	paddingX?: IDistance | number;
+	paddingX?: IDistance | IAbsoluteSize;
 	/** Component's top and bottom padding. */
-	paddingY?: IDistance | number;
+	paddingY?: IDistance | IAbsoluteSize;
 	/** Component's flex shrink. */
 	shrink?: number;
 	/** Component's width. */
-	width?: IWidth | number;
+	width?: IWidth | ISize;
 }
 
 export type IExternalBaseButtonProps = Omit<
@@ -233,15 +235,15 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 
 	const processedBorderColor = useColor(borderColor, undefined);
 
-	const processedBorderRadius = useMemo<string | undefined>(
-		() => ifNotUndefined(borderRadius, (borderRadius) => toPx(getBorderRadius(theme, borderRadius))),
+	const processedBorderRadius = useMemo<IAbsoluteSize | undefined>(
+		() => ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius)),
 		[borderRadius, theme]
 	);
 
 	const processedBorderStyle = useMemo<'solid' | undefined>(() => (borderWidth ? 'solid' : undefined), [borderWidth]);
 
-	const processedBorderWidth = useMemo<string | undefined>(
-		() => ifNotUndefined(borderWidth, (borderWidth) => toPx(getBorderWidth(theme, borderWidth))),
+	const processedBorderWidth = useMemo<IAbsoluteSize | undefined>(
+		() => ifNotUndefined(borderWidth, (borderWidth) => getBorderWidth(theme, borderWidth)),
 		[borderWidth, theme]
 	);
 

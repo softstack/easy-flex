@@ -1,9 +1,9 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
-import { IDistance, IViewportThreshold } from '../types';
-import { getDistance, getViewportThreshold, toPx, useDimension, useEasyFlexTheme } from '../utils';
+import { IAbsoluteSize, IDistance, IViewportThreshold } from '../types';
+import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils';
 
-const StyledSpacing = styled.div<{ 'data-height': string; 'data-width': string }>`
+const StyledSpacing = styled.div<{ 'data-height': IAbsoluteSize; 'data-width': IAbsoluteSize }>`
 	display: flex;
 	box-sizing: border-box;
 	background-color: transparent;
@@ -25,23 +25,23 @@ export interface ISpacingProps extends HTMLAttributes<HTMLDivElement> {
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the fallback threshold is used. */
 	viewportThreshold?: IViewportThreshold | number;
 	/** Component's height. */
-	height?: IDistance | number;
+	height?: IDistance | IAbsoluteSize;
 	/** Component's width. */
-	width?: IDistance | number;
+	width?: IDistance | IAbsoluteSize;
 }
 
 export const Spacing: FC<ISpacingProps> = ({
 	flip,
 	flipEnabled = false,
 	viewportThreshold,
-	height = 0,
-	width = 0,
+	height = '0px',
+	width = '0px',
 	...props
 }) => {
 	const theme = useEasyFlexTheme();
 	const { width: displayWidth } = useDimension();
 
-	const processedHeight = useMemo<string>(
+	const processedHeight = useMemo<IAbsoluteSize>(
 		() =>
 			flipEnabled &&
 			(flip ||
@@ -49,12 +49,12 @@ export const Spacing: FC<ISpacingProps> = ({
 					(viewportThreshold !== undefined
 						? displayWidth < getViewportThreshold(theme, viewportThreshold)
 						: displayWidth < theme.viewport.fallbackThreshold)))
-				? toPx(getDistance(theme, width))
-				: toPx(getDistance(theme, height)),
+				? getDistance(theme, width)
+				: getDistance(theme, height),
 		[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
 	);
 
-	const processedWidth = useMemo<string>(
+	const processedWidth = useMemo<IAbsoluteSize>(
 		() =>
 			flipEnabled &&
 			(flip ||
@@ -62,8 +62,8 @@ export const Spacing: FC<ISpacingProps> = ({
 					(viewportThreshold !== undefined
 						? displayWidth < getViewportThreshold(theme, viewportThreshold)
 						: displayWidth < theme.viewport.fallbackThreshold)))
-				? toPx(getDistance(theme, height))
-				: toPx(getDistance(theme, width)),
+				? getDistance(theme, height)
+				: getDistance(theme, width),
 		[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
 	);
 

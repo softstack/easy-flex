@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IAlignSelf, IColor, IDistance } from '../types';
+import { IAbsoluteSize, IAlignSelf, IColor, IDistance } from '../types';
 export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     /** The alignment of the component on the parent's element cross axis. */
     alignSelf?: IAlignSelf;
@@ -8,19 +8,19 @@ export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorEle
     /** Component's hover color. */
     hoverColor?: IColor;
     /** Component's margin of all sides. */
-    margin?: IDistance | number;
+    margin?: IDistance | IAbsoluteSize;
     /** Component's bottom margin. */
-    marginBottom?: IDistance | number;
+    marginBottom?: IDistance | IAbsoluteSize;
     /** Component's left margin. */
-    marginLeft?: IDistance | number;
+    marginLeft?: IDistance | IAbsoluteSize;
     /** Component's right margin. */
-    marginRight?: IDistance | number;
+    marginRight?: IDistance | IAbsoluteSize;
     /** Component's top margin. */
-    marginTop?: IDistance | number;
+    marginTop?: IDistance | IAbsoluteSize;
     /** Component's left and right margin. */
-    marginX?: IDistance | number;
+    marginX?: IDistance | IAbsoluteSize;
     /** Component's top and bottom margin. */
-    marginY?: IDistance | number;
+    marginY?: IDistance | IAbsoluteSize;
     /** If true, the link is opened in a new tab. */
     newTab?: boolean;
 }
