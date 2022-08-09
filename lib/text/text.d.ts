@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes } from 'react';
-import { IAbsoluteSize, IAlignSelf, IColor, IDistance, IFontSize, IFontWeight, IHeight, ISize, ITextAlign, ITextElement, IWidth, IWordBreak } from '../types';
+import { IAbsoluteSize, IAlignSelf, IColor, ICssLineHeight, IDistance, IFontSize, IFontWeight, IHeight, ILineHeight, ISize, ITextAlign, ITextElement, IWidth, IWordBreak } from '../types';
 export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     /** Component's text alignment. */
     align?: ITextAlign;
@@ -21,6 +21,7 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     height?: IHeight | ISize;
     /** If true, the text style is set to italic. */
     italic?: boolean;
+    lineHeight?: ICssLineHeight | ILineHeight;
     /** Component's margin of all sides. */
     margin?: IDistance | IAbsoluteSize;
     /** Component's bottom margin. */
@@ -32,9 +33,9 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     /** Component's top margin. */
     marginTop?: IDistance | IAbsoluteSize;
     /** Component's left and right margin. */
-    marginX?: IDistance | IAbsoluteSize;
+    marginHorizontal?: IDistance | IAbsoluteSize;
     /** Component's top and bottom margin. */
-    marginY?: IDistance | IAbsoluteSize;
+    marginVertical?: IDistance | IAbsoluteSize;
     /** Component's maximum height. */
     maxHeight?: IHeight | ISize;
     /** Component's maximum width. */
@@ -54,9 +55,9 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     /** Component's top padding. */
     paddingTop?: IDistance | IAbsoluteSize;
     /** Component's left and right padding. */
-    paddingX?: IDistance | IAbsoluteSize;
+    paddingHorizontal?: IDistance | IAbsoluteSize;
     /** Component's top and bottom padding. */
-    paddingY?: IDistance | IAbsoluteSize;
+    paddingVertical?: IDistance | IAbsoluteSize;
     /** Component's width. */
     width?: IWidth | ISize;
     /** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */

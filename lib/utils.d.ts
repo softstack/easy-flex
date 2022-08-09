@@ -1,16 +1,17 @@
-import { IAbsoluteSize, IBaseColor, IBorderRadius, IColor, ICssColor, ICssFontWeight, IDistance, IEasyFlexTheme, IFontSize, IFontWeight, IHeight, IPercent, IPx, IRem, ISize, IViewportThreshold, IWidth } from './types';
-export declare const isIBaseColor: (color: IColor) => color is IBaseColor;
+import { IAbsoluteSize, IBorderRadius, IColor, ICssColor, ICssFontWeight, ICssLineHeight, IDistance, IEasyFlexTheme, IFontSize, IFontWeight, IHeight, ILineHeight, IPercent, IPx, IRem, ISize, IThemeColor, IThemeSize, IViewportThreshold, IWidth } from './types';
+export declare const isIThemeColor: (color: IColor) => color is IThemeColor;
+export declare const isIThemeSize: (size: unknown) => size is IThemeSize;
+export declare const isIPercent: (value: unknown) => value is `${number}px`;
+export declare const isIPx: (value: unknown) => value is `${number}px`;
+export declare const isIRem: (value: unknown) => value is `${number}rem`;
+export declare const isIAbsoluteSize: (value: unknown) => value is IAbsoluteSize;
+export declare const isISize: (value: unknown) => value is ISize;
 export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => T extends never ? U | null | undefined : T extends null ? U | null : T extends undefined ? U | undefined : U;
 export declare const ifNotNull: <T, U>(value: T, fn: (value: Exclude<T, null>) => U) => T extends null ? null : U;
 export declare const ifNotUndefined: <T, U>(value: T, fn: (value: Exclude<T, undefined>) => U) => T extends undefined ? undefined : U;
 export declare const toIPercent: (value: number) => IPercent;
 export declare const toIPx: (value: number) => IPx;
 export declare const toIRem: (value: number) => IRem;
-export declare const isIPercent: (value: unknown) => value is `${number}px`;
-export declare const isIPx: (value: unknown) => value is `${number}px`;
-export declare const isIRem: (value: unknown) => value is `${number}rem`;
-export declare const isIAbsoluteSize: (value: unknown) => value is IAbsoluteSize;
-export declare const isISize: (value: unknown) => value is ISize;
 export declare const getBorderRadius: (theme: IEasyFlexTheme, borderRadius: IBorderRadius | IAbsoluteSize) => IAbsoluteSize;
 export declare const getBorderWidth: (theme: IEasyFlexTheme, borderWidth: IBorderRadius | IAbsoluteSize) => IAbsoluteSize;
 export declare const getColor: (theme: IEasyFlexTheme, color: IColor) => ICssColor;
@@ -18,6 +19,7 @@ export declare const getDistance: (theme: IEasyFlexTheme, distance: IDistance | 
 export declare const getFontSize: (theme: IEasyFlexTheme, fontSize: IFontSize | ISize) => ISize;
 export declare const getFontWeight: (theme: IEasyFlexTheme, fontWeight: IFontWeight | number) => ICssFontWeight | number;
 export declare const getHeight: (theme: IEasyFlexTheme, height: IHeight | ISize) => ISize;
+export declare const getLineHeight: (theme: IEasyFlexTheme, lineHeight: ICssLineHeight | ILineHeight) => ICssLineHeight;
 export declare const getViewportThreshold: (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold | number) => number;
 export declare const getWidth: (theme: IEasyFlexTheme, width: IWidth | ISize) => ISize;
 export declare const useEasyFlexTheme: () => IEasyFlexTheme;
@@ -26,21 +28,21 @@ export declare const useDimension: () => {
     height: number;
     width: number;
 };
-export declare const useDistance: ({ margin, marginBottom, marginLeft, marginRight, marginTop, marginX, marginY, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingX, paddingY, }: {
-    margin?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    marginBottom?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    marginLeft?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    marginRight?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    marginTop?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    marginX?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    marginY?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    padding?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    paddingBottom?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    paddingLeft?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    paddingRight?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    paddingTop?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    paddingX?: IAbsoluteSize | import("./types").ISizeRange | undefined;
-    paddingY?: IAbsoluteSize | import("./types").ISizeRange | undefined;
+export declare const useDistance: ({ margin, marginBottom, marginLeft, marginRight, marginTop, marginHorizontal, marginVertical, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical, }: {
+    margin?: IAbsoluteSize | IThemeSize | undefined;
+    marginBottom?: IAbsoluteSize | IThemeSize | undefined;
+    marginLeft?: IAbsoluteSize | IThemeSize | undefined;
+    marginRight?: IAbsoluteSize | IThemeSize | undefined;
+    marginTop?: IAbsoluteSize | IThemeSize | undefined;
+    marginHorizontal?: IAbsoluteSize | IThemeSize | undefined;
+    marginVertical?: IAbsoluteSize | IThemeSize | undefined;
+    padding?: IAbsoluteSize | IThemeSize | undefined;
+    paddingBottom?: IAbsoluteSize | IThemeSize | undefined;
+    paddingLeft?: IAbsoluteSize | IThemeSize | undefined;
+    paddingRight?: IAbsoluteSize | IThemeSize | undefined;
+    paddingTop?: IAbsoluteSize | IThemeSize | undefined;
+    paddingHorizontal?: IAbsoluteSize | IThemeSize | undefined;
+    paddingVertical?: IAbsoluteSize | IThemeSize | undefined;
 }) => {
     margin: {
         bottom: IAbsoluteSize;
@@ -58,12 +60,12 @@ export declare const useDistance: ({ margin, marginBottom, marginLeft, marginRig
 export declare const useSize: ({ fullHeight, fullWidth, height, heightMax, heightMin, width, widthMax, widthMin, }: {
     fullHeight: boolean;
     fullWidth: boolean;
-    height?: ISize | import("./types").ISizeRange | undefined;
-    heightMax?: ISize | import("./types").ISizeRange | undefined;
-    heightMin?: ISize | import("./types").ISizeRange | undefined;
-    width?: ISize | import("./types").ISizeRange | undefined;
-    widthMax?: ISize | import("./types").ISizeRange | undefined;
-    widthMin?: ISize | import("./types").ISizeRange | undefined;
+    height?: ISize | IThemeSize | undefined;
+    heightMax?: ISize | IThemeSize | undefined;
+    heightMin?: ISize | IThemeSize | undefined;
+    width?: ISize | IThemeSize | undefined;
+    widthMax?: ISize | IThemeSize | undefined;
+    widthMin?: ISize | IThemeSize | undefined;
 }) => {
     height: ISize | undefined;
     heightMax: ISize | undefined;
@@ -72,25 +74,4 @@ export declare const useSize: ({ fullHeight, fullWidth, height, heightMax, heigh
     widthMax: ISize | undefined;
     widthMin: ISize | undefined;
 };
-export declare const useViewport: () => {
-    fallback: boolean;
-    '8xs': boolean;
-    '7xs': boolean;
-    '6xs': boolean;
-    '5xs': boolean;
-    '4xs': boolean;
-    '3xs': boolean;
-    xxs: boolean;
-    xs: boolean;
-    s: boolean;
-    m: boolean;
-    l: boolean;
-    xl: boolean;
-    xxl: boolean;
-    '3xl': boolean;
-    '4xl': boolean;
-    '5xl': boolean;
-    '6xl': boolean;
-    '7xl': boolean;
-    '8xl': boolean;
-};
+export declare const useViewport: () => Record<'fallback' | IThemeSize, boolean>;

@@ -36,9 +36,9 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     /** Component's top margin. */
     marginTop?: IDistance | IAbsoluteSize;
     /** Component's left and right margin. */
-    marginX?: IDistance | IAbsoluteSize;
+    marginHorizontal?: IDistance | IAbsoluteSize;
     /** Component's top and bottom margin. */
-    marginY?: IDistance | IAbsoluteSize;
+    marginVertical?: IDistance | IAbsoluteSize;
     /** Component's maximum height. */
     maxHeight?: IHeight | ISize;
     /** Component's maximum width. */
@@ -65,13 +65,13 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
     /** Component's top padding. */
     paddingTop?: IDistance | IAbsoluteSize;
     /** Component's left and right padding. */
-    paddingX?: IDistance | IAbsoluteSize;
+    paddingHorizontal?: IDistance | IAbsoluteSize;
     /** Component's top and bottom padding. */
-    paddingY?: IDistance | IAbsoluteSize;
+    paddingVertical?: IDistance | IAbsoluteSize;
     /** Component's flex shrink. */
     shrink?: number;
     /** Component's width. */
     width?: IWidth | ISize;
 }
-export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'borderColor' | 'borderRadius' | 'borderWidth' | 'color' | 'justify' | 'padding' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingX' | 'paddingY'>;
+export declare type IExternalBaseButtonProps = Omit<IBaseButtonProps, 'align' | 'backgroundColor' | 'borderColor' | 'borderRadius' | 'borderWidth' | 'color' | 'justify' | 'padding' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingHorizontal' | 'paddingVertical'>;
 export declare const BaseButton: FC<IBaseButtonProps>;

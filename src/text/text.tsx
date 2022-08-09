@@ -6,18 +6,29 @@ import {
 	IColor,
 	ICssColor,
 	ICssFontWeight,
+	ICssLineHeight,
 	IDistance,
 	IFontSize,
 	IFontStyle,
 	IFontWeight,
 	IHeight,
+	ILineHeight,
 	ISize,
 	ITextAlign,
 	ITextElement,
 	IWidth,
 	IWordBreak,
 } from '../types';
-import { getColor, getFontSize, getFontWeight, ifNotUndefined, useDistance, useEasyFlexTheme, useSize } from '../utils';
+import {
+	getColor,
+	getFontSize,
+	getFontWeight,
+	getLineHeight,
+	ifNotUndefined,
+	useDistance,
+	useEasyFlexTheme,
+	useSize,
+} from '../utils';
 
 const style = css<{
 	'data-align'?: ITextAlign;
@@ -29,6 +40,7 @@ const style = css<{
 	'data-height'?: ISize;
 	'data-height-max'?: ISize;
 	'data-height-min'?: ISize;
+	'data-line-height'?: ICssLineHeight;
 	'data-margin-bottom': IAbsoluteSize;
 	'data-margin-left': IAbsoluteSize;
 	'data-margin-right': IAbsoluteSize;
@@ -52,6 +64,7 @@ const style = css<{
 	height: ${({ 'data-height': height }) => height};
 	max-height: ${({ 'data-height-max': heightMax }) => heightMax};
 	min-height: ${({ 'data-height-min': heightMin }) => heightMin};
+	line-height: ${({ 'data-line-height': lineHeight }) => lineHeight};
 	margin-bottom: ${({ 'data-margin-bottom': marginBottom }) => marginBottom};
 	margin-left: ${({ 'data-margin-left': marginLeft }) => marginLeft};
 	margin-right: ${({ 'data-margin-right': marginRight }) => marginRight};
@@ -115,6 +128,7 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 	height?: IHeight | ISize;
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
+	lineHeight?: ICssLineHeight | ILineHeight;
 	/** Component's margin of all sides. */
 	margin?: IDistance | IAbsoluteSize;
 	/** Component's bottom margin. */
@@ -126,9 +140,9 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 	/** Component's top margin. */
 	marginTop?: IDistance | IAbsoluteSize;
 	/** Component's left and right margin. */
-	marginX?: IDistance | IAbsoluteSize;
+	marginHorizontal?: IDistance | IAbsoluteSize;
 	/** Component's top and bottom margin. */
-	marginY?: IDistance | IAbsoluteSize;
+	marginVertical?: IDistance | IAbsoluteSize;
 	/** Component's maximum height. */
 	maxHeight?: IHeight | ISize;
 	/** Component's maximum width. */
@@ -148,9 +162,9 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 	/** Component's top padding. */
 	paddingTop?: IDistance | IAbsoluteSize;
 	/** Component's left and right padding. */
-	paddingX?: IDistance | IAbsoluteSize;
+	paddingHorizontal?: IDistance | IAbsoluteSize;
 	/** Component's top and bottom padding. */
-	paddingY?: IDistance | IAbsoluteSize;
+	paddingVertical?: IDistance | IAbsoluteSize;
 	/** Component's width. */
 	width?: IWidth | ISize;
 	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
@@ -169,13 +183,14 @@ export const Text: FC<ITextProps> = ({
 	fullWidth = false,
 	height,
 	italic,
+	lineHeight = 'm',
 	margin,
 	marginBottom,
 	marginLeft,
 	marginRight,
 	marginTop,
-	marginX,
-	marginY,
+	marginHorizontal,
+	marginVertical,
 	maxHeight,
 	maxWidth,
 	minHeight,
@@ -185,8 +200,8 @@ export const Text: FC<ITextProps> = ({
 	paddingLeft,
 	paddingRight,
 	paddingTop,
-	paddingX,
-	paddingY,
+	paddingHorizontal,
+	paddingVertical,
 	width,
 	wordBreak,
 	...props
@@ -207,21 +222,26 @@ export const Text: FC<ITextProps> = ({
 		[italic]
 	);
 
+	const processedLineHeight = useMemo<ICssLineHeight | undefined>(
+		() => getLineHeight(theme, lineHeight),
+		[lineHeight, theme]
+	);
+
 	const distance = useDistance({
 		margin,
 		marginBottom,
 		marginLeft,
 		marginRight,
 		marginTop,
-		marginX,
-		marginY,
+		marginHorizontal,
+		marginVertical,
 		padding,
 		paddingBottom,
 		paddingLeft,
 		paddingRight,
 		paddingTop,
-		paddingX,
-		paddingY,
+		paddingHorizontal,
+		paddingVertical,
 	});
 
 	const size = useSize({
@@ -265,6 +285,7 @@ export const Text: FC<ITextProps> = ({
 			data-height={size.height}
 			data-height-max={size.heightMax}
 			data-height-min={size.heightMin}
+			data-line-height={processedLineHeight}
 			data-margin-bottom={distance.margin.bottom}
 			data-margin-left={distance.margin.left}
 			data-margin-right={distance.margin.right}

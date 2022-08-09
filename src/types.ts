@@ -4,225 +4,70 @@ export type IDeepPartial<T> = T extends object
 	  }
 	: T;
 
-// Base start
-
-export type IPercent = `${number}%`;
-
-export type IPx = `${number}px`;
-
-export type IRem = `${number}rem`;
-
-export type IAbsoluteSize = IPx | IRem;
-
-export type ISize = IPercent | IAbsoluteSize;
-
-export type ISizeRange =
-	| '8xs'
-	| '7xs'
-	| '6xs'
-	| '5xs'
-	| '4xs'
-	| '3xs'
-	| 'xxs'
-	| 'xs'
-	| 's'
-	| 'm'
-	| 'l'
-	| 'xl'
-	| 'xxl'
-	| '3xl'
-	| '4xl'
-	| '5xl'
-	| '6xl'
-	| '7xl'
-	| '8xl';
-
-export interface ISizeRangeNumber {
-	'8xs': number;
-	'7xs': number;
-	'6xs': number;
-	'5xs': number;
-	'4xs': number;
-	'3xs': number;
-	xxs: number;
-	xs: number;
-	s: number;
-	m: number;
-	l: number;
-	xl: number;
-	xxl: number;
-	'3xl': number;
-	'4xl': number;
-	'5xl': number;
-	'6xl': number;
-	'7xl': number;
-	'8xl': number;
-}
-
-export interface ISizeRangeAbsoluteSize {
-	'8xs': IAbsoluteSize;
-	'7xs': IAbsoluteSize;
-	'6xs': IAbsoluteSize;
-	'5xs': IAbsoluteSize;
-	'4xs': IAbsoluteSize;
-	'3xs': IAbsoluteSize;
-	xxs: IAbsoluteSize;
-	xs: IAbsoluteSize;
-	s: IAbsoluteSize;
-	m: IAbsoluteSize;
-	l: IAbsoluteSize;
-	xl: IAbsoluteSize;
-	xxl: IAbsoluteSize;
-	'3xl': IAbsoluteSize;
-	'4xl': IAbsoluteSize;
-	'5xl': IAbsoluteSize;
-	'6xl': IAbsoluteSize;
-	'7xl': IAbsoluteSize;
-	'8xl': IAbsoluteSize;
-}
-
-export interface ISizeRangeSize {
-	'8xs': ISize;
-	'7xs': ISize;
-	'6xs': ISize;
-	'5xs': ISize;
-	'4xs': ISize;
-	'3xs': ISize;
-	xxs: ISize;
-	xs: ISize;
-	s: ISize;
-	m: ISize;
-	l: ISize;
-	xl: ISize;
-	xxl: ISize;
-	'3xl': ISize;
-	'4xl': ISize;
-	'5xl': ISize;
-	'6xl': ISize;
-	'7xl': ISize;
-	'8xl': ISize;
-}
-
-// Base end
-
 // CSS start
 
 export type IAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
 export type IAlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
-export type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
-
-export type ICssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
-
-export type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
-
-export type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
-
-export type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
-
-export type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
-
-// CSS end
-
-// Custom start
-
-export type IBaseFlexElement =
-	| 'article'
-	| 'aside'
-	| 'div'
-	| 'figure'
-	| 'footer'
-	| 'header'
-	| 'main'
-	| 'nav'
-	| 'section'
-	| 'summary';
-
-export type IBorderRadius = ISizeRange;
-
-export type IBorderWidth = ISizeRange;
-
-export type IBaseColor =
-	| 'primary'
-	| 'secondary'
-	| 'tertiary'
-	| 'quaternary'
-	| 'quinary'
-	| 'senary'
-	| 'warning'
-	| 'error'
-	| 'header'
-	| 'footer'
-	| 'modal'
-	| 'primaryText'
-	| 'secondaryText'
-	| 'tertiaryText'
-	| 'quaternaryText'
-	| 'quinaryText'
-	| 'senaryText'
-	| 'warningText'
-	| 'errorText'
-	| 'headerText'
-	| 'footerText'
-	| 'modalText'
-	| 'primaryBackground'
-	| 'secondaryBackground'
-	| 'tertiaryBackground'
-	| 'quaternaryBackground'
-	| 'quinaryBackground'
-	| 'senaryBackground'
-	| 'warningBackground'
-	| 'errorBackground'
-	| 'headerBackground'
-	| 'footerBackground'
-	| 'modalBackground'
-	| 'onPrimary'
-	| 'onSecondary'
-	| 'onTertiary'
-	| 'onQuaternary'
-	| 'onQuinary'
-	| 'onSenary'
-	| 'onWarning'
-	| 'onError'
-	| 'onHeader'
-	| 'onFooter'
-	| 'onModal'
-	| 'primaryBorder'
-	| 'secondaryBorder'
-	| 'tertiaryBorder'
-	| 'quaternaryBorder'
-	| 'senaryBorder'
-	| 'warningBorder'
-	| 'errorBorder'
-	| 'headerBorder'
-	| 'footerBorder'
-	| 'modalBorder';
-
 export type IColorCode =
 	| `#${string}`
 	| `hsl(${number}, ${number}%, ${number}%)`
+	| `hsl(${number}deg, ${number}%, ${number}%)`
+	| `hsl(${number}turn, ${number}%, ${number}%)`
+	| `hsl(${number}, ${number}%, ${number}%, ${number})`
+	| `hsl(${number}deg, ${number}%, ${number}%, ${number})`
+	| `hsl(${number}turn, ${number}%, ${number}%, ${number})`
+	| `hsl(${number}, ${number}%, ${number}%, ${number}%)`
+	| `hsl(${number}deg, ${number}%, ${number}%, ${number}%)`
+	| `hsl(${number}turn, ${number}%, ${number}%, ${number}%)`
+	| `hsl(${number} ${number}% ${number}%)`
+	| `hsl(${number}deg ${number}% ${number}%)`
+	| `hsl(${number}turn ${number}% ${number}%)`
+	| `hsl(${number} ${number}% ${number}% / ${number})`
+	| `hsl(${number}deg ${number}% ${number}% / ${number})`
+	| `hsl(${number}turn ${number}% ${number}% / ${number})`
+	| `hsl(${number} ${number}% ${number}% / ${number}%)`
+	| `hsl(${number}deg ${number}% ${number}% / ${number}%)`
+	| `hsl(${number}turn ${number}% ${number}% / ${number}%)`
+	| `hsla(${number}, ${number}%, ${number}%)`
+	| `hsla(${number}deg, ${number}%, ${number}%)`
+	| `hsla(${number}turn, ${number}%, ${number}%)`
 	| `hsla(${number}, ${number}%, ${number}%, ${number})`
+	| `hsla(${number}deg, ${number}%, ${number}%, ${number})`
+	| `hsla(${number}turn, ${number}%, ${number}%, ${number})`
+	| `hsla(${number}, ${number}%, ${number}%, ${number}%)`
+	| `hsla(${number}deg, ${number}%, ${number}%, ${number}%)`
+	| `hsla(${number}turn, ${number}%, ${number}%, ${number}%)`
+	| `hsla(${number} ${number}% ${number}%)`
+	| `hsla(${number}deg ${number}% ${number}%)`
+	| `hsla(${number}turn ${number}% ${number}%)`
+	| `hsla(${number} ${number}% ${number}% / ${number})`
+	| `hsla(${number}deg ${number}% ${number}% / ${number})`
+	| `hsla(${number}turn ${number}% ${number}% / ${number})`
+	| `hsla(${number} ${number}% ${number}% / ${number}%)`
+	| `hsla(${number}deg ${number}% ${number}% / ${number}%)`
+	| `hsla(${number}turn ${number}% ${number}% / ${number}%)`
 	| `rgb(${number}, ${number}, ${number})`
 	| `rgb(${number}%, ${number}%, ${number}%)`
-	| `rgb(${number} ${number} ${number})`
-	| `rgb(${number}% ${number}% ${number}%)`
 	| `rgb(${number}, ${number}, ${number}, ${number})`
 	| `rgb(${number}, ${number}, ${number}, ${number}%)`
 	| `rgb(${number}%, ${number}%, ${number}%, ${number})`
 	| `rgb(${number}%, ${number}%, ${number}%, ${number}%)`
+	| `rgb(${number} ${number} ${number})`
+	| `rgb(${number}% ${number}% ${number}%)`
 	| `rgb(${number} ${number} ${number} / ${number})`
 	| `rgb(${number} ${number} ${number} / ${number}%)`
 	| `rgb(${number}% ${number}% ${number}% / ${number})`
 	| `rgb(${number}% ${number}% ${number}% / ${number}%)`
 	| `rgba(${number}, ${number}, ${number})`
 	| `rgba(${number}%, ${number}%, ${number}%)`
-	| `rgba(${number} ${number} ${number})`
-	| `rgba(${number}% ${number}% ${number}%)`
 	| `rgba(${number}, ${number}, ${number}, ${number})`
 	| `rgba(${number}, ${number}, ${number}, ${number}%)`
 	| `rgba(${number}%, ${number}%, ${number}%, ${number})`
 	| `rgba(${number}%, ${number}%, ${number}%, ${number}%)`
+	| `rgba(${number} ${number} ${number})`
+	| `rgba(${number}% ${number}% ${number}%)`
 	| `rgba(${number} ${number} ${number} / ${number})`
 	| `rgba(${number} ${number} ${number} / ${number}%)`
 	| `rgba(${number}% ${number}% ${number}% / ${number})`
@@ -380,21 +225,145 @@ export type IColorName =
 	| 'yellow' // #ffff00
 	| 'yellowgreen'; // #9acd32
 
+export type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
+
+export type ICssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
+
+export type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
+
+export type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
+
+export type IPercent = `${number}%`;
+
+export type IPx = `${number}px`;
+
+export type IRem = `${number}rem`;
+
+export type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
+
+export type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
+
 export type ICssColor = IColorCode | IColorKeyword | IColorName;
 
-export type IColor = IBaseColor | ICssColor;
+export type IAbsoluteSize = IPx | IRem;
 
-export type IDistance = ISizeRange;
+export type ISize = IPercent | IAbsoluteSize;
+
+export type ICssLineHeight = 'normal' | IPercent | number;
+
+// CSS end
+
+// Theme start
+
+export type IThemeSize =
+	| '8xs'
+	| '7xs'
+	| '6xs'
+	| '5xs'
+	| '4xs'
+	| '3xs'
+	| 'xxs'
+	| 'xs'
+	| 's'
+	| 'm'
+	| 'l'
+	| 'xl'
+	| 'xxl'
+	| '3xl'
+	| '4xl'
+	| '5xl'
+	| '6xl'
+	| '7xl'
+	| '8xl';
+
+export type IBaseFlexElement =
+	| 'article'
+	| 'aside'
+	| 'div'
+	| 'figure'
+	| 'footer'
+	| 'header'
+	| 'main'
+	| 'nav'
+	| 'section'
+	| 'summary';
+
+export type IBorderRadius = IThemeSize;
+
+export type IBorderWidth = IThemeSize;
+
+export type IThemeColor =
+	| 'primary'
+	| 'secondary'
+	| 'tertiary'
+	| 'quaternary'
+	| 'quinary'
+	| 'senary'
+	| 'warning'
+	| 'error'
+	| 'header'
+	| 'footer'
+	| 'modal'
+	| 'primaryText'
+	| 'secondaryText'
+	| 'tertiaryText'
+	| 'quaternaryText'
+	| 'quinaryText'
+	| 'senaryText'
+	| 'warningText'
+	| 'errorText'
+	| 'headerText'
+	| 'footerText'
+	| 'modalText'
+	| 'primaryBackground'
+	| 'secondaryBackground'
+	| 'tertiaryBackground'
+	| 'quaternaryBackground'
+	| 'quinaryBackground'
+	| 'senaryBackground'
+	| 'warningBackground'
+	| 'errorBackground'
+	| 'headerBackground'
+	| 'footerBackground'
+	| 'modalBackground'
+	| 'onPrimary'
+	| 'onSecondary'
+	| 'onTertiary'
+	| 'onQuaternary'
+	| 'onQuinary'
+	| 'onSenary'
+	| 'onWarning'
+	| 'onError'
+	| 'onHeader'
+	| 'onFooter'
+	| 'onModal'
+	| 'primaryBorder'
+	| 'secondaryBorder'
+	| 'tertiaryBorder'
+	| 'quaternaryBorder'
+	| 'quinaryBorder'
+	| 'senaryBorder'
+	| 'warningBorder'
+	| 'errorBorder'
+	| 'headerBorder'
+	| 'footerBorder'
+	| 'modalBorder';
+
+export type IColor = IThemeColor | ICssColor;
+
+export type IDistance = IThemeSize;
 
 export type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
-export type IFontSize = ISizeRange;
+export type IFontSize = IThemeSize;
 
 export type IFontStyle = 'italic' | 'normal';
 
-export type IFontWeight = 'bold' | 'normal' | 'semibold';
+export type IFontWeight = 'bold' | 'light' | 'normal' | 'semibold';
 
-export type IHeight = ISizeRange;
+export type IHeight = IThemeSize;
+
+export type ILineHeight = IThemeSize;
 
 export type IStyleElement =
 	| 'b'
@@ -416,83 +385,21 @@ export type IStyleElement =
 
 export type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
-export type IViewportThreshold = ISizeRange;
+export type IViewportThreshold = IThemeSize;
 
-export type IWidth = ISizeRange;
-
-// Custom end
+export type IWidth = IThemeSize;
 
 export interface IEasyFlexTheme {
 	border: {
-		radius: ISizeRangeAbsoluteSize;
-		width: ISizeRangeAbsoluteSize;
+		radius: Record<IThemeSize, IAbsoluteSize>;
+		width: Record<IThemeSize, IAbsoluteSize>;
 	};
-	color: {
-		primary: ICssColor;
-		secondary: ICssColor;
-		tertiary: ICssColor;
-		quaternary: ICssColor;
-		quinary: ICssColor;
-		senary: ICssColor;
-		warning: ICssColor;
-		error: ICssColor;
-		header: ICssColor;
-		footer: ICssColor;
-		modal: ICssColor;
-		primaryText: ICssColor;
-		secondaryText: ICssColor;
-		tertiaryText: ICssColor;
-		quaternaryText: ICssColor;
-		quinaryText: ICssColor;
-		senaryText: ICssColor;
-		warningText: ICssColor;
-		errorText: ICssColor;
-		headerText: ICssColor;
-		footerText: ICssColor;
-		modalText: ICssColor;
-		primaryBackground: ICssColor;
-		secondaryBackground: ICssColor;
-		tertiaryBackground: ICssColor;
-		quaternaryBackground: ICssColor;
-		quinaryBackground: ICssColor;
-		senaryBackground: ICssColor;
-		warningBackground: ICssColor;
-		errorBackground: ICssColor;
-		headerBackground: ICssColor;
-		footerBackground: ICssColor;
-		modalBackground: ICssColor;
-		onPrimary: ICssColor;
-		onSecondary: ICssColor;
-		onTertiary: ICssColor;
-		onQuaternary: ICssColor;
-		onQuinary: ICssColor;
-		onSenary: ICssColor;
-		onWarning: ICssColor;
-		onError: ICssColor;
-		onHeader: ICssColor;
-		onFooter: ICssColor;
-		onModal: ICssColor;
-		primaryBorder: ICssColor;
-		secondaryBorder: ICssColor;
-		tertiaryBorder: ICssColor;
-		quaternaryBorder: ICssColor;
-		quinaryBorder: ICssColor;
-		senaryBorder: ICssColor;
-		warningBorder: ICssColor;
-		errorBorder: ICssColor;
-		headerBorder: ICssColor;
-		footerBorder: ICssColor;
-		modalBorder: ICssColor;
-	};
-	distance: ISizeRangeAbsoluteSize;
+	color: Record<IThemeColor, ICssColor>;
+	distance: Record<IThemeSize, IAbsoluteSize>;
 	font: {
-		size: ISizeRangeSize;
-		weight: {
-			light: ICssFontWeight | number;
-			normal: ICssFontWeight | number;
-			semibold: ICssFontWeight | number;
-			bold: ICssFontWeight | number;
-		};
+		lineHeight: Record<IThemeSize, ICssLineHeight>;
+		size: Record<IThemeSize, ISize>;
+		weight: Record<IFontWeight, ICssFontWeight | number>;
 	};
 	modal: {
 		backgroundColor: ICssColor;
@@ -501,13 +408,15 @@ export interface IEasyFlexTheme {
 		containerElementId: string;
 	};
 	size: {
-		height: ISizeRangeAbsoluteSize;
-		width: ISizeRangeAbsoluteSize;
+		height: Record<IThemeSize, IAbsoluteSize>;
+		width: Record<IThemeSize, IAbsoluteSize>;
 	};
 	viewport: {
 		fallbackThreshold: number;
-		threshold: ISizeRangeNumber;
+		threshold: Record<IThemeSize, number>;
 	};
 }
 
 export type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;
+
+// Theme end

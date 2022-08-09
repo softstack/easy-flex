@@ -1,7 +1,18 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { IColor, ICssColor, ICssFontWeight, IFontSize, IFontStyle, IFontWeight, ISize, IStyleElement } from '../types';
-import { getFontSize, getFontWeight, ifNotUndefined, useColor, useEasyFlexTheme } from '../utils';
+import {
+	IColor,
+	ICssColor,
+	ICssFontWeight,
+	ICssLineHeight,
+	IFontSize,
+	IFontStyle,
+	IFontWeight,
+	ILineHeight,
+	ISize,
+	IStyleElement,
+} from '../types';
+import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useColor, useEasyFlexTheme } from '../utils';
 
 const style = css<{
 	'data-background-color'?: ICssColor;
@@ -9,6 +20,7 @@ const style = css<{
 	'data-font-size'?: ISize;
 	'data-font-weight'?: ICssFontWeight | number;
 	'data-font-style'?: IFontStyle;
+	'data-line-height'?: ICssLineHeight;
 }>`
 	box-sizing: border-box;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
@@ -16,6 +28,7 @@ const style = css<{
 	font-size: ${({ 'data-font-size': fontSize }) => fontSize};
 	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
 	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
+	line-height: ${({ 'data-line-height': lineHeight }) => lineHeight};
 `;
 
 const B = styled.b`
@@ -95,16 +108,18 @@ export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
 	fontWeight?: IFontWeight | number;
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
+	lineHeight?: ICssLineHeight | ILineHeight;
 }
 
 export const Style: FC<IStyleProps> = ({
 	backgroundColor,
+	children,
 	color,
 	element = 'span',
 	fontSize,
 	fontWeight,
 	italic,
-	children,
+	lineHeight,
 }) => {
 	const theme = useEasyFlexTheme();
 
@@ -125,6 +140,11 @@ export const Style: FC<IStyleProps> = ({
 	const fontStyle = useMemo<IFontStyle | undefined>(
 		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
 		[italic]
+	);
+
+	const processedLineHeight = useMemo<ICssLineHeight | undefined>(
+		() => ifNotUndefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
+		[lineHeight, theme]
 	);
 
 	const Element = useMemo(() => {
@@ -171,6 +191,7 @@ export const Style: FC<IStyleProps> = ({
 			data-font-size={processedFontSize}
 			data-font-weight={processedFontWeight}
 			data-font-wtyle={fontStyle}
+			data-line-height={processedLineHeight}
 		>
 			{children}
 		</Element>

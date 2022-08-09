@@ -134,9 +134,9 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	/** Component's top margin. */
 	marginTop?: IDistance | IAbsoluteSize;
 	/** Component's left and right margin. */
-	marginX?: IDistance | IAbsoluteSize;
+	marginHorizontal?: IDistance | IAbsoluteSize;
 	/** Component's top and bottom margin. */
-	marginY?: IDistance | IAbsoluteSize;
+	marginVertical?: IDistance | IAbsoluteSize;
 	/** Component's maximum height. */
 	maxHeight?: IHeight | ISize;
 	/** Component's maximum width. */
@@ -163,9 +163,9 @@ export interface IBaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 	/** Component's top padding. */
 	paddingTop?: IDistance | IAbsoluteSize;
 	/** Component's left and right padding. */
-	paddingX?: IDistance | IAbsoluteSize;
+	paddingHorizontal?: IDistance | IAbsoluteSize;
 	/** Component's top and bottom padding. */
-	paddingY?: IDistance | IAbsoluteSize;
+	paddingVertical?: IDistance | IAbsoluteSize;
 	/** Component's flex shrink. */
 	shrink?: number;
 	/** Component's width. */
@@ -186,8 +186,8 @@ export type IExternalBaseButtonProps = Omit<
 	| 'paddingLeft'
 	| 'paddingRight'
 	| 'paddingTop'
-	| 'paddingX'
-	| 'paddingY'
+	| 'paddingHorizontal'
+	| 'paddingVertical'
 >;
 
 export const BaseButton: FC<IBaseButtonProps> = ({
@@ -209,8 +209,8 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 	marginLeft,
 	marginRight,
 	marginTop,
-	marginX,
-	marginY,
+	marginHorizontal,
+	marginVertical,
 	maxHeight,
 	maxWidth,
 	minHeight,
@@ -223,8 +223,8 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 	paddingLeft,
 	paddingRight,
 	paddingTop,
-	paddingX,
-	paddingY,
+	paddingHorizontal,
+	paddingVertical,
 	shrink,
 	width,
 	...props
@@ -255,15 +255,15 @@ export const BaseButton: FC<IBaseButtonProps> = ({
 		marginLeft,
 		marginRight,
 		marginTop,
-		marginX,
-		marginY,
+		marginHorizontal,
+		marginVertical,
 		padding,
 		paddingBottom,
 		paddingLeft,
 		paddingRight,
 		paddingTop,
-		paddingX,
-		paddingY,
+		paddingHorizontal,
+		paddingVertical,
 	});
 
 	const size = useSize({

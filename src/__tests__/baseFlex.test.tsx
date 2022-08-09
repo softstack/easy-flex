@@ -10,7 +10,7 @@ describe('<BaseFlex />', () => {
 	});
 
 	test('should have margin-bottom and margin-top not equal 0px', async () => {
-		const result = render(<BaseFlex marginY="m" />);
+		const result = render(<BaseFlex marginVertical="m" />);
 		expect(result.baseElement).toMatchSnapshot();
 	});
 });

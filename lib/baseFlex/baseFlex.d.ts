@@ -42,9 +42,9 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     /** Component's top margin. */
     marginTop?: IDistance | IAbsoluteSize;
     /** Component's left and right margin. */
-    marginX?: IDistance | IAbsoluteSize;
+    marginHorizontal?: IDistance | IAbsoluteSize;
     /** Component's top and bottom margin. */
-    marginY?: IDistance | IAbsoluteSize;
+    marginVertical?: IDistance | IAbsoluteSize;
     /** Component's maximum height. */
     maxHeight?: IHeight | ISize;
     /** Component's maximum width. */
@@ -70,9 +70,9 @@ export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     /** Component's top padding. */
     paddingTop?: IDistance | IAbsoluteSize;
     /** Component's left and right padding. */
-    paddingX?: IDistance | IAbsoluteSize;
+    paddingHorizontal?: IDistance | IAbsoluteSize;
     /** Component's top and bottom padding. */
-    paddingY?: IDistance | IAbsoluteSize;
+    paddingVertical?: IDistance | IAbsoluteSize;
     /** Component's flex shrink. */
     shrink?: number;
     /** Component's width. */

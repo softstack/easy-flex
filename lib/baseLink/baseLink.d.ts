@@ -18,9 +18,9 @@ export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorEle
     /** Component's top margin. */
     marginTop?: IDistance | IAbsoluteSize;
     /** Component's left and right margin. */
-    marginX?: IDistance | IAbsoluteSize;
+    marginHorizontal?: IDistance | IAbsoluteSize;
     /** Component's top and bottom margin. */
-    marginY?: IDistance | IAbsoluteSize;
+    marginVertical?: IDistance | IAbsoluteSize;
     /** If true, the link is opened in a new tab. */
     newTab?: boolean;
 }
