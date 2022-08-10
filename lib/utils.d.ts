@@ -4,6 +4,8 @@ export declare const isIThemeSize: (size: unknown) => size is IThemeSize;
 export declare const isIPercent: (value: unknown) => value is `${number}px`;
 export declare const isIPx: (value: unknown) => value is `${number}px`;
 export declare const isIRem: (value: unknown) => value is `${number}rem`;
+export declare const isIVh: (value: unknown) => value is `${number}rem`;
+export declare const isIVw: (value: unknown) => value is `${number}rem`;
 export declare const isIAbsoluteSize: (value: unknown) => value is IAbsoluteSize;
 export declare const isISize: (value: unknown) => value is ISize;
 export declare const ifDefined: <T, U>(value: T, fn: (value: Exclude<T, null | undefined>) => U) => T extends never ? U | null | undefined : T extends null ? U | null : T extends undefined ? U | undefined : U;

@@ -9,14 +9,17 @@ export declare type IColorName = 'aliceblue' | 'antiquewhite' | 'aqua' | 'aquama
 export declare type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
 export declare type ICssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
 export declare type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
+export declare type IObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 export declare type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
 export declare type IPercent = `${number}%`;
 export declare type IPx = `${number}px`;
 export declare type IRem = `${number}rem`;
 export declare type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
+export declare type IVh = `${number}vh`;
+export declare type IVw = `${number}vw`;
 export declare type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
 export declare type ICssColor = IColorCode | IColorKeyword | IColorName;
-export declare type IAbsoluteSize = IPx | IRem;
+export declare type IAbsoluteSize = IPx | IRem | IVh | IVw;
 export declare type ISize = IPercent | IAbsoluteSize;
 export declare type ICssLineHeight = 'normal' | IPercent | number;
 export declare type IThemeSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
@@ -27,9 +30,10 @@ export declare type IThemeColor = 'primary' | 'secondary' | 'tertiary' | 'quater
 export declare type IColor = IThemeColor | ICssColor;
 export declare type IDistance = IThemeSize;
 export declare type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
+export declare type IFontFamily = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'modal';
 export declare type IFontSize = IThemeSize;
 export declare type IFontStyle = 'italic' | 'normal';
-export declare type IFontWeight = 'bold' | 'light' | 'normal' | 'semibold';
+export declare type IFontWeight = 'thin' | 'extraLight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extraBold' | 'black' | 'extraBlack';
 export declare type IHeight = IThemeSize;
 export declare type ILineHeight = IThemeSize;
 export declare type IStyleElement = 'b' | 'cite' | 'code' | 'em' | 'i' | 'kbd' | 'mark' | 's' | 'samp' | 'small' | 'span' | 'strong' | 'sub' | 'sup' | 'u' | 'var';
@@ -44,6 +48,7 @@ export interface IEasyFlexTheme {
     color: Record<IThemeColor, ICssColor>;
     distance: Record<IThemeSize, IAbsoluteSize>;
     font: {
+        family: Record<IFontFamily, string>;
         lineHeight: Record<IThemeSize, ICssLineHeight>;
         size: Record<IThemeSize, ISize>;
         weight: Record<IFontWeight, ICssFontWeight | number>;

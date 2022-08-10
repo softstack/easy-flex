@@ -204,6 +204,19 @@ export const initialFlexTheme: IEasyFlexTheme = {
 		'8xl': '389px',
 	},
 	font: {
+		family: {
+			primary: 'sans-serif',
+			secondary: 'sans-serif',
+			tertiary: 'sans-serif',
+			quaternary: 'sans-serif',
+			quinary: 'sans-serif',
+			senary: 'sans-serif',
+			warning: 'sans-serif',
+			error: 'sans-serif',
+			header: 'sans-serif',
+			footer: 'sans-serif',
+			modal: 'sans-serif',
+		},
 		lineHeight: {
 			'8xs': 1.5,
 			'7xs': 1.5,
@@ -247,10 +260,16 @@ export const initialFlexTheme: IEasyFlexTheme = {
 			'8xl': '6rem',
 		},
 		weight: {
-			light: 100,
+			thin: 100,
+			extraLight: 200,
+			light: 300,
 			normal: 'normal',
-			semibold: 550,
+			medium: 500,
+			semibold: 600,
 			bold: 'bold',
+			extraBold: 800,
+			black: 900,
+			extraBlack: 950,
 		},
 	},
 	modal: {

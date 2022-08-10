@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { AnchorHTMLAttributes, FC, useMemo } from 'react';
 import styled from 'styled-components';
 import { IAbsoluteSize, IAlignSelf, IColor, ICssColor, IDistance } from '../types';
 import { useColor, useDistance } from '../utils';
@@ -27,7 +27,7 @@ const StyledBaseLink = styled.a<{
 	}
 `;
 
-export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface IBaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 	/** The alignment of the component on the parent's element cross axis. */
 	alignSelf?: IAlignSelf;
 	/** Component's color. */

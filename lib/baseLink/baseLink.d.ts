@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import { AnchorHTMLAttributes, FC } from 'react';
 import { IAbsoluteSize, IAlignSelf, IColor, IDistance } from '../types';
-export interface IBaseLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface IBaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     /** The alignment of the component on the parent's element cross axis. */
     alignSelf?: IAlignSelf;
     /** Component's color. */

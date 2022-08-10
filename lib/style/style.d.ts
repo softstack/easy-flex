@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes } from 'react';
-import { IColor, ICssLineHeight, IFontSize, IFontWeight, ILineHeight, ISize, IStyleElement } from '../types';
+import { IColor, ICssLineHeight, IFontFamily, IFontSize, IFontWeight, ILineHeight, ISize, IStyleElement } from '../types';
 export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
     /** Component's background color. */
     backgroundColor?: IColor;
@@ -7,6 +7,7 @@ export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
     color?: IColor;
     /** Component's html tag. */
     element?: IStyleElement;
+    fontFamily?: IFontFamily;
     /** Component's font size. */
     fontSize?: IFontSize | ISize;
     /** Component's font weight. */

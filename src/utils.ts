@@ -32,10 +32,16 @@ export const isIPercent = (value: unknown): value is IPx =>
 	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?%$/) : false;
 
 export const isIPx = (value: unknown): value is IPx =>
-	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?px$/) : false;
+	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?px$/i) : false;
 
 export const isIRem = (value: unknown): value is IRem =>
-	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?rem$/) : false;
+	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?rem$/i) : false;
+
+export const isIVh = (value: unknown): value is IRem =>
+	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?vh$/i) : false;
+
+export const isIVw = (value: unknown): value is IRem =>
+	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?vw$/i) : false;
 
 export const isIAbsoluteSize = (value: unknown): value is IAbsoluteSize => isIPx(value) || isIRem(value);
 
@@ -102,25 +108,25 @@ export const toIPx = (value: number): IPx => `${value}px`;
 export const toIRem = (value: number): IRem => `${value}rem`;
 
 export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: IBorderRadius | IAbsoluteSize): IAbsoluteSize =>
-	isIAbsoluteSize(borderRadius) ? borderRadius : theme.border.radius[borderRadius];
+	isIThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius;
 
 export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: IBorderRadius | IAbsoluteSize): IAbsoluteSize =>
-	isIAbsoluteSize(borderWidth) ? borderWidth : theme.border.width[borderWidth];
+	isIThemeSize(borderWidth) ? theme.border.width[borderWidth] : borderWidth;
 
 export const getColor = (theme: IEasyFlexTheme, color: IColor): ICssColor =>
 	isIThemeColor(color) ? theme.color[color] : color;
 
 export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | IAbsoluteSize): IAbsoluteSize =>
-	isIAbsoluteSize(distance) ? distance : theme.distance[distance];
+	isIThemeSize(distance) ? theme.distance[distance] : distance;
 
 export const getFontSize = (theme: IEasyFlexTheme, fontSize: IFontSize | ISize): ISize =>
-	isISize(fontSize) ? fontSize : theme.font.size[fontSize];
+	isIThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize;
 
 export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | number): ICssFontWeight | number =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
 export const getHeight = (theme: IEasyFlexTheme, height: IHeight | ISize): ISize =>
-	isISize(height) ? height : theme.size.height[height];
+	isIThemeSize(height) ? theme.size.height[height] : height;
 
 export const getLineHeight = (theme: IEasyFlexTheme, lineHeight: ICssLineHeight | ILineHeight): ICssLineHeight =>
 	isIThemeSize(lineHeight) ? theme.font.lineHeight[lineHeight] : lineHeight;
@@ -129,7 +135,7 @@ export const getViewportThreshold = (theme: IEasyFlexTheme, viewportThreshold: I
 	typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold];
 
 export const getWidth = (theme: IEasyFlexTheme, width: IWidth | ISize): ISize =>
-	isISize(width) ? width : theme.size.width[width];
+	isIThemeSize(width) ? theme.size.width[width] : width;
 
 export const useEasyFlexTheme = (): IEasyFlexTheme => useContext(EasyFlexContext);
 

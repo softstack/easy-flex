@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes } from 'react';
-import { IAbsoluteSize, IAlignSelf, IColor, ICssLineHeight, IDistance, IFontSize, IFontWeight, IHeight, ILineHeight, ISize, ITextAlign, ITextElement, IWidth, IWordBreak } from '../types';
+import { IAbsoluteSize, IAlignSelf, IColor, ICssLineHeight, IDistance, IFontFamily, IFontSize, IFontWeight, IHeight, ILineHeight, ISize, ITextAlign, ITextElement, IWidth, IWordBreak } from '../types';
 export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     /** Component's text alignment. */
     align?: ITextAlign;
@@ -9,6 +9,7 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
     color?: IColor;
     /** Component's html tag. */
     element?: ITextElement;
+    fontFamily?: IFontFamily;
     /** Component's font size. */
     fontSize?: IFontSize | ISize;
     /** Component's font weight. */

@@ -5,6 +5,7 @@ import {
 	ICssColor,
 	ICssFontWeight,
 	ICssLineHeight,
+	IFontFamily,
 	IFontSize,
 	IFontStyle,
 	IFontWeight,
@@ -17,6 +18,7 @@ import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useColor, us
 const style = css<{
 	'data-background-color'?: ICssColor;
 	'data-color'?: ICssColor;
+	'data-font-family'?: string;
 	'data-font-size'?: ISize;
 	'data-font-weight'?: ICssFontWeight | number;
 	'data-font-style'?: IFontStyle;
@@ -25,6 +27,7 @@ const style = css<{
 	box-sizing: border-box;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	color: ${({ 'data-color': color }) => color};
+	font-family: ${({ 'data-font-family': fontFamily }) => fontFamily};
 	font-size: ${({ 'data-font-size': fontSize }) => fontSize};
 	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
 	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
@@ -102,6 +105,7 @@ export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
 	color?: IColor;
 	/** Component's html tag. */
 	element?: IStyleElement;
+	fontFamily?: IFontFamily;
 	/** Component's font size. */
 	fontSize?: IFontSize | ISize;
 	/** Component's font weight. */
@@ -116,6 +120,7 @@ export const Style: FC<IStyleProps> = ({
 	children,
 	color,
 	element = 'span',
+	fontFamily,
 	fontSize,
 	fontWeight,
 	italic,
@@ -126,6 +131,11 @@ export const Style: FC<IStyleProps> = ({
 	const processedBackgroundColor = useColor(backgroundColor, undefined);
 
 	const processedColor = useColor(color, undefined);
+
+	const processedFontFamily = useMemo<string | undefined>(
+		() => ifNotUndefined(fontFamily, (fontFamily) => theme.font.family[fontFamily]),
+		[fontFamily, theme]
+	);
 
 	const processedFontSize = useMemo<ISize | undefined>(
 		() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
@@ -188,6 +198,7 @@ export const Style: FC<IStyleProps> = ({
 		<Element
 			data-background-color={processedBackgroundColor}
 			data-color={processedColor}
+			data-font-family={processedFontFamily}
 			data-font-size={processedFontSize}
 			data-font-weight={processedFontWeight}
 			data-font-wtyle={fontStyle}

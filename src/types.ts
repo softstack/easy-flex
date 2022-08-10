@@ -231,6 +231,8 @@ export type ICssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
 
 export type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 
+export type IObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+
 export type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
 
 export type IPercent = `${number}%`;
@@ -241,11 +243,15 @@ export type IRem = `${number}rem`;
 
 export type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 
+export type IVh = `${number}vh`;
+
+export type IVw = `${number}vw`;
+
 export type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
 
 export type ICssColor = IColorCode | IColorKeyword | IColorName;
 
-export type IAbsoluteSize = IPx | IRem;
+export type IAbsoluteSize = IPx | IRem | IVh | IVw;
 
 export type ISize = IPercent | IAbsoluteSize;
 
@@ -355,11 +361,34 @@ export type IDistance = IThemeSize;
 
 export type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
+export type IFontFamily =
+	| 'primary'
+	| 'secondary'
+	| 'tertiary'
+	| 'quaternary'
+	| 'quinary'
+	| 'senary'
+	| 'warning'
+	| 'error'
+	| 'header'
+	| 'footer'
+	| 'modal';
+
 export type IFontSize = IThemeSize;
 
 export type IFontStyle = 'italic' | 'normal';
 
-export type IFontWeight = 'bold' | 'light' | 'normal' | 'semibold';
+export type IFontWeight =
+	| 'thin'
+	| 'extraLight'
+	| 'light'
+	| 'normal'
+	| 'medium'
+	| 'semibold'
+	| 'bold'
+	| 'extraBold'
+	| 'black'
+	| 'extraBlack';
 
 export type IHeight = IThemeSize;
 
@@ -397,6 +426,7 @@ export interface IEasyFlexTheme {
 	color: Record<IThemeColor, ICssColor>;
 	distance: Record<IThemeSize, IAbsoluteSize>;
 	font: {
+		family: Record<IFontFamily, string>;
 		lineHeight: Record<IThemeSize, ICssLineHeight>;
 		size: Record<IThemeSize, ISize>;
 		weight: Record<IFontWeight, ICssFontWeight | number>;

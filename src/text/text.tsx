@@ -8,6 +8,7 @@ import {
 	ICssFontWeight,
 	ICssLineHeight,
 	IDistance,
+	IFontFamily,
 	IFontSize,
 	IFontStyle,
 	IFontWeight,
@@ -34,6 +35,7 @@ const style = css<{
 	'data-align'?: ITextAlign;
 	'data-align-self'?: IAlignSelf;
 	'data-color': ICssColor;
+	'data-font-family': string;
 	'data-font-size': ISize;
 	'data-font-weight': ICssFontWeight | number;
 	'data-font-style'?: IFontStyle;
@@ -58,6 +60,7 @@ const style = css<{
 	text-align: ${({ 'data-align': align }) => align};
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	color: ${({ 'data-color': color }) => color};
+	font-family: ${({ 'data-font-family': fontFamily }) => fontFamily};
 	font-size: ${({ 'data-font-size': fontSize }) => fontSize};
 	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
 	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
@@ -116,6 +119,7 @@ export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 	color?: IColor;
 	/** Component's html tag. */
 	element?: ITextElement;
+	fontFamily?: IFontFamily;
 	/** Component's font size. */
 	fontSize?: IFontSize | ISize;
 	/** Component's font weight. */
@@ -177,6 +181,7 @@ export const Text: FC<ITextProps> = ({
 	children,
 	color = 'primaryText',
 	element = 'p',
+	fontFamily = 'primary',
 	fontSize = 'm',
 	fontWeight = 'normal',
 	fullHeight = false,
@@ -209,6 +214,8 @@ export const Text: FC<ITextProps> = ({
 	const theme = useEasyFlexTheme();
 
 	const processedColor = useMemo<ICssColor>(() => getColor(theme, color), [color, theme]);
+
+	const processedFontFamily = useMemo<string>(() => theme.font.family[fontFamily], [fontFamily, theme]);
 
 	const processedFontSize = useMemo<ISize>(() => getFontSize(theme, fontSize), [fontSize, theme]);
 
@@ -279,6 +286,7 @@ export const Text: FC<ITextProps> = ({
 			data-align={align}
 			data-align-self={alignSelf}
 			data-color={processedColor}
+			data-font-family={processedFontFamily}
 			data-font-size={processedFontSize}
 			data-font-weight={processedFontWeight}
 			data-font-style={fontStyle}
