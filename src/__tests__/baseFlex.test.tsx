@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import React from 'react';
-import { BaseFlex } from '../baseFlex/baseFlex';
+import { BaseFlex } from '../baseFlex/BaseFlex';
 
 describe('<BaseFlex />', () => {
 	test('should have the basic css settings', async () => {

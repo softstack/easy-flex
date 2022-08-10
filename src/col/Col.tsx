@@ -1,9 +1,9 @@
 import React, { FC, useMemo } from 'react';
-import { BaseFlex, IBaseFlexProps } from '../baseFlex/baseFlex';
+import { BaseFlex, IBaseFlexProps } from '../baseFlex/BaseFlex';
 import { IFlexDirection, IFlipDirection, IViewportThreshold } from '../types';
 import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils';
 
-export interface IRowProps extends Omit<IBaseFlexProps, 'flexDirection'> {
+export interface IColProps extends Omit<IBaseFlexProps, 'flexDirection'> {
 	/** Flips the content in the direction set by flipDirection. */
 	flip?: boolean;
 	/** Sets what happens if the content shall be flipped. */
@@ -12,7 +12,7 @@ export interface IRowProps extends Omit<IBaseFlexProps, 'flexDirection'> {
 	viewportThreshold?: IViewportThreshold | number;
 }
 
-export const Row: FC<IRowProps> = ({ children, flip, flipDirection, viewportThreshold, ...props }) => {
+export const Col: FC<IColProps> = ({ children, flip, flipDirection, viewportThreshold, ...props }) => {
 	const theme = useEasyFlexTheme();
 	const { width } = useDimension();
 
@@ -27,14 +27,14 @@ export const Row: FC<IRowProps> = ({ children, flip, flipDirection, viewportThre
 		) {
 			switch (flipDirection) {
 				case 'flip':
-					return 'column';
+					return 'row';
 				case 'reverse':
-					return 'row-reverse';
-				case 'flip-reverse':
 					return 'column-reverse';
+				case 'flip-reverse':
+					return 'row-reverse';
 			}
 		}
-		return 'row';
+		return 'column';
 	}, [flip, flipDirection, theme, viewportThreshold, width]);
 
 	return (
