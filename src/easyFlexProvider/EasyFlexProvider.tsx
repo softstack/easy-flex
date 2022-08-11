@@ -1,8 +1,8 @@
 import React, { FC, ReactNode, useMemo } from 'react';
 import { EasyFlexContext, initialFlexTheme } from '../constants';
-import { IDeepPartial, IEasyFlexTheme } from '../types';
+import { DeepPartial, EasyFlexTheme } from '../types';
 
-const mergeDeep = <T,>(a: T, b: IDeepPartial<T>): T => {
+const mergeDeep = <T,>(a: T, b: DeepPartial<T>): T => {
 	if (b === undefined) {
 		return a;
 	} else if (typeof b === 'object') {
@@ -10,22 +10,22 @@ const mergeDeep = <T,>(a: T, b: IDeepPartial<T>): T => {
 		const tmp: any = {};
 		for (const [key] of Object.entries(a) as unknown as Array<[keyof T, T]>) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			tmp[key] = mergeDeep(a[key], b[key as keyof IDeepPartial<T>] as any);
+			tmp[key] = mergeDeep(a[key], b[key as keyof DeepPartial<T>] as any);
 		}
 		return tmp;
 	}
 	return b as T;
 };
 
-export interface IEasyFlexProviderProps {
+export interface EasyFlexProviderProps {
 	/** The component's children. */
 	children?: ReactNode;
 	/** Gets merged with the default theme. */
-	theme: IDeepPartial<IEasyFlexTheme>;
+	theme: DeepPartial<EasyFlexTheme>;
 }
 
-export const EasyFlexProvider: FC<IEasyFlexProviderProps> = ({ children, theme }) => {
-	const mergedTheme = useMemo<IEasyFlexTheme>(() => mergeDeep(initialFlexTheme, theme), [theme]);
+export const EasyFlexProvider: FC<EasyFlexProviderProps> = ({ children, theme }) => {
+	const mergedTheme = useMemo<EasyFlexTheme>(() => mergeDeep(initialFlexTheme, theme), [theme]);
 
 	return <EasyFlexContext.Provider value={mergedTheme}>{children}</EasyFlexContext.Provider>;
 };

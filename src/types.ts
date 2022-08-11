@@ -1,16 +1,16 @@
-export type IDeepPartial<T> = T extends object
+export type DeepPartial<T> = T extends object
 	? {
-			[P in keyof T]?: IDeepPartial<T[P]>;
+			[P in keyof T]?: DeepPartial<T[P]>;
 	  }
 	: T;
 
 // CSS start
 
-export type IAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+export type AlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
-export type IAlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+export type AlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
-export type IColorCode =
+export type ColorCode =
 	| `#${string}`
 	| `hsl(${number}, ${number}%, ${number}%)`
 	| `hsl(${number}deg, ${number}%, ${number}%)`
@@ -73,9 +73,9 @@ export type IColorCode =
 	| `rgba(${number}% ${number}% ${number}% / ${number})`
 	| `rgba(${number}% ${number}% ${number}% / ${number}%)`;
 
-export type IColorKeyword = 'currentColor' | 'inherit' | 'transparent';
+export type ColorKeyword = 'currentColor' | 'inherit' | 'transparent';
 
-export type IColorName =
+export type ColorName =
 	| 'aliceblue' // #f0f8ff
 	| 'antiquewhite' // #faebd7
 	| 'aqua' // #00ffff
@@ -225,43 +225,43 @@ export type IColorName =
 	| 'yellow' // #ffff00
 	| 'yellowgreen'; // #9acd32
 
-export type IFlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
+export type FlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
 
-export type ICssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
+export type CssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
 
-export type IJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
+export type JustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 
-export type IObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+export type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 
-export type IOverflow = 'auto' | 'hidden' | 'scroll' | 'visible';
+export type Overflow = 'auto' | 'hidden' | 'scroll' | 'visible';
 
-export type IPercent = `${number}%`;
+export type Percent = `${number}%`;
 
-export type IPx = `${number}px`;
+export type Px = `${number}px`;
 
-export type IRem = `${number}rem`;
+export type Rem = `${number}rem`;
 
-export type ITextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
+export type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 
-export type IVh = `${number}vh`;
+export type Vh = `${number}vh`;
 
-export type IVw = `${number}vw`;
+export type Vw = `${number}vw`;
 
-export type IWordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
+export type WordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
 
-export type ICssColor = IColorCode | IColorKeyword | IColorName;
+export type CssColor = ColorCode | ColorKeyword | ColorName;
 
-export type IAbsoluteSize = IPx | IRem | IVh | IVw;
+export type AbsoluteSize = Px | Rem | Vh | Vw;
 
-export type ISize = IPercent | IAbsoluteSize;
+export type Size = Percent | AbsoluteSize;
 
-export type ICssLineHeight = 'normal' | IPercent | number;
+export type CssLineHeight = 'normal' | Percent | number;
 
 // CSS end
 
 // Theme start
 
-export type IThemeSize =
+export type ThemeSize =
 	| '8xs'
 	| '7xs'
 	| '6xs'
@@ -282,7 +282,7 @@ export type IThemeSize =
 	| '7xl'
 	| '8xl';
 
-export type IBaseFlexElement =
+export type BaseFlexElement =
 	| 'article'
 	| 'aside'
 	| 'div'
@@ -294,11 +294,11 @@ export type IBaseFlexElement =
 	| 'section'
 	| 'summary';
 
-export type IBorderRadius = IThemeSize;
+export type BorderRadius = ThemeSize;
 
-export type IBorderWidth = IThemeSize;
+export type BorderWidth = ThemeSize;
 
-export type IThemeColor =
+export type ThemeColor =
 	| 'primary'
 	| 'secondary'
 	| 'tertiary'
@@ -355,13 +355,13 @@ export type IThemeColor =
 	| 'footerBorder'
 	| 'modalBorder';
 
-export type IColor = IThemeColor | ICssColor;
+export type Color = ThemeColor | CssColor;
 
-export type IDistance = IThemeSize;
+export type Distance = ThemeSize;
 
-export type IFlipDirection = 'flip' | 'flip-reverse' | 'reverse';
+export type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
-export type IFontFamily =
+export type FontFamily =
 	| 'primary'
 	| 'secondary'
 	| 'tertiary'
@@ -374,11 +374,11 @@ export type IFontFamily =
 	| 'footer'
 	| 'modal';
 
-export type IFontSize = IThemeSize;
+export type FontSize = ThemeSize;
 
-export type IFontStyle = 'italic' | 'normal';
+export type FontStyle = 'italic' | 'normal';
 
-export type IFontWeight =
+export type FontWeight =
 	| 'thin'
 	| 'extraLight'
 	| 'light'
@@ -390,11 +390,11 @@ export type IFontWeight =
 	| 'black'
 	| 'extraBlack';
 
-export type IHeight = IThemeSize;
+export type Height = ThemeSize;
 
-export type ILineHeight = IThemeSize;
+export type LineHeight = ThemeSize;
 
-export type IStyleElement =
+export type StyleElement =
 	| 'b'
 	| 'cite'
 	| 'code'
@@ -412,41 +412,41 @@ export type IStyleElement =
 	| 'u'
 	| 'var';
 
-export type ITextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+export type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
-export type IViewportThreshold = IThemeSize;
+export type ViewportThreshold = ThemeSize;
 
-export type IWidth = IThemeSize;
+export type Width = ThemeSize;
 
-export interface IEasyFlexTheme {
+export interface EasyFlexTheme {
 	border: {
-		radius: Record<IThemeSize, IAbsoluteSize>;
-		width: Record<IThemeSize, IAbsoluteSize>;
+		radius: Record<ThemeSize, AbsoluteSize>;
+		width: Record<ThemeSize, AbsoluteSize>;
 	};
-	color: Record<IThemeColor, ICssColor>;
-	distance: Record<IThemeSize, IAbsoluteSize>;
+	color: Record<ThemeColor, CssColor>;
+	distance: Record<ThemeSize, AbsoluteSize>;
 	font: {
-		family: Record<IFontFamily, string>;
-		lineHeight: Record<IThemeSize, ICssLineHeight>;
-		size: Record<IThemeSize, ISize>;
-		weight: Record<IFontWeight, ICssFontWeight | number>;
+		family: Record<FontFamily, string>;
+		lineHeight: Record<ThemeSize, CssLineHeight>;
+		size: Record<ThemeSize, Size>;
+		weight: Record<FontWeight, CssFontWeight | number>;
 	};
 	modal: {
-		backgroundColor: ICssColor;
-		blur: IAbsoluteSize;
+		backgroundColor: CssColor;
+		blur: AbsoluteSize;
 		blurElementId: string;
 		containerElementId: string;
 	};
 	size: {
-		height: Record<IThemeSize, IAbsoluteSize>;
-		width: Record<IThemeSize, IAbsoluteSize>;
+		height: Record<ThemeSize, AbsoluteSize>;
+		width: Record<ThemeSize, AbsoluteSize>;
 	};
 	viewport: {
 		fallbackThreshold: number;
-		threshold: Record<IThemeSize, number>;
+		threshold: Record<ThemeSize, number>;
 	};
 }
 
-export type IPartialEasyFlexTheme = IDeepPartial<IEasyFlexTheme>;
+export type PartialEasyFlexTheme = DeepPartial<EasyFlexTheme>;
 
 // Theme end

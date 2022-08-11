@@ -1,27 +1,27 @@
 import { AnchorHTMLAttributes, FC } from 'react';
-import { IAbsoluteSize, IAlignSelf, IColor, IDistance } from '../types';
-export interface IBaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+import { AbsoluteSize, AlignSelf, Color, Distance } from '../types';
+export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     /** The alignment of the component on the parent's element cross axis. */
-    alignSelf?: IAlignSelf;
+    alignSelf?: AlignSelf;
     /** Component's color. */
-    color?: IColor;
+    color?: Color;
     /** Component's hover color. */
-    hoverColor?: IColor;
+    hoverColor?: Color;
     /** Component's margin of all sides. */
-    margin?: IDistance | IAbsoluteSize;
+    margin?: Distance | AbsoluteSize;
     /** Component's bottom margin. */
-    marginBottom?: IDistance | IAbsoluteSize;
+    marginBottom?: Distance | AbsoluteSize;
     /** Component's left margin. */
-    marginLeft?: IDistance | IAbsoluteSize;
+    marginLeft?: Distance | AbsoluteSize;
     /** Component's right margin. */
-    marginRight?: IDistance | IAbsoluteSize;
+    marginRight?: Distance | AbsoluteSize;
     /** Component's top margin. */
-    marginTop?: IDistance | IAbsoluteSize;
+    marginTop?: Distance | AbsoluteSize;
     /** Component's left and right margin. */
-    marginHorizontal?: IDistance | IAbsoluteSize;
+    marginHorizontal?: Distance | AbsoluteSize;
     /** Component's top and bottom margin. */
-    marginVertical?: IDistance | IAbsoluteSize;
+    marginVertical?: Distance | AbsoluteSize;
     /** If true, the link is opened in a new tab. */
     newTab?: boolean;
 }
-export declare const BaseLink: FC<IBaseLinkProps>;
+export declare const BaseLink: FC<BaseLinkProps>;

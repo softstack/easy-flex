@@ -1,16 +1,16 @@
 import React, { AnchorHTMLAttributes, FC, useMemo } from 'react';
 import styled from 'styled-components';
-import { IAbsoluteSize, IAlignSelf, IColor, ICssColor, IDistance } from '../types';
+import { AbsoluteSize, AlignSelf, Color, CssColor, Distance } from '../types';
 import { useColor, useDistance } from '../utils';
 
 const StyledBaseLink = styled.a<{
-	'data-align-self'?: IAlignSelf;
-	'data-color'?: ICssColor;
-	'data-hover-color'?: ICssColor;
-	'data-margin-bottom': IAbsoluteSize;
-	'data-margin-left': IAbsoluteSize;
-	'data-margin-right': IAbsoluteSize;
-	'data-margin-top': IAbsoluteSize;
+	'data-align-self'?: AlignSelf;
+	'data-color'?: CssColor;
+	'data-hover-color'?: CssColor;
+	'data-margin-bottom': AbsoluteSize;
+	'data-margin-left': AbsoluteSize;
+	'data-margin-right': AbsoluteSize;
+	'data-margin-top': AbsoluteSize;
 }>`
 	box-sizing: border-box;
 	text-decoration: none;
@@ -27,32 +27,32 @@ const StyledBaseLink = styled.a<{
 	}
 `;
 
-export interface IBaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 	/** The alignment of the component on the parent's element cross axis. */
-	alignSelf?: IAlignSelf;
+	alignSelf?: AlignSelf;
 	/** Component's color. */
-	color?: IColor;
+	color?: Color;
 	/** Component's hover color. */
-	hoverColor?: IColor;
+	hoverColor?: Color;
 	/** Component's margin of all sides. */
-	margin?: IDistance | IAbsoluteSize;
+	margin?: Distance | AbsoluteSize;
 	/** Component's bottom margin. */
-	marginBottom?: IDistance | IAbsoluteSize;
+	marginBottom?: Distance | AbsoluteSize;
 	/** Component's left margin. */
-	marginLeft?: IDistance | IAbsoluteSize;
+	marginLeft?: Distance | AbsoluteSize;
 	/** Component's right margin. */
-	marginRight?: IDistance | IAbsoluteSize;
+	marginRight?: Distance | AbsoluteSize;
 	/** Component's top margin. */
-	marginTop?: IDistance | IAbsoluteSize;
+	marginTop?: Distance | AbsoluteSize;
 	/** Component's left and right margin. */
-	marginHorizontal?: IDistance | IAbsoluteSize;
+	marginHorizontal?: Distance | AbsoluteSize;
 	/** Component's top and bottom margin. */
-	marginVertical?: IDistance | IAbsoluteSize;
+	marginVertical?: Distance | AbsoluteSize;
 	/** If true, the link is opened in a new tab. */
 	newTab?: boolean;
 }
 
-export const BaseLink: FC<IBaseLinkProps> = ({
+export const BaseLink: FC<BaseLinkProps> = ({
 	alignSelf,
 	children,
 	color = 'inherit',

@@ -1,9 +1,9 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
-import { IAbsoluteSize, IDistance, IViewportThreshold } from '../types';
+import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
 import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils';
 
-const StyledSpacing = styled.div<{ 'data-height': IAbsoluteSize; 'data-width': IAbsoluteSize }>`
+const StyledSpacing = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
 	display: flex;
 	box-sizing: border-box;
 	background-color: transparent;
@@ -17,20 +17,20 @@ const StyledSpacing = styled.div<{ 'data-height': IAbsoluteSize; 'data-width': I
 	max-width: ${({ 'data-width': width }) => width};
 `;
 
-export interface ISpacingProps extends HTMLAttributes<HTMLDivElement> {
+export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 	/** If true, height and width are flipped if flipping has been enabled. */
 	flip?: boolean;
 	/** Enables flipping. */
 	flipEnabled?: boolean;
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the fallback threshold is used. */
-	viewportThreshold?: IViewportThreshold | number;
+	viewportThreshold?: ViewportThreshold | number;
 	/** Component's height. */
-	height?: IDistance | IAbsoluteSize;
+	height?: Distance | AbsoluteSize;
 	/** Component's width. */
-	width?: IDistance | IAbsoluteSize;
+	width?: Distance | AbsoluteSize;
 }
 
-export const Spacing: FC<ISpacingProps> = ({
+export const Spacing: FC<SpacingProps> = ({
 	flip,
 	flipEnabled = false,
 	viewportThreshold,
@@ -41,7 +41,7 @@ export const Spacing: FC<ISpacingProps> = ({
 	const theme = useEasyFlexTheme();
 	const { width: displayWidth } = useDimension();
 
-	const processedHeight = useMemo<IAbsoluteSize>(
+	const processedHeight = useMemo<AbsoluteSize>(
 		() =>
 			flipEnabled &&
 			(flip ||
@@ -54,7 +54,7 @@ export const Spacing: FC<ISpacingProps> = ({
 		[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
 	);
 
-	const processedWidth = useMemo<IAbsoluteSize>(
+	const processedWidth = useMemo<AbsoluteSize>(
 		() =>
 			flipEnabled &&
 			(flip ||

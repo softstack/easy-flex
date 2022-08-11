@@ -1,28 +1,28 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import {
-	IColor,
-	ICssColor,
-	ICssFontWeight,
-	ICssLineHeight,
-	IFontFamily,
-	IFontSize,
-	IFontStyle,
-	IFontWeight,
-	ILineHeight,
-	ISize,
-	IStyleElement,
+	Color,
+	CssColor,
+	CssFontWeight,
+	CssLineHeight,
+	FontFamily,
+	FontSize,
+	FontStyle,
+	FontWeight,
+	LineHeight,
+	Size,
+	StyleElement,
 } from '../types';
 import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useColor, useEasyFlexTheme } from '../utils';
 
 const style = css<{
-	'data-background-color'?: ICssColor;
-	'data-color'?: ICssColor;
+	'data-background-color'?: CssColor;
+	'data-color'?: CssColor;
 	'data-font-family'?: string;
-	'data-font-size'?: ISize;
-	'data-font-weight'?: ICssFontWeight | number;
-	'data-font-style'?: IFontStyle;
-	'data-line-height'?: ICssLineHeight;
+	'data-font-size'?: Size;
+	'data-font-weight'?: CssFontWeight | number;
+	'data-font-style'?: FontStyle;
+	'data-line-height'?: CssLineHeight;
 }>`
 	box-sizing: border-box;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
@@ -98,24 +98,24 @@ const Var = styled.var`
 	${style}
 `;
 
-export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
+export interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
 	/** Component's background color. */
-	backgroundColor?: IColor;
+	backgroundColor?: Color;
 	/** Component's color. */
-	color?: IColor;
+	color?: Color;
 	/** Component's html tag. */
-	element?: IStyleElement;
-	fontFamily?: IFontFamily;
+	element?: StyleElement;
+	fontFamily?: FontFamily;
 	/** Component's font size. */
-	fontSize?: IFontSize | ISize;
+	fontSize?: FontSize | Size;
 	/** Component's font weight. */
-	fontWeight?: IFontWeight | number;
+	fontWeight?: FontWeight | number;
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
-	lineHeight?: ICssLineHeight | ILineHeight;
+	lineHeight?: CssLineHeight | LineHeight;
 }
 
-export const Style: FC<IStyleProps> = ({
+export const Style: FC<StyleProps> = ({
 	backgroundColor,
 	children,
 	color,
@@ -137,22 +137,22 @@ export const Style: FC<IStyleProps> = ({
 		[fontFamily, theme]
 	);
 
-	const processedFontSize = useMemo<ISize | undefined>(
+	const processedFontSize = useMemo<Size | undefined>(
 		() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
 		[fontSize, theme]
 	);
 
-	const processedFontWeight = useMemo<ICssFontWeight | number | undefined>(
+	const processedFontWeight = useMemo<CssFontWeight | number | undefined>(
 		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
 		[fontWeight, theme]
 	);
 
-	const fontStyle = useMemo<IFontStyle | undefined>(
+	const fontStyle = useMemo<FontStyle | undefined>(
 		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
 		[italic]
 	);
 
-	const processedLineHeight = useMemo<ICssLineHeight | undefined>(
+	const processedLineHeight = useMemo<CssLineHeight | undefined>(
 		() => ifNotUndefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
 		[lineHeight, theme]
 	);

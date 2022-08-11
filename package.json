@@ -12,7 +12,7 @@
 	"scripts": {
 		"test": "jest",
 		"build": "tsc",
-		"format": "prettier --write \"src/**/*.ts\"",
+		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
 		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
 		"prepare": "rm ./lib/* -rf && npm run build",
 		"prepublishOnly": "npm test && npm run lint",

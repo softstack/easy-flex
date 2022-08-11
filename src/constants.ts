@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { IEasyFlexTheme } from './types';
+import { EasyFlexTheme } from './types';
 
 export const themeColors = [
 	'primary',
@@ -80,7 +80,7 @@ export const themeSizes = [
 	'8xl',
 ];
 
-export const initialFlexTheme: IEasyFlexTheme = {
+export const initialFlexTheme: EasyFlexTheme = {
 	border: {
 		radius: {
 			'8xs': '0px',
@@ -184,24 +184,24 @@ export const initialFlexTheme: IEasyFlexTheme = {
 	},
 	distance: {
 		'8xs': '1px',
-		'7xs': '1px',
-		'6xs': '1px',
-		'5xs': '1px',
-		'4xs': '1px',
-		'3xs': '2px',
-		xxs: '3px',
-		xs: '5px',
-		s: '7px',
-		m: '10px',
-		l: '15px',
-		xl: '23px',
-		xxl: '34px',
-		'3xl': '51px',
-		'4xl': '77px',
-		'5xl': '115px',
-		'6xl': '173px',
-		'7xl': '259px',
-		'8xl': '389px',
+		'7xs': '2px',
+		'6xs': '3px',
+		'5xs': '5px',
+		'4xs': '7px',
+		'3xs': '10px',
+		xxs: '15px',
+		xs: '23px',
+		s: '34px',
+		m: '51px',
+		l: '77px',
+		xl: '115px',
+		xxl: '173px',
+		'3xl': '259px',
+		'4xl': '389px',
+		'5xl': '584px',
+		'6xl': '876px',
+		'7xl': '1314px',
+		'8xl': '1971px',
 	},
 	font: {
 		family: {
@@ -239,25 +239,25 @@ export const initialFlexTheme: IEasyFlexTheme = {
 			'8xl': 1.5,
 		},
 		size: {
-			'8xs': '0.25rem',
-			'7xs': '0.25rem',
-			'6xs': '0.25rem',
-			'5xs': '0.25rem',
-			'4xs': '0.25rem',
-			'3xs': '0.25rem',
-			xxs: '0.25rem',
-			xs: '0.5rem',
-			s: '0.75rem',
-			m: '1rem',
-			l: '1.25rem',
-			xl: '1.5rem',
-			xxl: '1.75rem',
-			'3xl': '2rem',
-			'4xl': '2.5rem',
-			'5xl': '3rem',
-			'6xl': '4rem',
-			'7xl': '5rem',
-			'8xl': '6rem',
+			'8xs': '0.0625rem', // 1px
+			'7xs': '0.125rem', // 2px
+			'6xs': '0.1875rem', // 3px
+			'5xs': '0.25rem', // 4px
+			'4xs': '0.375rem', // 6px
+			'3xs': '0.5rem', // 8px
+			xxs: '0.625rem', // 10px
+			xs: '0.75rem', // 12px
+			s: '0.875rem', // 14px
+			m: '1rem', // 16px
+			l: '1.125rem', // 18px
+			xl: '1.25rem', // 20px
+			xxl: '1.375rem', // 22px
+			'3xl': '1.5rem', // 24px
+			'4xl': '1.75rem', // 28px
+			'5xl': '2rem', // 32px
+			'6xl': '2.5rem', // 40px
+			'7xl': '3rem', // 48px
+			'8xl': '4rem', // 64px
 		},
 		weight: {
 			thin: 100,
@@ -281,45 +281,45 @@ export const initialFlexTheme: IEasyFlexTheme = {
 	size: {
 		height: {
 			'8xs': '1px',
-			'7xs': '1px',
-			'6xs': '1px',
-			'5xs': '1px',
-			'4xs': '1px',
-			'3xs': '2px',
-			xxs: '3px',
-			xs: '5px',
-			s: '7px',
-			m: '10px',
-			l: '15px',
-			xl: '23px',
-			xxl: '34px',
-			'3xl': '51px',
-			'4xl': '77px',
-			'5xl': '115px',
-			'6xl': '173px',
-			'7xl': '259px',
-			'8xl': '389px',
+			'7xs': '2px',
+			'6xs': '3px',
+			'5xs': '5px',
+			'4xs': '7px',
+			'3xs': '10px',
+			xxs: '15px',
+			xs: '23px',
+			s: '34px',
+			m: '51px',
+			l: '77px',
+			xl: '115px',
+			xxl: '173px',
+			'3xl': '259px',
+			'4xl': '389px',
+			'5xl': '584px',
+			'6xl': '876px',
+			'7xl': '1314px',
+			'8xl': '1971px',
 		},
 		width: {
 			'8xs': '1px',
-			'7xs': '1px',
-			'6xs': '1px',
-			'5xs': '1px',
-			'4xs': '1px',
-			'3xs': '2px',
-			xxs: '3px',
-			xs: '5px',
-			s: '7px',
-			m: '10px',
-			l: '15px',
-			xl: '23px',
-			xxl: '34px',
-			'3xl': '51px',
-			'4xl': '77px',
-			'5xl': '115px',
-			'6xl': '173px',
-			'7xl': '259px',
-			'8xl': '389px',
+			'7xs': '2px',
+			'6xs': '3px',
+			'5xs': '5px',
+			'4xs': '7px',
+			'3xs': '10px',
+			xxs: '15px',
+			xs: '23px',
+			s: '34px',
+			m: '51px',
+			l: '77px',
+			xl: '115px',
+			xxl: '173px',
+			'3xl': '259px',
+			'4xl': '389px',
+			'5xl': '584px',
+			'6xl': '876px',
+			'7xl': '1314px',
+			'8xl': '1971px',
 		},
 	},
 	viewport: {

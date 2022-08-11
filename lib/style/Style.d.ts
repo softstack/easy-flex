@@ -1,19 +1,19 @@
 import { FC, HTMLAttributes } from 'react';
-import { IColor, ICssLineHeight, IFontFamily, IFontSize, IFontWeight, ILineHeight, ISize, IStyleElement } from '../types';
-export interface IStyleProps extends HTMLAttributes<HTMLSpanElement> {
+import { Color, CssLineHeight, FontFamily, FontSize, FontWeight, LineHeight, Size, StyleElement } from '../types';
+export interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
     /** Component's background color. */
-    backgroundColor?: IColor;
+    backgroundColor?: Color;
     /** Component's color. */
-    color?: IColor;
+    color?: Color;
     /** Component's html tag. */
-    element?: IStyleElement;
-    fontFamily?: IFontFamily;
+    element?: StyleElement;
+    fontFamily?: FontFamily;
     /** Component's font size. */
-    fontSize?: IFontSize | ISize;
+    fontSize?: FontSize | Size;
     /** Component's font weight. */
-    fontWeight?: IFontWeight | number;
+    fontWeight?: FontWeight | number;
     /** If true, the text style is set to italic. */
     italic?: boolean;
-    lineHeight?: ICssLineHeight | ILineHeight;
+    lineHeight?: CssLineHeight | LineHeight;
 }
-export declare const Style: FC<IStyleProps>;
+export declare const Style: FC<StyleProps>;

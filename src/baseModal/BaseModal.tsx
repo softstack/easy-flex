@@ -1,11 +1,11 @@
 import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { IAbsoluteSize, IColor, ICssColor } from '../types';
-import { isIAbsoluteSize, useColor, useEasyFlexTheme } from '../utils';
+import { AbsoluteSize, Color, CssColor } from '../types';
+import { isAbsoluteSize, useColor, useEasyFlexTheme } from '../utils';
 
 const Background = styled.div<{
-	'data-background-color': ICssColor;
+	'data-background-color': CssColor;
 }>`
 	display: flex;
 	box-sizing: border-box;
@@ -22,17 +22,17 @@ const Background = styled.div<{
 	padding: 0;
 `;
 
-export interface IBaseModalProps extends HTMLAttributes<HTMLDivElement> {
-	backgroundColor?: IColor;
+export interface BaseModalProps extends HTMLAttributes<HTMLDivElement> {
+	backgroundColor?: Color;
 	/** Sets blur for the content covered by the modal background. */
-	blur?: boolean | IAbsoluteSize;
+	blur?: boolean | AbsoluteSize;
 	blurElementId?: string;
 	containerElementId?: string;
 	/** Called if the modal background is clicked. */
 	onClose: () => void;
 }
 
-export const BaseModal: FC<IBaseModalProps> = ({
+export const BaseModal: FC<BaseModalProps> = ({
 	children,
 	backgroundColor,
 	blur,
@@ -57,11 +57,11 @@ export const BaseModal: FC<IBaseModalProps> = ({
 	const processedBackgroundColor = useColor(backgroundColor, theme.modal.backgroundColor);
 
 	useEffect(() => {
-		if (isIAbsoluteSize(blur) || (blur !== false && theme.modal.blur)) {
+		if (isAbsoluteSize(blur) || (blur !== false && theme.modal.blur)) {
 			const styleElement = document.createElement('style');
 			styleElement.textContent = `
 				#${blurElementId ?? theme.modal.blurElementId} {
-					filter: blur(${isIAbsoluteSize(blur) ? blur : theme.modal.blur});
+					filter: blur(${isAbsoluteSize(blur) ? blur : theme.modal.blur});
 				}
 			`;
 			document.head.append(styleElement);

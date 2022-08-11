@@ -1,67 +1,67 @@
 import { FC, HTMLAttributes } from 'react';
-import { IAbsoluteSize, IAlignSelf, IColor, ICssLineHeight, IDistance, IFontFamily, IFontSize, IFontWeight, IHeight, ILineHeight, ISize, ITextAlign, ITextElement, IWidth, IWordBreak } from '../types';
-export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
+import { AbsoluteSize, AlignSelf, Color, CssLineHeight, Distance, FontFamily, FontSize, FontWeight, Height, LineHeight, Size, TextAlign, TextElement, Width, WordBreak } from '../types';
+export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     /** Component's text alignment. */
-    align?: ITextAlign;
+    align?: TextAlign;
     /** The alignment of the component on the parent's element cross axis. */
-    alignSelf?: IAlignSelf;
+    alignSelf?: AlignSelf;
     /** Component's color */
-    color?: IColor;
+    color?: Color;
     /** Component's html tag. */
-    element?: ITextElement;
-    fontFamily?: IFontFamily;
+    element?: TextElement;
+    fontFamily?: FontFamily;
     /** Component's font size. */
-    fontSize?: IFontSize | ISize;
+    fontSize?: FontSize | Size;
     /** Component's font weight. */
-    fontWeight?: IFontWeight | number;
+    fontWeight?: FontWeight | number;
     /** Sets the component's height to 100% if true. */
     fullHeight?: boolean;
     /** Sets the component's width to 100% if true. */
     fullWidth?: boolean;
     /** Component's height. */
-    height?: IHeight | ISize;
+    height?: Height | Size;
     /** If true, the text style is set to italic. */
     italic?: boolean;
-    lineHeight?: ICssLineHeight | ILineHeight;
+    lineHeight?: CssLineHeight | LineHeight;
     /** Component's margin of all sides. */
-    margin?: IDistance | IAbsoluteSize;
+    margin?: Distance | AbsoluteSize;
     /** Component's bottom margin. */
-    marginBottom?: IDistance | IAbsoluteSize;
+    marginBottom?: Distance | AbsoluteSize;
     /** Component's left margin. */
-    marginLeft?: IDistance | IAbsoluteSize;
+    marginLeft?: Distance | AbsoluteSize;
     /** Component's right margin. */
-    marginRight?: IDistance | IAbsoluteSize;
+    marginRight?: Distance | AbsoluteSize;
     /** Component's top margin. */
-    marginTop?: IDistance | IAbsoluteSize;
+    marginTop?: Distance | AbsoluteSize;
     /** Component's left and right margin. */
-    marginHorizontal?: IDistance | IAbsoluteSize;
+    marginHorizontal?: Distance | AbsoluteSize;
     /** Component's top and bottom margin. */
-    marginVertical?: IDistance | IAbsoluteSize;
+    marginVertical?: Distance | AbsoluteSize;
     /** Component's maximum height. */
-    maxHeight?: IHeight | ISize;
+    maxHeight?: Height | Size;
     /** Component's maximum width. */
-    maxWidth?: IWidth | ISize;
+    maxWidth?: Width | Size;
     /** Component's miniumum height. */
-    minHeight?: IHeight | ISize;
+    minHeight?: Height | Size;
     /** Component's minimum width. */
-    minWidth?: IWidth | ISize;
+    minWidth?: Width | Size;
     /** Padding of all sides. */
-    padding?: IDistance | IAbsoluteSize;
+    padding?: Distance | AbsoluteSize;
     /** Component's bottom padding. */
-    paddingBottom?: IDistance | IAbsoluteSize;
+    paddingBottom?: Distance | AbsoluteSize;
     /** Component's left padding. */
-    paddingLeft?: IDistance | IAbsoluteSize;
+    paddingLeft?: Distance | AbsoluteSize;
     /** Component's right padding. */
-    paddingRight?: IDistance | IAbsoluteSize;
+    paddingRight?: Distance | AbsoluteSize;
     /** Component's top padding. */
-    paddingTop?: IDistance | IAbsoluteSize;
+    paddingTop?: Distance | AbsoluteSize;
     /** Component's left and right padding. */
-    paddingHorizontal?: IDistance | IAbsoluteSize;
+    paddingHorizontal?: Distance | AbsoluteSize;
     /** Component's top and bottom padding. */
-    paddingVertical?: IDistance | IAbsoluteSize;
+    paddingVertical?: Distance | AbsoluteSize;
     /** Component's width. */
-    width?: IWidth | ISize;
+    width?: Width | Size;
     /** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-    wordBreak?: IWordBreak;
+    wordBreak?: WordBreak;
 }
-export declare const Text: FC<ITextProps>;
+export declare const Text: FC<TextProps>;

@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react';
-import { IDeepPartial, IEasyFlexTheme } from '../types';
-export interface IEasyFlexProviderProps {
+import { DeepPartial, EasyFlexTheme } from '../types';
+export interface EasyFlexProviderProps {
     /** The component's children. */
     children?: ReactNode;
     /** Gets merged with the default theme. */
-    theme: IDeepPartial<IEasyFlexTheme>;
+    theme: DeepPartial<EasyFlexTheme>;
 }
-export declare const EasyFlexProvider: FC<IEasyFlexProviderProps>;
+export declare const EasyFlexProvider: FC<EasyFlexProviderProps>;

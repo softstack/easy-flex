@@ -1,6 +1,6 @@
 import { FC, ImgHTMLAttributes } from 'react';
-import { IObjectFit } from '../types';
-export interface IBaseImgProps extends ImgHTMLAttributes<HTMLImageElement> {
-    objectFit?: IObjectFit;
+import { ObjectFit } from '../types';
+export interface BaseImgProps extends ImgHTMLAttributes<HTMLImageElement> {
+    objectFit?: ObjectFit;
 }
-export declare const BaseImg: FC<IBaseImgProps>;
+export declare const BaseImg: FC<BaseImgProps>;

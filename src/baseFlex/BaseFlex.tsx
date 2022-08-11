@@ -1,21 +1,21 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import {
-	IAbsoluteSize,
-	IAlignItems,
-	IAlignSelf,
-	IBaseFlexElement,
-	IBorderRadius,
-	IBorderWidth,
-	IColor,
-	ICssColor,
-	IDistance,
-	IFlexDirection,
-	IHeight,
-	IJustifyContent,
-	IOverflow,
-	ISize,
-	IWidth,
+	AbsoluteSize,
+	AlignItems,
+	AlignSelf,
+	BaseFlexElement,
+	BorderRadius,
+	BorderWidth,
+	Color,
+	CssColor,
+	Distance,
+	FlexDirection,
+	Height,
+	JustifyContent,
+	Overflow,
+	Size,
+	Width,
 } from '../types';
 import {
 	getBorderRadius,
@@ -29,37 +29,37 @@ import {
 } from '../utils';
 
 const style = css<{
-	'data-align'?: IAlignItems;
-	'data-align-self'?: IAlignSelf;
-	'data-background-color'?: ICssColor;
-	'data-border-color'?: ICssColor;
-	'data-border-radius'?: IAbsoluteSize;
+	'data-align'?: AlignItems;
+	'data-align-self'?: AlignSelf;
+	'data-background-color'?: CssColor;
+	'data-border-color'?: CssColor;
+	'data-border-radius'?: AbsoluteSize;
 	'data-border-style'?: 'solid';
-	'data-border-width'?: IAbsoluteSize;
-	'data-color'?: ICssColor;
-	'data-flex-direction'?: IFlexDirection;
-	'data-column-gap'?: IAbsoluteSize;
-	'data-row-gap'?: IAbsoluteSize;
+	'data-border-width'?: AbsoluteSize;
+	'data-color'?: CssColor;
+	'data-flex-direction'?: FlexDirection;
+	'data-column-gap'?: AbsoluteSize;
+	'data-row-gap'?: AbsoluteSize;
 	'data-grow'?: number;
-	'data-height'?: ISize;
-	'data-height-max'?: ISize;
-	'data-height-min'?: ISize;
-	'data-justify'?: IJustifyContent;
-	'data-margin-bottom': IAbsoluteSize;
-	'data-margin-left': IAbsoluteSize;
-	'data-margin-right': IAbsoluteSize;
-	'data-margin-top': IAbsoluteSize;
-	'data-overflow'?: IOverflow;
-	'data-overflow-x'?: IOverflow;
-	'data-overflow-y'?: IOverflow;
-	'data-padding-bottom': IAbsoluteSize;
-	'data-padding-left': IAbsoluteSize;
-	'data-padding-right': IAbsoluteSize;
-	'data-padding-top': IAbsoluteSize;
+	'data-height'?: Size;
+	'data-height-max'?: Size;
+	'data-height-min'?: Size;
+	'data-justify'?: JustifyContent;
+	'data-margin-bottom': AbsoluteSize;
+	'data-margin-left': AbsoluteSize;
+	'data-margin-right': AbsoluteSize;
+	'data-margin-top': AbsoluteSize;
+	'data-overflow'?: Overflow;
+	'data-overflow-x'?: Overflow;
+	'data-overflow-y'?: Overflow;
+	'data-padding-bottom': AbsoluteSize;
+	'data-padding-left': AbsoluteSize;
+	'data-padding-right': AbsoluteSize;
+	'data-padding-top': AbsoluteSize;
 	'data-shrink'?: number;
-	'data-width'?: ISize;
-	'data-width-max'?: ISize;
-	'data-width-min'?: ISize;
+	'data-width'?: Size;
+	'data-width-max'?: Size;
+	'data-width-min'?: Size;
 }>`
 	display: flex;
 	box-sizing: border-box;
@@ -136,86 +136,86 @@ const Summary = styled.summary`
 	${style}
 `;
 
-export interface IBaseFlexProps extends HTMLAttributes<HTMLDivElement> {
+export interface BaseFlexProps extends HTMLAttributes<HTMLDivElement> {
 	/** The alignment of the component's children on the cross axis. */
-	align?: IAlignItems;
+	align?: AlignItems;
 	/** The alignment of the component on the parent's element cross axis. */
-	alignSelf?: IAlignSelf;
+	alignSelf?: AlignSelf;
 	/** Component's background color. */
-	backgroundColor?: IColor;
+	backgroundColor?: Color;
 	/** Component's border color. */
-	borderColor?: IColor;
+	borderColor?: Color;
 	/** Component's border radius. */
-	borderRadius?: IBorderRadius | IAbsoluteSize;
+	borderRadius?: BorderRadius | AbsoluteSize;
 	/** Component's border width. */
-	borderWidth?: IBorderWidth | IAbsoluteSize;
+	borderWidth?: BorderWidth | AbsoluteSize;
 	/** Component's color. */
-	color?: IColor;
+	color?: Color;
 	/** Component's html tag. */
-	element?: IBaseFlexElement;
+	element?: BaseFlexElement;
 	/** Component's flex direction. */
-	flexDirection?: IFlexDirection;
+	flexDirection?: FlexDirection;
 	/** Sets the component's height to 100% if true. */
 	fullHeight?: boolean;
 	/** Sets the component's width to 100% if true. */
 	fullWidth?: boolean;
 	/** Sets the gap between the component's children. If colum-gap or row-gap depends on flexDirection. */
-	gap?: IDistance | IAbsoluteSize;
+	gap?: Distance | AbsoluteSize;
 	/** Component's flex grow. */
 	grow?: number;
 	/** Component's height. */
-	height?: IHeight | ISize;
+	height?: Height | Size;
 	/** Sets how the browser distributes space between and around the component's children along the main axis. */
-	justify?: IJustifyContent;
+	justify?: JustifyContent;
 	/** Component's margin of all sides. */
-	margin?: IDistance | IAbsoluteSize;
+	margin?: Distance | AbsoluteSize;
 	/** Component's bottom margin. */
-	marginBottom?: IDistance | IAbsoluteSize;
+	marginBottom?: Distance | AbsoluteSize;
 	/** Component's left margin. */
-	marginLeft?: IDistance | IAbsoluteSize;
+	marginLeft?: Distance | AbsoluteSize;
 	/** Component's right margin. */
-	marginRight?: IDistance | IAbsoluteSize;
+	marginRight?: Distance | AbsoluteSize;
 	/** Component's top margin. */
-	marginTop?: IDistance | IAbsoluteSize;
+	marginTop?: Distance | AbsoluteSize;
 	/** Component's left and right margin. */
-	marginHorizontal?: IDistance | IAbsoluteSize;
+	marginHorizontal?: Distance | AbsoluteSize;
 	/** Component's top and bottom margin. */
-	marginVertical?: IDistance | IAbsoluteSize;
+	marginVertical?: Distance | AbsoluteSize;
 	/** Component's maximum height. */
-	maxHeight?: IHeight | ISize;
+	maxHeight?: Height | Size;
 	/** Component's maximum width. */
-	maxWidth?: IWidth | ISize;
+	maxWidth?: Width | Size;
 	/** Component's miniumum height. */
-	minHeight?: IHeight | ISize;
+	minHeight?: Height | Size;
 	/** Component's minimum width. */
-	minWidth?: IWidth | ISize;
+	minWidth?: Width | Size;
 	/** Component's overflow behaviour. */
-	overflow?: IOverflow;
+	overflow?: Overflow;
 	/** Component's verflow behaviour on left and right edges. */
-	overflowX?: IOverflow;
+	overflowX?: Overflow;
 	/** Component's overflow behaviour on top and bottom edges. */
-	overflowY?: IOverflow;
+	overflowY?: Overflow;
 	/** Padding of all sides. */
-	padding?: IDistance | IAbsoluteSize;
+	padding?: Distance | AbsoluteSize;
 	/** Component's bottom padding. */
-	paddingBottom?: IDistance | IAbsoluteSize;
+	paddingBottom?: Distance | AbsoluteSize;
 	/** Component's left padding. */
-	paddingLeft?: IDistance | IAbsoluteSize;
+	paddingLeft?: Distance | AbsoluteSize;
 	/** Component's right padding. */
-	paddingRight?: IDistance | IAbsoluteSize;
+	paddingRight?: Distance | AbsoluteSize;
 	/** Component's top padding. */
-	paddingTop?: IDistance | IAbsoluteSize;
+	paddingTop?: Distance | AbsoluteSize;
 	/** Component's left and right padding. */
-	paddingHorizontal?: IDistance | IAbsoluteSize;
+	paddingHorizontal?: Distance | AbsoluteSize;
 	/** Component's top and bottom padding. */
-	paddingVertical?: IDistance | IAbsoluteSize;
+	paddingVertical?: Distance | AbsoluteSize;
 	/** Component's flex shrink. */
 	shrink?: number;
 	/** Component's width. */
-	width?: IWidth | ISize;
+	width?: Width | Size;
 }
 
-export const BaseFlex: FC<IBaseFlexProps> = ({
+export const BaseFlex: FC<BaseFlexProps> = ({
 	align,
 	alignSelf,
 	backgroundColor,
@@ -263,21 +263,21 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 
 	const processedBorderColor = useColor(borderColor, undefined);
 
-	const processedBorderRadius = useMemo<IAbsoluteSize | undefined>(
+	const processedBorderRadius = useMemo<AbsoluteSize | undefined>(
 		() => ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius)),
 		[borderRadius, theme]
 	);
 
 	const processedBorderStyle = useMemo<'solid' | undefined>(() => (borderWidth ? 'solid' : undefined), [borderWidth]);
 
-	const processedBorderWidth = useMemo<IAbsoluteSize | undefined>(
+	const processedBorderWidth = useMemo<AbsoluteSize | undefined>(
 		() => ifNotUndefined(borderWidth, (borderWidth) => getBorderWidth(theme, borderWidth)),
 		[borderWidth, theme]
 	);
 
 	const processedColor = useColor(color, undefined);
 
-	const columnGap = useMemo<IAbsoluteSize | undefined>(() => {
+	const columnGap = useMemo<AbsoluteSize | undefined>(() => {
 		if (gap === undefined) {
 			return undefined;
 		}
@@ -287,7 +287,7 @@ export const BaseFlex: FC<IBaseFlexProps> = ({
 		return undefined;
 	}, [flexDirection, gap, theme]);
 
-	const rowGap = useMemo<IAbsoluteSize | undefined>(() => {
+	const rowGap = useMemo<AbsoluteSize | undefined>(() => {
 		if (gap === undefined) {
 			return undefined;
 		}

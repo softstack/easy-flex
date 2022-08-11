@@ -1,24 +1,24 @@
 import React, { FC, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import {
-	IAbsoluteSize,
-	IAlignSelf,
-	IColor,
-	ICssColor,
-	ICssFontWeight,
-	ICssLineHeight,
-	IDistance,
-	IFontFamily,
-	IFontSize,
-	IFontStyle,
-	IFontWeight,
-	IHeight,
-	ILineHeight,
-	ISize,
-	ITextAlign,
-	ITextElement,
-	IWidth,
-	IWordBreak,
+	AbsoluteSize,
+	AlignSelf,
+	Color,
+	CssColor,
+	CssFontWeight,
+	CssLineHeight,
+	Distance,
+	FontFamily,
+	FontSize,
+	FontStyle,
+	FontWeight,
+	Height,
+	LineHeight,
+	Size,
+	TextAlign,
+	TextElement,
+	Width,
+	WordBreak,
 } from '../types';
 import {
 	getColor,
@@ -32,29 +32,29 @@ import {
 } from '../utils';
 
 const style = css<{
-	'data-align'?: ITextAlign;
-	'data-align-self'?: IAlignSelf;
-	'data-color': ICssColor;
+	'data-align'?: TextAlign;
+	'data-align-self'?: AlignSelf;
+	'data-color': CssColor;
 	'data-font-family': string;
-	'data-font-size': ISize;
-	'data-font-weight': ICssFontWeight | number;
-	'data-font-style'?: IFontStyle;
-	'data-height'?: ISize;
-	'data-height-max'?: ISize;
-	'data-height-min'?: ISize;
-	'data-line-height'?: ICssLineHeight;
-	'data-margin-bottom': IAbsoluteSize;
-	'data-margin-left': IAbsoluteSize;
-	'data-margin-right': IAbsoluteSize;
-	'data-margin-top': IAbsoluteSize;
-	'data-padding-bottom': IAbsoluteSize;
-	'data-padding-left': IAbsoluteSize;
-	'data-padding-right': IAbsoluteSize;
-	'data-padding-top': IAbsoluteSize;
-	'data-width'?: ISize;
-	'data-width-max'?: ISize;
-	'data-width-min'?: ISize;
-	'data-word-break'?: IWordBreak;
+	'data-font-size': Size;
+	'data-font-weight': CssFontWeight | number;
+	'data-font-style'?: FontStyle;
+	'data-height'?: Size;
+	'data-height-max'?: Size;
+	'data-height-min'?: Size;
+	'data-line-height'?: CssLineHeight;
+	'data-margin-bottom': AbsoluteSize;
+	'data-margin-left': AbsoluteSize;
+	'data-margin-right': AbsoluteSize;
+	'data-margin-top': AbsoluteSize;
+	'data-padding-bottom': AbsoluteSize;
+	'data-padding-left': AbsoluteSize;
+	'data-padding-right': AbsoluteSize;
+	'data-padding-top': AbsoluteSize;
+	'data-width'?: Size;
+	'data-width-max'?: Size;
+	'data-width-min'?: Size;
+	'data-word-break'?: WordBreak;
 }>`
 	box-sizing: border-box;
 	text-align: ${({ 'data-align': align }) => align};
@@ -110,72 +110,72 @@ const P = styled.p`
 	${style}
 `;
 
-export interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 	/** Component's text alignment. */
-	align?: ITextAlign;
+	align?: TextAlign;
 	/** The alignment of the component on the parent's element cross axis. */
-	alignSelf?: IAlignSelf;
+	alignSelf?: AlignSelf;
 	/** Component's color */
-	color?: IColor;
+	color?: Color;
 	/** Component's html tag. */
-	element?: ITextElement;
-	fontFamily?: IFontFamily;
+	element?: TextElement;
+	fontFamily?: FontFamily;
 	/** Component's font size. */
-	fontSize?: IFontSize | ISize;
+	fontSize?: FontSize | Size;
 	/** Component's font weight. */
-	fontWeight?: IFontWeight | number;
+	fontWeight?: FontWeight | number;
 	/** Sets the component's height to 100% if true. */
 	fullHeight?: boolean;
 	/** Sets the component's width to 100% if true. */
 	fullWidth?: boolean;
 	/** Component's height. */
-	height?: IHeight | ISize;
+	height?: Height | Size;
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
-	lineHeight?: ICssLineHeight | ILineHeight;
+	lineHeight?: CssLineHeight | LineHeight;
 	/** Component's margin of all sides. */
-	margin?: IDistance | IAbsoluteSize;
+	margin?: Distance | AbsoluteSize;
 	/** Component's bottom margin. */
-	marginBottom?: IDistance | IAbsoluteSize;
+	marginBottom?: Distance | AbsoluteSize;
 	/** Component's left margin. */
-	marginLeft?: IDistance | IAbsoluteSize;
+	marginLeft?: Distance | AbsoluteSize;
 	/** Component's right margin. */
-	marginRight?: IDistance | IAbsoluteSize;
+	marginRight?: Distance | AbsoluteSize;
 	/** Component's top margin. */
-	marginTop?: IDistance | IAbsoluteSize;
+	marginTop?: Distance | AbsoluteSize;
 	/** Component's left and right margin. */
-	marginHorizontal?: IDistance | IAbsoluteSize;
+	marginHorizontal?: Distance | AbsoluteSize;
 	/** Component's top and bottom margin. */
-	marginVertical?: IDistance | IAbsoluteSize;
+	marginVertical?: Distance | AbsoluteSize;
 	/** Component's maximum height. */
-	maxHeight?: IHeight | ISize;
+	maxHeight?: Height | Size;
 	/** Component's maximum width. */
-	maxWidth?: IWidth | ISize;
+	maxWidth?: Width | Size;
 	/** Component's miniumum height. */
-	minHeight?: IHeight | ISize;
+	minHeight?: Height | Size;
 	/** Component's minimum width. */
-	minWidth?: IWidth | ISize;
+	minWidth?: Width | Size;
 	/** Padding of all sides. */
-	padding?: IDistance | IAbsoluteSize;
+	padding?: Distance | AbsoluteSize;
 	/** Component's bottom padding. */
-	paddingBottom?: IDistance | IAbsoluteSize;
+	paddingBottom?: Distance | AbsoluteSize;
 	/** Component's left padding. */
-	paddingLeft?: IDistance | IAbsoluteSize;
+	paddingLeft?: Distance | AbsoluteSize;
 	/** Component's right padding. */
-	paddingRight?: IDistance | IAbsoluteSize;
+	paddingRight?: Distance | AbsoluteSize;
 	/** Component's top padding. */
-	paddingTop?: IDistance | IAbsoluteSize;
+	paddingTop?: Distance | AbsoluteSize;
 	/** Component's left and right padding. */
-	paddingHorizontal?: IDistance | IAbsoluteSize;
+	paddingHorizontal?: Distance | AbsoluteSize;
 	/** Component's top and bottom padding. */
-	paddingVertical?: IDistance | IAbsoluteSize;
+	paddingVertical?: Distance | AbsoluteSize;
 	/** Component's width. */
-	width?: IWidth | ISize;
+	width?: Width | Size;
 	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-	wordBreak?: IWordBreak;
+	wordBreak?: WordBreak;
 }
 
-export const Text: FC<ITextProps> = ({
+export const Text: FC<TextProps> = ({
 	align,
 	alignSelf,
 	children,
@@ -213,23 +213,23 @@ export const Text: FC<ITextProps> = ({
 }) => {
 	const theme = useEasyFlexTheme();
 
-	const processedColor = useMemo<ICssColor>(() => getColor(theme, color), [color, theme]);
+	const processedColor = useMemo<CssColor>(() => getColor(theme, color), [color, theme]);
 
 	const processedFontFamily = useMemo<string>(() => theme.font.family[fontFamily], [fontFamily, theme]);
 
-	const processedFontSize = useMemo<ISize>(() => getFontSize(theme, fontSize), [fontSize, theme]);
+	const processedFontSize = useMemo<Size>(() => getFontSize(theme, fontSize), [fontSize, theme]);
 
-	const processedFontWeight = useMemo<ICssFontWeight | number>(
+	const processedFontWeight = useMemo<CssFontWeight | number>(
 		() => getFontWeight(theme, fontWeight),
 		[fontWeight, theme]
 	);
 
-	const fontStyle = useMemo<IFontStyle | undefined>(
+	const fontStyle = useMemo<FontStyle | undefined>(
 		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
 		[italic]
 	);
 
-	const processedLineHeight = useMemo<ICssLineHeight | undefined>(
+	const processedLineHeight = useMemo<CssLineHeight | undefined>(
 		() => getLineHeight(theme, lineHeight),
 		[lineHeight, theme]
 	);

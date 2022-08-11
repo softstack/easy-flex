@@ -1,13 +1,13 @@
-import { FC, ImgHTMLAttributes } from 'react';
+import React, { FC, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { IObjectFit } from '../types';
+import { ObjectFit } from '../types';
 
-const StyledBaseImg = styled.img<{ 'data-object-fit'?: IObjectFit }>``;
+const StyledBaseImg = styled.img<{ 'data-object-fit'?: ObjectFit }>``;
 
-export interface IBaseImgProps extends ImgHTMLAttributes<HTMLImageElement> {
-	objectFit?: IObjectFit;
+export interface BaseImgProps extends ImgHTMLAttributes<HTMLImageElement> {
+	objectFit?: ObjectFit;
 }
 
-export const BaseImg: FC<IBaseImgProps> = ({ objectFit, ...props }) => {
+export const BaseImg: FC<BaseImgProps> = ({ objectFit, ...props }) => {
 	return <StyledBaseImg data-object-fit={objectFit} {...props} />;
 };

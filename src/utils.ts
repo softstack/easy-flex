@@ -1,51 +1,50 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { EasyFlexContext, themeColors, themeSizes } from './constants';
 import {
-	IAbsoluteSize,
-	IBorderRadius,
-	IColor,
-	ICssColor,
-	ICssFontWeight,
-	ICssLineHeight,
-	IDistance,
-	IEasyFlexTheme,
-	IFontSize,
-	IFontWeight,
-	IHeight,
-	ILineHeight,
-	IPercent,
-	IPx,
-	IRem,
-	ISize,
-	IThemeColor,
-	IThemeSize,
-	IViewportThreshold,
-	IWidth,
+	AbsoluteSize,
+	BorderRadius,
+	Color,
+	CssColor,
+	CssFontWeight,
+	CssLineHeight,
+	Distance,
+	EasyFlexTheme,
+	FontSize,
+	FontWeight,
+	Height,
+	LineHeight,
+	Percent,
+	Px,
+	Rem,
+	Size,
+	ThemeColor,
+	ThemeSize,
+	ViewportThreshold,
+	Width,
 } from './types';
 
-export const isIThemeColor = (color: IColor): color is IThemeColor => themeColors.includes(color);
+export const isThemeColor = (color: Color): color is ThemeColor => themeColors.includes(color);
 
-export const isIThemeSize = (size: unknown): size is IThemeSize =>
-	typeof size === 'string' && themeSizes.includes(size);
+export const isThemeSize = (size: unknown): size is ThemeSize => typeof size === 'string' && themeSizes.includes(size);
 
-export const isIPercent = (value: unknown): value is IPx =>
+export const isPercent = (value: unknown): value is Px =>
 	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?%$/) : false;
 
-export const isIPx = (value: unknown): value is IPx =>
+export const isPx = (value: unknown): value is Px =>
 	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?px$/i) : false;
 
-export const isIRem = (value: unknown): value is IRem =>
+export const isRem = (value: unknown): value is Rem =>
 	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?rem$/i) : false;
 
-export const isIVh = (value: unknown): value is IRem =>
+export const isVh = (value: unknown): value is Rem =>
 	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?vh$/i) : false;
 
-export const isIVw = (value: unknown): value is IRem =>
+export const isVw = (value: unknown): value is Rem =>
 	typeof value === 'string' ? !!value.match(/^\d+(\.\d+)?vw$/i) : false;
 
-export const isIAbsoluteSize = (value: unknown): value is IAbsoluteSize => isIPx(value) || isIRem(value);
+export const isAbsoluteSize = (value: unknown): value is AbsoluteSize => isPx(value) || isRem(value);
 
-export const isISize = (value: unknown): value is ISize => isIPercent(value) || isIAbsoluteSize(value);
+export const isSize = (value: unknown): value is Size => isPercent(value) || isAbsoluteSize(value);
 
 export const ifDefined = <T, U>(
 	value: T,
@@ -101,56 +100,64 @@ export const ifNotUndefined = <T, U>(
 	return fn(value as Exclude<T, undefined>) as T extends undefined ? undefined : U;
 };
 
-export const toIPercent = (value: number): IPercent => `${value}%`;
+export const toPercent = (value: number): Percent => `${value}%`;
 
-export const toIPx = (value: number): IPx => `${value}px`;
+export const toPx = (value: number): Px => `${value}px`;
 
-export const toIRem = (value: number): IRem => `${value}rem`;
+export const toRem = (value: number): Rem => `${value}rem`;
 
-export const getBorderRadius = (theme: IEasyFlexTheme, borderRadius: IBorderRadius | IAbsoluteSize): IAbsoluteSize =>
-	isIThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius;
+export const pxToNumber = (px: Px): number => {
+	const match = px.match(/^(\d+(?:\.\d+)?)px$/i);
+	if (!match) {
+		throw new Error('No px value');
+	}
+	return Number(match[1]);
+};
 
-export const getBorderWidth = (theme: IEasyFlexTheme, borderWidth: IBorderRadius | IAbsoluteSize): IAbsoluteSize =>
-	isIThemeSize(borderWidth) ? theme.border.width[borderWidth] : borderWidth;
+export const getBorderRadius = (theme: EasyFlexTheme, borderRadius: BorderRadius | AbsoluteSize): AbsoluteSize =>
+	isThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius;
 
-export const getColor = (theme: IEasyFlexTheme, color: IColor): ICssColor =>
-	isIThemeColor(color) ? theme.color[color] : color;
+export const getBorderWidth = (theme: EasyFlexTheme, borderWidth: BorderRadius | AbsoluteSize): AbsoluteSize =>
+	isThemeSize(borderWidth) ? theme.border.width[borderWidth] : borderWidth;
 
-export const getDistance = (theme: IEasyFlexTheme, distance: IDistance | IAbsoluteSize): IAbsoluteSize =>
-	isIThemeSize(distance) ? theme.distance[distance] : distance;
+export const getColor = (theme: EasyFlexTheme, color: Color): CssColor =>
+	isThemeColor(color) ? theme.color[color] : color;
 
-export const getFontSize = (theme: IEasyFlexTheme, fontSize: IFontSize | ISize): ISize =>
-	isIThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize;
+export const getDistance = (theme: EasyFlexTheme, distance: Distance | AbsoluteSize): AbsoluteSize =>
+	isThemeSize(distance) ? theme.distance[distance] : distance;
 
-export const getFontWeight = (theme: IEasyFlexTheme, fontWeight: IFontWeight | number): ICssFontWeight | number =>
+export const getFontSize = (theme: EasyFlexTheme, fontSize: FontSize | Size): Size =>
+	isThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize;
+
+export const getFontWeight = (theme: EasyFlexTheme, fontWeight: FontWeight | number): CssFontWeight | number =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
-export const getHeight = (theme: IEasyFlexTheme, height: IHeight | ISize): ISize =>
-	isIThemeSize(height) ? theme.size.height[height] : height;
+export const getHeight = (theme: EasyFlexTheme, height: Height | Size): Size =>
+	isThemeSize(height) ? theme.size.height[height] : height;
 
-export const getLineHeight = (theme: IEasyFlexTheme, lineHeight: ICssLineHeight | ILineHeight): ICssLineHeight =>
-	isIThemeSize(lineHeight) ? theme.font.lineHeight[lineHeight] : lineHeight;
+export const getLineHeight = (theme: EasyFlexTheme, lineHeight: CssLineHeight | LineHeight): CssLineHeight =>
+	isThemeSize(lineHeight) ? theme.font.lineHeight[lineHeight] : lineHeight;
 
-export const getViewportThreshold = (theme: IEasyFlexTheme, viewportThreshold: IViewportThreshold | number): number =>
+export const getViewportThreshold = (theme: EasyFlexTheme, viewportThreshold: ViewportThreshold | number): number =>
 	typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold];
 
-export const getWidth = (theme: IEasyFlexTheme, width: IWidth | ISize): ISize =>
-	isIThemeSize(width) ? theme.size.width[width] : width;
+export const getWidth = (theme: EasyFlexTheme, width: Width | Size): Size =>
+	isThemeSize(width) ? theme.size.width[width] : width;
 
-export const useEasyFlexTheme = (): IEasyFlexTheme => useContext(EasyFlexContext);
+export const useEasyFlexTheme = (): EasyFlexTheme => useContext(EasyFlexContext);
 
-export const useColor = <T extends ICssColor | undefined>(
-	color: IColor | undefined,
+export const useColor = <T extends CssColor | undefined>(
+	color: Color | undefined,
 	fallback: T
-): T extends ICssColor ? ICssColor : ICssColor | undefined => {
+): T extends CssColor ? CssColor : CssColor | undefined => {
 	const theme = useEasyFlexTheme();
 
-	const processedColor = useMemo<ICssColor | undefined>(
+	const processedColor = useMemo<CssColor | undefined>(
 		() => (color === undefined ? fallback : getColor(theme, color)),
 		[color, fallback, theme]
 	);
 
-	return processedColor as T extends ICssColor ? ICssColor : ICssColor | undefined;
+	return processedColor as T extends CssColor ? CssColor : CssColor | undefined;
 };
 
 export const useDimension = (): { height: number; width: number } => {
@@ -191,81 +198,81 @@ export const useDistance = ({
 	paddingHorizontal,
 	paddingVertical,
 }: {
-	margin?: IDistance | IAbsoluteSize;
-	marginBottom?: IDistance | IAbsoluteSize;
-	marginLeft?: IDistance | IAbsoluteSize;
-	marginRight?: IDistance | IAbsoluteSize;
-	marginTop?: IDistance | IAbsoluteSize;
-	marginHorizontal?: IDistance | IAbsoluteSize;
-	marginVertical?: IDistance | IAbsoluteSize;
-	padding?: IDistance | IAbsoluteSize;
-	paddingBottom?: IDistance | IAbsoluteSize;
-	paddingLeft?: IDistance | IAbsoluteSize;
-	paddingRight?: IDistance | IAbsoluteSize;
-	paddingTop?: IDistance | IAbsoluteSize;
-	paddingHorizontal?: IDistance | IAbsoluteSize;
-	paddingVertical?: IDistance | IAbsoluteSize;
+	margin?: Distance | AbsoluteSize;
+	marginBottom?: Distance | AbsoluteSize;
+	marginLeft?: Distance | AbsoluteSize;
+	marginRight?: Distance | AbsoluteSize;
+	marginTop?: Distance | AbsoluteSize;
+	marginHorizontal?: Distance | AbsoluteSize;
+	marginVertical?: Distance | AbsoluteSize;
+	padding?: Distance | AbsoluteSize;
+	paddingBottom?: Distance | AbsoluteSize;
+	paddingLeft?: Distance | AbsoluteSize;
+	paddingRight?: Distance | AbsoluteSize;
+	paddingTop?: Distance | AbsoluteSize;
+	paddingHorizontal?: Distance | AbsoluteSize;
+	paddingVertical?: Distance | AbsoluteSize;
 }): {
 	margin: {
-		bottom: IAbsoluteSize;
-		left: IAbsoluteSize;
-		right: IAbsoluteSize;
-		top: IAbsoluteSize;
+		bottom: AbsoluteSize;
+		left: AbsoluteSize;
+		right: AbsoluteSize;
+		top: AbsoluteSize;
 	};
 	padding: {
-		bottom: IAbsoluteSize;
-		left: IAbsoluteSize;
-		right: IAbsoluteSize;
-		top: IAbsoluteSize;
+		bottom: AbsoluteSize;
+		left: AbsoluteSize;
+		right: AbsoluteSize;
+		top: AbsoluteSize;
 	};
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedMarginBottom = useMemo<IAbsoluteSize>(
+	const processedMarginBottom = useMemo<AbsoluteSize>(
 		() => getDistance(theme, marginBottom ?? marginVertical ?? margin ?? '0px'),
 		[margin, marginBottom, marginVertical, theme]
 	);
 
-	const processedMarginLeft = useMemo<IAbsoluteSize>(
+	const processedMarginLeft = useMemo<AbsoluteSize>(
 		() => getDistance(theme, marginLeft ?? marginHorizontal ?? margin ?? '0px'),
 		[margin, marginLeft, marginHorizontal, theme]
 	);
 
-	const processedMarginRight = useMemo<IAbsoluteSize>(
+	const processedMarginRight = useMemo<AbsoluteSize>(
 		() => getDistance(theme, marginRight ?? marginHorizontal ?? margin ?? '0px'),
 		[margin, marginRight, marginHorizontal, theme]
 	);
 
-	const processedMarginTop = useMemo<IAbsoluteSize>(
+	const processedMarginTop = useMemo<AbsoluteSize>(
 		() => getDistance(theme, marginTop ?? marginVertical ?? margin ?? '0px'),
 		[margin, marginTop, marginVertical, theme]
 	);
 
-	const processedPaddingBottom = useMemo<IAbsoluteSize>(
+	const processedPaddingBottom = useMemo<AbsoluteSize>(
 		() => getDistance(theme, paddingBottom ?? paddingVertical ?? padding ?? '0px'),
 		[padding, paddingBottom, paddingVertical, theme]
 	);
 
-	const processedPaddingLeft = useMemo<IAbsoluteSize>(
+	const processedPaddingLeft = useMemo<AbsoluteSize>(
 		() => getDistance(theme, paddingLeft ?? paddingHorizontal ?? padding ?? '0px'),
 		[padding, paddingLeft, paddingHorizontal, theme]
 	);
 
-	const processedPaddingRight = useMemo<IAbsoluteSize>(
+	const processedPaddingRight = useMemo<AbsoluteSize>(
 		() => getDistance(theme, paddingRight ?? paddingHorizontal ?? padding ?? '0px'),
 		[padding, paddingRight, paddingHorizontal, theme]
 	);
 
-	const processedPaddingTop = useMemo<IAbsoluteSize>(
+	const processedPaddingTop = useMemo<AbsoluteSize>(
 		() => getDistance(theme, paddingTop ?? paddingVertical ?? padding ?? '0px'),
 		[padding, paddingTop, paddingVertical, theme]
 	);
 
 	const processedMargin = useMemo<{
-		bottom: IAbsoluteSize;
-		left: IAbsoluteSize;
-		right: IAbsoluteSize;
-		top: IAbsoluteSize;
+		bottom: AbsoluteSize;
+		left: AbsoluteSize;
+		right: AbsoluteSize;
+		top: AbsoluteSize;
 	}>(
 		() => ({
 			bottom: processedMarginBottom,
@@ -277,10 +284,10 @@ export const useDistance = ({
 	);
 
 	const processedPadding = useMemo<{
-		bottom: IAbsoluteSize;
-		left: IAbsoluteSize;
-		right: IAbsoluteSize;
-		top: IAbsoluteSize;
+		bottom: AbsoluteSize;
+		left: AbsoluteSize;
+		right: AbsoluteSize;
+		top: AbsoluteSize;
 	}>(
 		() => ({
 			bottom: processedPaddingBottom,
@@ -293,16 +300,16 @@ export const useDistance = ({
 
 	const distance = useMemo<{
 		margin: {
-			bottom: IAbsoluteSize;
-			left: IAbsoluteSize;
-			right: IAbsoluteSize;
-			top: IAbsoluteSize;
+			bottom: AbsoluteSize;
+			left: AbsoluteSize;
+			right: AbsoluteSize;
+			top: AbsoluteSize;
 		};
 		padding: {
-			bottom: IAbsoluteSize;
-			left: IAbsoluteSize;
-			right: IAbsoluteSize;
-			top: IAbsoluteSize;
+			bottom: AbsoluteSize;
+			left: AbsoluteSize;
+			right: AbsoluteSize;
+			top: AbsoluteSize;
 		};
 	}>(
 		() => ({
@@ -327,59 +334,59 @@ export const useSize = ({
 }: {
 	fullHeight: boolean;
 	fullWidth: boolean;
-	height?: IHeight | ISize;
-	heightMax?: IHeight | ISize;
-	heightMin?: IHeight | ISize;
-	width?: IWidth | ISize;
-	widthMax?: IWidth | ISize;
-	widthMin?: IWidth | ISize;
+	height?: Height | Size;
+	heightMax?: Height | Size;
+	heightMin?: Height | Size;
+	width?: Width | Size;
+	widthMax?: Width | Size;
+	widthMin?: Width | Size;
 }): {
-	height: ISize | undefined;
-	heightMax: ISize | undefined;
-	heightMin: ISize | undefined;
-	width: ISize | undefined;
-	widthMax: ISize | undefined;
-	widthMin: ISize | undefined;
+	height: Size | undefined;
+	heightMax: Size | undefined;
+	heightMin: Size | undefined;
+	width: Size | undefined;
+	widthMax: Size | undefined;
+	widthMin: Size | undefined;
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedHeight = useMemo<ISize | undefined>(
+	const processedHeight = useMemo<Size | undefined>(
 		() => (fullHeight ? '100%' : ifNotUndefined(height, (height) => getHeight(theme, height))),
 		[fullHeight, height, theme]
 	);
 
-	const processedHeightMax = useMemo<ISize | undefined>(
+	const processedHeightMax = useMemo<Size | undefined>(
 		() => ifNotUndefined(heightMax, (heightMax) => getHeight(theme, heightMax)),
 		[heightMax, theme]
 	);
 
-	const processedHeightMin = useMemo<ISize | undefined>(
+	const processedHeightMin = useMemo<Size | undefined>(
 		() => ifNotUndefined(heightMin, (heightMin) => getHeight(theme, heightMin)),
 		[heightMin, theme]
 	);
 
-	const processedWidth = useMemo<ISize | undefined>(
+	const processedWidth = useMemo<Size | undefined>(
 		() => (fullWidth ? '100%' : ifNotUndefined(width, (width) => getWidth(theme, width))),
 		[fullWidth, theme, width]
 	);
 
-	const processedWidthMax = useMemo<ISize | undefined>(
+	const processedWidthMax = useMemo<Size | undefined>(
 		() => ifNotUndefined(widthMax, (widthMax) => getWidth(theme, widthMax)),
 		[theme, widthMax]
 	);
 
-	const processedWidthMin = useMemo<ISize | undefined>(
+	const processedWidthMin = useMemo<Size | undefined>(
 		() => ifNotUndefined(widthMin, (widthMin) => getWidth(theme, widthMin)),
 		[theme, widthMin]
 	);
 
 	const size = useMemo<{
-		height: ISize | undefined;
-		heightMax: ISize | undefined;
-		heightMin: ISize | undefined;
-		width: ISize | undefined;
-		widthMax: ISize | undefined;
-		widthMin: ISize | undefined;
+		height: Size | undefined;
+		heightMax: Size | undefined;
+		heightMin: Size | undefined;
+		width: Size | undefined;
+		widthMax: Size | undefined;
+		widthMin: Size | undefined;
 	}>(
 		() => ({
 			height: processedHeight,
@@ -395,11 +402,11 @@ export const useSize = ({
 	return size;
 };
 
-export const useViewport = (): Record<'fallback' | IThemeSize, boolean> => {
+export const useViewport = (): Record<'fallback' | ThemeSize, boolean> => {
 	const theme = useEasyFlexTheme();
 	const { width } = useDimension();
 
-	const viewport = useMemo<Record<'fallback' | IThemeSize, boolean>>(
+	const viewport = useMemo<Record<'fallback' | ThemeSize, boolean>>(
 		() => ({
 			fallback: width < theme.viewport.fallbackThreshold,
 			'8xs': width < getViewportThreshold(theme, '8xs'),
