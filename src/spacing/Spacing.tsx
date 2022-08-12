@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useMemo } from 'react';
+import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
 import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils';
@@ -30,42 +30,39 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 	width?: Distance | AbsoluteSize;
 }
 
-export const Spacing: FC<SpacingProps> = ({
-	flip,
-	flipEnabled = false,
-	viewportThreshold,
-	height = '0px',
-	width = '0px',
-	...props
-}) => {
-	const theme = useEasyFlexTheme();
-	const { width: displayWidth } = useDimension();
+export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
+	({ flip, flipEnabled = false, viewportThreshold, height = '0px', width = '0px', ...props }, ref) => {
+		const theme = useEasyFlexTheme();
+		const { width: displayWidth } = useDimension();
 
-	const processedHeight = useMemo<AbsoluteSize>(
-		() =>
-			flipEnabled &&
-			(flip ||
-				(flip === undefined &&
-					(viewportThreshold !== undefined
-						? displayWidth < getViewportThreshold(theme, viewportThreshold)
-						: displayWidth < theme.viewport.fallbackThreshold)))
-				? getDistance(theme, width)
-				: getDistance(theme, height),
-		[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
-	);
+		const processedHeight = useMemo<AbsoluteSize>(
+			() =>
+				flipEnabled &&
+				(flip ||
+					(flip === undefined &&
+						(viewportThreshold !== undefined
+							? displayWidth < getViewportThreshold(theme, viewportThreshold)
+							: displayWidth < theme.viewport.fallbackThreshold)))
+					? getDistance(theme, width)
+					: getDistance(theme, height),
+			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
+		);
 
-	const processedWidth = useMemo<AbsoluteSize>(
-		() =>
-			flipEnabled &&
-			(flip ||
-				(flip === undefined &&
-					(viewportThreshold !== undefined
-						? displayWidth < getViewportThreshold(theme, viewportThreshold)
-						: displayWidth < theme.viewport.fallbackThreshold)))
-				? getDistance(theme, height)
-				: getDistance(theme, width),
-		[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
-	);
+		const processedWidth = useMemo<AbsoluteSize>(
+			() =>
+				flipEnabled &&
+				(flip ||
+					(flip === undefined &&
+						(viewportThreshold !== undefined
+							? displayWidth < getViewportThreshold(theme, viewportThreshold)
+							: displayWidth < theme.viewport.fallbackThreshold)))
+					? getDistance(theme, height)
+					: getDistance(theme, width),
+			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
+		);
 
-	return <StyledSpacing data-height={processedHeight} data-width={processedWidth} {...props} />;
-};
+		return <StyledSpacing data-height={processedHeight} data-width={processedWidth} ref={ref} {...props} />;
+	}
+);
+
+Spacing.displayName = 'Spacing';

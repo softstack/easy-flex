@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { AbsoluteSize, AlignItems, AlignSelf, BorderRadius, BorderWidth, Color, Distance, Height, JustifyContent, Overflow, Size, Width } from '../types';
 export interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     /** The alignment of the component's children on the cross axis. */
@@ -74,4 +74,4 @@ export interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
     width?: Width | Size;
 }
 export declare type ExternalBaseButtonProps = Omit<BaseButtonProps, 'align' | 'backgroundColor' | 'borderColor' | 'borderRadius' | 'borderWidth' | 'color' | 'justify' | 'padding' | 'paddingBottom' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingHorizontal' | 'paddingVertical'>;
-export declare const BaseButton: FC<BaseButtonProps>;
+export declare const BaseButton: React.ForwardRefExoticComponent<BaseButtonProps & React.RefAttributes<HTMLButtonElement>>;

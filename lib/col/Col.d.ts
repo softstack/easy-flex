@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React from 'react';
 import { BaseFlexProps } from '../baseFlex/BaseFlex';
 import { FlipDirection, ViewportThreshold } from '../types';
 export interface ColProps extends Omit<BaseFlexProps, 'flexDirection'> {
@@ -9,4 +9,4 @@ export interface ColProps extends Omit<BaseFlexProps, 'flexDirection'> {
     /** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the fallback threshold is used. */
     viewportThreshold?: ViewportThreshold | number;
 }
-export declare const Col: FC<ColProps>;
+export declare const Col: React.ForwardRefExoticComponent<ColProps & React.RefAttributes<HTMLDivElement>>;

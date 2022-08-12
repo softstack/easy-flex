@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
 export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
     /** If true, height and width are flipped if flipping has been enabled. */
@@ -12,4 +12,4 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
     /** Component's width. */
     width?: Distance | AbsoluteSize;
 }
-export declare const Spacing: FC<SpacingProps>;
+export declare const Spacing: React.ForwardRefExoticComponent<SpacingProps & React.RefAttributes<HTMLDivElement>>;

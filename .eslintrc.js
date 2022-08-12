@@ -8,11 +8,17 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react/recommended',
 		'plugin:react-hooks/recommended',
-		'prettier',
 	],
 	settings: {
 		react: {
 			version: 'detect',
 		},
+	},
+	rules: {
+		indent: ['error', 'tab', { SwitchCase: 1 }],
+		'linebreak-style': ['error', 'unix'],
+		quotes: ['error', 'single', { avoidEscape: true }],
+		semi: ['error', 'always'],
+		'no-mixed-spaces-and-tabs': 'off',
 	},
 };

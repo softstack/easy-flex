@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { AbsoluteSize, AlignSelf, Color, CssLineHeight, Distance, FontFamily, FontSize, FontWeight, Height, LineHeight, Size, TextAlign, TextElement, Width, WordBreak } from '../types';
 export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     /** Component's text alignment. */
@@ -64,4 +64,4 @@ export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
     /** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
     wordBreak?: WordBreak;
 }
-export declare const Text: FC<TextProps>;
+export declare const Text: React.ForwardRefExoticComponent<TextProps & React.RefAttributes<HTMLParagraphElement>>;

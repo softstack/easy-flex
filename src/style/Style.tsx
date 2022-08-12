@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useMemo } from 'react';
+import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import {
 	Color,
@@ -115,96 +115,94 @@ export interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
 	lineHeight?: CssLineHeight | LineHeight;
 }
 
-export const Style: FC<StyleProps> = ({
-	backgroundColor,
-	children,
-	color,
-	element = 'span',
-	fontFamily,
-	fontSize,
-	fontWeight,
-	italic,
-	lineHeight,
-}) => {
-	const theme = useEasyFlexTheme();
+export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
+	(
+		{ backgroundColor, children, color, element = 'span', fontFamily, fontSize, fontWeight, italic, lineHeight },
+		ref
+	) => {
+		const theme = useEasyFlexTheme();
 
-	const processedBackgroundColor = useColor(backgroundColor, undefined);
+		const processedBackgroundColor = useColor(backgroundColor, undefined);
 
-	const processedColor = useColor(color, undefined);
+		const processedColor = useColor(color, undefined);
 
-	const processedFontFamily = useMemo<string | undefined>(
-		() => ifNotUndefined(fontFamily, (fontFamily) => theme.font.family[fontFamily]),
-		[fontFamily, theme]
-	);
+		const processedFontFamily = useMemo<string | undefined>(
+			() => ifNotUndefined(fontFamily, (fontFamily) => theme.font.family[fontFamily]),
+			[fontFamily, theme]
+		);
 
-	const processedFontSize = useMemo<Size | undefined>(
-		() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
-		[fontSize, theme]
-	);
+		const processedFontSize = useMemo<Size | undefined>(
+			() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
+			[fontSize, theme]
+		);
 
-	const processedFontWeight = useMemo<CssFontWeight | number | undefined>(
-		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
-		[fontWeight, theme]
-	);
+		const processedFontWeight = useMemo<CssFontWeight | number | undefined>(
+			() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
+			[fontWeight, theme]
+		);
 
-	const fontStyle = useMemo<FontStyle | undefined>(
-		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
-		[italic]
-	);
+		const fontStyle = useMemo<FontStyle | undefined>(
+			() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
+			[italic]
+		);
 
-	const processedLineHeight = useMemo<CssLineHeight | undefined>(
-		() => ifNotUndefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
-		[lineHeight, theme]
-	);
+		const processedLineHeight = useMemo<CssLineHeight | undefined>(
+			() => ifNotUndefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
+			[lineHeight, theme]
+		);
 
-	const Element = useMemo(() => {
-		switch (element) {
-			case 'b':
-				return B;
-			case 'cite':
-				return Cite;
-			case 'code':
-				return Code;
-			case 'em':
-				return Em;
-			case 'i':
-				return I;
-			case 'kbd':
-				return Kbd;
-			case 'mark':
-				return Mark;
-			case 's':
-				return S;
-			case 'samp':
-				return Samp;
-			case 'small':
-				return Small;
-			case 'span':
-				return Span;
-			case 'strong':
-				return Strong;
-			case 'sub':
-				return Sub;
-			case 'sup':
-				return Sup;
-			case 'u':
-				return U;
-			case 'var':
-				return Var;
-		}
-	}, [element]);
+		const Element = useMemo(() => {
+			switch (element) {
+				case 'b':
+					return B;
+				case 'cite':
+					return Cite;
+				case 'code':
+					return Code;
+				case 'em':
+					return Em;
+				case 'i':
+					return I;
+				case 'kbd':
+					return Kbd;
+				case 'mark':
+					return Mark;
+				case 's':
+					return S;
+				case 'samp':
+					return Samp;
+				case 'small':
+					return Small;
+				case 'span':
+					return Span;
+				case 'strong':
+					return Strong;
+				case 'sub':
+					return Sub;
+				case 'sup':
+					return Sup;
+				case 'u':
+					return U;
+				case 'var':
+					return Var;
+			}
+		}, [element]);
 
-	return (
-		<Element
-			data-background-color={processedBackgroundColor}
-			data-color={processedColor}
-			data-font-family={processedFontFamily}
-			data-font-size={processedFontSize}
-			data-font-weight={processedFontWeight}
-			data-font-wtyle={fontStyle}
-			data-line-height={processedLineHeight}
-		>
-			{children}
-		</Element>
-	);
-};
+		return (
+			<Element
+				data-background-color={processedBackgroundColor}
+				data-color={processedColor}
+				data-font-family={processedFontFamily}
+				data-font-size={processedFontSize}
+				data-font-weight={processedFontWeight}
+				data-font-wtyle={fontStyle}
+				data-line-height={processedLineHeight}
+				ref={ref}
+			>
+				{children}
+			</Element>
+		);
+	}
+);
+
+Style.displayName = 'Style';

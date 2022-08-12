@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { AbsoluteSize, AlignItems, AlignSelf, BaseFlexElement, BorderRadius, BorderWidth, Color, Distance, FlexDirection, Height, JustifyContent, Overflow, Size, Width } from '../types';
 export interface BaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     /** The alignment of the component's children on the cross axis. */
@@ -78,4 +78,4 @@ export interface BaseFlexProps extends HTMLAttributes<HTMLDivElement> {
     /** Component's width. */
     width?: Width | Size;
 }
-export declare const BaseFlex: FC<BaseFlexProps>;
+export declare const BaseFlex: React.ForwardRefExoticComponent<BaseFlexProps & React.RefAttributes<HTMLDivElement>>;

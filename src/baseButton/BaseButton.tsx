@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, useMemo } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
 import {
 	AbsoluteSize,
@@ -190,126 +190,134 @@ export type ExternalBaseButtonProps = Omit<
 	| 'paddingVertical'
 >;
 
-export const BaseButton: FC<BaseButtonProps> = ({
-	align,
-	alignSelf,
-	backgroundColor,
-	borderColor,
-	borderRadius,
-	borderWidth,
-	children,
-	color,
-	fullHeight = false,
-	fullWidth = false,
-	grow,
-	height,
-	justify,
-	margin,
-	marginBottom,
-	marginLeft,
-	marginRight,
-	marginTop,
-	marginHorizontal,
-	marginVertical,
-	maxHeight,
-	maxWidth,
-	minHeight,
-	minWidth,
-	overflow,
-	overflowX,
-	overflowY,
-	padding,
-	paddingBottom,
-	paddingLeft,
-	paddingRight,
-	paddingTop,
-	paddingHorizontal,
-	paddingVertical,
-	shrink,
-	width,
-	...props
-}) => {
-	const theme = useEasyFlexTheme();
+export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
+	(
+		{
+			align,
+			alignSelf,
+			backgroundColor,
+			borderColor,
+			borderRadius,
+			borderWidth,
+			children,
+			color,
+			fullHeight = false,
+			fullWidth = false,
+			grow,
+			height,
+			justify,
+			margin,
+			marginBottom,
+			marginLeft,
+			marginRight,
+			marginTop,
+			marginHorizontal,
+			marginVertical,
+			maxHeight,
+			maxWidth,
+			minHeight,
+			minWidth,
+			overflow,
+			overflowX,
+			overflowY,
+			padding,
+			paddingBottom,
+			paddingLeft,
+			paddingRight,
+			paddingTop,
+			paddingHorizontal,
+			paddingVertical,
+			shrink,
+			width,
+			...props
+		},
+		ref
+	) => {
+		const theme = useEasyFlexTheme();
 
-	const processedBackgroundColor = useColor(backgroundColor, 'transparent');
+		const processedBackgroundColor = useColor(backgroundColor, 'transparent');
 
-	const processedBorderColor = useColor(borderColor, undefined);
+		const processedBorderColor = useColor(borderColor, undefined);
 
-	const processedBorderRadius = useMemo<AbsoluteSize | undefined>(
-		() => ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius)),
-		[borderRadius, theme]
-	);
+		const processedBorderRadius = useMemo<AbsoluteSize | undefined>(
+			() => ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius)),
+			[borderRadius, theme]
+		);
 
-	const processedBorderStyle = useMemo<'solid' | undefined>(() => (borderWidth ? 'solid' : undefined), [borderWidth]);
+		const processedBorderStyle = useMemo<'solid' | undefined>(() => (borderWidth ? 'solid' : undefined), [borderWidth]);
 
-	const processedBorderWidth = useMemo<AbsoluteSize | undefined>(
-		() => ifNotUndefined(borderWidth, (borderWidth) => getBorderWidth(theme, borderWidth)),
-		[borderWidth, theme]
-	);
+		const processedBorderWidth = useMemo<AbsoluteSize | undefined>(
+			() => ifNotUndefined(borderWidth, (borderWidth) => getBorderWidth(theme, borderWidth)),
+			[borderWidth, theme]
+		);
 
-	const processedColor = useColor(color, undefined);
+		const processedColor = useColor(color, undefined);
 
-	const distance = useDistance({
-		margin,
-		marginBottom,
-		marginLeft,
-		marginRight,
-		marginTop,
-		marginHorizontal,
-		marginVertical,
-		padding,
-		paddingBottom,
-		paddingLeft,
-		paddingRight,
-		paddingTop,
-		paddingHorizontal,
-		paddingVertical,
-	});
+		const distance = useDistance({
+			margin,
+			marginBottom,
+			marginLeft,
+			marginRight,
+			marginTop,
+			marginHorizontal,
+			marginVertical,
+			padding,
+			paddingBottom,
+			paddingLeft,
+			paddingRight,
+			paddingTop,
+			paddingHorizontal,
+			paddingVertical,
+		});
 
-	const size = useSize({
-		fullHeight,
-		fullWidth,
-		height,
-		heightMax: maxHeight,
-		heightMin: minHeight,
-		width,
-		widthMax: maxWidth,
-		widthMin: minWidth,
-	});
+		const size = useSize({
+			fullHeight,
+			fullWidth,
+			height,
+			heightMax: maxHeight,
+			heightMin: minHeight,
+			width,
+			widthMax: maxWidth,
+			widthMin: minWidth,
+		});
 
-	return (
-		<StyledBaseButton
-			data-align={align}
-			data-align-self={alignSelf}
-			data-background-color={processedBackgroundColor}
-			data-border-color={processedBorderColor}
-			data-border-radius={processedBorderRadius}
-			data-border-style={processedBorderStyle}
-			data-border-width={processedBorderWidth}
-			data-color={processedColor}
-			data-grow={grow}
-			data-height={size.height}
-			data-height-max={size.heightMax}
-			data-height-min={size.heightMin}
-			data-justify={justify}
-			data-margin-bottom={distance.margin.bottom}
-			data-margin-left={distance.margin.left}
-			data-margin-right={distance.margin.right}
-			data-margin-top={distance.margin.top}
-			data-overflow={overflow}
-			data-overflow-x={overflowX}
-			data-overflow-y={overflowY}
-			data-padding-bottom={distance.padding.bottom}
-			data-padding-left={distance.padding.left}
-			data-padding-right={distance.padding.right}
-			data-padding-top={distance.padding.top}
-			data-shrink={shrink}
-			data-width={size.width}
-			data-width-max={size.widthMax}
-			data-width-min={size.widthMin}
-			{...props}
-		>
-			{children}
-		</StyledBaseButton>
-	);
-};
+		return (
+			<StyledBaseButton
+				data-align={align}
+				data-align-self={alignSelf}
+				data-background-color={processedBackgroundColor}
+				data-border-color={processedBorderColor}
+				data-border-radius={processedBorderRadius}
+				data-border-style={processedBorderStyle}
+				data-border-width={processedBorderWidth}
+				data-color={processedColor}
+				data-grow={grow}
+				data-height={size.height}
+				data-height-max={size.heightMax}
+				data-height-min={size.heightMin}
+				data-justify={justify}
+				data-margin-bottom={distance.margin.bottom}
+				data-margin-left={distance.margin.left}
+				data-margin-right={distance.margin.right}
+				data-margin-top={distance.margin.top}
+				data-overflow={overflow}
+				data-overflow-x={overflowX}
+				data-overflow-y={overflowY}
+				data-padding-bottom={distance.padding.bottom}
+				data-padding-left={distance.padding.left}
+				data-padding-right={distance.padding.right}
+				data-padding-top={distance.padding.top}
+				data-shrink={shrink}
+				data-width={size.width}
+				data-width-max={size.widthMax}
+				data-width-min={size.widthMin}
+				ref={ref}
+				{...props}
+			>
+				{children}
+			</StyledBaseButton>
+		);
+	}
+);
+
+BaseButton.displayName = 'BaseButton';

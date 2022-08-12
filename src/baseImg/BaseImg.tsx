@@ -1,4 +1,4 @@
-import React, { FC, ImgHTMLAttributes } from 'react';
+import React, { forwardRef, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { ObjectFit } from '../types';
 
@@ -8,6 +8,8 @@ export interface BaseImgProps extends ImgHTMLAttributes<HTMLImageElement> {
 	objectFit?: ObjectFit;
 }
 
-export const BaseImg: FC<BaseImgProps> = ({ objectFit, ...props }) => {
-	return <StyledBaseImg data-object-fit={objectFit} {...props} />;
-};
+export const BaseImg = forwardRef<HTMLImageElement, BaseImgProps>(({ objectFit, ...props }, ref) => {
+	return <StyledBaseImg data-object-fit={objectFit} ref={ref} {...props} />;
+});
+
+BaseImg.displayName = 'BaseImg';

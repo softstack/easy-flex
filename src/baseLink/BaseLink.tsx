@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, FC, useMemo } from 'react';
+import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
 import { AbsoluteSize, AlignSelf, Color, CssColor, Distance } from '../types';
 import { useColor, useDistance } from '../utils';
@@ -52,51 +52,59 @@ export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 	newTab?: boolean;
 }
 
-export const BaseLink: FC<BaseLinkProps> = ({
-	alignSelf,
-	children,
-	color = 'inherit',
-	hoverColor,
-	margin,
-	marginBottom,
-	marginLeft,
-	marginRight,
-	marginTop,
-	marginHorizontal,
-	marginVertical,
-	newTab = false,
-	...props
-}) => {
-	const processedColor = useColor(color, undefined);
+export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
+	(
+		{
+			alignSelf,
+			children,
+			color = 'inherit',
+			hoverColor,
+			margin,
+			marginBottom,
+			marginLeft,
+			marginRight,
+			marginTop,
+			marginHorizontal,
+			marginVertical,
+			newTab = false,
+			...props
+		},
+		ref
+	) => {
+		const processedColor = useColor(color, undefined);
 
-	const processedHoverColor = useColor(hoverColor, undefined);
+		const processedHoverColor = useColor(hoverColor, undefined);
 
-	const target = useMemo<'_blank' | undefined>(() => (newTab ? '_blank' : undefined), [newTab]);
+		const target = useMemo<'_blank' | undefined>(() => (newTab ? '_blank' : undefined), [newTab]);
 
-	const distance = useDistance({
-		margin,
-		marginBottom,
-		marginLeft,
-		marginRight,
-		marginTop,
-		marginHorizontal,
-		marginVertical,
-	});
+		const distance = useDistance({
+			margin,
+			marginBottom,
+			marginLeft,
+			marginRight,
+			marginTop,
+			marginHorizontal,
+			marginVertical,
+		});
 
-	return (
-		<StyledBaseLink
-			data-align-self={alignSelf}
-			data-color={processedColor}
-			data-hover-color={processedHoverColor}
-			data-margin-bottom={distance.margin.bottom}
-			data-margin-left={distance.margin.left}
-			data-margin-right={distance.margin.right}
-			data-margin-top={distance.margin.top}
-			rel="noopener noreferrer"
-			target={target}
-			{...props}
-		>
-			{children}
-		</StyledBaseLink>
-	);
-};
+		return (
+			<StyledBaseLink
+				data-align-self={alignSelf}
+				data-color={processedColor}
+				data-hover-color={processedHoverColor}
+				data-margin-bottom={distance.margin.bottom}
+				data-margin-left={distance.margin.left}
+				data-margin-right={distance.margin.right}
+				data-margin-top={distance.margin.top}
+				rel="noopener noreferrer"
+				target={target}
+				ref={ref}
+				{...props}
+			>
+				{children}
+			</StyledBaseLink>
+		);
+	}
+);
+
+BaseLink.displayName = 'BaseLink';

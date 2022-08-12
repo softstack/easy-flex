@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, FC } from 'react';
+import React, { AnchorHTMLAttributes } from 'react';
 import { AbsoluteSize, AlignSelf, Color, Distance } from '../types';
 export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     /** The alignment of the component on the parent's element cross axis. */
@@ -24,4 +24,4 @@ export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     /** If true, the link is opened in a new tab. */
     newTab?: boolean;
 }
-export declare const BaseLink: FC<BaseLinkProps>;
+export declare const BaseLink: React.ForwardRefExoticComponent<BaseLinkProps & React.RefAttributes<HTMLAnchorElement>>;

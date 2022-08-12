@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { Color, CssLineHeight, FontFamily, FontSize, FontWeight, LineHeight, Size, StyleElement } from '../types';
 export interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
     /** Component's background color. */
@@ -16,4 +16,4 @@ export interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
     italic?: boolean;
     lineHeight?: CssLineHeight | LineHeight;
 }
-export declare const Style: FC<StyleProps>;
+export declare const Style: React.ForwardRefExoticComponent<StyleProps & React.RefAttributes<HTMLParagraphElement>>;

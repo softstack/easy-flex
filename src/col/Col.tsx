@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import { BaseFlex, BaseFlexProps } from '../baseFlex/BaseFlex';
 import { FlexDirection, FlipDirection, ViewportThreshold } from '../types';
 import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils';
@@ -12,34 +12,38 @@ export interface ColProps extends Omit<BaseFlexProps, 'flexDirection'> {
 	viewportThreshold?: ViewportThreshold | number;
 }
 
-export const Col: FC<ColProps> = ({ children, flip, flipDirection, viewportThreshold, ...props }) => {
-	const theme = useEasyFlexTheme();
-	const { width } = useDimension();
+export const Col = forwardRef<HTMLDivElement, ColProps>(
+	({ children, flip, flipDirection, viewportThreshold, ...props }, ref) => {
+		const theme = useEasyFlexTheme();
+		const { width } = useDimension();
 
-	const flexDirection = useMemo<FlexDirection>(() => {
-		if (
-			flipDirection !== undefined &&
-			(flip ||
-				(flip === undefined &&
-					(viewportThreshold !== undefined
-						? width < getViewportThreshold(theme, viewportThreshold)
-						: width < theme.viewport.fallbackThreshold)))
-		) {
-			switch (flipDirection) {
-				case 'flip':
-					return 'row';
-				case 'reverse':
-					return 'column-reverse';
-				case 'flip-reverse':
-					return 'row-reverse';
+		const flexDirection = useMemo<FlexDirection>(() => {
+			if (
+				flipDirection !== undefined &&
+				(flip ||
+					(flip === undefined &&
+						(viewportThreshold !== undefined
+							? width < getViewportThreshold(theme, viewportThreshold)
+							: width < theme.viewport.fallbackThreshold)))
+			) {
+				switch (flipDirection) {
+					case 'flip':
+						return 'row';
+					case 'reverse':
+						return 'column-reverse';
+					case 'flip-reverse':
+						return 'row-reverse';
+				}
 			}
-		}
-		return 'column';
-	}, [flip, flipDirection, theme, viewportThreshold, width]);
+			return 'column';
+		}, [flip, flipDirection, theme, viewportThreshold, width]);
 
-	return (
-		<BaseFlex flexDirection={flexDirection} {...props}>
-			{children}
-		</BaseFlex>
-	);
-};
+		return (
+			<BaseFlex flexDirection={flexDirection} ref={ref} {...props}>
+				{children}
+			</BaseFlex>
+		);
+	}
+);
+
+Col.displayName = 'Col';

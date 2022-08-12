@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useMemo } from 'react';
+import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import {
 	AbsoluteSize,
@@ -175,140 +175,148 @@ export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 	wordBreak?: WordBreak;
 }
 
-export const Text: FC<TextProps> = ({
-	align,
-	alignSelf,
-	children,
-	color = 'primaryText',
-	element = 'p',
-	fontFamily = 'primary',
-	fontSize = 'm',
-	fontWeight = 'normal',
-	fullHeight = false,
-	fullWidth = false,
-	height,
-	italic,
-	lineHeight = 'm',
-	margin,
-	marginBottom,
-	marginLeft,
-	marginRight,
-	marginTop,
-	marginHorizontal,
-	marginVertical,
-	maxHeight,
-	maxWidth,
-	minHeight,
-	minWidth,
-	padding,
-	paddingBottom,
-	paddingLeft,
-	paddingRight,
-	paddingTop,
-	paddingHorizontal,
-	paddingVertical,
-	width,
-	wordBreak,
-	...props
-}) => {
-	const theme = useEasyFlexTheme();
+export const Text = forwardRef<HTMLParagraphElement, TextProps>(
+	(
+		{
+			align,
+			alignSelf,
+			children,
+			color = 'primaryText',
+			element = 'p',
+			fontFamily = 'primary',
+			fontSize = 'm',
+			fontWeight = 'normal',
+			fullHeight = false,
+			fullWidth = false,
+			height,
+			italic,
+			lineHeight = 'm',
+			margin,
+			marginBottom,
+			marginLeft,
+			marginRight,
+			marginTop,
+			marginHorizontal,
+			marginVertical,
+			maxHeight,
+			maxWidth,
+			minHeight,
+			minWidth,
+			padding,
+			paddingBottom,
+			paddingLeft,
+			paddingRight,
+			paddingTop,
+			paddingHorizontal,
+			paddingVertical,
+			width,
+			wordBreak,
+			...props
+		},
+		ref
+	) => {
+		const theme = useEasyFlexTheme();
 
-	const processedColor = useMemo<CssColor>(() => getColor(theme, color), [color, theme]);
+		const processedColor = useMemo<CssColor>(() => getColor(theme, color), [color, theme]);
 
-	const processedFontFamily = useMemo<string>(() => theme.font.family[fontFamily], [fontFamily, theme]);
+		const processedFontFamily = useMemo<string>(() => theme.font.family[fontFamily], [fontFamily, theme]);
 
-	const processedFontSize = useMemo<Size>(() => getFontSize(theme, fontSize), [fontSize, theme]);
+		const processedFontSize = useMemo<Size>(() => getFontSize(theme, fontSize), [fontSize, theme]);
 
-	const processedFontWeight = useMemo<CssFontWeight | number>(
-		() => getFontWeight(theme, fontWeight),
-		[fontWeight, theme]
-	);
+		const processedFontWeight = useMemo<CssFontWeight | number>(
+			() => getFontWeight(theme, fontWeight),
+			[fontWeight, theme]
+		);
 
-	const fontStyle = useMemo<FontStyle | undefined>(
-		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
-		[italic]
-	);
+		const fontStyle = useMemo<FontStyle | undefined>(
+			() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
+			[italic]
+		);
 
-	const processedLineHeight = useMemo<CssLineHeight | undefined>(
-		() => getLineHeight(theme, lineHeight),
-		[lineHeight, theme]
-	);
+		const processedLineHeight = useMemo<CssLineHeight | undefined>(
+			() => getLineHeight(theme, lineHeight),
+			[lineHeight, theme]
+		);
 
-	const distance = useDistance({
-		margin,
-		marginBottom,
-		marginLeft,
-		marginRight,
-		marginTop,
-		marginHorizontal,
-		marginVertical,
-		padding,
-		paddingBottom,
-		paddingLeft,
-		paddingRight,
-		paddingTop,
-		paddingHorizontal,
-		paddingVertical,
-	});
+		const distance = useDistance({
+			margin,
+			marginBottom,
+			marginLeft,
+			marginRight,
+			marginTop,
+			marginHorizontal,
+			marginVertical,
+			padding,
+			paddingBottom,
+			paddingLeft,
+			paddingRight,
+			paddingTop,
+			paddingHorizontal,
+			paddingVertical,
+		});
 
-	const size = useSize({
-		fullHeight,
-		fullWidth,
-		height,
-		heightMax: maxHeight,
-		heightMin: minHeight,
-		width,
-		widthMax: maxWidth,
-		widthMin: minWidth,
-	});
+		const size = useSize({
+			fullHeight,
+			fullWidth,
+			height,
+			heightMax: maxHeight,
+			heightMin: minHeight,
+			width,
+			widthMax: maxWidth,
+			widthMin: minWidth,
+		});
 
-	const Element = useMemo(() => {
-		switch (element) {
-			case 'h1':
-				return H1;
-			case 'h2':
-				return H2;
-			case 'h3':
-				return H3;
-			case 'h4':
-				return H4;
-			case 'h5':
-				return H5;
-			case 'h6':
-				return H6;
-			case 'p':
-				return P;
-		}
-	}, [element]);
+		const Element = useMemo(() => {
+			switch (element) {
+				case 'h1':
+					return H1;
+				case 'h2':
+					return H2;
+				case 'h3':
+					return H3;
+				case 'h4':
+					return H4;
+				case 'h5':
+					return H5;
+				case 'h6':
+					return H6;
+				case 'p':
+					return P;
+			}
+		}, [element]);
 
-	return (
-		<Element
-			data-align={align}
-			data-align-self={alignSelf}
-			data-color={processedColor}
-			data-font-family={processedFontFamily}
-			data-font-size={processedFontSize}
-			data-font-weight={processedFontWeight}
-			data-font-style={fontStyle}
-			data-height={size.height}
-			data-height-max={size.heightMax}
-			data-height-min={size.heightMin}
-			data-line-height={processedLineHeight}
-			data-margin-bottom={distance.margin.bottom}
-			data-margin-left={distance.margin.left}
-			data-margin-right={distance.margin.right}
-			data-margin-top={distance.margin.top}
-			data-padding-bottom={distance.padding.bottom}
-			data-padding-left={distance.padding.left}
-			data-padding-right={distance.padding.right}
-			data-padding-top={distance.padding.top}
-			data-width={size.width}
-			data-width-max={size.widthMax}
-			data-width-min={size.widthMin}
-			data-word-break={wordBreak}
-			{...props}
-		>
-			{children}
-		</Element>
-	);
-};
+		return (
+			<Element
+				data-align={align}
+				data-align-self={alignSelf}
+				data-color={processedColor}
+				data-font-family={processedFontFamily}
+				data-font-size={processedFontSize}
+				data-font-weight={processedFontWeight}
+				data-font-style={fontStyle}
+				data-height={size.height}
+				data-height-max={size.heightMax}
+				data-height-min={size.heightMin}
+				data-line-height={processedLineHeight}
+				data-margin-bottom={distance.margin.bottom}
+				data-margin-left={distance.margin.left}
+				data-margin-right={distance.margin.right}
+				data-margin-top={distance.margin.top}
+				data-padding-bottom={distance.padding.bottom}
+				data-padding-left={distance.padding.left}
+				data-padding-right={distance.padding.right}
+				data-padding-top={distance.padding.top}
+				data-width={size.width}
+				data-width-max={size.widthMax}
+				data-width-min={size.widthMin}
+				data-word-break={wordBreak}
+				ref={ref}
+				{...props}
+			>
+				{children}
+			</Element>
+		);
+	}
+);
+
+Text.displayName = 'Text';
