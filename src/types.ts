@@ -253,7 +253,7 @@ export type CssColor = ColorCode | ColorKeyword | ColorName;
 
 export type AbsoluteSize = Px | Rem | Vh | Vw;
 
-export type Size = Percent | AbsoluteSize;
+export type Size = Percent | AbsoluteSize | 'fit-content';
 
 export type CssLineHeight = 'normal' | Percent | number;
 
