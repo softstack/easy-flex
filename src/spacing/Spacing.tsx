@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
-import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils';
+import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/utils';
 
 const StyledSpacing = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
 	display: flex;

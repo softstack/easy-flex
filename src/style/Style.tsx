@@ -1,37 +1,19 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import {
-	Color,
-	CssColor,
-	CssFontWeight,
-	CssLineHeight,
-	FontFamily,
-	FontSize,
-	FontStyle,
-	FontWeight,
-	LineHeight,
-	Size,
-	StyleElement,
-} from '../types';
-import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useColor, useEasyFlexTheme } from '../utils';
+import { Color, CssColor, StyleElement } from '../types';
+import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { useColor } from '../utils/utils';
 
-const style = css<{
-	'data-background-color'?: CssColor;
-	'data-color'?: CssColor;
-	'data-font-family'?: string;
-	'data-font-size'?: Size;
-	'data-font-weight'?: CssFontWeight | number;
-	'data-font-style'?: FontStyle;
-	'data-line-height'?: CssLineHeight;
-}>`
+const style = css<
+	{
+		'data-background-color'?: CssColor;
+		'data-color'?: CssColor;
+	} & FontStyleProps
+>`
 	box-sizing: border-box;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	color: ${({ 'data-color': color }) => color};
-	font-family: ${({ 'data-font-family': fontFamily }) => fontFamily};
-	font-size: ${({ 'data-font-size': fontSize }) => fontSize};
-	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
-	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
-	line-height: ${({ 'data-line-height': lineHeight }) => lineHeight};
+	${fontStyle}
 `;
 
 const B = styled.b`
@@ -98,21 +80,13 @@ const Var = styled.var`
 	${style}
 `;
 
-export interface StyleProps extends HTMLAttributes<HTMLSpanElement> {
+export interface StyleProps extends HTMLAttributes<HTMLSpanElement>, FontProps {
 	/** Component's background color. */
 	backgroundColor?: Color;
 	/** Component's color. */
 	color?: Color;
 	/** Component's html tag. */
 	element?: StyleElement;
-	fontFamily?: FontFamily;
-	/** Component's font size. */
-	fontSize?: FontSize | Size;
-	/** Component's font weight. */
-	fontWeight?: FontWeight | number;
-	/** If true, the text style is set to italic. */
-	italic?: boolean;
-	lineHeight?: CssLineHeight | LineHeight;
 }
 
 export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
@@ -120,36 +94,11 @@ export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 		{ backgroundColor, children, color, element = 'span', fontFamily, fontSize, fontWeight, italic, lineHeight },
 		ref
 	) => {
-		const theme = useEasyFlexTheme();
-
 		const processedBackgroundColor = useColor(backgroundColor, undefined);
 
 		const processedColor = useColor(color, undefined);
 
-		const processedFontFamily = useMemo<string | undefined>(
-			() => ifNotUndefined(fontFamily, (fontFamily) => theme.font.family[fontFamily]),
-			[fontFamily, theme]
-		);
-
-		const processedFontSize = useMemo<Size | undefined>(
-			() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
-			[fontSize, theme]
-		);
-
-		const processedFontWeight = useMemo<CssFontWeight | number | undefined>(
-			() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
-			[fontWeight, theme]
-		);
-
-		const fontStyle = useMemo<FontStyle | undefined>(
-			() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
-			[italic]
-		);
-
-		const processedLineHeight = useMemo<CssLineHeight | undefined>(
-			() => ifNotUndefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
-			[lineHeight, theme]
-		);
+		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
 
 		const Element = useMemo(() => {
 			switch (element) {
@@ -192,11 +141,7 @@ export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 			<Element
 				data-background-color={processedBackgroundColor}
 				data-color={processedColor}
-				data-font-family={processedFontFamily}
-				data-font-size={processedFontSize}
-				data-font-weight={processedFontWeight}
-				data-font-wtyle={fontStyle}
-				data-line-height={processedLineHeight}
+				{...fontStyleProps}
 				ref={ref}
 			>
 				{children}

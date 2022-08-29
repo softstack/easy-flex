@@ -1,7 +1,7 @@
 import React, { forwardRef, useMemo } from 'react';
 import { BaseFlex, BaseFlexProps } from '../baseFlex/BaseFlex';
 import { FlexDirection, FlipDirection, ViewportThreshold } from '../types';
-import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils';
+import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/utils';
 
 export interface RowProps extends Omit<BaseFlexProps, 'flexDirection'> {
 	/** Flips the content in the direction set by flipDirection. */
