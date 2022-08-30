@@ -62,7 +62,7 @@ export const useFont = ({
 		[lineHeight, theme]
 	);
 
-	const font = useMemo<{
+	return useMemo<{
 		family: string | undefined;
 		size: Size | undefined;
 		weight: number | CssFontWeight | undefined;
@@ -78,8 +78,6 @@ export const useFont = ({
 		}),
 		[processedFontFamily, processedFontSize, processedFontWeight, processedItalic, processedLineHeight]
 	);
-
-	return font;
 };
 
 export const useFontStyleProps = (props: FontProps): FontStyleProps => {
