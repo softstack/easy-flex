@@ -1,14 +1,19 @@
 {
 	"name": "easy-flex",
-	"version": "1.0.0",
+	"version": "1.0.0-alpha.0",
 	"description": "",
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
+	"license": "MIT",
+	"author": "Softstack GmbH <hello@softstack.de> (https://softstack.de)",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/chainsulting/easyflex"
 	},
 	"homepage": "https://github.com/chainsulting/easyflex",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"files": [
+		"lib/**/*"
+	],
 	"scripts": {
 		"test": "jest",
 		"build": "tsc",
@@ -20,11 +25,6 @@
 		"version": "npm run format && git add -A src",
 		"postversion": "git push && git push --tags"
 	},
-	"author": "Softstack GmbH <hello@softstack.de> (https://softstack.de)",
-	"license": "MIT",
-	"files": [
-		"lib/**/*"
-	],
 	"peerDependencies": {
 		"react": "*",
 		"react-dom": "*",
