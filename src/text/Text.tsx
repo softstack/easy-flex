@@ -1,10 +1,11 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { AlignSelf, Color, CssColor, Size, TextAlign, TextElement, WordBreak } from '../types';
+import { useColor } from '../utils/base';
+import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
-import { useColor } from '../utils/utils';
 
 const style = css<
 	{
@@ -18,7 +19,8 @@ const style = css<
 		'data-width-max'?: Size;
 		'data-width-min'?: Size;
 		'data-word-break'?: WordBreak;
-	} & DistanceStyleProps &
+	} & BorderStyleProps &
+		DistanceStyleProps &
 		FontStyleProps &
 		SizeStyleProps
 >`
@@ -27,6 +29,7 @@ const style = css<
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	color: ${({ 'data-color': color }) => color};
 	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
+	${borderStyle}
 	${distanceStyle}
 	${fontStyle}
 	${sizeStyle}
@@ -60,7 +63,12 @@ const P = styled.p`
 	${style}
 `;
 
-export interface TextProps extends HTMLAttributes<HTMLParagraphElement>, DistanceProps, FontProps, SizeProps {
+export interface TextProps
+	extends HTMLAttributes<HTMLParagraphElement>,
+		BorderProps,
+		DistanceProps,
+		FontProps,
+		SizeProps {
 	/** Component's text alignment. */
 	align?: TextAlign;
 	/** The alignment of the component on the parent's element cross axis. */
@@ -78,6 +86,10 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		{
 			align,
 			alignSelf,
+			borderColor,
+			borderRadius,
+			borderStyle,
+			borderWidth,
 			children,
 			color,
 			element = 'p',
@@ -91,10 +103,10 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			lineHeight,
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 			maxHeight,
 			maxWidth,
@@ -102,17 +114,20 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			minWidth,
 			padding,
 			paddingBottom,
+			paddingHorizontal,
 			paddingLeft,
 			paddingRight,
 			paddingTop,
-			paddingHorizontal,
 			paddingVertical,
+			round,
 			width,
 			wordBreak,
 			...props
 		},
 		ref
 	) => {
+		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+
 		const processedColor = useColor(color, undefined);
 
 		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
@@ -120,17 +135,17 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 			padding,
 			paddingBottom,
+			paddingHorizontal,
 			paddingLeft,
 			paddingRight,
 			paddingTop,
-			paddingHorizontal,
 			paddingVertical,
 		});
 
@@ -138,11 +153,11 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			fullHeight,
 			fullWidth,
 			height,
-			heightMax: maxHeight,
-			heightMin: minHeight,
+			maxHeight,
+			maxWidth,
+			minHeight,
+			minWidth,
 			width,
-			widthMax: maxWidth,
-			widthMin: minWidth,
 		});
 
 		const Element = useMemo(() => {
@@ -170,6 +185,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 				data-align-self={alignSelf}
 				data-color={processedColor}
 				data-word-break={wordBreak}
+				{...borderStyleProps}
 				{...distanceStyleProps}
 				{...fontStyleProps}
 				{...sizeStyleProps}

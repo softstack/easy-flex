@@ -1,74 +1,71 @@
-import React, { forwardRef, ImgHTMLAttributes, useMemo } from 'react';
+import React, { forwardRef, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { AbsoluteSize, BorderRadius, ObjectFit, Size } from '../types';
+import { ObjectFit, Size } from '../types';
+import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
-import { getBorderRadius, ifNotUndefined, useEasyFlexTheme } from '../utils/utils';
 
 const StyledBaseImg = styled.img<
 	{
-		'data-border-radius'?: AbsoluteSize;
 		'data-height'?: Size;
 		'data-object-fit'?: ObjectFit;
 		'data-width'?: Size;
-	} & MarginStyleProps &
+	} & BorderStyleProps &
+		MarginStyleProps &
 		SizeStyleProps
 >`
 	display: flex;
 	border-radius: ${({ 'data-border-radius': borderRadius }) => borderRadius};
 	object-fit: ${({ 'data-object-fit': objectFit }) => objectFit};
+	${borderStyle}
 	${marginStyle}
 	${sizeStyle}
 `;
 
 export type BaseImgProps = ImgHTMLAttributes<HTMLImageElement> &
+	BorderProps &
 	MarginProps &
 	SizeProps & {
-		/** Component's border radius. */
-		borderRadius?: BorderRadius | AbsoluteSize;
 		objectFit?: ObjectFit;
-		round?: boolean;
 	};
 
 export const BaseImg = forwardRef<HTMLImageElement, BaseImgProps>(
 	(
 		{
+			borderColor,
 			borderRadius,
+			borderStyle,
+			borderWidth,
 			fullHeight,
 			fullWidth,
 			height,
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 			maxHeight,
 			maxWidth,
 			minHeight,
 			minWidth,
 			objectFit,
-			round = false,
+			round,
 			width,
 			...props
 		},
 		ref
 	) => {
-		const theme = useEasyFlexTheme();
-
-		const processedBorderRadius = useMemo<AbsoluteSize | undefined>(
-			() => (round ? '100000px' : ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius))),
-			[borderRadius, round, theme]
-		);
+		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
 		const marginStyleProps = useMarginStyleProps({
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 		});
 
@@ -76,17 +73,17 @@ export const BaseImg = forwardRef<HTMLImageElement, BaseImgProps>(
 			fullHeight,
 			fullWidth,
 			height,
-			heightMax: maxHeight,
-			heightMin: minHeight,
+			maxHeight,
+			maxWidth,
+			minHeight,
+			minWidth,
 			width,
-			widthMax: maxWidth,
-			widthMin: minWidth,
 		});
 
 		return (
 			<StyledBaseImg
-				data-border-radius={processedBorderRadius}
 				data-object-fit={objectFit}
+				{...borderStyleProps}
 				{...marginStyleProps}
 				{...sizeStyleProps}
 				ref={ref}

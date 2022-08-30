@@ -1,21 +1,21 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
 import { AbsoluteSize, Distance } from '../types';
-import { useDistance } from './utils';
+import { getDistance, useEasyFlexTheme } from './base';
 
 export interface MarginProps {
 	/** Component's margin of all sides. */
 	margin?: Distance | AbsoluteSize;
 	/** Component's bottom margin. */
 	marginBottom?: Distance | AbsoluteSize;
+	/** Component's left and right margin. */
+	marginHorizontal?: Distance | AbsoluteSize;
 	/** Component's left margin. */
 	marginLeft?: Distance | AbsoluteSize;
 	/** Component's right margin. */
 	marginRight?: Distance | AbsoluteSize;
 	/** Component's top margin. */
 	marginTop?: Distance | AbsoluteSize;
-	/** Component's left and right margin. */
-	marginHorizontal?: Distance | AbsoluteSize;
 	/** Component's top and bottom margin. */
 	marginVertical?: Distance | AbsoluteSize;
 }
@@ -27,25 +27,69 @@ export interface MarginStyleProps {
 	'data-margin-top': AbsoluteSize;
 }
 
-export const useMarginStyleProps = (data: {
-	margin?: Distance | AbsoluteSize;
-	marginBottom?: Distance | AbsoluteSize;
-	marginLeft?: Distance | AbsoluteSize;
-	marginRight?: Distance | AbsoluteSize;
-	marginTop?: Distance | AbsoluteSize;
-	marginHorizontal?: Distance | AbsoluteSize;
-	marginVertical?: Distance | AbsoluteSize;
-}): MarginStyleProps => {
-	const distance = useDistance(data);
+export const useMargin = ({
+	margin,
+	marginBottom,
+	marginHorizontal,
+	marginLeft,
+	marginRight,
+	marginTop,
+	marginVertical,
+}: MarginProps): {
+	bottom: AbsoluteSize;
+	left: AbsoluteSize;
+	right: AbsoluteSize;
+	top: AbsoluteSize;
+} => {
+	const theme = useEasyFlexTheme();
+
+	const processedMarginBottom = useMemo<AbsoluteSize>(
+		() => getDistance(theme, marginBottom ?? marginVertical ?? margin ?? '0px'),
+		[margin, marginBottom, marginVertical, theme]
+	);
+
+	const processedMarginLeft = useMemo<AbsoluteSize>(
+		() => getDistance(theme, marginLeft ?? marginHorizontal ?? margin ?? '0px'),
+		[margin, marginHorizontal, marginLeft, theme]
+	);
+
+	const processedMarginRight = useMemo<AbsoluteSize>(
+		() => getDistance(theme, marginRight ?? marginHorizontal ?? margin ?? '0px'),
+		[margin, marginHorizontal, marginRight, theme]
+	);
+
+	const processedMarginTop = useMemo<AbsoluteSize>(
+		() => getDistance(theme, marginTop ?? marginVertical ?? margin ?? '0px'),
+		[margin, marginTop, marginVertical, theme]
+	);
+
+	return useMemo<{
+		bottom: AbsoluteSize;
+		left: AbsoluteSize;
+		right: AbsoluteSize;
+		top: AbsoluteSize;
+	}>(
+		() => ({
+			bottom: processedMarginBottom,
+			left: processedMarginLeft,
+			right: processedMarginRight,
+			top: processedMarginTop,
+		}),
+		[processedMarginBottom, processedMarginLeft, processedMarginRight, processedMarginTop]
+	);
+};
+
+export const useMarginStyleProps = (props: MarginProps): MarginStyleProps => {
+	const margin = useMargin(props);
 
 	return useMemo<MarginStyleProps>(
 		() => ({
-			'data-margin-bottom': distance.margin.bottom,
-			'data-margin-left': distance.margin.left,
-			'data-margin-right': distance.margin.right,
-			'data-margin-top': distance.margin.top,
+			'data-margin-bottom': margin.bottom,
+			'data-margin-left': margin.left,
+			'data-margin-right': margin.right,
+			'data-margin-top': margin.top,
 		}),
-		[distance]
+		[margin]
 	);
 };
 

@@ -6,7 +6,7 @@ export interface ColProps extends Omit<BaseFlexProps, 'flexDirection'> {
     flip?: boolean;
     /** Sets what happens if the content shall be flipped. */
     flipDirection?: FlipDirection;
-    /** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the fallback threshold is used. */
+    /** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
     viewportThreshold?: ViewportThreshold | number;
 }
 export declare const Col: React.ForwardRefExoticComponent<ColProps & React.RefAttributes<HTMLDivElement>>;

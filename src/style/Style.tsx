@@ -1,8 +1,8 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { Color, CssColor, StyleElement } from '../types';
+import { useColor } from '../utils/base';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
-import { useColor } from '../utils/utils';
 
 const style = css<
 	{

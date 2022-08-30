@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
 import { Height, Size, Width } from '../types';
-import { useSize } from './utils';
+import { getHeight, getWidth, ifNotUndefined, useEasyFlexTheme } from './base';
 
 export interface SizeProps {
 	/** Sets the component's height to 100% if true. */
@@ -31,26 +31,86 @@ export interface SizeStyleProps {
 	'data-width-min'?: Size;
 }
 
-export const useSizeStyleProps = (data: {
-	fullHeight?: boolean;
-	fullWidth?: boolean;
-	height?: Height | Size;
-	heightMax?: Height | Size;
-	heightMin?: Height | Size;
-	width?: Width | Size;
-	widthMax?: Width | Size;
-	widthMin?: Width | Size;
-}): SizeStyleProps => {
-	const size = useSize(data);
+export const useSize = ({
+	fullHeight = false,
+	fullWidth = false,
+	height,
+	maxHeight,
+	maxWidth,
+	minHeight,
+	minWidth,
+	width,
+}: SizeProps): {
+	height: Size | undefined;
+	maxHeight: Size | undefined;
+	maxWidth: Size | undefined;
+	minHeight: Size | undefined;
+	minWidth: Size | undefined;
+	width: Size | undefined;
+} => {
+	const theme = useEasyFlexTheme();
+
+	const processedHeight = useMemo<Size | undefined>(
+		() => (fullHeight ? '100%' : ifNotUndefined(height, (height) => getHeight(theme, height))),
+		[fullHeight, height, theme]
+	);
+
+	const processedMaxHeight = useMemo<Size | undefined>(
+		() => ifNotUndefined(maxHeight, (maxHeight) => getHeight(theme, maxHeight)),
+		[maxHeight, theme]
+	);
+
+	const processedMaxWidth = useMemo<Size | undefined>(
+		() => ifNotUndefined(maxWidth, (maxWidth) => getWidth(theme, maxWidth)),
+		[theme, maxWidth]
+	);
+
+	const processedMinHeight = useMemo<Size | undefined>(
+		() => ifNotUndefined(minHeight, (minHeight) => getHeight(theme, minHeight)),
+		[minHeight, theme]
+	);
+
+	const processedMinWidth = useMemo<Size | undefined>(
+		() => ifNotUndefined(minWidth, (minWidth) => getWidth(theme, minWidth)),
+		[theme, minWidth]
+	);
+
+	const processedWidth = useMemo<Size | undefined>(
+		() => (fullWidth ? '100%' : ifNotUndefined(width, (width) => getWidth(theme, width))),
+		[fullWidth, theme, width]
+	);
+
+	return useMemo<{
+		height: Size | undefined;
+		maxHeight: Size | undefined;
+		maxWidth: Size | undefined;
+		minHeight: Size | undefined;
+		minWidth: Size | undefined;
+		width: Size | undefined;
+	}>(
+		() => ({
+			height: processedHeight,
+			maxHeight: processedMaxHeight,
+			maxWidth: processedMaxWidth,
+			minHeight: processedMinHeight,
+			minWidth: processedMinWidth,
+			width: processedWidth,
+		}),
+		[processedHeight, processedMaxHeight, processedMaxWidth, processedMinHeight, processedMinWidth, processedWidth]
+	);
+};
+
+export const useSizeStyleProps = (props: SizeProps): SizeStyleProps => {
+	const size = useSize(props);
 
 	return useMemo<SizeStyleProps>(
 		() => ({
 			'data-height': size.height,
-			'data-height-max': size.heightMax,
-			'data-height-min': size.heightMin,
+			'data-height-max': size.maxHeight,
+			'data-height-min': size.minHeight,
 			'data-width': size.width,
-			'data-width-max': size.widthMax,
-			'data-width-min': size.widthMin,
+			'data-width-max': size.maxWidth,
+			'data-width-min': size.minWidth,
 		}),
 		[size]
 	);

@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
-import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/utils';
+import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
 const StyledSpacing = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
 	display: flex;
@@ -22,7 +22,7 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 	flip?: boolean;
 	/** Enables flipping. */
 	flipEnabled?: boolean;
-	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the fallback threshold is used. */
+	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
 	viewportThreshold?: ViewportThreshold | number;
 	/** Component's height. */
 	height?: Distance | AbsoluteSize;
@@ -42,7 +42,7 @@ export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
 					(flip === undefined &&
 						(viewportThreshold !== undefined
 							? displayWidth < getViewportThreshold(theme, viewportThreshold)
-							: displayWidth < theme.viewport.fallbackThreshold)))
+							: displayWidth < theme.viewport.defaultThreshold)))
 					? getDistance(theme, width)
 					: getDistance(theme, height),
 			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
@@ -55,7 +55,7 @@ export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
 					(flip === undefined &&
 						(viewportThreshold !== undefined
 							? displayWidth < getViewportThreshold(theme, viewportThreshold)
-							: displayWidth < theme.viewport.fallbackThreshold)))
+							: displayWidth < theme.viewport.defaultThreshold)))
 					? getDistance(theme, height)
 					: getDistance(theme, width),
 			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]

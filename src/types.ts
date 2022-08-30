@@ -10,6 +10,18 @@ export type AlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'st
 
 export type AlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
+export type BorderStyle =
+	| 'dashed'
+	| 'dotted'
+	| 'double'
+	| 'groove'
+	| 'hidden'
+	| 'inset'
+	| 'none'
+	| 'outset'
+	| 'ridge'
+	| 'solid';
+
 export type ColorCode =
 	| `#${string}`
 	| `hsl(${number}, ${number}%, ${number}%)`
@@ -420,6 +432,7 @@ export type Width = ThemeSize;
 
 export interface EasyFlexTheme {
 	border: {
+		defaultStyle: BorderStyle;
 		radius: Record<ThemeSize, AbsoluteSize>;
 		width: Record<ThemeSize, AbsoluteSize>;
 	};
@@ -442,7 +455,7 @@ export interface EasyFlexTheme {
 		width: Record<ThemeSize, AbsoluteSize>;
 	};
 	viewport: {
-		fallbackThreshold: number;
+		defaultThreshold: number;
 		threshold: Record<ThemeSize, number>;
 	};
 }

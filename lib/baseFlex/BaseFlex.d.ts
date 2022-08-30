@@ -1,21 +1,16 @@
 import React, { HTMLAttributes } from 'react';
-import { AbsoluteSize, AlignItems, AlignSelf, BaseFlexElement, BorderRadius, BorderWidth, Color, Distance, FlexDirection, JustifyContent, Overflow } from '../types';
+import { AbsoluteSize, AlignItems, AlignSelf, BaseFlexElement, Color, Distance, FlexDirection, JustifyContent, Overflow } from '../types';
+import { BorderProps } from '../utils/border';
 import { DistanceProps } from '../utils/distance';
 import { FontProps } from '../utils/font';
 import { SizeProps } from '../utils/size';
-export interface BaseFlexProps extends HTMLAttributes<HTMLDivElement>, FontProps, DistanceProps, SizeProps {
+export interface BaseFlexProps extends HTMLAttributes<HTMLDivElement>, BorderProps, FontProps, DistanceProps, SizeProps {
     /** The alignment of the component's children on the cross axis. */
     align?: AlignItems;
     /** The alignment of the component on the parent's element cross axis. */
     alignSelf?: AlignSelf;
     /** Component's background color. */
     backgroundColor?: Color;
-    /** Component's border color. */
-    borderColor?: Color;
-    /** Component's border radius. */
-    borderRadius?: BorderRadius | AbsoluteSize;
-    /** Component's border width. */
-    borderWidth?: BorderWidth | AbsoluteSize;
     /** Component's color. */
     color?: Color;
     /** Component's html tag. */

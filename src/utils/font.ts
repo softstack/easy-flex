@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
 import { CssFontWeight, CssLineHeight, FontFamily, FontSize, FontStyle, FontWeight, LineHeight, Size } from '../types';
-import { useFont } from './utils';
+import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useEasyFlexTheme } from './base';
 
 export interface FontProps {
 	fontFamily?: FontFamily;
@@ -22,14 +22,68 @@ export interface FontStyleProps {
 	'data-line-height'?: CssLineHeight;
 }
 
-export const useFontStyleProps = (data: {
-	fontFamily?: FontFamily;
-	fontSize?: FontSize | Size;
-	fontWeight?: FontWeight | number;
-	italic?: boolean;
-	lineHeight?: CssLineHeight | LineHeight;
-}): FontStyleProps => {
-	const font = useFont(data);
+export const useFont = ({
+	fontFamily,
+	fontSize,
+	fontWeight,
+	italic,
+	lineHeight,
+}: FontProps): {
+	family: string | undefined;
+	size: Size | undefined;
+	weight: number | CssFontWeight | undefined;
+	style: FontStyle | undefined;
+	lineHeight: CssLineHeight | undefined;
+} => {
+	const theme = useEasyFlexTheme();
+
+	const processedFontFamily = useMemo<string | undefined>(
+		() => ifNotUndefined(fontFamily, (fontFamily) => theme.font.family[fontFamily]),
+		[fontFamily, theme]
+	);
+
+	const processedFontSize = useMemo<Size | undefined>(
+		() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
+		[fontSize, theme]
+	);
+
+	const processedFontWeight = useMemo<CssFontWeight | number | undefined>(
+		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
+		[fontWeight, theme]
+	);
+
+	const processedItalic = useMemo<FontStyle | undefined>(
+		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
+		[italic]
+	);
+
+	const processedLineHeight = useMemo<CssLineHeight | undefined>(
+		() => ifNotUndefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
+		[lineHeight, theme]
+	);
+
+	const font = useMemo<{
+		family: string | undefined;
+		size: Size | undefined;
+		weight: number | CssFontWeight | undefined;
+		style: FontStyle | undefined;
+		lineHeight: CssLineHeight | undefined;
+	}>(
+		() => ({
+			family: processedFontFamily,
+			size: processedFontSize,
+			weight: processedFontWeight,
+			style: processedItalic,
+			lineHeight: processedLineHeight,
+		}),
+		[processedFontFamily, processedFontSize, processedFontWeight, processedItalic, processedLineHeight]
+	);
+
+	return font;
+};
+
+export const useFontStyleProps = (props: FontProps): FontStyleProps => {
+	const font = useFont(props);
 
 	return useMemo<FontStyleProps>(
 		() => ({

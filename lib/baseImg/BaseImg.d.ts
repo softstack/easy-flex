@@ -1,16 +1,11 @@
 import React, { ImgHTMLAttributes } from 'react';
-import { AbsoluteSize, BorderRadius, ObjectFit } from '../types';
+import { ObjectFit } from '../types';
+import { BorderProps } from '../utils/border';
 import { MarginProps } from '../utils/margin';
 import { SizeProps } from '../utils/size';
-export declare type BaseImgProps = ImgHTMLAttributes<HTMLImageElement> & MarginProps & SizeProps & {
-    /** Component's border radius. */
-    borderRadius?: BorderRadius | AbsoluteSize;
+export declare type BaseImgProps = ImgHTMLAttributes<HTMLImageElement> & BorderProps & MarginProps & SizeProps & {
     objectFit?: ObjectFit;
-    round?: boolean;
 };
-export declare const BaseImg: React.ForwardRefExoticComponent<React.ImgHTMLAttributes<HTMLImageElement> & MarginProps & SizeProps & {
-    /** Component's border radius. */
-    borderRadius?: AbsoluteSize | import("../types").ThemeSize | undefined;
+export declare const BaseImg: React.ForwardRefExoticComponent<React.ImgHTMLAttributes<HTMLImageElement> & BorderProps & MarginProps & SizeProps & {
     objectFit?: ObjectFit | undefined;
-    round?: boolean | undefined;
 } & React.RefAttributes<HTMLImageElement>>;

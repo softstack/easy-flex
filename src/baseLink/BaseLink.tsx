@@ -1,8 +1,8 @@
 import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
 import { AlignSelf, Color, CssColor } from '../types';
+import { useColor } from '../utils/base';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
-import { useColor } from '../utils/utils';
 
 const StyledBaseLink = styled.a<
 	{
@@ -43,10 +43,10 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 			hoverColor,
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 			newTab = false,
 			...props
@@ -62,10 +62,10 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 		const marginStyleProps = useMarginStyleProps({
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 		});
 

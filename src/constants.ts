@@ -82,6 +82,7 @@ export const themeSizes = [
 
 export const initialFlexTheme: EasyFlexTheme = {
 	border: {
+		defaultStyle: 'solid',
 		radius: {
 			'8xs': '0px',
 			'7xs': '0px',
@@ -323,7 +324,7 @@ export const initialFlexTheme: EasyFlexTheme = {
 		},
 	},
 	viewport: {
-		fallbackThreshold: 0,
+		defaultThreshold: 0,
 		threshold: {
 			'8xs': 0,
 			'7xs': 0,

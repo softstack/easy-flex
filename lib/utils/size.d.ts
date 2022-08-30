@@ -25,14 +25,13 @@ export interface SizeStyleProps {
     'data-width-max'?: Size;
     'data-width-min'?: Size;
 }
-export declare const useSizeStyleProps: (data: {
-    fullHeight?: boolean;
-    fullWidth?: boolean;
-    height?: Height | Size;
-    heightMax?: Height | Size;
-    heightMin?: Height | Size;
-    width?: Width | Size;
-    widthMax?: Width | Size;
-    widthMin?: Width | Size;
-}) => SizeStyleProps;
+export declare const useSize: ({ fullHeight, fullWidth, height, maxHeight, maxWidth, minHeight, minWidth, width, }: SizeProps) => {
+    height: Size | undefined;
+    maxHeight: Size | undefined;
+    maxWidth: Size | undefined;
+    minHeight: Size | undefined;
+    minWidth: Size | undefined;
+    width: Size | undefined;
+};
+export declare const useSizeStyleProps: (props: SizeProps) => SizeStyleProps;
 export declare const sizeStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<SizeStyleProps, any>>;

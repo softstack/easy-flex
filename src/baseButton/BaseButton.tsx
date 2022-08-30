@@ -1,32 +1,17 @@
-import React, { ButtonHTMLAttributes, forwardRef, useMemo } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
-import {
-	AbsoluteSize,
-	AlignItems,
-	AlignSelf,
-	BorderRadius,
-	BorderWidth,
-	Color,
-	CssColor,
-	JustifyContent,
-	Overflow,
-	Size,
-	Width,
-} from '../types';
+import { AlignItems, AlignSelf, Color, CssColor, JustifyContent, Overflow, Size, Width } from '../types';
+import { useColor } from '../utils/base';
+import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
-import { getBorderRadius, getBorderWidth, ifNotUndefined, useColor, useEasyFlexTheme } from '../utils/utils';
 
 const StyledBaseButton = styled.button<
 	{
 		'data-align'?: AlignItems;
 		'data-align-self'?: AlignSelf;
 		'data-background-color': CssColor;
-		'data-border-color'?: CssColor;
-		'data-border-radius'?: AbsoluteSize;
-		'data-border-style'?: 'solid';
-		'data-border-width'?: AbsoluteSize;
 		'data-color'?: CssColor;
 		'data-grow'?: number;
 		'data-justify'?: JustifyContent;
@@ -34,7 +19,8 @@ const StyledBaseButton = styled.button<
 		'data-overflow-x'?: Overflow;
 		'data-overflow-y'?: Overflow;
 		'data-shrink'?: number;
-	} & DistanceStyleProps &
+	} & BorderStyleProps &
+		DistanceStyleProps &
 		FontStyleProps &
 		SizeStyleProps
 >`
@@ -46,23 +32,14 @@ const StyledBaseButton = styled.button<
 	align-items: ${({ 'data-align': align }) => align};
 	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
-	border-color: ${({ 'data-border-color': borderColor }) => borderColor};
-	border-radius: ${({ 'data-border-radius': borderRadius }) => borderRadius};
-	border-style: ${({ 'data-border-style': borderStyle }) => borderStyle};
-	border-width: ${({ 'data-border-width': borderWidth }) => borderWidth};
 	color: ${({ 'data-color': color }) => color};
 	flex-grow: ${({ 'data-grow': grow }) => grow};
-	height: ${({ 'data-height': height }) => height};
-	max-height: ${({ 'data-height-max': heightMax }) => heightMax};
-	min-height: ${({ 'data-height-min': heightMin }) => heightMin};
 	justify-content: ${({ 'data-justify': justify }) => justify};
 	overflow: ${({ 'data-overflow': overflow }) => overflow};
 	overflow-x: ${({ 'data-overflow-x': overflowX }) => overflowX};
 	overflow-y: ${({ 'data-overflow-y': overflowY }) => overflowY};
 	flex-shrink: ${({ 'data-shrink': shrink }) => shrink};
-	width: ${({ 'data-width': width }) => width};
-	max-width: ${({ 'data-width-max': widthMax }) => widthMax};
-	min-width: ${({ 'data-width-min': widthMin }) => widthMin};
+	${borderStyle}
 	${distanceStyle}
 	${fontStyle}
 	${sizeStyle}
@@ -76,19 +53,18 @@ const StyledBaseButton = styled.button<
 	}
 `;
 
-export interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, DistanceProps, FontProps, SizeProps {
+export interface BaseButtonProps
+	extends ButtonHTMLAttributes<HTMLButtonElement>,
+		BorderProps,
+		DistanceProps,
+		FontProps,
+		SizeProps {
 	/** The alignment of the component's children on the cross axis. */
 	align?: AlignItems;
 	/** The alignment of the component on the parent's element cross axis. */
 	alignSelf?: AlignSelf;
 	/** Component's background color. */
 	backgroundColor?: Color;
-	/** Component's border color. */
-	borderColor?: Color;
-	/** Component's border radius. */
-	borderRadius?: BorderRadius | AbsoluteSize;
-	/** Component's border width. */
-	borderWidth?: BorderWidth | AbsoluteSize;
 	/** Component's color. */
 	color?: Color;
 	/** Component's flex grow. */
@@ -118,10 +94,10 @@ export type ExternalBaseButtonProps = Omit<
 	| 'justify'
 	| 'padding'
 	| 'paddingBottom'
+	| 'paddingHorizontal'
 	| 'paddingLeft'
 	| 'paddingRight'
 	| 'paddingTop'
-	| 'paddingHorizontal'
 	| 'paddingVertical'
 >;
 
@@ -133,6 +109,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			backgroundColor,
 			borderColor,
 			borderRadius,
+			borderStyle,
 			borderWidth,
 			children,
 			color,
@@ -148,10 +125,10 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			lineHeight,
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 			maxHeight,
 			maxWidth,
@@ -162,51 +139,38 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			overflowY,
 			padding,
 			paddingBottom,
+			paddingHorizontal,
 			paddingLeft,
 			paddingRight,
 			paddingTop,
-			paddingHorizontal,
 			paddingVertical,
+			round,
 			shrink,
 			width,
 			...props
 		},
 		ref
 	) => {
-		const theme = useEasyFlexTheme();
-
 		const processedBackgroundColor = useColor(backgroundColor, 'transparent');
 
-		const processedBorderColor = useColor(borderColor, undefined);
-
-		const processedBorderRadius = useMemo<AbsoluteSize | undefined>(
-			() => ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius)),
-			[borderRadius, theme]
-		);
-
-		const processedBorderStyle = useMemo<'solid' | undefined>(() => (borderWidth ? 'solid' : undefined), [borderWidth]);
-
-		const processedBorderWidth = useMemo<AbsoluteSize | undefined>(
-			() => ifNotUndefined(borderWidth, (borderWidth) => getBorderWidth(theme, borderWidth)),
-			[borderWidth, theme]
-		);
+		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
 		const processedColor = useColor(color, undefined);
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
 			marginBottom,
+			marginHorizontal,
 			marginLeft,
 			marginRight,
 			marginTop,
-			marginHorizontal,
 			marginVertical,
 			padding,
 			paddingBottom,
+			paddingHorizontal,
 			paddingLeft,
 			paddingRight,
 			paddingTop,
-			paddingHorizontal,
 			paddingVertical,
 		});
 
@@ -216,11 +180,11 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			fullHeight,
 			fullWidth,
 			height,
-			heightMax: maxHeight,
-			heightMin: minHeight,
+			maxHeight,
+			maxWidth,
+			minHeight,
+			minWidth,
 			width,
-			widthMax: maxWidth,
-			widthMin: minWidth,
 		});
 
 		return (
@@ -228,10 +192,6 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 				data-align={align}
 				data-align-self={alignSelf}
 				data-background-color={processedBackgroundColor}
-				data-border-color={processedBorderColor}
-				data-border-radius={processedBorderRadius}
-				data-border-style={processedBorderStyle}
-				data-border-width={processedBorderWidth}
 				data-color={processedColor}
 				data-grow={grow}
 				data-justify={justify}
@@ -239,6 +199,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 				data-overflow-x={overflowX}
 				data-overflow-y={overflowY}
 				data-shrink={shrink}
+				{...borderStyleProps}
 				{...distanceStyleProps}
 				{...fontStyleProps}
 				{...sizeStyleProps}

@@ -5,7 +5,7 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
     flip?: boolean;
     /** Enables flipping. */
     flipEnabled?: boolean;
-    /** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the fallback threshold is used. */
+    /** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
     viewportThreshold?: ViewportThreshold | number;
     /** Component's height. */
     height?: Distance | AbsoluteSize;

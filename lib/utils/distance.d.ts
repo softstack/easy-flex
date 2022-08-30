@@ -1,22 +1,21 @@
-import { AbsoluteSize, Distance } from '../types';
+import { AbsoluteSize } from '../types';
 import { MarginProps, MarginStyleProps } from './margin';
 import { PaddingProps, PaddingStyleProps } from './padding';
 export declare type DistanceProps = MarginProps & PaddingProps;
 export declare type DistanceStyleProps = MarginStyleProps & PaddingStyleProps;
-export declare const useDistanceStyleProps: (data: {
-    margin?: Distance | AbsoluteSize;
-    marginBottom?: Distance | AbsoluteSize;
-    marginLeft?: Distance | AbsoluteSize;
-    marginRight?: Distance | AbsoluteSize;
-    marginTop?: Distance | AbsoluteSize;
-    marginHorizontal?: Distance | AbsoluteSize;
-    marginVertical?: Distance | AbsoluteSize;
-    padding?: Distance | AbsoluteSize;
-    paddingBottom?: Distance | AbsoluteSize;
-    paddingLeft?: Distance | AbsoluteSize;
-    paddingRight?: Distance | AbsoluteSize;
-    paddingTop?: Distance | AbsoluteSize;
-    paddingHorizontal?: Distance | AbsoluteSize;
-    paddingVertical?: Distance | AbsoluteSize;
-}) => DistanceStyleProps;
+export declare const useDistance: ({ margin, marginBottom, marginHorizontal, marginLeft, marginRight, marginTop, marginVertical, padding, paddingBottom, paddingHorizontal, paddingLeft, paddingRight, paddingTop, paddingVertical, }: DistanceProps) => {
+    margin: {
+        bottom: AbsoluteSize;
+        left: AbsoluteSize;
+        right: AbsoluteSize;
+        top: AbsoluteSize;
+    };
+    padding: {
+        bottom: AbsoluteSize;
+        left: AbsoluteSize;
+        right: AbsoluteSize;
+        top: AbsoluteSize;
+    };
+};
+export declare const useDistanceStyleProps: (props: DistanceProps) => DistanceStyleProps;
 export declare const distanceStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<DistanceStyleProps, any>>;

@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useMemo,
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor } from '../types';
-import { isAbsoluteSize, useColor, useEasyFlexTheme } from '../utils/utils';
+import { isAbsoluteSize, useColor, useEasyFlexTheme } from '../utils/base';
 
 const Background = styled.div<{
 	'data-background-color': CssColor;

@@ -1,31 +1,67 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, Distance } from '../types';
-import { MarginProps, marginStyle, MarginStyleProps } from './margin';
-import { PaddingProps, paddingStyle, PaddingStyleProps } from './padding';
-import { useDistance } from './utils';
+import { AbsoluteSize } from '../types';
+import { MarginProps, marginStyle, MarginStyleProps, useMargin } from './margin';
+import { PaddingProps, paddingStyle, PaddingStyleProps, usePadding } from './padding';
 
 export type DistanceProps = MarginProps & PaddingProps;
 
 export type DistanceStyleProps = MarginStyleProps & PaddingStyleProps;
 
-export const useDistanceStyleProps = (data: {
-	margin?: Distance | AbsoluteSize;
-	marginBottom?: Distance | AbsoluteSize;
-	marginLeft?: Distance | AbsoluteSize;
-	marginRight?: Distance | AbsoluteSize;
-	marginTop?: Distance | AbsoluteSize;
-	marginHorizontal?: Distance | AbsoluteSize;
-	marginVertical?: Distance | AbsoluteSize;
-	padding?: Distance | AbsoluteSize;
-	paddingBottom?: Distance | AbsoluteSize;
-	paddingLeft?: Distance | AbsoluteSize;
-	paddingRight?: Distance | AbsoluteSize;
-	paddingTop?: Distance | AbsoluteSize;
-	paddingHorizontal?: Distance | AbsoluteSize;
-	paddingVertical?: Distance | AbsoluteSize;
-}): DistanceStyleProps => {
-	const distance = useDistance(data);
+export const useDistance = ({
+	margin,
+	marginBottom,
+	marginHorizontal,
+	marginLeft,
+	marginRight,
+	marginTop,
+	marginVertical,
+	padding,
+	paddingBottom,
+	paddingHorizontal,
+	paddingLeft,
+	paddingRight,
+	paddingTop,
+	paddingVertical,
+}: DistanceProps): {
+	margin: {
+		bottom: AbsoluteSize;
+		left: AbsoluteSize;
+		right: AbsoluteSize;
+		top: AbsoluteSize;
+	};
+	padding: {
+		bottom: AbsoluteSize;
+		left: AbsoluteSize;
+		right: AbsoluteSize;
+		top: AbsoluteSize;
+	};
+} => {
+	const processedMargin = useMargin({
+		margin,
+		marginBottom,
+		marginHorizontal,
+		marginLeft,
+		marginRight,
+		marginTop,
+		marginVertical,
+	});
+
+	const processedPadding = usePadding({
+		padding,
+		paddingBottom,
+		paddingHorizontal,
+		paddingLeft,
+		paddingRight,
+		paddingTop,
+		paddingVertical,
+	});
+
+	return useMemo(() => ({ margin: processedMargin, padding: processedPadding }), [processedMargin, processedPadding]);
+};
+
+export const useDistanceStyleProps = (props: DistanceProps): DistanceStyleProps => {
+	const distance = useDistance(props);
 
 	return useMemo<DistanceStyleProps>(
 		() => ({
