@@ -1,14 +1,13 @@
 import React, { HTMLAttributes } from 'react';
-import { AlignSelf, Color, TextAlign, TextElement, WordBreak } from '../types';
+import { Color, TextAlign, TextElement, WordBreak } from '../types';
 import { BorderProps } from '../utils/border';
 import { DistanceProps } from '../utils/distance';
+import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { SizeProps } from '../utils/size';
-export interface TextProps extends HTMLAttributes<HTMLParagraphElement>, BorderProps, DistanceProps, FontProps, SizeProps {
+export interface TextProps extends HTMLAttributes<HTMLParagraphElement>, BorderProps, DistanceProps, FlexItemProps, FontProps, SizeProps {
     /** Component's text alignment. */
     align?: TextAlign;
-    /** The alignment of the component on the parent's element cross axis. */
-    alignSelf?: AlignSelf;
     /** Component's color */
     color?: Color;
     /** Component's html tag. */

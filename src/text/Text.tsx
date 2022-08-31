@@ -1,16 +1,16 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { AlignSelf, Color, CssColor, Size, TextAlign, TextElement, WordBreak } from '../types';
+import { Color, CssColor, Size, TextAlign, TextElement, WordBreak } from '../types';
 import { useColor } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
+import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
 	{
 		'data-align'?: TextAlign;
-		'data-align-self'?: AlignSelf;
 		'data-color'?: CssColor;
 		'data-height'?: Size;
 		'data-height-max'?: Size;
@@ -21,16 +21,17 @@ const style = css<
 		'data-word-break'?: WordBreak;
 	} & BorderStyleProps &
 		DistanceStyleProps &
+		FlexItemStyleProps &
 		FontStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
 	text-align: ${({ 'data-align': align }) => align};
-	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	color: ${({ 'data-color': color }) => color};
 	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
 	${borderStyle}
 	${distanceStyle}
+	${flexItemStyle}
 	${fontStyle}
 	${sizeStyle}
 `;
@@ -67,12 +68,11 @@ export interface TextProps
 	extends HTMLAttributes<HTMLParagraphElement>,
 		BorderProps,
 		DistanceProps,
+		FlexItemProps,
 		FontProps,
 		SizeProps {
 	/** Component's text alignment. */
 	align?: TextAlign;
-	/** The alignment of the component on the parent's element cross axis. */
-	alignSelf?: AlignSelf;
 	/** Component's color */
 	color?: Color;
 	/** Component's html tag. */
@@ -86,6 +86,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		{
 			align,
 			alignSelf,
+			basis,
 			borderColor,
 			borderRadius,
 			borderStyle,
@@ -93,11 +94,13 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			children,
 			color,
 			element = 'p',
+			flex,
 			fontFamily,
 			fontSize,
 			fontWeight,
 			fullHeight,
 			fullWidth,
+			grow,
 			height,
 			italic,
 			lineHeight,
@@ -120,6 +123,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			paddingTop,
 			paddingVertical,
 			round,
+			shrink,
 			width,
 			wordBreak,
 			...props
@@ -129,6 +133,8 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
 		const processedColor = useColor(color, undefined);
+
+		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
 		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
 
@@ -182,11 +188,11 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		return (
 			<Element
 				data-align={align}
-				data-align-self={alignSelf}
 				data-color={processedColor}
 				data-word-break={wordBreak}
 				{...borderStyleProps}
 				{...distanceStyleProps}
+				{...flexItemStyleProps}
 				{...fontStyleProps}
 				{...sizeStyleProps}
 				ref={ref}

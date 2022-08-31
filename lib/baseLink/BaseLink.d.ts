@@ -1,9 +1,8 @@
 import React, { AnchorHTMLAttributes } from 'react';
-import { AlignSelf, Color } from '../types';
+import { Color } from '../types';
+import { FlexItemProps } from '../utils/flexItem';
 import { MarginProps } from '../utils/margin';
-export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, MarginProps {
-    /** The alignment of the component on the parent's element cross axis. */
-    alignSelf?: AlignSelf;
+export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, FlexItemProps, MarginProps {
     /** Component's color. */
     color?: Color;
     /** Component's hover color. */

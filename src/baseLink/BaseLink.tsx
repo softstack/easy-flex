@@ -1,21 +1,22 @@
 import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { AlignSelf, Color, CssColor } from '../types';
+import { Color, CssColor } from '../types';
 import { useColor } from '../utils/base';
+import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 
 const StyledBaseLink = styled.a<
 	{
-		'data-align-self'?: AlignSelf;
 		'data-color'?: CssColor;
 		'data-hover-color'?: CssColor;
-	} & MarginStyleProps
+	} & FlexItemStyleProps &
+		MarginStyleProps
 >`
 	box-sizing: border-box;
 	text-decoration: none;
 	padding: 0;
-	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	color: ${({ 'data-color': color }) => color};
+	${flexItemStyle}
 	${marginStyle}
 
 	&:hover {
@@ -23,9 +24,7 @@ const StyledBaseLink = styled.a<
 	}
 `;
 
-export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, MarginProps {
-	/** The alignment of the component on the parent's element cross axis. */
-	alignSelf?: AlignSelf;
+export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, FlexItemProps, MarginProps {
 	/** Component's color. */
 	color?: Color;
 	/** Component's hover color. */
@@ -38,8 +37,11 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 	(
 		{
 			alignSelf,
+			basis,
 			children,
 			color = 'inherit',
+			flex,
+			grow,
 			hoverColor,
 			margin,
 			marginBottom,
@@ -49,6 +51,7 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 			marginTop,
 			marginVertical,
 			newTab = false,
+			shrink,
 			...props
 		},
 		ref
@@ -58,6 +61,8 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 		const processedHoverColor = useColor(hoverColor, undefined);
 
 		const target = useMemo<'_blank' | undefined>(() => (newTab ? '_blank' : undefined), [newTab]);
+
+		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
 		const marginStyleProps = useMarginStyleProps({
 			margin,
@@ -71,9 +76,9 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 
 		return (
 			<StyledBaseLink
-				data-align-self={alignSelf}
 				data-color={processedColor}
 				data-hover-color={processedHoverColor}
+				{...flexItemStyleProps}
 				{...marginStyleProps}
 				rel="noopener noreferrer"
 				target={target}
