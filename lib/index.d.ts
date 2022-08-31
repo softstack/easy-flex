@@ -1,5 +1,6 @@
 export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
+export * from './baseGrid/BaseGrid';
 export * from './baseImg/BaseImg';
 export * from './baseLink/BaseLink';
 export * from './baseModal/BaseModal';

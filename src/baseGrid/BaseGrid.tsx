@@ -1,100 +1,92 @@
-import React, { ButtonHTMLAttributes, forwardRef } from 'react';
-import styled from 'styled-components';
-import { Color, CssColor, Overflow } from '../types';
+import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
+import styled, { css } from 'styled-components';
+import { BaseGridElement, Color, CssColor } from '../types';
 import { useColor } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
-import {
-	FlexContainerProps,
-	flexContainerStyle,
-	FlexContainerStyleProps,
-	useFlexContainerStyleProps,
-} from '../utils/flexContainer';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
-const StyledBaseButton = styled.button<
+const style = css<
 	{
-		'data-background-color': CssColor;
+		'data-background-color'?: CssColor;
 		'data-color'?: CssColor;
-		'data-overflow'?: Overflow;
-		'data-overflow-x'?: Overflow;
-		'data-overflow-y'?: Overflow;
 	} & BorderStyleProps &
 		DistanceStyleProps &
-		FlexContainerStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
 		SizeStyleProps
 >`
-	display: flex;
+	display: grid;
 	box-sizing: border-box;
-	border: none;
-	cursor: pointer;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	color: ${({ 'data-color': color }) => color};
-	overflow: ${({ 'data-overflow': overflow }) => overflow};
-	overflow-x: ${({ 'data-overflow-x': overflowX }) => overflowX};
-	overflow-y: ${({ 'data-overflow-y': overflowY }) => overflowY};
 	${borderStyle}
 	${distanceStyle}
-	${flexContainerStyle}
 	${flexItemStyle}
 	${fontStyle}
 	${sizeStyle}
-	
-	&:disabled {
-		cursor: not-allowed;
-	}
-
-	&:focus:not(:focus-visible) {
-		outline: 0;
-	}
 `;
 
-export interface BaseButtonProps
-	extends ButtonHTMLAttributes<HTMLButtonElement>,
+const Article = styled.article`
+	${style}
+`;
+
+const Aside = styled.aside`
+	${style}
+`;
+
+const Div = styled.div`
+	${style}
+`;
+
+const Figure = styled.figure`
+	${style}
+`;
+
+const Footer = styled.footer`
+	${style}
+`;
+
+const Header = styled.header`
+	${style}
+`;
+
+const Main = styled.main`
+	${style}
+`;
+
+const Nav = styled.nav`
+	${style}
+`;
+
+const Section = styled.section`
+	${style}
+`;
+
+const Summary = styled.summary`
+	${style}
+`;
+
+export interface BaseGridProps
+	extends HTMLAttributes<HTMLDivElement>,
 		BorderProps,
-		DistanceProps,
-		FlexContainerProps,
 		FlexItemProps,
 		FontProps,
+		DistanceProps,
 		SizeProps {
 	/** Component's background color. */
 	backgroundColor?: Color;
 	/** Component's color. */
 	color?: Color;
-	/** Component's overflow behaviour. */
-	overflow?: Overflow;
-	/** Component's verflow behaviour on left and right edges. */
-	overflowX?: Overflow;
-	/** Component's overflow behaviour on top and bottom edges. */
-	overflowY?: Overflow;
+	/** Component's html tag. */
+	element?: BaseGridElement;
 }
 
-export type ExternalBaseButtonProps = Omit<
-	BaseButtonProps,
-	| 'align'
-	| 'backgroundColor'
-	| 'borderColor'
-	| 'borderRadius'
-	| 'borderWidth'
-	| 'color'
-	| 'justify'
-	| 'padding'
-	| 'paddingBottom'
-	| 'paddingHorizontal'
-	| 'paddingLeft'
-	| 'paddingRight'
-	| 'paddingTop'
-	| 'paddingVertical'
->;
-
-export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
+export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 	(
 		{
-			align,
 			alignSelf,
 			backgroundColor,
 			basis,
@@ -104,18 +96,16 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			borderWidth,
 			children,
 			color,
+			element = 'div',
 			flex,
-			direction = 'row',
 			fontFamily,
 			fontSize,
 			fontWeight,
 			fullHeight,
 			fullWidth,
-			gap,
 			grow,
 			height,
 			italic,
-			justify,
 			lineHeight,
 			margin,
 			marginBottom,
@@ -128,9 +118,6 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			maxWidth,
 			minHeight,
 			minWidth,
-			overflow,
-			overflowX,
-			overflowY,
 			padding,
 			paddingBottom,
 			paddingHorizontal,
@@ -145,11 +132,15 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 		},
 		ref
 	) => {
-		const processedBackgroundColor = useColor(backgroundColor, 'transparent');
+		const processedBackgroundColor = useColor(backgroundColor, undefined);
 
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
 		const processedColor = useColor(color, undefined);
+
+		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+
+		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
@@ -168,12 +159,6 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			paddingVertical,
 		});
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
-
-		const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
-
-		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
-
 		const sizeStyleProps = useSizeStyleProps({
 			fullHeight,
 			fullWidth,
@@ -185,16 +170,37 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			width,
 		});
 
+		const Element = useMemo(() => {
+			switch (element) {
+				case 'article':
+					return Article;
+				case 'aside':
+					return Aside;
+				case 'div':
+					return Div;
+				case 'figure':
+					return Figure;
+				case 'footer':
+					return Footer;
+				case 'header':
+					return Header;
+				case 'main':
+					return Main;
+				case 'nav':
+					return Nav;
+				case 'section':
+					return Section;
+				case 'summary':
+					return Summary;
+			}
+		}, [element]);
+
 		return (
-			<StyledBaseButton
+			<Element
 				data-background-color={processedBackgroundColor}
 				data-color={processedColor}
-				data-overflow={overflow}
-				data-overflow-x={overflowX}
-				data-overflow-y={overflowY}
 				{...borderStyleProps}
 				{...distanceStyleProps}
-				{...flexContainerStyleProps}
 				{...flexItemStyleProps}
 				{...fontStyleProps}
 				{...sizeStyleProps}
@@ -202,9 +208,9 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 				{...props}
 			>
 				{children}
-			</StyledBaseButton>
+			</Element>
 		);
 	}
 );
 
-BaseButton.displayName = 'BaseButton';
+BaseGrid.displayName = 'BaseGrid';

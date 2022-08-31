@@ -3,7 +3,7 @@ import { BaseFlex, BaseFlexProps } from '../baseFlex/BaseFlex';
 import { FlexDirection, FlipDirection, ViewportThreshold } from '../types';
 import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
-export interface ColProps extends Omit<BaseFlexProps, 'flexDirection'> {
+export interface ColProps extends Omit<BaseFlexProps, 'direction'> {
 	/** Flips the content in the direction set by flipDirection. */
 	flip?: boolean;
 	/** Sets what happens if the content shall be flipped. */
@@ -17,7 +17,7 @@ export const Col = forwardRef<HTMLDivElement, ColProps>(
 		const theme = useEasyFlexTheme();
 		const { width } = useDimension();
 
-		const flexDirection = useMemo<FlexDirection>(() => {
+		const direction = useMemo<FlexDirection>(() => {
 			if (
 				flipDirection !== undefined &&
 				(flip ||
@@ -39,7 +39,7 @@ export const Col = forwardRef<HTMLDivElement, ColProps>(
 		}, [flip, flipDirection, theme, viewportThreshold, width]);
 
 		return (
-			<BaseFlex flexDirection={flexDirection} ref={ref} {...props}>
+			<BaseFlex direction={direction} ref={ref} {...props}>
 				{children}
 			</BaseFlex>
 		);

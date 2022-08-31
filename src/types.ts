@@ -265,9 +265,13 @@ export type CssColor = ColorCode | ColorKeyword | ColorName;
 
 export type AbsoluteSize = Px | Rem | Vh | Vw;
 
-export type Size = Percent | AbsoluteSize | 'fit-content';
+export type Flex = AbsoluteSize | Percent | 'auto' | 'none';
 
-export type CssLineHeight = 'normal' | Percent | number;
+export type FlexBasis = AbsoluteSize | Percent | 'auto';
+
+export type Size = AbsoluteSize | Percent | 'fit-content';
+
+export type CssLineHeight = Percent | number | 'normal';
 
 // CSS end
 
@@ -295,6 +299,18 @@ export type ThemeSize =
 	| '8xl';
 
 export type BaseFlexElement =
+	| 'article'
+	| 'aside'
+	| 'div'
+	| 'figure'
+	| 'footer'
+	| 'header'
+	| 'main'
+	| 'nav'
+	| 'section'
+	| 'summary';
+
+export type BaseGridElement =
 	| 'article'
 	| 'aside'
 	| 'div'

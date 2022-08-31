@@ -8,7 +8,7 @@
 		"type": "git",
 		"url": "https://github.com/chainsulting/easyflex"
 	},
-	"homepage": "https://github.com/chainsulting/easyflex",
+	"homepage": "https://github.com/chainsulting/easyflex#readme",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"files": [

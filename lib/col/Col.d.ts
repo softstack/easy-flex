@@ -1,7 +1,7 @@
 import React from 'react';
 import { BaseFlexProps } from '../baseFlex/BaseFlex';
 import { FlipDirection, ViewportThreshold } from '../types';
-export interface ColProps extends Omit<BaseFlexProps, 'flexDirection'> {
+export interface ColProps extends Omit<BaseFlexProps, 'direction'> {
     /** Flips the content in the direction set by flipDirection. */
     flip?: boolean;
     /** Sets what happens if the content shall be flipped. */

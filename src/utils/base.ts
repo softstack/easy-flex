@@ -199,7 +199,7 @@ export const useViewport = (): Record<'default' | ThemeSize, boolean> => {
 
 	return useMemo<Record<'default' | ThemeSize, boolean>>(
 		() => ({
-			default: width < theme.viewport.defaultThreshold,
+			default: width >= theme.viewport.defaultThreshold,
 			'8xs': width >= getViewportThreshold(theme, '8xs'),
 			'7xs': width >= getViewportThreshold(theme, '7xs'),
 			'6xs': width >= getViewportThreshold(theme, '6xs'),

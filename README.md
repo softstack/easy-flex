@@ -7,6 +7,7 @@ import { FC } from 'react';
 const theme: DeepPartial<EasyFlexTheme> = {
 	color: {
 		primaryText: 'blue',
+		secondaryText: '#bd3bc2',
 	},
 	distance: { m: '20px', l: '40px' },
 	font: {
@@ -20,8 +21,10 @@ const theme: DeepPartial<EasyFlexTheme> = {
 export const App: FC = () => {
 	return (
 		<EasyFlexProvider theme={theme}>
-			<Col fontSize="m" gap="m" minHeight="100vh" minWidth="100vw" align="center" justify="center">
-				<Text fontSize="l">Example</Text>
+			<Col color="primaryText" fontSize="m" gap="m" minHeight="100vh" minWidth="100vw" align="center" justify="center">
+				<Text color="secondaryText" fontSize="l">
+					Example
+				</Text>
 				<Text>This is an example</Text>
 			</Col>
 		</EasyFlexProvider>
