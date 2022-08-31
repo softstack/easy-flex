@@ -1,15 +1,13 @@
 import React, { forwardRef, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { ObjectFit, Size } from '../types';
+import { ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledBaseImg = styled.img<
 	{
-		'data-height'?: Size;
 		'data-object-fit'?: ObjectFit;
-		'data-width'?: Size;
 	} & BorderStyleProps &
 		MarginStyleProps &
 		SizeStyleProps

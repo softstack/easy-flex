@@ -9,6 +9,7 @@ import {
 	CssLineHeight,
 	Distance,
 	EasyFlexTheme,
+	ElementSize,
 	FontSize,
 	FontWeight,
 	Height,
@@ -147,7 +148,7 @@ export const getFontSize = (theme: EasyFlexTheme, fontSize: FontSize | Size): Si
 export const getFontWeight = (theme: EasyFlexTheme, fontWeight: FontWeight | number): CssFontWeight | number =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
-export const getHeight = (theme: EasyFlexTheme, height: Height | Size): Size =>
+export const getHeight = (theme: EasyFlexTheme, height: Height | ElementSize): ElementSize =>
 	isThemeSize(height) ? theme.size.height[height] : height;
 
 export const getLineHeight = (theme: EasyFlexTheme, lineHeight: CssLineHeight | LineHeight): CssLineHeight =>
@@ -156,7 +157,7 @@ export const getLineHeight = (theme: EasyFlexTheme, lineHeight: CssLineHeight | 
 export const getViewportThreshold = (theme: EasyFlexTheme, viewportThreshold: ViewportThreshold | number): number =>
 	typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold];
 
-export const getWidth = (theme: EasyFlexTheme, width: Width | Size): Size =>
+export const getWidth = (theme: EasyFlexTheme, width: Width | ElementSize): ElementSize =>
 	isThemeSize(width) ? theme.size.width[width] : width;
 
 export const useEasyFlexTheme = (): EasyFlexTheme => useContext(EasyFlexContext);

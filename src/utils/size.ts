@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { Height, Size, Width } from '../types';
+import { ElementSize, Height, Width } from '../types';
 import { getHeight, getWidth, ifNotUndefined, useEasyFlexTheme } from './base';
 
 export interface SizeProps {
@@ -9,26 +9,26 @@ export interface SizeProps {
 	/** Sets the component's width to 100% if true. */
 	fullWidth?: boolean;
 	/** Component's height. */
-	height?: Height | Size;
+	height?: Height | ElementSize;
 	/** Component's maximum height. */
-	maxHeight?: Height | Size;
+	maxHeight?: Height | ElementSize;
 	/** Component's maximum width. */
-	maxWidth?: Width | Size;
+	maxWidth?: Width | ElementSize;
 	/** Component's miniumum height. */
-	minHeight?: Height | Size;
+	minHeight?: Height | ElementSize;
 	/** Component's minimum width. */
-	minWidth?: Width | Size;
+	minWidth?: Width | ElementSize;
 	/** Component's width. */
-	width?: Width | Size;
+	width?: Width | ElementSize;
 }
 
 export interface SizeStyleProps {
-	'data-height'?: Size;
-	'data-height-max'?: Size;
-	'data-height-min'?: Size;
-	'data-width'?: Size;
-	'data-width-max'?: Size;
-	'data-width-min'?: Size;
+	'data-height'?: ElementSize;
+	'data-height-max'?: ElementSize;
+	'data-height-min'?: ElementSize;
+	'data-width'?: ElementSize;
+	'data-width-max'?: ElementSize;
+	'data-width-min'?: ElementSize;
 }
 
 export const useSize = ({
@@ -41,52 +41,52 @@ export const useSize = ({
 	minWidth,
 	width,
 }: SizeProps): {
-	height: Size | undefined;
-	maxHeight: Size | undefined;
-	maxWidth: Size | undefined;
-	minHeight: Size | undefined;
-	minWidth: Size | undefined;
-	width: Size | undefined;
+	height: ElementSize | undefined;
+	maxHeight: ElementSize | undefined;
+	maxWidth: ElementSize | undefined;
+	minHeight: ElementSize | undefined;
+	minWidth: ElementSize | undefined;
+	width: ElementSize | undefined;
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedHeight = useMemo<Size | undefined>(
+	const processedHeight = useMemo<ElementSize | undefined>(
 		() => (fullHeight ? '100%' : ifNotUndefined(height, (height) => getHeight(theme, height))),
 		[fullHeight, height, theme]
 	);
 
-	const processedMaxHeight = useMemo<Size | undefined>(
+	const processedMaxHeight = useMemo<ElementSize | undefined>(
 		() => ifNotUndefined(maxHeight, (maxHeight) => getHeight(theme, maxHeight)),
 		[maxHeight, theme]
 	);
 
-	const processedMaxWidth = useMemo<Size | undefined>(
+	const processedMaxWidth = useMemo<ElementSize | undefined>(
 		() => ifNotUndefined(maxWidth, (maxWidth) => getWidth(theme, maxWidth)),
 		[theme, maxWidth]
 	);
 
-	const processedMinHeight = useMemo<Size | undefined>(
+	const processedMinHeight = useMemo<ElementSize | undefined>(
 		() => ifNotUndefined(minHeight, (minHeight) => getHeight(theme, minHeight)),
 		[minHeight, theme]
 	);
 
-	const processedMinWidth = useMemo<Size | undefined>(
+	const processedMinWidth = useMemo<ElementSize | undefined>(
 		() => ifNotUndefined(minWidth, (minWidth) => getWidth(theme, minWidth)),
 		[theme, minWidth]
 	);
 
-	const processedWidth = useMemo<Size | undefined>(
+	const processedWidth = useMemo<ElementSize | undefined>(
 		() => (fullWidth ? '100%' : ifNotUndefined(width, (width) => getWidth(theme, width))),
 		[fullWidth, theme, width]
 	);
 
 	return useMemo<{
-		height: Size | undefined;
-		maxHeight: Size | undefined;
-		maxWidth: Size | undefined;
-		minHeight: Size | undefined;
-		minWidth: Size | undefined;
-		width: Size | undefined;
+		height: ElementSize | undefined;
+		maxHeight: ElementSize | undefined;
+		maxWidth: ElementSize | undefined;
+		minHeight: ElementSize | undefined;
+		minWidth: ElementSize | undefined;
+		width: ElementSize | undefined;
 	}>(
 		() => ({
 			height: processedHeight,

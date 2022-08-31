@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Color, CssColor, Size, TextAlign, TextElement, WordBreak } from '../types';
+import { Color, CssColor, TextAlign, TextElement, WordBreak } from '../types';
 import { useColor } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -12,12 +12,6 @@ const style = css<
 	{
 		'data-align'?: TextAlign;
 		'data-color'?: CssColor;
-		'data-height'?: Size;
-		'data-height-max'?: Size;
-		'data-height-min'?: Size;
-		'data-width'?: Size;
-		'data-width-max'?: Size;
-		'data-width-min'?: Size;
 		'data-word-break'?: WordBreak;
 	} & BorderStyleProps &
 		DistanceStyleProps &

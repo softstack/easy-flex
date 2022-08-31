@@ -265,11 +265,13 @@ export type CssColor = ColorCode | ColorKeyword | ColorName;
 
 export type AbsoluteSize = Px | Rem | Vh | Vw;
 
-export type Flex = AbsoluteSize | Percent | 'auto' | 'none';
+export type Flex = AbsoluteSize | Percent | number | 'auto' | 'none';
 
 export type FlexBasis = AbsoluteSize | Percent | 'auto';
 
-export type Size = AbsoluteSize | Percent | 'fit-content';
+export type Size = AbsoluteSize | Percent;
+
+export type ElementSize = Size | 'fit-content';
 
 export type CssLineHeight = Percent | number | 'normal';
 

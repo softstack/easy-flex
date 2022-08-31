@@ -1,4 +1,4 @@
-import { AbsoluteSize, BorderRadius, Color, CssColor, CssFontWeight, CssLineHeight, Distance, EasyFlexTheme, FontSize, FontWeight, Height, LineHeight, Percent, Px, Rem, Size, ThemeColor, ThemeSize, ViewportThreshold, Width } from '../types';
+import { AbsoluteSize, BorderRadius, Color, CssColor, CssFontWeight, CssLineHeight, Distance, EasyFlexTheme, ElementSize, FontSize, FontWeight, Height, LineHeight, Percent, Px, Rem, Size, ThemeColor, ThemeSize, ViewportThreshold, Width } from '../types';
 export declare const isThemeColor: (color: Color) => color is ThemeColor;
 export declare const isThemeSize: (size: unknown) => size is ThemeSize;
 export declare const isPercent: (value: unknown) => value is `${number}px`;
@@ -23,10 +23,10 @@ export declare const getColor: (theme: EasyFlexTheme, color: Color) => CssColor;
 export declare const getDistance: (theme: EasyFlexTheme, distance: Distance | AbsoluteSize) => AbsoluteSize;
 export declare const getFontSize: (theme: EasyFlexTheme, fontSize: FontSize | Size) => Size;
 export declare const getFontWeight: (theme: EasyFlexTheme, fontWeight: FontWeight | number) => CssFontWeight | number;
-export declare const getHeight: (theme: EasyFlexTheme, height: Height | Size) => Size;
+export declare const getHeight: (theme: EasyFlexTheme, height: Height | ElementSize) => ElementSize;
 export declare const getLineHeight: (theme: EasyFlexTheme, lineHeight: CssLineHeight | LineHeight) => CssLineHeight;
 export declare const getViewportThreshold: (theme: EasyFlexTheme, viewportThreshold: ViewportThreshold | number) => number;
-export declare const getWidth: (theme: EasyFlexTheme, width: Width | Size) => Size;
+export declare const getWidth: (theme: EasyFlexTheme, width: Width | ElementSize) => ElementSize;
 export declare const useEasyFlexTheme: () => EasyFlexTheme;
 export declare const useColor: <T extends CssColor | undefined>(color: Color | undefined, fallback: T) => T extends CssColor ? CssColor : CssColor | undefined;
 export declare const useDimension: () => {

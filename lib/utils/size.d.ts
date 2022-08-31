@@ -1,37 +1,37 @@
-import { Height, Size, Width } from '../types';
+import { ElementSize, Height, Width } from '../types';
 export interface SizeProps {
     /** Sets the component's height to 100% if true. */
     fullHeight?: boolean;
     /** Sets the component's width to 100% if true. */
     fullWidth?: boolean;
     /** Component's height. */
-    height?: Height | Size;
+    height?: Height | ElementSize;
     /** Component's maximum height. */
-    maxHeight?: Height | Size;
+    maxHeight?: Height | ElementSize;
     /** Component's maximum width. */
-    maxWidth?: Width | Size;
+    maxWidth?: Width | ElementSize;
     /** Component's miniumum height. */
-    minHeight?: Height | Size;
+    minHeight?: Height | ElementSize;
     /** Component's minimum width. */
-    minWidth?: Width | Size;
+    minWidth?: Width | ElementSize;
     /** Component's width. */
-    width?: Width | Size;
+    width?: Width | ElementSize;
 }
 export interface SizeStyleProps {
-    'data-height'?: Size;
-    'data-height-max'?: Size;
-    'data-height-min'?: Size;
-    'data-width'?: Size;
-    'data-width-max'?: Size;
-    'data-width-min'?: Size;
+    'data-height'?: ElementSize;
+    'data-height-max'?: ElementSize;
+    'data-height-min'?: ElementSize;
+    'data-width'?: ElementSize;
+    'data-width-max'?: ElementSize;
+    'data-width-min'?: ElementSize;
 }
 export declare const useSize: ({ fullHeight, fullWidth, height, maxHeight, maxWidth, minHeight, minWidth, width, }: SizeProps) => {
-    height: Size | undefined;
-    maxHeight: Size | undefined;
-    maxWidth: Size | undefined;
-    minHeight: Size | undefined;
-    minWidth: Size | undefined;
-    width: Size | undefined;
+    height: ElementSize | undefined;
+    maxHeight: ElementSize | undefined;
+    maxWidth: ElementSize | undefined;
+    minHeight: ElementSize | undefined;
+    minWidth: ElementSize | undefined;
+    width: ElementSize | undefined;
 };
 export declare const useSizeStyleProps: (props: SizeProps) => SizeStyleProps;
 export declare const sizeStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<SizeStyleProps, any>>;
