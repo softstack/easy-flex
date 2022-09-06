@@ -42,6 +42,7 @@ export declare type FontWeight = 'thin' | 'extraLight' | 'light' | 'normal' | 'm
 export declare type Height = ThemeSize;
 export declare type LineHeight = ThemeSize;
 export declare type StyleElement = 'b' | 'cite' | 'code' | 'em' | 'i' | 'kbd' | 'mark' | 's' | 'samp' | 'small' | 'span' | 'strong' | 'sub' | 'sup' | 'u' | 'var';
+export declare type TextDecoration = 'none' | 'underline';
 export declare type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 export declare type ViewportThreshold = ThemeSize;
 export declare type Width = ThemeSize;

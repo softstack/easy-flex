@@ -1,8 +1,8 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BaseFlexElement, Color, CssColor, Overflow } from '../types';
-import { useColor } from '../utils/base';
+import { BaseFlexElement } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
+import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import {
 	FlexContainerProps,
@@ -12,34 +12,28 @@ import {
 } from '../utils/flexContainer';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
-	{
-		'data-background-color'?: CssColor;
-		'data-color'?: CssColor;
-		'data-overflow'?: Overflow;
-		'data-overflow-x'?: Overflow;
-		'data-overflow-y'?: Overflow;
-	} & BorderStyleProps &
+	BorderStyleProps &
+		ColorStyleProps &
 		DistanceStyleProps &
 		FlexContainerStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		OverflowStyleProps &
 		SizeStyleProps
 >`
 	display: flex;
 	box-sizing: border-box;
-	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
-	color: ${({ 'data-color': color }) => color};
-	overflow: ${({ 'data-overflow': overflow }) => overflow};
-	overflow-x: ${({ 'data-overflow-x': overflowX }) => overflowX};
-	overflow-y: ${({ 'data-overflow-y': overflowY }) => overflowY};
 	${borderStyle}
+	${colorStyle}
 	${distanceStyle}
 	${flexContainerStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${overflowStyle}
 	${sizeStyle}
 `;
 
@@ -83,27 +77,18 @@ const Summary = styled.summary`
 	${style}
 `;
 
-export interface BaseFlexProps
-	extends HTMLAttributes<HTMLDivElement>,
-		BorderProps,
-		FlexContainerProps,
-		FlexItemProps,
-		FontProps,
-		DistanceProps,
-		SizeProps {
-	/** Component's background color. */
-	backgroundColor?: Color;
-	/** Component's color. */
-	color?: Color;
-	/** Component's html tag. */
-	element?: BaseFlexElement;
-	/** Component's overflow behaviour. */
-	overflow?: Overflow;
-	/** Component's verflow behaviour on left and right edges. */
-	overflowX?: Overflow;
-	/** Component's overflow behaviour on top and bottom edges. */
-	overflowY?: Overflow;
-}
+export type BaseFlexProps = HTMLAttributes<HTMLDivElement> &
+	BorderProps &
+	ColorProps &
+	FlexContainerProps &
+	FlexItemProps &
+	FontProps &
+	DistanceProps &
+	OverflowProps &
+	SizeProps & {
+		/** Component's html tag. */
+		element?: BaseFlexElement;
+	};
 
 export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 	(
@@ -155,16 +140,15 @@ export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 			paddingVertical,
 			round,
 			shrink,
+			underline,
 			width,
 			...props
 		},
 		ref
 	) => {
-		const processedBackgroundColor = useColor(backgroundColor, undefined);
-
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const processedColor = useColor(color, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
@@ -183,11 +167,13 @@ export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 			paddingVertical,
 		});
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
+		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
 
 		const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+
+		const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
 		const sizeStyleProps = useSizeStyleProps({
 			fullHeight,
@@ -227,16 +213,13 @@ export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 
 		return (
 			<Element
-				data-background-color={processedBackgroundColor}
-				data-color={processedColor}
-				data-overflow={overflow}
-				data-overflow-x={overflowX}
-				data-overflow-y={overflowY}
 				{...borderStyleProps}
+				{...colorStyleProps}
 				{...distanceStyleProps}
 				{...fontStyleProps}
 				{...flexContainerStyleProps}
 				{...flexItemStyleProps}
+				{...overflowStyleProps}
 				{...sizeStyleProps}
 				ref={ref}
 				{...props}

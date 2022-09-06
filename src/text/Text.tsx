@@ -1,22 +1,24 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Color, CssColor, TextAlign, TextElement, WordBreak } from '../types';
-import { useColor } from '../utils/base';
+import { TextAlign, TextElement, WordBreak } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
+import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
 	{
 		'data-align'?: TextAlign;
-		'data-color'?: CssColor;
 		'data-word-break'?: WordBreak;
 	} & BorderStyleProps &
+		ColorStyleProps &
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		OverflowStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
@@ -24,9 +26,11 @@ const style = css<
 	color: ${({ 'data-color': color }) => color};
 	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
 	${borderStyle}
+	${colorStyle}
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${overflowStyle}
 	${sizeStyle}
 `;
 
@@ -58,28 +62,28 @@ const P = styled.p`
 	${style}
 `;
 
-export interface TextProps
-	extends HTMLAttributes<HTMLParagraphElement>,
-		BorderProps,
-		DistanceProps,
-		FlexItemProps,
-		FontProps,
-		SizeProps {
-	/** Component's text alignment. */
-	align?: TextAlign;
-	/** Component's color */
-	color?: Color;
-	/** Component's html tag. */
-	element?: TextElement;
-	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-	wordBreak?: WordBreak;
-}
+export type TextProps = HTMLAttributes<HTMLParagraphElement> &
+	BorderProps &
+	ColorProps &
+	DistanceProps &
+	FlexItemProps &
+	FontProps &
+	OverflowProps &
+	SizeProps & {
+		/** Component's text alignment. */
+		align?: TextAlign;
+		/** Component's html tag. */
+		element?: TextElement;
+		/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
+		wordBreak?: WordBreak;
+	};
 
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 	(
 		{
 			align,
 			alignSelf,
+			backgroundColor,
 			basis,
 			borderColor,
 			borderRadius,
@@ -109,6 +113,9 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			maxWidth,
 			minHeight,
 			minWidth,
+			overflow,
+			overflowX,
+			overflowY,
 			padding,
 			paddingBottom,
 			paddingHorizontal,
@@ -118,6 +125,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			paddingVertical,
 			round,
 			shrink,
+			underline,
 			width,
 			wordBreak,
 			...props
@@ -126,11 +134,11 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 	) => {
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const processedColor = useColor(color, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
+		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
@@ -148,6 +156,8 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			paddingTop,
 			paddingVertical,
 		});
+
+		const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
 		const sizeStyleProps = useSizeStyleProps({
 			fullHeight,
@@ -182,12 +192,13 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		return (
 			<Element
 				data-align={align}
-				data-color={processedColor}
 				data-word-break={wordBreak}
 				{...borderStyleProps}
+				{...colorStyleProps}
 				{...distanceStyleProps}
 				{...flexItemStyleProps}
 				{...fontStyleProps}
+				{...overflowStyleProps}
 				{...sizeStyleProps}
 				ref={ref}
 				{...props}

@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
 import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor } from '../types';
-import { getBorderRadius, getBorderWidth, ifNotUndefined, useColor, useEasyFlexTheme } from './base';
+import { getBorderRadius, getBorderWidth, ifNotUndefined, useEasyFlexTheme } from './base';
+import { useColor } from './color';
 
 export interface BorderProps {
 	/** Component's border color. */

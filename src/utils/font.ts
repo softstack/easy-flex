@@ -1,7 +1,20 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { CssFontWeight, CssLineHeight, FontFamily, FontSize, FontStyle, FontWeight, LineHeight, Size } from '../types';
+import {
+	Color,
+	CssColor,
+	CssFontWeight,
+	CssLineHeight,
+	FontFamily,
+	FontSize,
+	FontStyle,
+	FontWeight,
+	LineHeight,
+	Size,
+	TextDecoration,
+} from '../types';
 import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useEasyFlexTheme } from './base';
+import { useColor } from './color';
 
 export interface FontProps {
 	fontFamily?: FontFamily;
@@ -12,6 +25,8 @@ export interface FontProps {
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
 	lineHeight?: CssLineHeight | LineHeight;
+	underline?: boolean;
+	underlineColor?: Color;
 }
 
 export interface FontStyleProps {
@@ -20,6 +35,8 @@ export interface FontStyleProps {
 	'data-font-weight'?: CssFontWeight | number;
 	'data-font-style'?: FontStyle;
 	'data-line-height'?: CssLineHeight;
+	'data-text-decoration'?: TextDecoration;
+	'data-text-decoration-color'?: CssColor;
 }
 
 export const useFont = ({
@@ -28,12 +45,16 @@ export const useFont = ({
 	fontWeight,
 	italic,
 	lineHeight,
+	underline,
+	underlineColor,
 }: FontProps): {
 	family: string | undefined;
 	size: Size | undefined;
 	weight: number | CssFontWeight | undefined;
 	style: FontStyle | undefined;
 	lineHeight: CssLineHeight | undefined;
+	textDecoration: TextDecoration | undefined;
+	textDecorationColor: CssColor | undefined;
 } => {
 	const theme = useEasyFlexTheme();
 
@@ -62,12 +83,21 @@ export const useFont = ({
 		[lineHeight, theme]
 	);
 
+	const processedUnderline = useMemo<TextDecoration | undefined>(
+		() => ifNotUndefined(underline, (underline) => (underline ? 'underline' : 'none')),
+		[underline]
+	);
+
+	const processedUnderlineColor = useColor(underlineColor, undefined);
+
 	return useMemo<{
 		family: string | undefined;
 		size: Size | undefined;
 		weight: number | CssFontWeight | undefined;
 		style: FontStyle | undefined;
 		lineHeight: CssLineHeight | undefined;
+		textDecoration: TextDecoration | undefined;
+		textDecorationColor: CssColor | undefined;
 	}>(
 		() => ({
 			family: processedFontFamily,
@@ -75,8 +105,18 @@ export const useFont = ({
 			weight: processedFontWeight,
 			style: processedItalic,
 			lineHeight: processedLineHeight,
+			textDecoration: processedUnderline,
+			textDecorationColor: processedUnderlineColor,
 		}),
-		[processedFontFamily, processedFontSize, processedFontWeight, processedItalic, processedLineHeight]
+		[
+			processedFontFamily,
+			processedFontSize,
+			processedFontWeight,
+			processedItalic,
+			processedLineHeight,
+			processedUnderline,
+			processedUnderlineColor,
+		]
 	);
 };
 
@@ -90,6 +130,8 @@ export const useFontStyleProps = (props: FontProps): FontStyleProps => {
 			'data-font-weight': font.weight,
 			'data-font-style': font.style,
 			'data-line-height': font.lineHeight,
+			'data-text-decoration': font.textDecoration,
+			'data-text-decoration-color': font.textDecorationColor,
 		}),
 		[font]
 	);
@@ -101,4 +143,6 @@ export const fontStyle = css<FontStyleProps>`
 	font-weight: ${({ 'data-font-weight': fontWeight }) => fontWeight};
 	font-style: ${({ 'data-font-style': fontStyle }) => fontStyle};
 	line-height: ${({ 'data-line-height': lineHeight }) => lineHeight};
+	text-decoration: ${({ 'data-text-decoration': textDecoration }) => textDecoration};
+	text-decoration-color: ${({ 'data-text-decoration-color': textDecorationColor }) => textDecorationColor};
 `;

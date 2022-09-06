@@ -1,12 +1,12 @@
 import React, { HTMLAttributes } from 'react';
-import { Color, StyleElement } from '../types';
+import { StyleElement } from '../types';
+import { ColorProps } from '../utils/color';
 import { FontProps } from '../utils/font';
-export interface StyleProps extends HTMLAttributes<HTMLSpanElement>, FontProps {
-    /** Component's background color. */
-    backgroundColor?: Color;
-    /** Component's color. */
-    color?: Color;
+export declare type StyleProps = HTMLAttributes<HTMLSpanElement> & ColorProps & FontProps & {
     /** Component's html tag. */
     element?: StyleElement;
-}
-export declare const Style: React.ForwardRefExoticComponent<StyleProps & React.RefAttributes<HTMLParagraphElement>>;
+};
+export declare const Style: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLSpanElement> & ColorProps & FontProps & {
+    /** Component's html tag. */
+    element?: StyleElement | undefined;
+} & React.RefAttributes<HTMLParagraphElement>>;

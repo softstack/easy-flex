@@ -1,28 +1,20 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BaseGridElement, Color, CssColor } from '../types';
-import { useColor } from '../utils/base';
+import { BaseGridElement } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
+import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
-	{
-		'data-background-color'?: CssColor;
-		'data-color'?: CssColor;
-	} & BorderStyleProps &
-		DistanceStyleProps &
-		FlexItemStyleProps &
-		FontStyleProps &
-		SizeStyleProps
+	BorderStyleProps & ColorStyleProps & DistanceStyleProps & FlexItemStyleProps & FontStyleProps & SizeStyleProps
 >`
 	display: grid;
 	box-sizing: border-box;
-	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
-	color: ${({ 'data-color': color }) => color};
 	${borderStyle}
+	${colorStyle}
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
@@ -69,20 +61,16 @@ const Summary = styled.summary`
 	${style}
 `;
 
-export interface BaseGridProps
-	extends HTMLAttributes<HTMLDivElement>,
-		BorderProps,
-		FlexItemProps,
-		FontProps,
-		DistanceProps,
-		SizeProps {
-	/** Component's background color. */
-	backgroundColor?: Color;
-	/** Component's color. */
-	color?: Color;
-	/** Component's html tag. */
-	element?: BaseGridElement;
-}
+export type BaseGridProps = HTMLAttributes<HTMLDivElement> &
+	BorderProps &
+	ColorProps &
+	FlexItemProps &
+	FontProps &
+	DistanceProps &
+	SizeProps & {
+		/** Component's html tag. */
+		element?: BaseGridElement;
+	};
 
 export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 	(
@@ -127,20 +115,19 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 			paddingVertical,
 			round,
 			shrink,
+			underline,
 			width,
 			...props
 		},
 		ref
 	) => {
-		const processedBackgroundColor = useColor(backgroundColor, undefined);
-
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const processedColor = useColor(color, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
+		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
@@ -197,9 +184,8 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 
 		return (
 			<Element
-				data-background-color={processedBackgroundColor}
-				data-color={processedColor}
 				{...borderStyleProps}
+				{...colorStyleProps}
 				{...distanceStyleProps}
 				{...flexItemStyleProps}
 				{...fontStyleProps}

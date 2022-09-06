@@ -1,48 +1,66 @@
 import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
 import { Color, CssColor } from '../types';
-import { useColor } from '../utils/base';
+import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
+import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
+import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledBaseLink = styled.a<
 	{
-		'data-color'?: CssColor;
 		'data-hover-color'?: CssColor;
-	} & FlexItemStyleProps &
-		MarginStyleProps
+	} & ColorStyleProps &
+		FlexItemStyleProps &
+		FontStyleProps &
+		MarginStyleProps &
+		SizeStyleProps
 >`
 	box-sizing: border-box;
 	text-decoration: none;
 	padding: 0;
-	color: ${({ 'data-color': color }) => color};
+	${colorStyle}
 	${flexItemStyle}
+	${fontStyle}
 	${marginStyle}
+	${sizeStyle}
 
 	&:hover {
 		color: ${({ 'data-hover-color': hoverColor }) => hoverColor};
 	}
 `;
 
-export interface BaseLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, FlexItemProps, MarginProps {
-	/** Component's color. */
-	color?: Color;
-	/** Component's hover color. */
-	hoverColor?: Color;
-	/** If true, the link is opened in a new tab. */
-	newTab?: boolean;
-}
+export type BaseLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
+	ColorProps &
+	FlexItemProps &
+	FontProps &
+	MarginProps &
+	SizeProps & {
+		/** Component's hover color. */
+		hoverColor?: Color;
+		/** If true, the link is opened in a new tab. */
+		newTab?: boolean;
+	};
 
 export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 	(
 		{
 			alignSelf,
+			backgroundColor,
 			basis,
 			children,
 			color = 'inherit',
 			flex,
+			fontFamily,
+			fontSize,
+			fontWeight,
+			fullHeight,
+			fullWidth,
 			grow,
+			height,
 			hoverColor,
+			italic,
+			lineHeight,
 			margin,
 			marginBottom,
 			marginHorizontal,
@@ -50,19 +68,27 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 			marginRight,
 			marginTop,
 			marginVertical,
+			maxHeight,
+			maxWidth,
+			minHeight,
+			minWidth,
 			newTab = false,
 			shrink,
+			underline,
+			width,
 			...props
 		},
 		ref
 	) => {
-		const processedColor = useColor(color, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
 
 		const processedHoverColor = useColor(hoverColor, undefined);
 
 		const target = useMemo<'_blank' | undefined>(() => (newTab ? '_blank' : undefined), [newTab]);
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+
+		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
 
 		const marginStyleProps = useMarginStyleProps({
 			margin,
@@ -74,12 +100,25 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 			marginVertical,
 		});
 
+		const sizeStyleProps = useSizeStyleProps({
+			fullHeight,
+			fullWidth,
+			height,
+			maxHeight,
+			maxWidth,
+			minHeight,
+			minWidth,
+			width,
+		});
+
 		return (
 			<StyledBaseLink
-				data-color={processedColor}
 				data-hover-color={processedHoverColor}
+				{...colorStyleProps}
 				{...flexItemStyleProps}
+				{...fontStyleProps}
 				{...marginStyleProps}
+				{...sizeStyleProps}
 				rel="noopener noreferrer"
 				target={target}
 				ref={ref}

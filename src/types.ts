@@ -442,6 +442,8 @@ export type StyleElement =
 	| 'u'
 	| 'var';
 
+export type TextDecoration = 'none' | 'underline';
+
 export type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
 export type ViewportThreshold = ThemeSize;

@@ -28,7 +28,6 @@ export declare const getLineHeight: (theme: EasyFlexTheme, lineHeight: CssLineHe
 export declare const getViewportThreshold: (theme: EasyFlexTheme, viewportThreshold: ViewportThreshold | number) => number;
 export declare const getWidth: (theme: EasyFlexTheme, width: Width | ElementSize) => ElementSize;
 export declare const useEasyFlexTheme: () => EasyFlexTheme;
-export declare const useColor: <T extends CssColor | undefined>(color: Color | undefined, fallback: T) => T extends CssColor ? CssColor : CssColor | undefined;
 export declare const useDimension: () => {
     height: number;
     width: number;

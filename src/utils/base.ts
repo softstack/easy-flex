@@ -162,18 +162,6 @@ export const getWidth = (theme: EasyFlexTheme, width: Width | ElementSize): Elem
 
 export const useEasyFlexTheme = (): EasyFlexTheme => useContext(EasyFlexContext);
 
-export const useColor = <T extends CssColor | undefined>(
-	color: Color | undefined,
-	fallback: T
-): T extends CssColor ? CssColor : CssColor | undefined => {
-	const theme = useEasyFlexTheme();
-
-	return useMemo<CssColor | undefined>(
-		() => (color === undefined ? fallback : getColor(theme, color)),
-		[color, fallback, theme]
-	) as T extends CssColor ? CssColor : CssColor | undefined;
-};
-
 export const useDimension = (): { height: number; width: number } => {
 	const [height, setHeight] = useState<number>(document.documentElement.clientHeight);
 	const [width, setWidth] = useState<number>(document.documentElement.clientWidth);

@@ -1,18 +1,12 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Color, CssColor, StyleElement } from '../types';
-import { useColor } from '../utils/base';
+import { StyleElement } from '../types';
+import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 
-const style = css<
-	{
-		'data-background-color'?: CssColor;
-		'data-color'?: CssColor;
-	} & FontStyleProps
->`
+const style = css<ColorStyleProps & FontStyleProps>`
 	box-sizing: border-box;
-	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
-	color: ${({ 'data-color': color }) => color};
+	${colorStyle}
 	${fontStyle}
 `;
 
@@ -80,25 +74,32 @@ const Var = styled.var`
 	${style}
 `;
 
-export interface StyleProps extends HTMLAttributes<HTMLSpanElement>, FontProps {
-	/** Component's background color. */
-	backgroundColor?: Color;
-	/** Component's color. */
-	color?: Color;
-	/** Component's html tag. */
-	element?: StyleElement;
-}
+export type StyleProps = HTMLAttributes<HTMLSpanElement> &
+	ColorProps &
+	FontProps & {
+		/** Component's html tag. */
+		element?: StyleElement;
+	};
 
 export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 	(
-		{ backgroundColor, children, color, element = 'span', fontFamily, fontSize, fontWeight, italic, lineHeight },
+		{
+			backgroundColor,
+			children,
+			color,
+			element = 'span',
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+		},
 		ref
 	) => {
-		const processedBackgroundColor = useColor(backgroundColor, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
 
-		const processedColor = useColor(color, undefined);
-
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight });
+		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
 
 		const Element = useMemo(() => {
 			switch (element) {
@@ -138,12 +139,7 @@ export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 		}, [element]);
 
 		return (
-			<Element
-				data-background-color={processedBackgroundColor}
-				data-color={processedColor}
-				{...fontStyleProps}
-				ref={ref}
-			>
+			<Element {...colorStyleProps} {...fontStyleProps} ref={ref}>
 				{children}
 			</Element>
 		);
