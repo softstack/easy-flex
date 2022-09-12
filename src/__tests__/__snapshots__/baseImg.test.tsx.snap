@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BaseImg /> should have the basic css settings 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
+
+<body>
+  <div>
+    <img
+      class="c0"
+      data-margin-bottom="0px"
+      data-margin-left="0px"
+      data-margin-right="0px"
+      data-margin-top="0px"
+    />
+  </div>
+</body>
+`;
