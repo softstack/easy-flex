@@ -24,8 +24,8 @@ const StyledBaseButton = styled.button<
 		OverflowStyleProps &
 		SizeStyleProps
 >`
-	display: flex;
 	box-sizing: border-box;
+	display: flex;
 	border: none;
 	cursor: pointer;
 	${borderStyle}

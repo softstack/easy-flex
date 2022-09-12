@@ -12,8 +12,8 @@ const StyledBaseImg = styled.img<
 		MarginStyleProps &
 		SizeStyleProps
 >`
+	box-sizing: border-box;
 	display: flex;
-	border-radius: ${({ 'data-border-radius': borderRadius }) => borderRadius};
 	object-fit: ${({ 'data-object-fit': objectFit }) => objectFit};
 	${borderStyle}
 	${marginStyle}

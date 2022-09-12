@@ -2,11 +2,11 @@
 
 exports[`<Spacing /> should have the basic css settings 1`] = `
 .c0 {
+  box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  box-sizing: border-box;
   background-color: transparent;
   margin: 0;
   padding: 0;

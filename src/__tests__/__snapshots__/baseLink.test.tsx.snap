@@ -21,7 +21,6 @@ exports[`<BaseLink /> should have the basic css settings 1`] = `
       data-margin-left="0px"
       data-margin-right="0px"
       data-margin-top="0px"
-      rel="noopener noreferrer"
     />
   </div>
 </body>

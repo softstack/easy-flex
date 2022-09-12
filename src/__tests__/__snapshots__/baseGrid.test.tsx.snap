@@ -2,8 +2,8 @@
 
 exports[`<BaseGrid /> should have the basic css settings 1`] = `
 .c0 {
-  display: grid;
   box-sizing: border-box;
+  display: grid;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;

@@ -4,8 +4,8 @@ import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
 import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
 const StyledSpacing = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
-	display: flex;
 	box-sizing: border-box;
+	display: flex;
 	background-color: transparent;
 	margin: 0;
 	padding: 0;

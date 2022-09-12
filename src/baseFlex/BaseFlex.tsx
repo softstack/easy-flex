@@ -25,8 +25,8 @@ const style = css<
 		OverflowStyleProps &
 		SizeStyleProps
 >`
-	display: flex;
 	box-sizing: border-box;
+	display: flex;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}

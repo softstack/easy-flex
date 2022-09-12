@@ -2,11 +2,11 @@
 
 exports[`<BaseFlex /> should have margin-bottom and margin-top not equal 0px 1`] = `
 .c0 {
+  box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  box-sizing: border-box;
   margin-bottom: 51px;
   margin-left: 0px;
   margin-right: 0px;
@@ -36,11 +36,11 @@ exports[`<BaseFlex /> should have margin-bottom and margin-top not equal 0px 1`]
 
 exports[`<BaseFlex /> should have the basic css settings 1`] = `
 .c0 {
+  box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  box-sizing: border-box;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;

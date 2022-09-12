@@ -11,8 +11,8 @@ import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../util
 const style = css<
 	BorderStyleProps & ColorStyleProps & DistanceStyleProps & FlexItemStyleProps & FontStyleProps & SizeStyleProps
 >`
-	display: grid;
 	box-sizing: border-box;
+	display: grid;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}

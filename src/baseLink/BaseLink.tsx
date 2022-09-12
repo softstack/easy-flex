@@ -84,8 +84,6 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 
 		const processedHoverColor = useColor(hoverColor, undefined);
 
-		const target = useMemo<'_blank' | undefined>(() => (newTab ? '_blank' : undefined), [newTab]);
-
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
 		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
@@ -111,6 +109,23 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 			width,
 		});
 
+		const newTabProps = useMemo<
+			| {
+					rel: 'noopener noreferrer';
+					target: '_blank';
+			  }
+			| undefined
+		>(
+			() =>
+				newTab
+					? {
+							rel: 'noopener noreferrer',
+							target: '_blank',
+					  }
+					: undefined,
+			[newTab]
+		);
+
 		return (
 			<StyledBaseLink
 				data-hover-color={processedHoverColor}
@@ -119,8 +134,7 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 				{...fontStyleProps}
 				{...marginStyleProps}
 				{...sizeStyleProps}
-				rel="noopener noreferrer"
-				target={target}
+				{...newTabProps}
 				ref={ref}
 				{...props}
 			>

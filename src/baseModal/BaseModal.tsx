@@ -8,19 +8,19 @@ import { useColor } from '../utils/color';
 const Background = styled.div<{
 	'data-background-color': CssColor;
 }>`
-	display: flex;
 	box-sizing: border-box;
-	flex-direction: row;
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
-	align-items: center;
-	justify-content: center;
 	margin: 0;
 	padding: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 `;
 
 export interface BaseModalProps extends HTMLAttributes<HTMLDivElement> {

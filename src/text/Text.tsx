@@ -23,7 +23,6 @@ const style = css<
 >`
 	box-sizing: border-box;
 	text-align: ${({ 'data-align': align }) => align};
-	color: ${({ 'data-color': color }) => color};
 	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
 	${borderStyle}
 	${colorStyle}
