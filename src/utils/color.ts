@@ -15,7 +15,13 @@ export interface ColorStyleProps {
 	'data-color'?: CssColor;
 }
 
-export const useColor = <T extends CssColor | undefined>(
+export const useColor = (color: Color | undefined): CssColor | undefined => {
+	const theme = useEasyFlexTheme();
+
+	return useMemo<CssColor | undefined>(() => ifNotUndefined(color, (color) => getColor(theme, color)), [color, theme]);
+};
+
+export const useDefaultColor = <T extends CssColor | undefined>(
 	color: Color | undefined,
 	defaultColor: T
 ): T extends CssColor ? CssColor : CssColor | undefined => {
@@ -34,17 +40,9 @@ export const useColorStyleProps = ({
 	backgroundColor: CssColor | undefined;
 	color: CssColor | undefined;
 } => {
-	const theme = useEasyFlexTheme();
+	const processedBackgroundColor = useColor(backgroundColor);
 
-	const processedBackgroundColor = useMemo<CssColor | undefined>(
-		() => ifNotUndefined(backgroundColor, (backgroundColor) => getColor(theme, backgroundColor)),
-		[backgroundColor, theme]
-	);
-
-	const processedColor = useMemo<CssColor | undefined>(
-		() => ifNotUndefined(color, (color) => getColor(theme, color)),
-		[color, theme]
-	);
+	const processedColor = useColor(color);
 
 	return useMemo<{
 		backgroundColor: CssColor | undefined;

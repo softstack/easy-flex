@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor } from '../types';
 import { isAbsoluteSize, useEasyFlexTheme } from '../utils/base';
-import { useColor } from '../utils/color';
+import { useDefaultColor } from '../utils/color';
 
 const Background = styled.div<{
 	'data-background-color': CssColor;
@@ -55,7 +55,7 @@ export const BaseModal: FC<BaseModalProps> = ({
 		[onClose]
 	);
 
-	const processedBackgroundColor = useColor(backgroundColor, theme.modal.backgroundColor);
+	const processedBackgroundColor = useDefaultColor(backgroundColor, theme.modal.backgroundColor);
 
 	useEffect(() => {
 		if (

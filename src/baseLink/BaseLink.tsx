@@ -82,7 +82,7 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 	) => {
 		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const processedHoverColor = useColor(hoverColor, undefined);
+		const processedHoverColor = useColor(hoverColor);
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

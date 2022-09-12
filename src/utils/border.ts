@@ -36,7 +36,7 @@ export const useBorder = ({
 } => {
 	const theme = useEasyFlexTheme();
 
-	const processedBorderColor = useColor(borderColor, undefined);
+	const processedBorderColor = useColor(borderColor);
 
 	const processedBorderRadius = useMemo<AbsoluteSize | undefined>(
 		() => (round ? '99999px' : ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius))),

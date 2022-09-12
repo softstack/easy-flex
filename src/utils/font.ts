@@ -88,7 +88,7 @@ export const useFont = ({
 		[underline]
 	);
 
-	const processedUnderlineColor = useColor(underlineColor, undefined);
+	const processedUnderlineColor = useColor(underlineColor);
 
 	return useMemo<{
 		family: string | undefined;
