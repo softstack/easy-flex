@@ -97,7 +97,7 @@ export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 		},
 		ref
 	) => {
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
 

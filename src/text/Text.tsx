@@ -133,7 +133,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 	) => {
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

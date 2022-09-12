@@ -10,7 +10,7 @@ export interface ColorStyleProps {
     'data-color'?: CssColor;
 }
 export declare const useColor: <T extends CssColor | undefined>(color: Color | undefined, defaultColor: T) => T extends CssColor ? CssColor : CssColor | undefined;
-export declare const useColorStyleProps: (props: ColorProps, defaultBackgroundColor: CssColor | undefined, defaultColor: CssColor | undefined) => {
+export declare const useColorStyleProps: ({ backgroundColor, color, }: ColorProps) => {
     backgroundColor: CssColor | undefined;
     color: CssColor | undefined;
 };

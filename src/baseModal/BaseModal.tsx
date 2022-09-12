@@ -58,7 +58,10 @@ export const BaseModal: FC<BaseModalProps> = ({
 	const processedBackgroundColor = useColor(backgroundColor, theme.modal.backgroundColor);
 
 	useEffect(() => {
-		if (isAbsoluteSize(blur) || (blur !== false && theme.modal.blur)) {
+		if (
+			(blurElementId ?? theme.modal.blurElementId) &&
+			(isAbsoluteSize(blur) || (blur !== false && theme.modal.blur))
+		) {
 			const styleElement = document.createElement('style');
 			styleElement.textContent = `
 				#${blurElementId ?? theme.modal.blurElementId} {

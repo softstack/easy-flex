@@ -79,7 +79,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 		{
 			align,
 			alignSelf,
-			backgroundColor,
+			backgroundColor = 'transparent',
 			basis,
 			borderColor,
 			borderRadius,
@@ -131,7 +131,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 	) => {
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, 'transparent', undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,

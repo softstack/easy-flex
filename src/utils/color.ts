@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
 import { Color, CssColor } from '../types';
-import { getColor, useEasyFlexTheme } from './base';
+import { getColor, ifNotUndefined, useEasyFlexTheme } from './base';
 
 export interface ColorProps {
 	/** Component's background color. */
@@ -27,17 +27,24 @@ export const useColor = <T extends CssColor | undefined>(
 	) as T extends CssColor ? CssColor : CssColor | undefined;
 };
 
-export const useColorStyleProps = (
-	props: ColorProps,
-	defaultBackgroundColor: CssColor | undefined,
-	defaultColor: CssColor | undefined
-): {
+export const useColorStyleProps = ({
+	backgroundColor,
+	color,
+}: ColorProps): {
 	backgroundColor: CssColor | undefined;
 	color: CssColor | undefined;
 } => {
-	const processedBackgroundColor = useColor(props.backgroundColor, defaultBackgroundColor);
+	const theme = useEasyFlexTheme();
 
-	const processedColor = useColor(props.color, defaultColor);
+	const processedBackgroundColor = useMemo<CssColor | undefined>(
+		() => ifNotUndefined(backgroundColor, (backgroundColor) => getColor(theme, backgroundColor)),
+		[backgroundColor, theme]
+	);
+
+	const processedColor = useMemo<CssColor | undefined>(
+		() => ifNotUndefined(color, (color) => getColor(theme, color)),
+		[color, theme]
+	);
 
 	return useMemo<{
 		backgroundColor: CssColor | undefined;

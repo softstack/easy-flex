@@ -148,7 +148,7 @@ export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 	) => {
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,

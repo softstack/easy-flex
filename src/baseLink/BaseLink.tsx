@@ -80,7 +80,7 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 		},
 		ref
 	) => {
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color }, undefined, undefined);
+		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 		const processedHoverColor = useColor(hoverColor, undefined);
 
