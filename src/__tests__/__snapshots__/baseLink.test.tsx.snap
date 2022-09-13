@@ -6,6 +6,7 @@ exports[`<BaseLink /> should have the basic css settings 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   padding: 0;
+  color: inherit;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
@@ -16,7 +17,7 @@ exports[`<BaseLink /> should have the basic css settings 1`] = `
   <div>
     <a
       class="c0"
-      color="inherit"
+      data-color="inherit"
       data-margin-bottom="0px"
       data-margin-left="0px"
       data-margin-right="0px"

@@ -61,21 +61,22 @@ const P = styled.p`
 	${style}
 `;
 
-export type TextProps = HTMLAttributes<HTMLParagraphElement> &
-	BorderProps &
-	ColorProps &
-	DistanceProps &
-	FlexItemProps &
-	FontProps &
-	OverflowProps &
-	SizeProps & {
-		/** Component's text alignment. */
-		align?: TextAlign;
-		/** Component's html tag. */
-		element?: TextElement;
-		/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-		wordBreak?: WordBreak;
-	};
+export interface TextProps
+	extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>,
+		BorderProps,
+		ColorProps,
+		DistanceProps,
+		FlexItemProps,
+		FontProps,
+		OverflowProps,
+		SizeProps {
+	/** Component's text alignment. */
+	align?: TextAlign;
+	/** Component's html tag. */
+	element?: TextElement;
+	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
+	wordBreak?: WordBreak;
+}
 
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 	(

@@ -77,18 +77,19 @@ const Summary = styled.summary`
 	${style}
 `;
 
-export type BaseFlexProps = HTMLAttributes<HTMLDivElement> &
-	BorderProps &
-	ColorProps &
-	FlexContainerProps &
-	FlexItemProps &
-	FontProps &
-	DistanceProps &
-	OverflowProps &
-	SizeProps & {
-		/** Component's html tag. */
-		element?: BaseFlexElement;
-	};
+export interface BaseFlexProps
+	extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
+		BorderProps,
+		ColorProps,
+		FlexContainerProps,
+		FlexItemProps,
+		FontProps,
+		DistanceProps,
+		OverflowProps,
+		SizeProps {
+	/** Component's html tag. */
+	element?: BaseFlexElement;
+}
 
 export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 	(

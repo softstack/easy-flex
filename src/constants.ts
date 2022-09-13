@@ -24,6 +24,8 @@ export const themeColors = [
 	'headerText',
 	'footerText',
 	'modalText',
+	'riseText',
+	'declineText',
 	'primaryBackground',
 	'secondaryBackground',
 	'tertiaryBackground',
@@ -149,6 +151,8 @@ export const initialFlexTheme: EasyFlexTheme = {
 		headerText: '#343a40',
 		footerText: '#343a40',
 		modalText: '#343a40',
+		riseText: '#28a745',
+		declineText: '#dc3545',
 		primaryBackground: '#fff',
 		secondaryBackground: '#fff',
 		tertiaryBackground: '#fff',
@@ -240,15 +244,15 @@ export const initialFlexTheme: EasyFlexTheme = {
 			'8xl': 1.5,
 		},
 		size: {
-			'8xs': '0.0625rem', // 1px
-			'7xs': '0.125rem', // 2px
-			'6xs': '0.1875rem', // 3px
-			'5xs': '0.25rem', // 4px
-			'4xs': '0.375rem', // 6px
-			'3xs': '0.5rem', // 8px
-			xxs: '0.625rem', // 10px
-			xs: '0.75rem', // 12px
-			s: '0.875rem', // 14px
+			'8xs': '0.4375rem', // 7px
+			'7xs': '0.5rem', // 8px
+			'6xs': '0.5625rem', // 9px
+			'5xs': '0.625rem', // 10px
+			'4xs': '0.6875rem', // 11px
+			'3xs': '0.75rem', // 12px
+			xxs: '0.8125rem', // 13px
+			xs: '0.875rem', // 14px
+			s: '0.9375rem', // 15px
 			m: '1rem', // 16px
 			l: '1.125rem', // 18px
 			xl: '1.25rem', // 20px

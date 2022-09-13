@@ -74,12 +74,10 @@ const Var = styled.var`
 	${style}
 `;
 
-export type StyleProps = HTMLAttributes<HTMLSpanElement> &
-	ColorProps &
-	FontProps & {
-		/** Component's html tag. */
-		element?: StyleElement;
-	};
+export interface StyleProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>, ColorProps, FontProps {
+	/** Component's html tag. */
+	element?: StyleElement;
+}
 
 export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 	(

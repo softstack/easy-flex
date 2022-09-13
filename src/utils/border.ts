@@ -70,7 +70,7 @@ export const useBorder = ({
 	);
 };
 
-export const useBorderStyleProps = (props: BorderProps) => {
+export const useBorderStyleProps = (props: BorderProps): BorderStyleProps => {
 	const border = useBorder(props);
 
 	return useMemo<BorderStyleProps>(

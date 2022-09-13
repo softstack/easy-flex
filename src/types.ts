@@ -351,6 +351,8 @@ export type ThemeColor =
 	| 'headerText'
 	| 'footerText'
 	| 'modalText'
+	| 'riseText'
+	| 'declineText'
 	| 'primaryBackground'
 	| 'secondaryBackground'
 	| 'tertiaryBackground'

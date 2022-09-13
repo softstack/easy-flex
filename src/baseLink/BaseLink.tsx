@@ -30,17 +30,18 @@ const StyledBaseLink = styled.a<
 	}
 `;
 
-export type BaseLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
-	ColorProps &
-	FlexItemProps &
-	FontProps &
-	MarginProps &
-	SizeProps & {
-		/** Component's hover color. */
-		hoverColor?: Color;
-		/** If true, the link is opened in a new tab. */
-		newTab?: boolean;
-	};
+export interface BaseLinkProps
+	extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
+		ColorProps,
+		FlexItemProps,
+		FontProps,
+		MarginProps,
+		SizeProps {
+	/** Component's hover color. */
+	hoverColor?: Color;
+	/** If true, the link is opened in a new tab. */
+	newTab?: boolean;
+}
 
 export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 	(

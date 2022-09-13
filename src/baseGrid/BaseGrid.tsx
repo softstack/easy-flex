@@ -61,16 +61,17 @@ const Summary = styled.summary`
 	${style}
 `;
 
-export type BaseGridProps = HTMLAttributes<HTMLDivElement> &
-	BorderProps &
-	ColorProps &
-	FlexItemProps &
-	FontProps &
-	DistanceProps &
-	SizeProps & {
-		/** Component's html tag. */
-		element?: BaseGridElement;
-	};
+export interface BaseGridProps
+	extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
+		BorderProps,
+		ColorProps,
+		FlexItemProps,
+		FontProps,
+		DistanceProps,
+		SizeProps {
+	/** Component's html tag. */
+	element?: BaseGridElement;
+}
 
 export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 	(

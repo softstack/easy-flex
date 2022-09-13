@@ -46,7 +46,7 @@ const StyledBaseButton = styled.button<
 	}
 `;
 
-export type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+export type BaseButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
 	BorderProps &
 	ColorProps &
 	DistanceProps &
@@ -62,9 +62,20 @@ export type ExternalBaseButtonProps = Omit<
 	| 'backgroundColor'
 	| 'borderColor'
 	| 'borderRadius'
+	| 'borderStyle'
 	| 'borderWidth'
 	| 'color'
+	| 'direction'
+	| 'fontFamily'
+	| 'fontSize'
+	| 'fontWeight'
+	| 'gap'
+	| 'italic'
 	| 'justify'
+	| 'lineHeight'
+	| 'overflow'
+	| 'overflowX'
+	| 'overflowY'
 	| 'padding'
 	| 'paddingBottom'
 	| 'paddingHorizontal'
@@ -72,6 +83,9 @@ export type ExternalBaseButtonProps = Omit<
 	| 'paddingRight'
 	| 'paddingTop'
 	| 'paddingVertical'
+	| 'round'
+	| 'underline'
+	| 'underlineColor'
 >;
 
 export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(

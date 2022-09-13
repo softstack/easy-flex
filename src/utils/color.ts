@@ -33,24 +33,15 @@ export const useDefaultColor = <T extends CssColor | undefined>(
 	) as T extends CssColor ? CssColor : CssColor | undefined;
 };
 
-export const useColorStyleProps = ({
-	backgroundColor,
-	color,
-}: ColorProps): {
-	backgroundColor: CssColor | undefined;
-	color: CssColor | undefined;
-} => {
+export const useColorStyleProps = ({ backgroundColor, color }: ColorProps): ColorStyleProps => {
 	const processedBackgroundColor = useColor(backgroundColor);
 
 	const processedColor = useColor(color);
 
-	return useMemo<{
-		backgroundColor: CssColor | undefined;
-		color: CssColor | undefined;
-	}>(
+	return useMemo<ColorStyleProps>(
 		() => ({
-			backgroundColor: processedBackgroundColor,
-			color: processedColor,
+			'data-background-color': processedBackgroundColor,
+			'data-color': processedColor,
 		}),
 		[processedBackgroundColor, processedColor]
 	);

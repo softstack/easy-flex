@@ -6,11 +6,8 @@ import { DistanceProps } from '../utils/distance';
 import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { SizeProps } from '../utils/size';
-export declare type BaseGridProps = HTMLAttributes<HTMLDivElement> & BorderProps & ColorProps & FlexItemProps & FontProps & DistanceProps & SizeProps & {
+export interface BaseGridProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps, ColorProps, FlexItemProps, FontProps, DistanceProps, SizeProps {
     /** Component's html tag. */
     element?: BaseGridElement;
-};
-export declare const BaseGrid: React.ForwardRefExoticComponent<React.HTMLAttributes<HTMLDivElement> & BorderProps & ColorProps & FlexItemProps & FontProps & import("..").MarginProps & import("..").PaddingProps & SizeProps & {
-    /** Component's html tag. */
-    element?: BaseGridElement | undefined;
-} & React.RefAttributes<HTMLDivElement>>;
+}
+export declare const BaseGrid: React.ForwardRefExoticComponent<BaseGridProps & React.RefAttributes<HTMLDivElement>>;
