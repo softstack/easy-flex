@@ -1,6 +1,6 @@
 import { FC, HTMLAttributes } from 'react';
 import { AbsoluteSize, Color } from '../types';
-export interface BaseModalProps extends HTMLAttributes<HTMLDivElement> {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
     backgroundColor?: Color;
     /** Sets blur for the content covered by the modal background. */
     blur?: boolean | AbsoluteSize;
@@ -9,4 +9,4 @@ export interface BaseModalProps extends HTMLAttributes<HTMLDivElement> {
     /** Called if the modal background is clicked. */
     onClose: () => void;
 }
-export declare const BaseModal: FC<BaseModalProps>;
+export declare const Modal: FC<ModalProps>;

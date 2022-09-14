@@ -23,7 +23,7 @@ const Background = styled.div<{
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 `;
 
-export interface BaseModalProps extends HTMLAttributes<HTMLDivElement> {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 	backgroundColor?: Color;
 	/** Sets blur for the content covered by the modal background. */
 	blur?: boolean | AbsoluteSize;
@@ -33,7 +33,7 @@ export interface BaseModalProps extends HTMLAttributes<HTMLDivElement> {
 	onClose: () => void;
 }
 
-export const BaseModal: FC<BaseModalProps> = ({
+export const Modal: FC<ModalProps> = ({
 	children,
 	backgroundColor,
 	blur,

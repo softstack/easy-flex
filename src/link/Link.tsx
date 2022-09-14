@@ -7,7 +7,7 @@ import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../util
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
-const StyledBaseLink = styled.a<
+const StyledLink = styled.a<
 	{
 		'data-hover-color'?: CssColor;
 	} & ColorStyleProps &
@@ -30,7 +30,7 @@ const StyledBaseLink = styled.a<
 	}
 `;
 
-export interface BaseLinkProps
+export interface LinkProps
 	extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
 		ColorProps,
 		FlexItemProps,
@@ -43,7 +43,7 @@ export interface BaseLinkProps
 	newTab?: boolean;
 }
 
-export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 	(
 		{
 			alignSelf,
@@ -128,7 +128,7 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 		);
 
 		return (
-			<StyledBaseLink
+			<StyledLink
 				data-hover-color={processedHoverColor}
 				{...colorStyleProps}
 				{...flexItemStyleProps}
@@ -140,9 +140,9 @@ export const BaseLink = forwardRef<HTMLAnchorElement, BaseLinkProps>(
 				{...props}
 			>
 				{children}
-			</StyledBaseLink>
+			</StyledLink>
 		);
 	}
 );
 
-BaseLink.displayName = 'BaseLink';
+Link.displayName = 'Link';

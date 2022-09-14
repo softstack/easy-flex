@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<BaseModal /> should have the basic css settings 1`] = `
+exports[`<Modal /> should have the basic css settings 1`] = `
 .c0 {
   box-sizing: border-box;
   position: fixed;

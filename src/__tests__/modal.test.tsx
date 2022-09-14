@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import React from 'react';
-import { BaseLink } from '../baseLink/BaseLink';
+import { Modal } from '../modal/Modal';
 
-describe('<BaseLink />', () => {
+describe('<Modal />', () => {
 	test('should have the basic css settings', async () => {
-		const result = render(<BaseLink />);
+		const result = render(<Modal onClose={() => undefined} />);
 		expect(result.baseElement).toMatchSnapshot();
 	});
 });
