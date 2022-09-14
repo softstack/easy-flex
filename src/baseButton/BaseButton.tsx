@@ -14,7 +14,7 @@ import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../util
 import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
-const StyledBaseButton = styled.button<
+const StyledButton = styled.button<
 	BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -184,7 +184,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 		});
 
 		return (
-			<StyledBaseButton
+			<StyledButton
 				{...borderStyleProps}
 				{...colorStyleProps}
 				{...distanceStyleProps}
@@ -197,7 +197,7 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 				{...props}
 			>
 				{children}
-			</StyledBaseButton>
+			</StyledButton>
 		);
 	}
 );

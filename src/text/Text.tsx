@@ -33,31 +33,31 @@ const style = css<
 	${sizeStyle}
 `;
 
-const H1 = styled.h1`
+const StyledH1 = styled.h1`
 	${style}
 `;
 
-const H2 = styled.h2`
+const StyledH2 = styled.h2`
 	${style}
 `;
 
-const H3 = styled.h3`
+const StyledH3 = styled.h3`
 	${style}
 `;
 
-const H4 = styled.h4`
+const StyledH4 = styled.h4`
 	${style}
 `;
 
-const H5 = styled.h5`
+const StyledH5 = styled.h5`
 	${style}
 `;
 
-const H6 = styled.h6`
+const StyledH6 = styled.h6`
 	${style}
 `;
 
-const P = styled.p`
+const StyledP = styled.p`
 	${style}
 `;
 
@@ -173,19 +173,19 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		const Element = useMemo(() => {
 			switch (element) {
 				case 'h1':
-					return H1;
+					return StyledH1;
 				case 'h2':
-					return H2;
+					return StyledH2;
 				case 'h3':
-					return H3;
+					return StyledH3;
 				case 'h4':
-					return H4;
+					return StyledH4;
 				case 'h5':
-					return H5;
+					return StyledH5;
 				case 'h6':
-					return H6;
+					return StyledH6;
 				case 'p':
-					return P;
+					return StyledP;
 			}
 		}, [element]);
 

@@ -7,7 +7,7 @@ import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../util
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
-const StyledLink = styled.a<
+const StyledA = styled.a<
 	{
 		'data-hover-color'?: CssColor;
 	} & ColorStyleProps &
@@ -128,7 +128,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 		);
 
 		return (
-			<StyledLink
+			<StyledA
 				data-hover-color={processedHoverColor}
 				{...colorStyleProps}
 				{...flexItemStyleProps}
@@ -140,7 +140,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 				{...props}
 			>
 				{children}
-			</StyledLink>
+			</StyledA>
 		);
 	}
 );

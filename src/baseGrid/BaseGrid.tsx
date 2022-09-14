@@ -21,43 +21,43 @@ const style = css<
 	${sizeStyle}
 `;
 
-const Article = styled.article`
+const StyledArticle = styled.article`
 	${style}
 `;
 
-const Aside = styled.aside`
+const StyledAside = styled.aside`
 	${style}
 `;
 
-const Div = styled.div`
+const StyledDiv = styled.div`
 	${style}
 `;
 
-const Figure = styled.figure`
+const StyledFigure = styled.figure`
 	${style}
 `;
 
-const Footer = styled.footer`
+const StyledFooter = styled.footer`
 	${style}
 `;
 
-const Header = styled.header`
+const StyledHeader = styled.header`
 	${style}
 `;
 
-const Main = styled.main`
+const StyledMain = styled.main`
 	${style}
 `;
 
-const Nav = styled.nav`
+const StyledNav = styled.nav`
 	${style}
 `;
 
-const Section = styled.section`
+const StyledSection = styled.section`
 	${style}
 `;
 
-const Summary = styled.summary`
+const StyledSummary = styled.summary`
 	${style}
 `;
 
@@ -161,25 +161,25 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 		const Element = useMemo(() => {
 			switch (element) {
 				case 'article':
-					return Article;
+					return StyledArticle;
 				case 'aside':
-					return Aside;
+					return StyledAside;
 				case 'div':
-					return Div;
+					return StyledDiv;
 				case 'figure':
-					return Figure;
+					return StyledFigure;
 				case 'footer':
-					return Footer;
+					return StyledFooter;
 				case 'header':
-					return Header;
+					return StyledHeader;
 				case 'main':
-					return Main;
+					return StyledMain;
 				case 'nav':
-					return Nav;
+					return StyledNav;
 				case 'section':
-					return Section;
+					return StyledSection;
 				case 'summary':
-					return Summary;
+					return StyledSummary;
 			}
 		}, [element]);
 

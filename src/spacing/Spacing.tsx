@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
 import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
-const StyledSpacing = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
+const StyledDiv = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
 	box-sizing: border-box;
 	display: flex;
 	background-color: transparent;
@@ -61,7 +61,7 @@ export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
 			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
 		);
 
-		return <StyledSpacing data-height={processedHeight} data-width={processedWidth} ref={ref} {...props} />;
+		return <StyledDiv data-height={processedHeight} data-width={processedWidth} ref={ref} {...props} />;
 	}
 );
 

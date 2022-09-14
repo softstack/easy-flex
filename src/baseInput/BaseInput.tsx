@@ -8,7 +8,7 @@ import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
-const StyledBaseInput = styled.input<
+const StyledInput = styled.input<
 	{ 'data-placeholder-color'?: CssColor } & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -128,7 +128,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
 		const processedPlaceholderColor = useColor(placeholderColor);
 
 		return (
-			<StyledBaseInput
+			<StyledInput
 				data-placeholder-color={processedPlaceholderColor}
 				{...borderStyleProps}
 				{...colorStyleProps}

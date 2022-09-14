@@ -10,67 +10,67 @@ const style = css<ColorStyleProps & FontStyleProps>`
 	${fontStyle}
 `;
 
-const B = styled.b`
+const StyledB = styled.b`
 	${style}
 `;
 
-const Cite = styled.cite`
+const StyledCite = styled.cite`
 	${style}
 `;
 
-const Code = styled.code`
+const StyledCode = styled.code`
 	${style}
 `;
 
-const Em = styled.em`
+const StyledEm = styled.em`
 	${style}
 `;
 
-const I = styled.i`
+const StyledI = styled.i`
 	${style}
 `;
 
-const Kbd = styled.kbd`
+const StyledKbd = styled.kbd`
 	${style}
 `;
 
-const Mark = styled.mark`
+const StyledMark = styled.mark`
 	${style}
 `;
 
-const S = styled.s`
+const StyledS = styled.s`
 	${style}
 `;
 
-const Samp = styled.samp`
+const StyledSamp = styled.samp`
 	${style}
 `;
 
-const Small = styled.small`
+const StyledSmall = styled.small`
 	${style}
 `;
 
-const Span = styled.span`
+const StyledSpan = styled.span`
 	${style}
 `;
 
-const Strong = styled.strong`
+const StyledStrong = styled.strong`
 	${style}
 `;
 
-const Sub = styled.sub`
+const StyledSub = styled.sub`
 	${style}
 `;
 
-const Sup = styled.sup`
+const StyledSup = styled.sup`
 	${style}
 `;
 
-const U = styled.u`
+const StyledU = styled.u`
 	${style}
 `;
 
-const Var = styled.var`
+const StyledVar = styled.var`
 	${style}
 `;
 
@@ -102,37 +102,37 @@ export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 		const Element = useMemo(() => {
 			switch (element) {
 				case 'b':
-					return B;
+					return StyledB;
 				case 'cite':
-					return Cite;
+					return StyledCite;
 				case 'code':
-					return Code;
+					return StyledCode;
 				case 'em':
-					return Em;
+					return StyledEm;
 				case 'i':
-					return I;
+					return StyledI;
 				case 'kbd':
-					return Kbd;
+					return StyledKbd;
 				case 'mark':
-					return Mark;
+					return StyledMark;
 				case 's':
-					return S;
+					return StyledS;
 				case 'samp':
-					return Samp;
+					return StyledSamp;
 				case 'small':
-					return Small;
+					return StyledSmall;
 				case 'span':
-					return Span;
+					return StyledSpan;
 				case 'strong':
-					return Strong;
+					return StyledStrong;
 				case 'sub':
-					return Sub;
+					return StyledSub;
 				case 'sup':
-					return Sup;
+					return StyledSup;
 				case 'u':
-					return U;
+					return StyledU;
 				case 'var':
-					return Var;
+					return StyledVar;
 			}
 		}, [element]);
 
