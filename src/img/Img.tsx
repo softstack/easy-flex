@@ -5,7 +5,7 @@ import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from 
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
-const StyledBaseImg = styled.img<
+const StyledImg = styled.img<
 	{
 		'data-object-fit'?: ObjectFit;
 	} & BorderStyleProps &
@@ -20,14 +20,14 @@ const StyledBaseImg = styled.img<
 	${sizeStyle}
 `;
 
-export type BaseImgProps = ImgHTMLAttributes<HTMLImageElement> &
+export type ImgProps = ImgHTMLAttributes<HTMLImageElement> &
 	BorderProps &
 	MarginProps &
 	SizeProps & {
 		objectFit?: ObjectFit;
 	};
 
-export const BaseImg = forwardRef<HTMLImageElement, BaseImgProps>(
+export const Img = forwardRef<HTMLImageElement, ImgProps>(
 	(
 		{
 			borderColor,
@@ -79,7 +79,7 @@ export const BaseImg = forwardRef<HTMLImageElement, BaseImgProps>(
 		});
 
 		return (
-			<StyledBaseImg
+			<StyledImg
 				data-object-fit={objectFit}
 				{...borderStyleProps}
 				{...marginStyleProps}
@@ -91,4 +91,4 @@ export const BaseImg = forwardRef<HTMLImageElement, BaseImgProps>(
 	}
 );
 
-BaseImg.displayName = 'BaseImg';
+Img.displayName = 'Img';

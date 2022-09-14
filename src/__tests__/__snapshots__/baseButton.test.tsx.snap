@@ -28,7 +28,7 @@ exports[`<BaseButton /> should have the basic css settings 1`] = `
 }
 
 .c0:focus:not(:focus-visible) {
-  outline: 0;
+  outline: none;
 }
 
 <body>

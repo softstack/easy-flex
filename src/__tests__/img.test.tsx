@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import React from 'react';
-import { BaseImg } from '../baseImg/BaseImg';
+import { Img } from '../img/Img';
 
-describe('<BaseImg />', () => {
+describe('<Img />', () => {
 	test('should have the basic css settings', async () => {
-		const result = render(<BaseImg />);
+		const result = render(<Img />);
 		expect(result.baseElement).toMatchSnapshot();
 	});
 });
