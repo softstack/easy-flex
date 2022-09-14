@@ -2,6 +2,7 @@ export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
 export * from './baseGrid/BaseGrid';
 export * from './baseImg/BaseImg';
+export * from './baseInput/BaseInput';
 export * from './baseLink/BaseLink';
 export * from './baseModal/BaseModal';
 export * from './col/Col';
