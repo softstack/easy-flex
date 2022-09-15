@@ -6,6 +6,20 @@ export type DeepPartial<T> = T extends object
 
 // CSS start
 
+export type Deg = `${number}deg`;
+
+export type Percent = `${number}%`;
+
+export type Px = `${number}px`;
+
+export type Rem = `${number}rem`;
+
+export type Turn = `${number}turn`;
+
+export type Vh = `${number}vh`;
+
+export type Vw = `${number}vw`;
+
 export type AlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
 export type AlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
@@ -22,68 +36,24 @@ export type BorderStyle =
 	| 'ridge'
 	| 'solid';
 
+export type HslName = 'hsl' | 'hsla';
+
+export type RgbName = 'rgb' | 'rgba';
+
+export type RgbPlain = `${number} ${number} ${number}` | `${Percent} ${Percent} ${Percent}`;
+
+export type RgbComma = `${number}, ${number}, ${number}` | `${Percent}, ${Percent}, ${Percent}`;
+
 export type ColorCode =
 	| `#${string}`
-	| `hsl(${number}, ${number}%, ${number}%)`
-	| `hsl(${number}deg, ${number}%, ${number}%)`
-	| `hsl(${number}turn, ${number}%, ${number}%)`
-	| `hsl(${number}, ${number}%, ${number}%, ${number})`
-	| `hsl(${number}deg, ${number}%, ${number}%, ${number})`
-	| `hsl(${number}turn, ${number}%, ${number}%, ${number})`
-	| `hsl(${number}, ${number}%, ${number}%, ${number}%)`
-	| `hsl(${number}deg, ${number}%, ${number}%, ${number}%)`
-	| `hsl(${number}turn, ${number}%, ${number}%, ${number}%)`
-	| `hsl(${number} ${number}% ${number}%)`
-	| `hsl(${number}deg ${number}% ${number}%)`
-	| `hsl(${number}turn ${number}% ${number}%)`
-	| `hsl(${number} ${number}% ${number}% / ${number})`
-	| `hsl(${number}deg ${number}% ${number}% / ${number})`
-	| `hsl(${number}turn ${number}% ${number}% / ${number})`
-	| `hsl(${number} ${number}% ${number}% / ${number}%)`
-	| `hsl(${number}deg ${number}% ${number}% / ${number}%)`
-	| `hsl(${number}turn ${number}% ${number}% / ${number}%)`
-	| `hsla(${number}, ${number}%, ${number}%)`
-	| `hsla(${number}deg, ${number}%, ${number}%)`
-	| `hsla(${number}turn, ${number}%, ${number}%)`
-	| `hsla(${number}, ${number}%, ${number}%, ${number})`
-	| `hsla(${number}deg, ${number}%, ${number}%, ${number})`
-	| `hsla(${number}turn, ${number}%, ${number}%, ${number})`
-	| `hsla(${number}, ${number}%, ${number}%, ${number}%)`
-	| `hsla(${number}deg, ${number}%, ${number}%, ${number}%)`
-	| `hsla(${number}turn, ${number}%, ${number}%, ${number}%)`
-	| `hsla(${number} ${number}% ${number}%)`
-	| `hsla(${number}deg ${number}% ${number}%)`
-	| `hsla(${number}turn ${number}% ${number}%)`
-	| `hsla(${number} ${number}% ${number}% / ${number})`
-	| `hsla(${number}deg ${number}% ${number}% / ${number})`
-	| `hsla(${number}turn ${number}% ${number}% / ${number})`
-	| `hsla(${number} ${number}% ${number}% / ${number}%)`
-	| `hsla(${number}deg ${number}% ${number}% / ${number}%)`
-	| `hsla(${number}turn ${number}% ${number}% / ${number}%)`
-	| `rgb(${number}, ${number}, ${number})`
-	| `rgb(${number}%, ${number}%, ${number}%)`
-	| `rgb(${number}, ${number}, ${number}, ${number})`
-	| `rgb(${number}, ${number}, ${number}, ${number}%)`
-	| `rgb(${number}%, ${number}%, ${number}%, ${number})`
-	| `rgb(${number}%, ${number}%, ${number}%, ${number}%)`
-	| `rgb(${number} ${number} ${number})`
-	| `rgb(${number}% ${number}% ${number}%)`
-	| `rgb(${number} ${number} ${number} / ${number})`
-	| `rgb(${number} ${number} ${number} / ${number}%)`
-	| `rgb(${number}% ${number}% ${number}% / ${number})`
-	| `rgb(${number}% ${number}% ${number}% / ${number}%)`
-	| `rgba(${number}, ${number}, ${number})`
-	| `rgba(${number}%, ${number}%, ${number}%)`
-	| `rgba(${number}, ${number}, ${number}, ${number})`
-	| `rgba(${number}, ${number}, ${number}, ${number}%)`
-	| `rgba(${number}%, ${number}%, ${number}%, ${number})`
-	| `rgba(${number}%, ${number}%, ${number}%, ${number}%)`
-	| `rgba(${number} ${number} ${number})`
-	| `rgba(${number}% ${number}% ${number}%)`
-	| `rgba(${number} ${number} ${number} / ${number})`
-	| `rgba(${number} ${number} ${number} / ${number}%)`
-	| `rgba(${number}% ${number}% ${number}% / ${number})`
-	| `rgba(${number}% ${number}% ${number}% / ${number}%)`;
+	| `${HslName}(${number | Deg | Turn} ${Percent} ${Percent})`
+	| `${HslName}(${number | Deg | Turn} ${Percent} ${Percent} / ${number | Percent})`
+	| `${HslName}(${number | Deg | Turn}, ${Percent}, ${Percent})`
+	| `${HslName}(${number | Deg | Turn}, ${Percent}, ${Percent}, ${number | Percent})`
+	| `${RgbName}(${RgbPlain})`
+	| `${RgbName}(${RgbPlain} / ${number | Percent})`
+	| `${RgbName}(${RgbComma})`
+	| `${RgbName}(${RgbComma}, ${number | Percent})`;
 
 export type ColorKeyword = 'currentColor' | 'inherit' | 'transparent';
 
@@ -247,17 +217,7 @@ export type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 
 export type Overflow = 'auto' | 'hidden' | 'scroll' | 'visible';
 
-export type Percent = `${number}%`;
-
-export type Px = `${number}px`;
-
-export type Rem = `${number}rem`;
-
 export type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
-
-export type Vh = `${number}vh`;
-
-export type Vw = `${number}vw`;
 
 export type WordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
 

@@ -1,4 +1,5 @@
-import { AbsoluteSize, BorderRadius, Color, CssColor, CssFontWeight, CssLineHeight, Distance, EasyFlexTheme, ElementSize, FontSize, FontWeight, Height, LineHeight, Percent, Px, Rem, Size, ThemeColor, ThemeSize, ViewportThreshold, Width } from '../types';
+import { AbsoluteSize, BorderRadius, Color, CssColor, CssFontWeight, CssLineHeight, DeepPartial, Distance, EasyFlexTheme, ElementSize, FontSize, FontWeight, Height, LineHeight, Percent, Px, Rem, Size, ThemeColor, ThemeSize, ViewportThreshold, Width } from '../types';
+export declare const mergeDeep: <T>(a: T, b: DeepPartial<T>) => T;
 export declare const isThemeColor: (color: Color) => color is ThemeColor;
 export declare const isThemeSize: (size: unknown) => size is ThemeSize;
 export declare const isPercent: (value: unknown) => value is `${number}px`;
