@@ -116,7 +116,7 @@ export const themeSizes = [
 	'8xl',
 ];
 
-export const initialFlexTheme: EasyFlexTheme = {
+export const defaultEasyFlexTheme: EasyFlexTheme = {
 	border: {
 		defaultStyle: 'solid',
 		radius: {
@@ -420,4 +420,4 @@ export const initialFlexTheme: EasyFlexTheme = {
 	},
 };
 
-export const EasyFlexContext = createContext(initialFlexTheme);
+export const EasyFlexContext = createContext(defaultEasyFlexTheme);

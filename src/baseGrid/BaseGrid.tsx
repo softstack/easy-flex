@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BaseGridElement } from '../types';
+import { AbsoluteSize, BaseGridElement, Distance, ThemeSize } from '../types';
+import { getDistance, ifNotUndefined, useEasyFlexTheme } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -9,10 +10,21 @@ import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../util
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
-	BorderStyleProps & ColorStyleProps & DistanceStyleProps & FlexItemStyleProps & FontStyleProps & SizeStyleProps
+	{
+		'data-column-gap'?: AbsoluteSize;
+		'data-row-gap'?: AbsoluteSize;
+		'data-distance': Record<ThemeSize, AbsoluteSize>;
+	} & BorderStyleProps &
+		ColorStyleProps &
+		DistanceStyleProps &
+		FlexItemStyleProps &
+		FontStyleProps &
+		SizeStyleProps
 >`
 	box-sizing: border-box;
 	display: grid;
+	column-gap: ${({ 'data-column-gap': columnGap }) => columnGap};
+	row-gap: ${({ 'data-row-gap': rowGap }) => rowGap};
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
@@ -69,8 +81,10 @@ export interface BaseGridProps
 		FontProps,
 		DistanceProps,
 		SizeProps {
+	columnGap?: Distance | AbsoluteSize;
 	/** Component's html tag. */
 	element?: BaseGridElement;
+	rowGap?: Distance | AbsoluteSize;
 }
 
 export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
@@ -85,6 +99,7 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 			borderWidth,
 			children,
 			color,
+			columnGap,
 			element = 'div',
 			flex,
 			fontFamily,
@@ -115,6 +130,7 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 			paddingTop,
 			paddingVertical,
 			round,
+			rowGap,
 			shrink,
 			underline,
 			width,
@@ -122,6 +138,8 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 		},
 		ref
 	) => {
+		const theme = useEasyFlexTheme();
+
 		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
 		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
@@ -158,6 +176,16 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 			width,
 		});
 
+		const processedColumnGap = useMemo<AbsoluteSize | undefined>(
+			() => ifNotUndefined(columnGap, (columnGap) => getDistance(theme, columnGap)),
+			[columnGap, theme]
+		);
+
+		const processedRowGap = useMemo<AbsoluteSize | undefined>(
+			() => ifNotUndefined(rowGap, (rowGap) => getDistance(theme, rowGap)),
+			[rowGap, theme]
+		);
+
 		const Element = useMemo(() => {
 			switch (element) {
 				case 'article':
@@ -185,6 +213,9 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 
 		return (
 			<Element
+				data-column-gap={processedColumnGap}
+				data-row-gap={processedRowGap}
+				data-distance={theme.distance}
 				{...borderStyleProps}
 				{...colorStyleProps}
 				{...distanceStyleProps}

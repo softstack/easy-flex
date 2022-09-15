@@ -1,8 +1,8 @@
 import React, { FC, ReactNode, useMemo } from 'react';
-import { EasyFlexContext, initialFlexTheme } from '../constants';
+import { defaultEasyFlexTheme, EasyFlexContext } from '../constants';
 import { DeepPartial, EasyFlexTheme } from '../types';
 
-const mergeDeep = <T,>(a: T, b: DeepPartial<T>): T => {
+export const mergeDeep = <T,>(a: T, b: DeepPartial<T>): T => {
 	if (b === undefined) {
 		return a;
 	} else if (typeof b === 'object') {
@@ -25,7 +25,7 @@ export interface EasyFlexProviderProps {
 }
 
 export const EasyFlexProvider: FC<EasyFlexProviderProps> = ({ children, theme }) => {
-	const mergedTheme = useMemo<EasyFlexTheme>(() => mergeDeep(initialFlexTheme, theme), [theme]);
+	const mergedTheme = useMemo<EasyFlexTheme>(() => mergeDeep(defaultEasyFlexTheme, theme), [theme]);
 
 	return <EasyFlexContext.Provider value={mergedTheme}>{children}</EasyFlexContext.Provider>;
 };
