@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BaseArea /> should have the basic css settings 1`] = `
+.c0 {
+  box-sizing: border-box;
+  border: none;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+.c0 {
+  box-sizing: border-box;
+  border: none;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+.c0 {
+  box-sizing: border-box;
+  border: none;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+.c0 {
+  box-sizing: border-box;
+  border: none;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+<body>
+  <div>
+    <area
+      class="c0"
+      data-margin-bottom="0px"
+      data-margin-left="0px"
+      data-margin-right="0px"
+      data-margin-top="0px"
+      data-padding-bottom="0px"
+      data-padding-left="0px"
+      data-padding-right="0px"
+      data-padding-top="0px"
+    />
+  </div>
+</body>
+`;

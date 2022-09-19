@@ -21,7 +21,9 @@ import {
 	Size,
 	ThemeColor,
 	ThemeSize,
+	Vh,
 	ViewportThreshold,
+	Vw,
 	Width,
 } from '../types';
 
@@ -50,9 +52,9 @@ export const isPx = (value: unknown): value is Px => typeof value === 'string' &
 
 export const isRem = (value: unknown): value is Rem => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?rem$/i);
 
-export const isVh = (value: unknown): value is Rem => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?vh$/i);
+export const isVh = (value: unknown): value is Vh => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?vh$/i);
 
-export const isVw = (value: unknown): value is Rem => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?vw$/i);
+export const isVw = (value: unknown): value is Vw => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?vw$/i);
 
 export const isAbsoluteSize = (value: unknown): value is AbsoluteSize => isPx(value) || isRem(value);
 
@@ -138,12 +140,66 @@ export const toPx = (value: number): Px => `${value}px`;
 
 export const toRem = (value: number): Rem => `${value}rem`;
 
-export const pxToNumber = (px: Px): number => {
-	const match = px.match(/^(\d+(?:\.\d+)?)px$/i);
+export const toVh = (value: number): Vh => `${value}vh`;
+
+export const toVw = (value: number): Vw => `${value}vw`;
+
+export const percentToNumber = (value: Percent): number => {
+	const match = value.match(/^(\d+(?:\.\d+)?)%$/i);
 	if (!match) {
-		throw new Error('No px value');
+		throw new Error('Value is not of type Percent');
 	}
 	return Number(match[1]);
+};
+
+export const pxToNumber = (value: Px): number => {
+	const match = value.match(/^(\d+(?:\.\d+)?)px$/i);
+	if (!match) {
+		throw new Error('Value is not of type Px');
+	}
+	return Number(match[1]);
+};
+
+export const remToNumber = (value: Rem): number => {
+	const match = value.match(/^(\d+(?:\.\d+)?)rem$/i);
+	if (!match) {
+		throw new Error('Value is not of type Rem');
+	}
+	return Number(match[1]);
+};
+
+export const vhToNumber = (value: Vh): number => {
+	const match = value.match(/^(\d+(?:\.\d+)?)vh$/i);
+	if (!match) {
+		throw new Error('Value is not of type Vh');
+	}
+	return Number(match[1]);
+};
+
+export const vwToNumber = (value: Vw): number => {
+	const match = value.match(/^(\d+(?:\.\d+)?)vw$/i);
+	if (!match) {
+		throw new Error('Value is not of type Vw');
+	}
+	return Number(match[1]);
+};
+
+export const absoluteSizeToNumber = (value: AbsoluteSize): number => {
+	if (isPx(value)) {
+		return pxToNumber(value);
+	} else if (isRem(value)) {
+		return remToNumber(value);
+	} else if (isVh(value)) {
+		return vhToNumber(value);
+	}
+	return vwToNumber(value);
+};
+
+export const sizeToNumber = (value: Size): number => {
+	if (isAbsoluteSize(value)) {
+		return absoluteSizeToNumber(value);
+	}
+	return percentToNumber(value);
 };
 
 export const getBorderRadius = (theme: EasyFlexTheme, borderRadius: BorderRadius | AbsoluteSize): AbsoluteSize =>

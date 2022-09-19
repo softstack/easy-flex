@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { AbsoluteSize, BaseGridElement, Distance, ThemeSize } from '../types';
+import { AbsoluteSize, BaseGridElement, Distance } from '../types';
 import { getDistance, ifNotUndefined, useEasyFlexTheme } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
@@ -13,7 +13,6 @@ const style = css<
 	{
 		'data-column-gap'?: AbsoluteSize;
 		'data-row-gap'?: AbsoluteSize;
-		'data-distance': Record<ThemeSize, AbsoluteSize>;
 	} & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -215,7 +214,6 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 			<Element
 				data-column-gap={processedColumnGap}
 				data-row-gap={processedRowGap}
-				data-distance={theme.distance}
 				{...borderStyleProps}
 				{...colorStyleProps}
 				{...distanceStyleProps}

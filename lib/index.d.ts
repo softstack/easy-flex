@@ -1,3 +1,4 @@
+export * from './baseArea/BaseArea';
 export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
 export * from './baseGrid/BaseGrid';
