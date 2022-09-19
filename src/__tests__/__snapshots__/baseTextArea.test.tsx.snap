@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<BaseArea /> should have the basic css settings 1`] = `
+exports[`<BaseTextArea /> should have the basic css settings 1`] = `
 .c0 {
   box-sizing: border-box;
   border: none;
@@ -55,7 +55,7 @@ exports[`<BaseArea /> should have the basic css settings 1`] = `
 
 <body>
   <div>
-    <area
+    <textarea
       class="c0"
       data-margin-bottom="0px"
       data-margin-left="0px"

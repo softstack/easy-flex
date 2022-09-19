@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import React from 'react';
-import { BaseArea } from '../baseArea/BaseArea';
+import { BaseTextArea } from '../baseTextArea/BaseTextArea';
 
-describe('<BaseArea />', () => {
+describe('<BaseTextArea />', () => {
 	test('should have the basic css settings', async () => {
-		const result = render(<BaseArea />);
+		const result = render(<BaseTextArea />);
 		expect(result.baseElement).toMatchSnapshot();
 	});
 });

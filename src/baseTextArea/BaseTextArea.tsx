@@ -1,4 +1,4 @@
-import React, { AreaHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef, TextareaHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { Color, CssColor } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
@@ -8,7 +8,7 @@ import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
-const StyledArea = styled.area<
+const StyledTextArea = styled.textarea<
 	{ 'data-placeholder-color'?: CssColor } & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -30,8 +30,8 @@ const StyledArea = styled.area<
 	}
 `;
 
-export interface BaseAreaProps
-	extends Omit<AreaHTMLAttributes<HTMLAreaElement>, 'color'>,
+export interface BaseTextAreaProps
+	extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'color'>,
 		BorderProps,
 		ColorProps,
 		DistanceProps,
@@ -41,7 +41,7 @@ export interface BaseAreaProps
 	placeholderColor?: Color;
 }
 
-export const BaseArea = forwardRef<HTMLAreaElement, BaseAreaProps>(
+export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
 	(
 		{
 			alignSelf,
@@ -51,6 +51,7 @@ export const BaseArea = forwardRef<HTMLAreaElement, BaseAreaProps>(
 			borderRadius,
 			borderStyle,
 			borderWidth,
+			children,
 			color,
 			flex,
 			fontFamily,
@@ -128,7 +129,7 @@ export const BaseArea = forwardRef<HTMLAreaElement, BaseAreaProps>(
 		const processedPlaceholderColor = useColor(placeholderColor);
 
 		return (
-			<StyledArea
+			<StyledTextArea
 				data-placeholder-color={processedPlaceholderColor}
 				{...borderStyleProps}
 				{...colorStyleProps}
@@ -138,9 +139,11 @@ export const BaseArea = forwardRef<HTMLAreaElement, BaseAreaProps>(
 				{...sizeStyleProps}
 				ref={ref}
 				{...props}
-			/>
+			>
+				{children}
+			</StyledTextArea>
 		);
 	}
 );
 
-BaseArea.displayName = 'BaseArea';
+BaseTextArea.displayName = 'BaseTextArea';
