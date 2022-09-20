@@ -3,6 +3,7 @@ import { EasyFlexContext, themeColors, themeSizes } from '../constants';
 import {
 	AbsoluteSize,
 	BorderRadius,
+	BorderWidth,
 	Color,
 	CssColor,
 	CssFontWeight,
@@ -202,34 +203,34 @@ export const sizeToNumber = (value: Size): number => {
 	return percentToNumber(value);
 };
 
-export const getBorderRadius = (theme: EasyFlexTheme, borderRadius: BorderRadius | AbsoluteSize): AbsoluteSize =>
+export const getBorderRadius = (theme: EasyFlexTheme, borderRadius: BorderRadius): AbsoluteSize =>
 	isThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius;
 
-export const getBorderWidth = (theme: EasyFlexTheme, borderWidth: BorderRadius | AbsoluteSize): AbsoluteSize =>
+export const getBorderWidth = (theme: EasyFlexTheme, borderWidth: BorderWidth): AbsoluteSize =>
 	isThemeSize(borderWidth) ? theme.border.width[borderWidth] : borderWidth;
 
 export const getColor = (theme: EasyFlexTheme, color: Color): CssColor =>
 	isThemeColor(color) ? theme.color[color] : color;
 
-export const getDistance = (theme: EasyFlexTheme, distance: Distance | AbsoluteSize): AbsoluteSize =>
+export const getDistance = (theme: EasyFlexTheme, distance: Distance): AbsoluteSize =>
 	isThemeSize(distance) ? theme.distance[distance] : distance;
 
-export const getFontSize = (theme: EasyFlexTheme, fontSize: FontSize | Size): Size =>
+export const getFontSize = (theme: EasyFlexTheme, fontSize: FontSize): Size =>
 	isThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize;
 
-export const getFontWeight = (theme: EasyFlexTheme, fontWeight: FontWeight | number): CssFontWeight | number =>
+export const getFontWeight = (theme: EasyFlexTheme, fontWeight: FontWeight): CssFontWeight =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
-export const getHeight = (theme: EasyFlexTheme, height: Height | ElementSize): ElementSize =>
+export const getHeight = (theme: EasyFlexTheme, height: Height): ElementSize =>
 	isThemeSize(height) ? theme.size.height[height] : height;
 
-export const getLineHeight = (theme: EasyFlexTheme, lineHeight: CssLineHeight | LineHeight): CssLineHeight =>
+export const getLineHeight = (theme: EasyFlexTheme, lineHeight: LineHeight): CssLineHeight =>
 	isThemeSize(lineHeight) ? theme.font.lineHeight[lineHeight] : lineHeight;
 
-export const getViewportThreshold = (theme: EasyFlexTheme, viewportThreshold: ViewportThreshold | number): number =>
+export const getViewportThreshold = (theme: EasyFlexTheme, viewportThreshold: ViewportThreshold): number =>
 	typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold];
 
-export const getWidth = (theme: EasyFlexTheme, width: Width | ElementSize): ElementSize =>
+export const getWidth = (theme: EasyFlexTheme, width: Width): ElementSize =>
 	isThemeSize(width) ? theme.size.width[width] : width;
 
 export const useEasyFlexTheme = (): EasyFlexTheme => useContext(EasyFlexContext);
@@ -254,11 +255,11 @@ export const useDimension = (): { height: number; width: number } => {
 	}>(() => ({ height, width }), [height, width]);
 };
 
-export const useViewport = (): Record<'default' | ThemeSize, boolean> => {
+export const useViewport = (): Record<ThemeSize | 'default', boolean> => {
 	const theme = useEasyFlexTheme();
 	const { width } = useDimension();
 
-	return useMemo<Record<'default' | ThemeSize, boolean>>(
+	return useMemo<Record<ThemeSize | 'default', boolean>>(
 		() => ({
 			default: width >= theme.viewport.defaultThreshold,
 			'8xs': width >= getViewportThreshold(theme, '8xs'),

@@ -5,17 +5,17 @@ export interface SizeProps {
     /** Sets the component's width to 100% if true. */
     fullWidth?: boolean;
     /** Component's height. */
-    height?: Height | ElementSize;
+    height?: Height;
     /** Component's maximum height. */
-    maxHeight?: Height | ElementSize;
+    maxHeight?: Height;
     /** Component's maximum width. */
-    maxWidth?: Width | ElementSize;
+    maxWidth?: Width;
     /** Component's miniumum height. */
-    minHeight?: Height | ElementSize;
+    minHeight?: Height;
     /** Component's minimum width. */
-    minWidth?: Width | ElementSize;
+    minWidth?: Width;
     /** Component's width. */
-    width?: Width | ElementSize;
+    width?: Width;
 }
 export interface SizeStyleProps {
     'data-height'?: ElementSize;

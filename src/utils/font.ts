@@ -19,12 +19,12 @@ import { useColor } from './color';
 export interface FontProps {
 	fontFamily?: FontFamily;
 	/** Component's font size. */
-	fontSize?: FontSize | Size;
+	fontSize?: FontSize;
 	/** Component's font weight. */
-	fontWeight?: FontWeight | number;
+	fontWeight?: FontWeight;
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
-	lineHeight?: CssLineHeight | LineHeight;
+	lineHeight?: LineHeight;
 	underline?: boolean;
 	underlineColor?: Color;
 }
@@ -32,7 +32,7 @@ export interface FontProps {
 export interface FontStyleProps {
 	'data-font-family'?: string;
 	'data-font-size'?: Size;
-	'data-font-weight'?: CssFontWeight | number;
+	'data-font-weight'?: CssFontWeight;
 	'data-font-style'?: FontStyle;
 	'data-line-height'?: CssLineHeight;
 	'data-text-decoration'?: TextDecoration;
@@ -50,7 +50,7 @@ export const useFont = ({
 }: FontProps): {
 	family: string | undefined;
 	size: Size | undefined;
-	weight: number | CssFontWeight | undefined;
+	weight: CssFontWeight | undefined;
 	style: FontStyle | undefined;
 	lineHeight: CssLineHeight | undefined;
 	textDecoration: TextDecoration | undefined;
@@ -68,7 +68,7 @@ export const useFont = ({
 		[fontSize, theme]
 	);
 
-	const processedFontWeight = useMemo<CssFontWeight | number | undefined>(
+	const processedFontWeight = useMemo<CssFontWeight | undefined>(
 		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
 		[fontWeight, theme]
 	);
@@ -93,7 +93,7 @@ export const useFont = ({
 	return useMemo<{
 		family: string | undefined;
 		size: Size | undefined;
-		weight: number | CssFontWeight | undefined;
+		weight: CssFontWeight | undefined;
 		style: FontStyle | undefined;
 		lineHeight: CssLineHeight | undefined;
 		textDecoration: TextDecoration | undefined;

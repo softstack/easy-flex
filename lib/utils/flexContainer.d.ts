@@ -5,7 +5,7 @@ export interface FlexContainerProps {
     /** Component's flex direction. */
     direction?: FlexDirection;
     /** Sets the gap between the component's children. If colum-gap or row-gap depends on direction. */
-    gap?: Distance | AbsoluteSize;
+    gap?: Distance;
     /** Sets how the browser distributes space between and around the component's children along the main axis. */
     justify?: JustifyContent;
 }
@@ -18,7 +18,7 @@ export interface FlexContainerStyleProps {
 }
 export declare const useGap: ({ direction, gap, }: {
     direction?: FlexDirection | undefined;
-    gap?: AbsoluteSize | import("../types").ThemeSize | undefined;
+    gap?: Distance | undefined;
 }) => {
     column: AbsoluteSize | undefined;
     row: AbsoluteSize | undefined;

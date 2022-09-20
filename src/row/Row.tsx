@@ -9,7 +9,7 @@ export interface RowProps extends Omit<BaseFlexProps, 'direction'> {
 	/** Sets what happens if the content shall be flipped. */
 	flipDirection?: FlipDirection;
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
-	viewportThreshold?: ViewportThreshold | number;
+	viewportThreshold?: ViewportThreshold;
 }
 
 export const Row = forwardRef<HTMLDivElement, RowProps>(

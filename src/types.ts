@@ -209,7 +209,7 @@ export type ColorName =
 
 export type FlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
 
-export type CssFontWeight = 'bold' | 'bolder' | 'lighter' | 'normal';
+export type CssFontWeight = number | 'bold' | 'bolder' | 'lighter' | 'normal';
 
 export type JustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 
@@ -284,9 +284,9 @@ export type BaseGridElement =
 	| 'section'
 	| 'summary';
 
-export type BorderRadius = ThemeSize;
+export type BorderRadius = AbsoluteSize | ThemeSize;
 
-export type BorderWidth = ThemeSize;
+export type BorderWidth = AbsoluteSize | ThemeSize;
 
 export type ThemeColor =
 	| 'primary'
@@ -380,9 +380,9 @@ export type ThemeColor =
 	| 'border7'
 	| 'border8';
 
-export type Color = ThemeColor | CssColor;
+export type Color = CssColor | ThemeColor;
 
-export type Distance = ThemeSize;
+export type Distance = AbsoluteSize | ThemeSize;
 
 export type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
@@ -399,7 +399,7 @@ export type FontFamily =
 	| 'footer'
 	| 'modal';
 
-export type FontSize = ThemeSize;
+export type FontSize = Size | ThemeSize;
 
 export type FontStyle = 'italic' | 'normal';
 
@@ -415,9 +415,9 @@ export type FontWeight =
 	| 'black'
 	| 'extraBlack';
 
-export type Height = ThemeSize;
+export type Height = ElementSize | ThemeSize;
 
-export type LineHeight = ThemeSize;
+export type LineHeight = CssLineHeight | ThemeSize;
 
 export type StyleElement =
 	| 'b'
@@ -441,9 +441,9 @@ export type TextDecoration = 'none' | 'underline';
 
 export type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
-export type ViewportThreshold = ThemeSize;
+export type ViewportThreshold = ThemeSize | number;
 
-export type Width = ThemeSize;
+export type Width = ElementSize | ThemeSize;
 
 export interface EasyFlexTheme {
 	border: {
@@ -457,7 +457,7 @@ export interface EasyFlexTheme {
 		family: Record<FontFamily, string>;
 		lineHeight: Record<ThemeSize, CssLineHeight>;
 		size: Record<ThemeSize, Size>;
-		weight: Record<FontWeight, CssFontWeight | number>;
+		weight: Record<FontWeight, CssFontWeight>;
 	};
 	modal: {
 		backgroundColor: CssColor;

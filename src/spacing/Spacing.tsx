@@ -23,11 +23,11 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 	/** Enables flipping. */
 	flipEnabled?: boolean;
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
-	viewportThreshold?: ViewportThreshold | number;
+	viewportThreshold?: ViewportThreshold;
 	/** Component's height. */
-	height?: Distance | AbsoluteSize;
+	height?: Distance;
 	/** Component's width. */
-	width?: Distance | AbsoluteSize;
+	width?: Distance;
 }
 
 export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(

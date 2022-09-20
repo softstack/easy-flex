@@ -26,7 +26,7 @@ const Background = styled.div<{
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 	backgroundColor?: Color;
 	/** Sets blur for the content covered by the modal background. */
-	blur?: boolean | AbsoluteSize;
+	blur?: AbsoluteSize | boolean;
 	blurElementId?: string;
 	containerElementId?: string;
 	/** Called if the modal background is clicked. */

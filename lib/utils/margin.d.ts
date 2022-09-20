@@ -1,19 +1,19 @@
 import { AbsoluteSize, Distance } from '../types';
 export interface MarginProps {
     /** Component's margin of all sides. */
-    margin?: Distance | AbsoluteSize;
+    margin?: Distance;
     /** Component's bottom margin. */
-    marginBottom?: Distance | AbsoluteSize;
+    marginBottom?: Distance;
     /** Component's left and right margin. */
-    marginHorizontal?: Distance | AbsoluteSize;
+    marginHorizontal?: Distance;
     /** Component's left margin. */
-    marginLeft?: Distance | AbsoluteSize;
+    marginLeft?: Distance;
     /** Component's right margin. */
-    marginRight?: Distance | AbsoluteSize;
+    marginRight?: Distance;
     /** Component's top margin. */
-    marginTop?: Distance | AbsoluteSize;
+    marginTop?: Distance;
     /** Component's top and bottom margin. */
-    marginVertical?: Distance | AbsoluteSize;
+    marginVertical?: Distance;
 }
 export interface MarginStyleProps {
     'data-margin-bottom': AbsoluteSize;

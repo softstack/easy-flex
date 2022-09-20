@@ -5,19 +5,19 @@ import { getDistance, useEasyFlexTheme } from './base';
 
 export interface PaddingProps {
 	/** Padding of all sides. */
-	padding?: Distance | AbsoluteSize;
+	padding?: Distance;
 	/** Component's bottom padding. */
-	paddingBottom?: Distance | AbsoluteSize;
+	paddingBottom?: Distance;
 	/** Component's left and right padding. */
-	paddingHorizontal?: Distance | AbsoluteSize;
+	paddingHorizontal?: Distance;
 	/** Component's left padding. */
-	paddingLeft?: Distance | AbsoluteSize;
+	paddingLeft?: Distance;
 	/** Component's right padding. */
-	paddingRight?: Distance | AbsoluteSize;
+	paddingRight?: Distance;
 	/** Component's top padding. */
-	paddingTop?: Distance | AbsoluteSize;
+	paddingTop?: Distance;
 	/** Component's top and bottom padding. */
-	paddingVertical?: Distance | AbsoluteSize;
+	paddingVertical?: Distance;
 }
 
 export interface PaddingStyleProps {

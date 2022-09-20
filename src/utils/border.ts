@@ -8,10 +8,10 @@ export interface BorderProps {
 	/** Component's border color. */
 	borderColor?: Color;
 	/** Component's border radius. */
-	borderRadius?: BorderRadius | AbsoluteSize;
+	borderRadius?: BorderRadius;
 	borderStyle?: BorderStyle;
 	/** Component's border width. */
-	borderWidth?: BorderWidth | AbsoluteSize;
+	borderWidth?: BorderWidth;
 	round?: boolean;
 }
 

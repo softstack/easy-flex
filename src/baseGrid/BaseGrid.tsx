@@ -80,10 +80,10 @@ export interface BaseGridProps
 		FontProps,
 		DistanceProps,
 		SizeProps {
-	columnGap?: Distance | AbsoluteSize;
+	columnGap?: Distance;
 	/** Component's html tag. */
 	element?: BaseGridElement;
-	rowGap?: Distance | AbsoluteSize;
+	rowGap?: Distance;
 }
 
 export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
