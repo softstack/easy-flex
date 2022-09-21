@@ -20,6 +20,10 @@ export type Vh = `${number}vh`;
 
 export type Vw = `${number}vw`;
 
+export type AbsoluteSize = Px | Rem | Vh | Vw;
+
+export type Size = AbsoluteSize | Percent;
+
 export type AlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
 export type AlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
@@ -223,13 +227,9 @@ export type WordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
 
 export type CssColor = ColorCode | ColorKeyword | ColorName;
 
-export type AbsoluteSize = Px | Rem | Vh | Vw;
-
 export type Flex = AbsoluteSize | Percent | number | 'auto' | 'none';
 
 export type FlexBasis = AbsoluteSize | Percent | 'auto';
-
-export type Size = AbsoluteSize | Percent;
 
 export type ElementSize = Size | 'fit-content';
 
@@ -284,7 +284,7 @@ export type BaseGridElement =
 	| 'section'
 	| 'summary';
 
-export type BorderRadius = AbsoluteSize | ThemeSize;
+export type BorderRadius = Size | ThemeSize;
 
 export type BorderWidth = AbsoluteSize | ThemeSize;
 

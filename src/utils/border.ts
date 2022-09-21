@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor } from '../types';
+import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Size } from '../types';
 import { getBorderRadius, getBorderWidth, ifNotUndefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
@@ -17,7 +17,7 @@ export interface BorderProps {
 
 export interface BorderStyleProps {
 	'data-border-color'?: CssColor;
-	'data-border-radius'?: AbsoluteSize;
+	'data-border-radius'?: Size;
 	'data-border-style'?: BorderStyle;
 	'data-border-width'?: AbsoluteSize;
 }
@@ -30,7 +30,7 @@ export const useBorder = ({
 	round,
 }: BorderProps): {
 	color: CssColor | undefined;
-	radius: AbsoluteSize | undefined;
+	radius: Size | undefined;
 	style: BorderStyle | undefined;
 	width: AbsoluteSize | undefined;
 } => {
@@ -38,7 +38,7 @@ export const useBorder = ({
 
 	const processedBorderColor = useColor(borderColor);
 
-	const processedBorderRadius = useMemo<AbsoluteSize | undefined>(
+	const processedBorderRadius = useMemo<Size | undefined>(
 		() => (round ? '99999px' : ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius))),
 		[borderRadius, round, theme]
 	);
@@ -56,7 +56,7 @@ export const useBorder = ({
 
 	return useMemo<{
 		color: CssColor | undefined;
-		radius: AbsoluteSize | undefined;
+		radius: Size | undefined;
 		style: BorderStyle | undefined;
 		width: AbsoluteSize | undefined;
 	}>(

@@ -1,4 +1,4 @@
-import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor } from '../types';
+import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Size } from '../types';
 export interface BorderProps {
     /** Component's border color. */
     borderColor?: Color;
@@ -11,13 +11,13 @@ export interface BorderProps {
 }
 export interface BorderStyleProps {
     'data-border-color'?: CssColor;
-    'data-border-radius'?: AbsoluteSize;
+    'data-border-radius'?: Size;
     'data-border-style'?: BorderStyle;
     'data-border-width'?: AbsoluteSize;
 }
 export declare const useBorder: ({ borderColor, borderRadius, borderStyle, borderWidth, round, }: BorderProps) => {
     color: CssColor | undefined;
-    radius: AbsoluteSize | undefined;
+    radius: Size | undefined;
     style: BorderStyle | undefined;
     width: AbsoluteSize | undefined;
 };

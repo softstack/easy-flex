@@ -203,7 +203,7 @@ export const sizeToNumber = (value: Size): number => {
 	return percentToNumber(value);
 };
 
-export const getBorderRadius = (theme: EasyFlexTheme, borderRadius: BorderRadius): AbsoluteSize =>
+export const getBorderRadius = (theme: EasyFlexTheme, borderRadius: BorderRadius): Size =>
 	isThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius;
 
 export const getBorderWidth = (theme: EasyFlexTheme, borderWidth: BorderWidth): AbsoluteSize =>
