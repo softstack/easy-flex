@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { TextAlign, TextElement, WordBreak } from '../types';
+import { TextAlign, TextElement } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -12,7 +12,6 @@ import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../util
 const style = css<
 	{
 		'data-align'?: TextAlign;
-		'data-word-break'?: WordBreak;
 	} & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -23,7 +22,7 @@ const style = css<
 >`
 	box-sizing: border-box;
 	text-align: ${({ 'data-align': align }) => align};
-	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
+
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
@@ -74,8 +73,6 @@ export interface TextProps
 	align?: TextAlign;
 	/** Component's html tag. */
 	element?: TextElement;
-	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-	wordBreak?: WordBreak;
 }
 
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(
@@ -126,6 +123,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 			round,
 			shrink,
 			underline,
+			whiteSpace,
 			width,
 			wordBreak,
 			...props
@@ -138,7 +136,16 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
@@ -192,7 +199,6 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 		return (
 			<Element
 				data-align={align}
-				data-word-break={wordBreak}
 				{...borderStyleProps}
 				{...colorStyleProps}
 				{...distanceStyleProps}

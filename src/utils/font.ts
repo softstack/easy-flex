@@ -12,6 +12,8 @@ import {
 	LineHeight,
 	Size,
 	TextDecoration,
+	WhiteSpace,
+	WordBreak
 } from '../types';
 import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
@@ -27,6 +29,9 @@ export interface FontProps {
 	lineHeight?: LineHeight;
 	underline?: boolean;
 	underlineColor?: Color;
+	whiteSpace?: WhiteSpace;
+	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
+	wordBreak?: WordBreak;
 }
 
 export interface FontStyleProps {
@@ -37,6 +42,8 @@ export interface FontStyleProps {
 	'data-line-height'?: CssLineHeight;
 	'data-text-decoration'?: TextDecoration;
 	'data-text-decoration-color'?: CssColor;
+	'data-white-space'?: WhiteSpace;
+	'data-word-break'?: WordBreak;
 }
 
 export const useFont = ({
@@ -47,6 +54,8 @@ export const useFont = ({
 	lineHeight,
 	underline,
 	underlineColor,
+	whiteSpace,
+	wordBreak,
 }: FontProps): {
 	family: string | undefined;
 	size: Size | undefined;
@@ -55,6 +64,8 @@ export const useFont = ({
 	lineHeight: CssLineHeight | undefined;
 	textDecoration: TextDecoration | undefined;
 	textDecorationColor: CssColor | undefined;
+	whiteSpace: WhiteSpace | undefined;
+	wordBreak: WordBreak | undefined;
 } => {
 	const theme = useEasyFlexTheme();
 
@@ -98,6 +109,8 @@ export const useFont = ({
 		lineHeight: CssLineHeight | undefined;
 		textDecoration: TextDecoration | undefined;
 		textDecorationColor: CssColor | undefined;
+		whiteSpace: WhiteSpace | undefined;
+		wordBreak: WordBreak | undefined;
 	}>(
 		() => ({
 			family: processedFontFamily,
@@ -107,6 +120,8 @@ export const useFont = ({
 			lineHeight: processedLineHeight,
 			textDecoration: processedUnderline,
 			textDecorationColor: processedUnderlineColor,
+			whiteSpace,
+			wordBreak,
 		}),
 		[
 			processedFontFamily,
@@ -116,6 +131,8 @@ export const useFont = ({
 			processedLineHeight,
 			processedUnderline,
 			processedUnderlineColor,
+			whiteSpace,
+			wordBreak,
 		]
 	);
 };
@@ -132,6 +149,8 @@ export const useFontStyleProps = (props: FontProps): FontStyleProps => {
 			'data-line-height': font.lineHeight,
 			'data-text-decoration': font.textDecoration,
 			'data-text-decoration-color': font.textDecorationColor,
+			'data-white-space':font.whiteSpace,
+			'data-word-break': font.wordBreak,
 		}),
 		[font]
 	);
@@ -145,4 +164,6 @@ export const fontStyle = css<FontStyleProps>`
 	line-height: ${({ 'data-line-height': lineHeight }) => lineHeight};
 	text-decoration: ${({ 'data-text-decoration': textDecoration }) => textDecoration};
 	text-decoration-color: ${({ 'data-text-decoration-color': textDecorationColor }) => textDecorationColor};
+	white-space: ${({ 'data-white-space': whiteSpace }) => whiteSpace};
+	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
 `;

@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import { TextAlign, TextElement, WordBreak } from '../types';
+import { TextAlign, TextElement } from '../types';
 import { BorderProps } from '../utils/border';
 import { ColorProps } from '../utils/color';
 import { DistanceProps } from '../utils/distance';
@@ -12,7 +12,5 @@ export interface TextProps extends Omit<HTMLAttributes<HTMLParagraphElement>, 'c
     align?: TextAlign;
     /** Component's html tag. */
     element?: TextElement;
-    /** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-    wordBreak?: WordBreak;
 }
 export declare const Text: React.ForwardRefExoticComponent<TextProps & React.RefAttributes<HTMLParagraphElement>>;

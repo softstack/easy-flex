@@ -84,7 +84,9 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
 			round,
 			shrink,
 			underline,
+			whiteSpace,
 			width,
+			wordBreak,
 			...props
 		},
 		ref
@@ -110,7 +112,16 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
 			paddingVertical,
 		});
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

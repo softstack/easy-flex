@@ -76,7 +76,9 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 			newTab = false,
 			shrink,
 			underline,
+			whiteSpace,
 			width,
+			wordBreak,
 			...props
 		},
 		ref
@@ -87,7 +89,16 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const marginStyleProps = useMarginStyleProps({
 			margin,

@@ -92,12 +92,23 @@ export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 			italic,
 			lineHeight,
 			underline,
+			whiteSpace,
+			wordBreak,
 		},
 		ref
 	) => {
 		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const Element = useMemo(() => {
 			switch (element) {

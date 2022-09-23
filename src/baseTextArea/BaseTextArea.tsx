@@ -85,7 +85,9 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
 			round,
 			shrink,
 			underline,
+			whiteSpace,
 			width,
+			wordBreak,
 			...props
 		},
 		ref
@@ -111,7 +113,16 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
 			paddingVertical,
 		});
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

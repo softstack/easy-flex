@@ -138,7 +138,9 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			round,
 			shrink,
 			underline,
+			whiteSpace,
 			width,
+			wordBreak,
 			...props
 		},
 		ref
@@ -164,7 +166,16 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			paddingVertical,
 		});
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
 

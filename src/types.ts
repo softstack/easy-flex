@@ -6,6 +6,8 @@ export type DeepPartial<T> = T extends object
 
 // CSS start
 
+export type GlobalValue = 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
+
 export type Deg = `${number}deg`;
 
 export type Percent = `${number}%`;
@@ -24,11 +26,14 @@ export type AbsoluteSize = Px | Rem | Vh | Vw;
 
 export type Size = AbsoluteSize | Percent;
 
-export type AlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+export type ElementSize = GlobalValue | Size | 'fit-content';
 
-export type AlignSelf = 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+export type AlignItems = GlobalValue | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+
+export type AlignSelf = GlobalValue | 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
 
 export type BorderStyle =
+	| GlobalValue
 	| 'dashed'
 	| 'dotted'
 	| 'double'
@@ -59,7 +64,7 @@ export type ColorCode =
 	| `${RgbName}(${RgbComma})`
 	| `${RgbName}(${RgbComma}, ${number | Percent})`;
 
-export type ColorKeyword = 'currentColor' | 'inherit' | 'transparent';
+export type ColorKeyword = 'currentColor' | 'transparent';
 
 export type ColorName =
 	| 'aliceblue' // #f0f8ff
@@ -211,29 +216,45 @@ export type ColorName =
 	| 'yellow' // #ffff00
 	| 'yellowgreen'; // #9acd32
 
-export type FlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
+export type CssColor = ColorCode | ColorKeyword | ColorName | GlobalValue;
 
-export type CssFontWeight = number | 'bold' | 'bolder' | 'lighter' | 'normal';
+export type Flex = GlobalValue | AbsoluteSize | Percent | number | 'auto' | 'none';
 
-export type JustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
+export type FlexBasis = GlobalValue | AbsoluteSize | Percent | 'auto';
 
-export type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+export type FlexDirection = GlobalValue | 'column' | 'column-reverse' | 'row' | 'row-reverse';
 
-export type Overflow = 'auto' | 'hidden' | 'scroll' | 'visible';
+export type CssFontWeight = GlobalValue | number | 'bold' | 'bolder' | 'lighter' | 'normal';
 
-export type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
+export type JustifyContent =
+	| GlobalValue
+	| 'center'
+	| 'flex-end'
+	| 'flex-start'
+	| 'space-around'
+	| 'space-between'
+	| 'space-evenly';
 
-export type WordBreak = 'break-all' | 'break-word' | 'keep-all' | 'normal';
+export type CssLineHeight = GlobalValue | Percent | number | 'normal';
 
-export type CssColor = ColorCode | ColorKeyword | ColorName;
+export type ObjectFit = GlobalValue | 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 
-export type Flex = AbsoluteSize | Percent | number | 'auto' | 'none';
+export type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'visible';
 
-export type FlexBasis = AbsoluteSize | Percent | 'auto';
+export type TextAlign =
+	| GlobalValue
+	| 'center'
+	| 'end'
+	| 'justify'
+	| 'justify-all'
+	| 'left'
+	| 'match-parent'
+	| 'right'
+	| 'start';
 
-export type ElementSize = Size | 'fit-content';
+export type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 
-export type CssLineHeight = Percent | number | 'normal';
+export type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 'normal';
 
 // CSS end
 

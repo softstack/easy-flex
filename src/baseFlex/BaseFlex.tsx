@@ -142,7 +142,9 @@ export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 			round,
 			shrink,
 			underline,
+			whiteSpace,
 			width,
+			wordBreak,
 			...props
 		},
 		ref
@@ -168,7 +170,16 @@ export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 			paddingVertical,
 		});
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
 

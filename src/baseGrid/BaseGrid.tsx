@@ -132,7 +132,9 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 			rowGap,
 			shrink,
 			underline,
+			whiteSpace,
 			width,
+			wordBreak,
 			...props
 		},
 		ref
@@ -145,7 +147,16 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 
 		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const fontStyleProps = useFontStyleProps({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline });
+		const fontStyleProps = useFontStyleProps({
+			fontFamily,
+			fontSize,
+			fontWeight,
+			italic,
+			lineHeight,
+			underline,
+			whiteSpace,
+			wordBreak,
+		});
 
 		const distanceStyleProps = useDistanceStyleProps({
 			margin,
