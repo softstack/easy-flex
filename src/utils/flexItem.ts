@@ -35,6 +35,7 @@ export const useFlexItemStyleProps = ({ alignSelf, basis, flex, grow, shrink }: 
 };
 
 export const flexItemStyle = css<FlexItemStyleProps>`
+	align-self: ${({ 'data-align-self': alignSelf }) => alignSelf};
 	flex: ${({ 'data-flex': flex }) => flex};
 	flex-basis: ${({ 'data-basis': basis }) => basis};
 	flex-grow: ${({ 'data-grow': grow }) => grow};
