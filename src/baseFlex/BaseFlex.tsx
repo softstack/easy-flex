@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BaseFlexElement } from '../types';
+import { BaseFlexElement, Falsifiable } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -88,7 +88,7 @@ export interface BaseFlexProps
 		OverflowProps,
 		SizeProps {
 	/** Component's html tag. */
-	element?: BaseFlexElement;
+	element?: Falsifiable<BaseFlexElement>;
 }
 
 export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
@@ -205,6 +205,7 @@ export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
 				case 'aside':
 					return StyledAside;
 				case 'div':
+				case false:
 					return StyledDiv;
 				case 'figure':
 					return StyledFigure;

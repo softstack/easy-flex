@@ -1,18 +1,18 @@
-import { Color, CssColor, CssFontWeight, CssLineHeight, FontFamily, FontSize, FontStyle, FontWeight, LineHeight, Size, TextDecoration, WhiteSpace, WordBreak } from '../types';
+import { Color, CssColor, CssFontWeight, CssLineHeight, Falsifiable, FontFamily, FontSize, FontStyle, FontWeight, LineHeight, Size, TextDecoration, WhiteSpace, WordBreak } from '../types';
 export interface FontProps {
-    fontFamily?: FontFamily;
+    fontFamily?: Falsifiable<FontFamily>;
     /** Component's font size. */
-    fontSize?: FontSize;
+    fontSize?: Falsifiable<FontSize>;
     /** Component's font weight. */
-    fontWeight?: FontWeight;
+    fontWeight?: Falsifiable<FontWeight>;
     /** If true, the text style is set to italic. */
     italic?: boolean;
-    lineHeight?: LineHeight;
+    lineHeight?: Falsifiable<LineHeight>;
     underline?: boolean;
-    underlineColor?: Color;
-    whiteSpace?: WhiteSpace;
+    underlineColor?: Falsifiable<Color>;
+    whiteSpace?: Falsifiable<WhiteSpace>;
     /** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-    wordBreak?: WordBreak;
+    wordBreak?: Falsifiable<WordBreak>;
 }
 export interface FontStyleProps {
     'data-font-family'?: string;
@@ -22,8 +22,8 @@ export interface FontStyleProps {
     'data-line-height'?: CssLineHeight;
     'data-text-decoration'?: TextDecoration;
     'data-text-decoration-color'?: CssColor;
-    'data-white-space'?: WhiteSpace;
-    'data-word-break'?: WordBreak;
+    'data-white-space'?: Falsifiable<WhiteSpace>;
+    'data-word-break'?: Falsifiable<WordBreak>;
 }
 export declare const useFont: ({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline, underlineColor, whiteSpace, wordBreak, }: FontProps) => {
     family: string | undefined;
@@ -33,8 +33,8 @@ export declare const useFont: ({ fontFamily, fontSize, fontWeight, italic, lineH
     lineHeight: CssLineHeight | undefined;
     textDecoration: TextDecoration | undefined;
     textDecorationColor: CssColor | undefined;
-    whiteSpace: WhiteSpace | undefined;
-    wordBreak: WordBreak | undefined;
+    whiteSpace: Falsifiable<WhiteSpace> | undefined;
+    wordBreak: Falsifiable<WordBreak> | undefined;
 };
 export declare const useFontStyleProps: (props: FontProps) => FontStyleProps;
 export declare const fontStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<FontStyleProps, any>>;

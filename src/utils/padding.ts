@@ -1,23 +1,23 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, Distance } from '../types';
-import { getDistance, useEasyFlexTheme } from './base';
+import { AbsoluteSize, Distance, Falsifiable } from '../types';
+import { defalsify, getDistance, useEasyFlexTheme } from './base';
 
 export interface PaddingProps {
 	/** Padding of all sides. */
-	padding?: Distance;
+	padding?: Falsifiable<Distance>;
 	/** Component's bottom padding. */
-	paddingBottom?: Distance;
+	paddingBottom?: Falsifiable<Distance>;
 	/** Component's left and right padding. */
-	paddingHorizontal?: Distance;
+	paddingHorizontal?: Falsifiable<Distance>;
 	/** Component's left padding. */
-	paddingLeft?: Distance;
+	paddingLeft?: Falsifiable<Distance>;
 	/** Component's right padding. */
-	paddingRight?: Distance;
+	paddingRight?: Falsifiable<Distance>;
 	/** Component's top padding. */
-	paddingTop?: Distance;
+	paddingTop?: Falsifiable<Distance>;
 	/** Component's top and bottom padding. */
-	paddingVertical?: Distance;
+	paddingVertical?: Falsifiable<Distance>;
 }
 
 export interface PaddingStyleProps {
@@ -44,22 +44,22 @@ export const usePadding = ({
 	const theme = useEasyFlexTheme();
 
 	const processedPaddingBottom = useMemo<AbsoluteSize>(
-		() => getDistance(theme, paddingBottom ?? paddingVertical ?? padding ?? '0px'),
+		() => getDistance(theme, defalsify(paddingBottom) ?? defalsify(paddingVertical) ?? defalsify(padding) ?? '0px'),
 		[padding, paddingBottom, paddingVertical, theme]
 	);
 
 	const processedPaddingLeft = useMemo<AbsoluteSize>(
-		() => getDistance(theme, paddingLeft ?? paddingHorizontal ?? padding ?? '0px'),
+		() => getDistance(theme, defalsify(paddingLeft) ?? defalsify(paddingHorizontal) ?? defalsify(padding) ?? '0px'),
 		[padding, paddingHorizontal, paddingLeft, theme]
 	);
 
 	const processedPaddingRight = useMemo<AbsoluteSize>(
-		() => getDistance(theme, paddingRight ?? paddingHorizontal ?? padding ?? '0px'),
+		() => getDistance(theme, defalsify(paddingRight) ?? defalsify(paddingHorizontal) ?? defalsify(padding) ?? '0px'),
 		[padding, paddingHorizontal, paddingRight, theme]
 	);
 
 	const processedPaddingTop = useMemo<AbsoluteSize>(
-		() => getDistance(theme, paddingTop ?? paddingVertical ?? padding ?? '0px'),
+		() => getDistance(theme, defalsify(paddingTop) ?? defalsify(paddingVertical) ?? defalsify(padding) ?? '0px'),
 		[padding, paddingTop, paddingVertical, theme]
 	);
 

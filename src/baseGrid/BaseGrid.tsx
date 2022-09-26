@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { AbsoluteSize, BaseGridElement, Distance } from '../types';
-import { getDistance, ifNotUndefined, useEasyFlexTheme } from '../utils/base';
+import { AbsoluteSize, BaseGridElement, Distance, Falsifiable } from '../types';
+import { getDistance, ifDefined, useEasyFlexTheme } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -80,10 +80,10 @@ export interface BaseGridProps
 		FontProps,
 		DistanceProps,
 		SizeProps {
-	columnGap?: Distance;
+	columnGap?: Falsifiable<Distance>;
 	/** Component's html tag. */
-	element?: BaseGridElement;
-	rowGap?: Distance;
+	element?: Falsifiable<BaseGridElement>;
+	rowGap?: Falsifiable<Distance>;
 }
 
 export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
@@ -187,12 +187,12 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 		});
 
 		const processedColumnGap = useMemo<AbsoluteSize | undefined>(
-			() => ifNotUndefined(columnGap, (columnGap) => getDistance(theme, columnGap)),
+			() => ifDefined(columnGap, (columnGap) => getDistance(theme, columnGap)),
 			[columnGap, theme]
 		);
 
 		const processedRowGap = useMemo<AbsoluteSize | undefined>(
-			() => ifNotUndefined(rowGap, (rowGap) => getDistance(theme, rowGap)),
+			() => ifDefined(rowGap, (rowGap) => getDistance(theme, rowGap)),
 			[rowGap, theme]
 		);
 
@@ -203,6 +203,7 @@ export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
 				case 'aside':
 					return StyledAside;
 				case 'div':
+				case false:
 					return StyledDiv;
 				case 'figure':
 					return StyledFigure;

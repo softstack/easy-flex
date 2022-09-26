@@ -1,17 +1,17 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Size } from '../types';
-import { getBorderRadius, getBorderWidth, ifNotUndefined, useEasyFlexTheme } from './base';
+import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Falsifiable, Size } from '../types';
+import { defalsify, getBorderRadius, getBorderWidth, ifDefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
 export interface BorderProps {
 	/** Component's border color. */
-	borderColor?: Color;
+	borderColor?: Falsifiable<Color>;
 	/** Component's border radius. */
-	borderRadius?: BorderRadius;
-	borderStyle?: BorderStyle;
+	borderRadius?: Falsifiable<BorderRadius>;
+	borderStyle?: Falsifiable<BorderStyle>;
 	/** Component's border width. */
-	borderWidth?: BorderWidth;
+	borderWidth?: Falsifiable<BorderWidth>;
 	round?: boolean;
 }
 
@@ -39,18 +39,20 @@ export const useBorder = ({
 	const processedBorderColor = useColor(borderColor);
 
 	const processedBorderRadius = useMemo<Size | undefined>(
-		() => (round ? '99999px' : ifNotUndefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius))),
+		() => (round ? '99999px' : ifDefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius))),
 		[borderRadius, round, theme]
 	);
 
 	const processedBorderStyle = useMemo<BorderStyle | undefined>(
 		() =>
-			borderStyle !== undefined || borderWidth !== undefined ? borderStyle ?? theme.border.defaultStyle : undefined,
+			(borderStyle !== false && borderStyle !== undefined) || (borderWidth !== false && borderWidth !== undefined)
+				? defalsify(borderStyle) ?? theme.border.defaultStyle
+				: undefined,
 		[borderStyle, borderWidth, theme]
 	);
 
 	const processedBorderWidth = useMemo<AbsoluteSize | undefined>(
-		() => ifNotUndefined(borderWidth, (borderWidth) => getBorderWidth(theme, borderWidth)),
+		() => ifDefined(borderWidth, (borderWidth) => getBorderWidth(theme, borderWidth)),
 		[borderWidth, theme]
 	);
 

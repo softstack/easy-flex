@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
-import { AbsoluteSize, Distance, ViewportThreshold } from '../types';
-import { getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
+import { AbsoluteSize, Distance, Falsifiable, ViewportThreshold } from '../types';
+import { defalsify, getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
 const StyledDiv = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
 	box-sizing: border-box;
@@ -23,15 +23,15 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 	/** Enables flipping. */
 	flipEnabled?: boolean;
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
-	viewportThreshold?: ViewportThreshold;
+	viewportThreshold?: Falsifiable<ViewportThreshold>;
 	/** Component's height. */
-	height?: Distance;
+	height?: Falsifiable<Distance>;
 	/** Component's width. */
-	width?: Distance;
+	width?: Falsifiable<Distance>;
 }
 
 export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
-	({ flip, flipEnabled = false, viewportThreshold, height = '0px', width = '0px', ...props }, ref) => {
+	({ flip, flipEnabled = false, viewportThreshold, height, width, ...props }, ref) => {
 		const theme = useEasyFlexTheme();
 		const { width: displayWidth } = useDimension();
 
@@ -40,11 +40,11 @@ export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
 				flipEnabled &&
 				(flip ||
 					(flip === undefined &&
-						(viewportThreshold !== undefined
+						(viewportThreshold !== false && viewportThreshold !== undefined
 							? displayWidth < getViewportThreshold(theme, viewportThreshold)
 							: displayWidth < theme.viewport.defaultThreshold)))
-					? getDistance(theme, width)
-					: getDistance(theme, height),
+					? getDistance(theme, defalsify(width) ?? '0px')
+					: getDistance(theme, defalsify(height) ?? '0px'),
 			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
 		);
 
@@ -53,11 +53,11 @@ export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
 				flipEnabled &&
 				(flip ||
 					(flip === undefined &&
-						(viewportThreshold !== undefined
+						(viewportThreshold !== false && viewportThreshold !== undefined
 							? displayWidth < getViewportThreshold(theme, viewportThreshold)
 							: displayWidth < theme.viewport.defaultThreshold)))
-					? getDistance(theme, height)
-					: getDistance(theme, width),
+					? getDistance(theme, defalsify(height) ?? '0px')
+					: getDistance(theme, defalsify(width) ?? '0px'),
 			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
 		);
 

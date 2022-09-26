@@ -5,6 +5,7 @@ import {
 	CssColor,
 	CssFontWeight,
 	CssLineHeight,
+	Falsifiable,
 	FontFamily,
 	FontSize,
 	FontStyle,
@@ -13,25 +14,25 @@ import {
 	Size,
 	TextDecoration,
 	WhiteSpace,
-	WordBreak
+	WordBreak,
 } from '../types';
-import { getFontSize, getFontWeight, getLineHeight, ifNotUndefined, useEasyFlexTheme } from './base';
+import { getFontSize, getFontWeight, getLineHeight, ifDefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
 export interface FontProps {
-	fontFamily?: FontFamily;
+	fontFamily?: Falsifiable<FontFamily>;
 	/** Component's font size. */
-	fontSize?: FontSize;
+	fontSize?: Falsifiable<FontSize>;
 	/** Component's font weight. */
-	fontWeight?: FontWeight;
+	fontWeight?: Falsifiable<FontWeight>;
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
-	lineHeight?: LineHeight;
+	lineHeight?: Falsifiable<LineHeight>;
 	underline?: boolean;
-	underlineColor?: Color;
-	whiteSpace?: WhiteSpace;
+	underlineColor?: Falsifiable<Color>;
+	whiteSpace?: Falsifiable<WhiteSpace>;
 	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
-	wordBreak?: WordBreak;
+	wordBreak?: Falsifiable<WordBreak>;
 }
 
 export interface FontStyleProps {
@@ -42,8 +43,8 @@ export interface FontStyleProps {
 	'data-line-height'?: CssLineHeight;
 	'data-text-decoration'?: TextDecoration;
 	'data-text-decoration-color'?: CssColor;
-	'data-white-space'?: WhiteSpace;
-	'data-word-break'?: WordBreak;
+	'data-white-space'?: Falsifiable<WhiteSpace>;
+	'data-word-break'?: Falsifiable<WordBreak>;
 }
 
 export const useFont = ({
@@ -64,38 +65,38 @@ export const useFont = ({
 	lineHeight: CssLineHeight | undefined;
 	textDecoration: TextDecoration | undefined;
 	textDecorationColor: CssColor | undefined;
-	whiteSpace: WhiteSpace | undefined;
-	wordBreak: WordBreak | undefined;
+	whiteSpace: Falsifiable<WhiteSpace> | undefined;
+	wordBreak: Falsifiable<WordBreak> | undefined;
 } => {
 	const theme = useEasyFlexTheme();
 
 	const processedFontFamily = useMemo<string | undefined>(
-		() => ifNotUndefined(fontFamily, (fontFamily) => theme.font.family[fontFamily]),
+		() => ifDefined(fontFamily, (fontFamily) => theme.font.family[fontFamily]),
 		[fontFamily, theme]
 	);
 
 	const processedFontSize = useMemo<Size | undefined>(
-		() => ifNotUndefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
+		() => ifDefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
 		[fontSize, theme]
 	);
 
 	const processedFontWeight = useMemo<CssFontWeight | undefined>(
-		() => ifNotUndefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
+		() => ifDefined(fontWeight, (fontWeight) => getFontWeight(theme, fontWeight)),
 		[fontWeight, theme]
 	);
 
 	const processedItalic = useMemo<FontStyle | undefined>(
-		() => ifNotUndefined(italic, (italic) => (italic ? 'italic' : 'normal')),
+		() => ifDefined(italic, (italic) => (italic ? 'italic' : 'normal')),
 		[italic]
 	);
 
 	const processedLineHeight = useMemo<CssLineHeight | undefined>(
-		() => ifNotUndefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
+		() => ifDefined(lineHeight, (lineHeight) => getLineHeight(theme, lineHeight)),
 		[lineHeight, theme]
 	);
 
 	const processedUnderline = useMemo<TextDecoration | undefined>(
-		() => ifNotUndefined(underline, (underline) => (underline ? 'underline' : 'none')),
+		() => ifDefined(underline, (underline) => (underline ? 'underline' : 'none')),
 		[underline]
 	);
 
@@ -109,8 +110,8 @@ export const useFont = ({
 		lineHeight: CssLineHeight | undefined;
 		textDecoration: TextDecoration | undefined;
 		textDecorationColor: CssColor | undefined;
-		whiteSpace: WhiteSpace | undefined;
-		wordBreak: WordBreak | undefined;
+		whiteSpace: Falsifiable<WhiteSpace> | undefined;
+		wordBreak: Falsifiable<WordBreak> | undefined;
 	}>(
 		() => ({
 			family: processedFontFamily,
@@ -149,7 +150,7 @@ export const useFontStyleProps = (props: FontProps): FontStyleProps => {
 			'data-line-height': font.lineHeight,
 			'data-text-decoration': font.textDecoration,
 			'data-text-decoration-color': font.textDecorationColor,
-			'data-white-space':font.whiteSpace,
+			'data-white-space': font.whiteSpace,
 			'data-word-break': font.wordBreak,
 		}),
 		[font]

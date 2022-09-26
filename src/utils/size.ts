@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { ElementSize, Height, Width } from '../types';
-import { getHeight, getWidth, ifNotUndefined, useEasyFlexTheme } from './base';
+import { ElementSize, Falsifiable, Height, Width } from '../types';
+import { getHeight, getWidth, ifDefined, useEasyFlexTheme } from './base';
 
 export interface SizeProps {
 	/** Sets the component's height to 100% if true. */
@@ -9,17 +9,17 @@ export interface SizeProps {
 	/** Sets the component's width to 100% if true. */
 	fullWidth?: boolean;
 	/** Component's height. */
-	height?: Height;
+	height?: Falsifiable<Height>;
 	/** Component's maximum height. */
-	maxHeight?: Height;
+	maxHeight?: Falsifiable<Height>;
 	/** Component's maximum width. */
-	maxWidth?: Width;
+	maxWidth?: Falsifiable<Width>;
 	/** Component's miniumum height. */
-	minHeight?: Height;
+	minHeight?: Falsifiable<Height>;
 	/** Component's minimum width. */
-	minWidth?: Width;
+	minWidth?: Falsifiable<Width>;
 	/** Component's width. */
-	width?: Width;
+	width?: Falsifiable<Width>;
 }
 
 export interface SizeStyleProps {
@@ -51,32 +51,32 @@ export const useSize = ({
 	const theme = useEasyFlexTheme();
 
 	const processedHeight = useMemo<ElementSize | undefined>(
-		() => (fullHeight ? '100%' : ifNotUndefined(height, (height) => getHeight(theme, height))),
+		() => (fullHeight ? '100%' : ifDefined(height, (height) => getHeight(theme, height))),
 		[fullHeight, height, theme]
 	);
 
 	const processedMaxHeight = useMemo<ElementSize | undefined>(
-		() => ifNotUndefined(maxHeight, (maxHeight) => getHeight(theme, maxHeight)),
+		() => ifDefined(maxHeight, (maxHeight) => getHeight(theme, maxHeight)),
 		[maxHeight, theme]
 	);
 
 	const processedMaxWidth = useMemo<ElementSize | undefined>(
-		() => ifNotUndefined(maxWidth, (maxWidth) => getWidth(theme, maxWidth)),
+		() => ifDefined(maxWidth, (maxWidth) => getWidth(theme, maxWidth)),
 		[theme, maxWidth]
 	);
 
 	const processedMinHeight = useMemo<ElementSize | undefined>(
-		() => ifNotUndefined(minHeight, (minHeight) => getHeight(theme, minHeight)),
+		() => ifDefined(minHeight, (minHeight) => getHeight(theme, minHeight)),
 		[minHeight, theme]
 	);
 
 	const processedMinWidth = useMemo<ElementSize | undefined>(
-		() => ifNotUndefined(minWidth, (minWidth) => getWidth(theme, minWidth)),
+		() => ifDefined(minWidth, (minWidth) => getWidth(theme, minWidth)),
 		[theme, minWidth]
 	);
 
 	const processedWidth = useMemo<ElementSize | undefined>(
-		() => (fullWidth ? '100%' : ifNotUndefined(width, (width) => getWidth(theme, width))),
+		() => (fullWidth ? '100%' : ifDefined(width, (width) => getWidth(theme, width))),
 		[fullWidth, theme, width]
 	);
 

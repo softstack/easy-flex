@@ -1,6 +1,6 @@
 import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { Color, CssColor } from '../types';
+import { Color, CssColor, Falsifiable } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
@@ -38,7 +38,7 @@ export interface LinkProps
 		MarginProps,
 		SizeProps {
 	/** Component's hover color. */
-	hoverColor?: Color;
+	hoverColor?: Falsifiable<Color>;
 	/** If true, the link is opened in a new tab. */
 	newTab?: boolean;
 }

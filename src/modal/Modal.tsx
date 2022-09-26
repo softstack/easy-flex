@@ -1,8 +1,8 @@
 import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { AbsoluteSize, Color, CssColor } from '../types';
-import { isAbsoluteSize, useEasyFlexTheme } from '../utils/base';
+import { AbsoluteSize, Color, CssColor, Falsifiable } from '../types';
+import { defalsify, isAbsoluteSize, useEasyFlexTheme } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
 
 const Background = styled.div<{
@@ -24,11 +24,11 @@ const Background = styled.div<{
 `;
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
-	backgroundColor?: Color;
+	backgroundColor?: Falsifiable<Color>;
 	/** Sets blur for the content covered by the modal background. */
 	blur?: AbsoluteSize | boolean;
-	blurElementId?: string;
-	containerElementId?: string;
+	blurElementId?: Falsifiable<string>;
+	containerElementId?: Falsifiable<string>;
 	/** Called if the modal background is clicked. */
 	onClose: () => void;
 }
@@ -59,12 +59,12 @@ export const Modal: FC<ModalProps> = ({
 
 	useEffect(() => {
 		if (
-			(blurElementId ?? theme.modal.blurElementId) &&
+			(defalsify(blurElementId) ?? theme.modal.blurElementId) &&
 			(isAbsoluteSize(blur) || (blur !== false && theme.modal.blur))
 		) {
 			const styleElement = document.createElement('style');
 			styleElement.textContent = `
-				#${blurElementId ?? theme.modal.blurElementId} {
+				#${defalsify(blurElementId) ?? theme.modal.blurElementId} {
 					filter: blur(${isAbsoluteSize(blur) ? blur : theme.modal.blur});
 				}
 			`;
@@ -77,7 +77,7 @@ export const Modal: FC<ModalProps> = ({
 	}, [blur, blurElementId, theme]);
 
 	const container = useMemo<HTMLElement>(
-		() => document.getElementById(containerElementId ?? theme.modal.containerElementId) ?? document.body,
+		() => document.getElementById(defalsify(containerElementId) ?? theme.modal.containerElementId) ?? document.body,
 		[containerElementId, theme]
 	);
 

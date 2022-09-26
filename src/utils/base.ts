@@ -63,77 +63,15 @@ export const isSize = (value: unknown): value is Size => isPercent(value) || isA
 
 export const ifDefined = <T, U>(
 	value: T,
-	fn: (value: Exclude<T, null | undefined>) => U
-): T extends null & undefined
-	? U | null | undefined
-	: T extends null
-	? U | null
-	: T extends undefined
-	? U | undefined
-	: U => {
-	if (value === null) {
-		return null as T extends null & undefined
-			? U | null | undefined
-			: T extends null
-			? U | null
-			: T extends undefined
-			? U | undefined
-			: U;
-	}
-	if (value === undefined) {
-		return undefined as T extends null & undefined
-			? U | null | undefined
-			: T extends null
-			? U | null
-			: T extends undefined
-			? U | undefined
-			: U;
-	}
-	return fn(value as Exclude<T, undefined | null>) as T extends null & undefined
-		? U | null | undefined
-		: T extends null
-		? U | null
-		: T extends undefined
-		? U | undefined
-		: U;
-};
-
-export const ifNotDefined = <T, U>(
-	value: T,
-	fn: (value: null | undefined) => U
-): T extends null | undefined ? U : T => {
-	if (value === null) {
-		return fn(value as unknown as null) as T extends null | undefined ? U : T;
-	}
-	if (value === undefined) {
-		return fn(value as unknown as undefined) as T extends null | undefined ? U : T;
-	}
-	return value as T extends null | undefined ? U : T;
-};
-
-export const ifNotNull = <T, U>(value: T, fn: (value: Exclude<T, null>) => U): T extends null ? null : U => {
-	if (value === null) {
-		return null as T extends null ? null : U;
-	}
-	return fn(value as Exclude<T, null>) as T extends null ? null : U;
-};
-
-export const ifNotUndefined = <T, U>(
-	value: T,
-	fn: (value: Exclude<T, undefined>) => U
+	fn: (value: Exclude<T, false | undefined>) => U
 ): T extends undefined ? undefined : U => {
-	if (value === undefined) {
+	if ((value as unknown as boolean) === false || value === undefined) {
 		return undefined as T extends undefined ? undefined : U;
 	}
-	return fn(value as Exclude<T, undefined>) as T extends undefined ? undefined : U;
+	return fn(value as Exclude<T, false | undefined>) as T extends undefined ? undefined : U;
 };
 
-export const ifUndefined = <T, U>(value: T, fn: () => U): T extends undefined ? U : T => {
-	if (value === undefined) {
-		return fn() as T extends undefined ? U : T;
-	}
-	return value as T extends undefined ? U : T;
-};
+export const defalsify = <T>(value: T | false): T | undefined => (value === false ? undefined : value);
 
 export const toPercent = (value: number): Percent => `${value}%`;
 

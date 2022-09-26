@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { StyleElement } from '../types';
+import { Falsifiable, StyleElement } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 
@@ -76,7 +76,7 @@ const StyledVar = styled.var`
 
 export interface StyleProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>, ColorProps, FontProps {
 	/** Component's html tag. */
-	element?: StyleElement;
+	element?: Falsifiable<StyleElement>;
 }
 
 export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
@@ -133,6 +133,7 @@ export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
 				case 'small':
 					return StyledSmall;
 				case 'span':
+				case false:
 					return StyledSpan;
 				case 'strong':
 					return StyledStrong;

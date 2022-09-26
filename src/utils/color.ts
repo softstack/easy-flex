@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { Color, CssColor } from '../types';
-import { getColor, ifNotUndefined, useEasyFlexTheme } from './base';
+import { Color, CssColor, Falsifiable } from '../types';
+import { getColor, ifDefined, useEasyFlexTheme } from './base';
 
 export interface ColorProps {
 	/** Component's background color. */
-	backgroundColor?: Color;
+	backgroundColor?: Falsifiable<Color>;
 	/** Component's color. */
-	color?: Color;
+	color?: Falsifiable<Color>;
 }
 
 export interface ColorStyleProps {
@@ -15,20 +15,20 @@ export interface ColorStyleProps {
 	'data-color'?: CssColor;
 }
 
-export const useColor = (color: Color | undefined): CssColor | undefined => {
+export const useColor = (color: Falsifiable<Color> | undefined): CssColor | undefined => {
 	const theme = useEasyFlexTheme();
 
-	return useMemo<CssColor | undefined>(() => ifNotUndefined(color, (color) => getColor(theme, color)), [color, theme]);
+	return useMemo<CssColor | undefined>(() => ifDefined(color, (color) => getColor(theme, color)), [color, theme]);
 };
 
 export const useDefaultColor = <T extends CssColor | undefined>(
-	color: Color | undefined,
+	color: Falsifiable<Color> | undefined,
 	defaultColor: T
 ): T extends CssColor ? CssColor : CssColor | undefined => {
 	const theme = useEasyFlexTheme();
 
 	return useMemo<CssColor | undefined>(
-		() => (color === undefined ? defaultColor : getColor(theme, color)),
+		() => (color === false || color === undefined ? defaultColor : getColor(theme, color)),
 		[color, defaultColor, theme]
 	) as T extends CssColor ? CssColor : CssColor | undefined;
 };

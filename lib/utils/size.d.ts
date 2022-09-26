@@ -1,21 +1,21 @@
-import { ElementSize, Height, Width } from '../types';
+import { ElementSize, Falsifiable, Height, Width } from '../types';
 export interface SizeProps {
     /** Sets the component's height to 100% if true. */
     fullHeight?: boolean;
     /** Sets the component's width to 100% if true. */
     fullWidth?: boolean;
     /** Component's height. */
-    height?: Height;
+    height?: Falsifiable<Height>;
     /** Component's maximum height. */
-    maxHeight?: Height;
+    maxHeight?: Falsifiable<Height>;
     /** Component's maximum width. */
-    maxWidth?: Width;
+    maxWidth?: Falsifiable<Width>;
     /** Component's miniumum height. */
-    minHeight?: Height;
+    minHeight?: Falsifiable<Height>;
     /** Component's minimum width. */
-    minWidth?: Width;
+    minWidth?: Falsifiable<Width>;
     /** Component's width. */
-    width?: Width;
+    width?: Falsifiable<Width>;
 }
 export interface SizeStyleProps {
     'data-height'?: ElementSize;

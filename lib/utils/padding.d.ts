@@ -1,19 +1,19 @@
-import { AbsoluteSize, Distance } from '../types';
+import { AbsoluteSize, Distance, Falsifiable } from '../types';
 export interface PaddingProps {
     /** Padding of all sides. */
-    padding?: Distance;
+    padding?: Falsifiable<Distance>;
     /** Component's bottom padding. */
-    paddingBottom?: Distance;
+    paddingBottom?: Falsifiable<Distance>;
     /** Component's left and right padding. */
-    paddingHorizontal?: Distance;
+    paddingHorizontal?: Falsifiable<Distance>;
     /** Component's left padding. */
-    paddingLeft?: Distance;
+    paddingLeft?: Falsifiable<Distance>;
     /** Component's right padding. */
-    paddingRight?: Distance;
+    paddingRight?: Falsifiable<Distance>;
     /** Component's top padding. */
-    paddingTop?: Distance;
+    paddingTop?: Falsifiable<Distance>;
     /** Component's top and bottom padding. */
-    paddingVertical?: Distance;
+    paddingVertical?: Falsifiable<Distance>;
 }
 export interface PaddingStyleProps {
     'data-padding-bottom': AbsoluteSize;

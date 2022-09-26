@@ -1,6 +1,7 @@
 export declare type DeepPartial<T> = T extends object ? {
     [P in keyof T]?: DeepPartial<T[P]>;
 } : T;
+export declare type Falsifiable<T> = T | false;
 export declare type GlobalValue = 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
 export declare type Deg = `${number}deg`;
 export declare type Percent = `${number}%`;

@@ -1,20 +1,20 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { Overflow } from '../types';
+import { Falsifiable, Overflow } from '../types';
 
 export interface OverflowProps {
 	/** Component's overflow behaviour. */
-	overflow?: Overflow;
+	overflow?: Falsifiable<Overflow>;
 	/** Component's verflow behaviour on left and right edges. */
-	overflowX?: Overflow;
+	overflowX?: Falsifiable<Overflow>;
 	/** Component's overflow behaviour on top and bottom edges. */
-	overflowY?: Overflow;
+	overflowY?: Falsifiable<Overflow>;
 }
 
 export interface OverflowStyleProps {
-	'data-overflow'?: Overflow;
-	'data-overflow-x'?: Overflow;
-	'data-overflow-y'?: Overflow;
+	'data-overflow'?: Falsifiable<Overflow>;
+	'data-overflow-x'?: Falsifiable<Overflow>;
+	'data-overflow-y'?: Falsifiable<Overflow>;
 }
 
 export const useOverflowStyleProps = (props: OverflowProps): OverflowStyleProps => {

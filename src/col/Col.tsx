@@ -1,15 +1,15 @@
 import React, { forwardRef, useMemo } from 'react';
 import { BaseFlex, BaseFlexProps } from '../baseFlex/BaseFlex';
-import { FlexDirection, FlipDirection, ViewportThreshold } from '../types';
+import { Falsifiable, FlexDirection, FlipDirection, ViewportThreshold } from '../types';
 import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
 export interface ColProps extends Omit<BaseFlexProps, 'direction'> {
 	/** Flips the content in the direction set by flipDirection. */
 	flip?: boolean;
 	/** Sets what happens if the content shall be flipped. */
-	flipDirection?: FlipDirection;
+	flipDirection?: Falsifiable<FlipDirection>;
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
-	viewportThreshold?: ViewportThreshold;
+	viewportThreshold?: Falsifiable<ViewportThreshold>;
 }
 
 export const Col = forwardRef<HTMLDivElement, ColProps>(
@@ -19,10 +19,11 @@ export const Col = forwardRef<HTMLDivElement, ColProps>(
 
 		const direction = useMemo<FlexDirection>(() => {
 			if (
+				flipDirection !== false &&
 				flipDirection !== undefined &&
 				(flip ||
 					(flip === undefined &&
-						(viewportThreshold !== undefined
+						(viewportThreshold !== false && viewportThreshold !== undefined
 							? width < getViewportThreshold(theme, viewportThreshold)
 							: width < theme.viewport.defaultThreshold)))
 			) {

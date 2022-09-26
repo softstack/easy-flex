@@ -1,12 +1,12 @@
-import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Size } from '../types';
+import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Falsifiable, Size } from '../types';
 export interface BorderProps {
     /** Component's border color. */
-    borderColor?: Color;
+    borderColor?: Falsifiable<Color>;
     /** Component's border radius. */
-    borderRadius?: BorderRadius;
-    borderStyle?: BorderStyle;
+    borderRadius?: Falsifiable<BorderRadius>;
+    borderStyle?: Falsifiable<BorderStyle>;
     /** Component's border width. */
-    borderWidth?: BorderWidth;
+    borderWidth?: Falsifiable<BorderWidth>;
     round?: boolean;
 }
 export interface BorderStyleProps {

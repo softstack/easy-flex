@@ -4,6 +4,8 @@ export type DeepPartial<T> = T extends object
 	  }
 	: T;
 
+export type Falsifiable<T> = T | false;
+
 // CSS start
 
 export type GlobalValue = 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';

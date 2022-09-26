@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { TextAlign, TextElement } from '../types';
+import { Falsifiable, TextAlign, TextElement } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -11,7 +11,7 @@ import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../util
 
 const style = css<
 	{
-		'data-align'?: TextAlign;
+		'data-align'?: Falsifiable<TextAlign>;
 	} & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -70,9 +70,9 @@ export interface TextProps
 		OverflowProps,
 		SizeProps {
 	/** Component's text alignment. */
-	align?: TextAlign;
+	align?: Falsifiable<TextAlign>;
 	/** Component's html tag. */
-	element?: TextElement;
+	element?: Falsifiable<TextElement>;
 }
 
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(
@@ -192,6 +192,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
 				case 'h6':
 					return StyledH6;
 				case 'p':
+				case false:
 					return StyledP;
 			}
 		}, [element]);

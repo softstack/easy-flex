@@ -1,13 +1,13 @@
 import React, { forwardRef, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { ObjectFit } from '../types';
+import { Falsifiable, ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledImg = styled.img<
 	{
-		'data-object-fit'?: ObjectFit;
+		'data-object-fit'?: Falsifiable<ObjectFit>;
 	} & BorderStyleProps &
 		MarginStyleProps &
 		SizeStyleProps
@@ -24,7 +24,7 @@ export type ImgProps = ImgHTMLAttributes<HTMLImageElement> &
 	BorderProps &
 	MarginProps &
 	SizeProps & {
-		objectFit?: ObjectFit;
+		objectFit?: Falsifiable<ObjectFit>;
 	};
 
 export const Img = forwardRef<HTMLImageElement, ImgProps>(

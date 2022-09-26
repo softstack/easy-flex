@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { Color, CssColor } from '../types';
+import { Color, CssColor, Falsifiable } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -38,7 +38,7 @@ export interface BaseInputProps
 		FlexItemProps,
 		FontProps,
 		SizeProps {
-	placeholderColor?: Color;
+	placeholderColor?: Falsifiable<Color>;
 }
 
 export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(

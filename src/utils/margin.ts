@@ -1,23 +1,23 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, Distance } from '../types';
-import { getDistance, useEasyFlexTheme } from './base';
+import { AbsoluteSize, Distance, Falsifiable } from '../types';
+import { defalsify, getDistance, useEasyFlexTheme } from './base';
 
 export interface MarginProps {
 	/** Component's margin of all sides. */
-	margin?: Distance;
+	margin?: Falsifiable<Distance>;
 	/** Component's bottom margin. */
-	marginBottom?: Distance;
+	marginBottom?: Falsifiable<Distance>;
 	/** Component's left and right margin. */
-	marginHorizontal?: Distance;
+	marginHorizontal?: Falsifiable<Distance>;
 	/** Component's left margin. */
-	marginLeft?: Distance;
+	marginLeft?: Falsifiable<Distance>;
 	/** Component's right margin. */
-	marginRight?: Distance;
+	marginRight?: Falsifiable<Distance>;
 	/** Component's top margin. */
-	marginTop?: Distance;
+	marginTop?: Falsifiable<Distance>;
 	/** Component's top and bottom margin. */
-	marginVertical?: Distance;
+	marginVertical?: Falsifiable<Distance>;
 }
 
 export interface MarginStyleProps {
@@ -44,22 +44,22 @@ export const useMargin = ({
 	const theme = useEasyFlexTheme();
 
 	const processedMarginBottom = useMemo<AbsoluteSize>(
-		() => getDistance(theme, marginBottom ?? marginVertical ?? margin ?? '0px'),
+		() => getDistance(theme, defalsify(marginBottom) ?? defalsify(marginVertical) ?? defalsify(margin) ?? '0px'),
 		[margin, marginBottom, marginVertical, theme]
 	);
 
 	const processedMarginLeft = useMemo<AbsoluteSize>(
-		() => getDistance(theme, marginLeft ?? marginHorizontal ?? margin ?? '0px'),
+		() => getDistance(theme, defalsify(marginLeft) ?? defalsify(marginHorizontal) ?? defalsify(margin) ?? '0px'),
 		[margin, marginHorizontal, marginLeft, theme]
 	);
 
 	const processedMarginRight = useMemo<AbsoluteSize>(
-		() => getDistance(theme, marginRight ?? marginHorizontal ?? margin ?? '0px'),
+		() => getDistance(theme, defalsify(marginRight) ?? defalsify(marginHorizontal) ?? defalsify(margin) ?? '0px'),
 		[margin, marginHorizontal, marginRight, theme]
 	);
 
 	const processedMarginTop = useMemo<AbsoluteSize>(
-		() => getDistance(theme, marginTop ?? marginVertical ?? margin ?? '0px'),
+		() => getDistance(theme, defalsify(marginTop) ?? defalsify(marginVertical) ?? defalsify(margin) ?? '0px'),
 		[margin, marginTop, marginVertical, theme]
 	);
 

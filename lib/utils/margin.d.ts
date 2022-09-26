@@ -1,19 +1,19 @@
-import { AbsoluteSize, Distance } from '../types';
+import { AbsoluteSize, Distance, Falsifiable } from '../types';
 export interface MarginProps {
     /** Component's margin of all sides. */
-    margin?: Distance;
+    margin?: Falsifiable<Distance>;
     /** Component's bottom margin. */
-    marginBottom?: Distance;
+    marginBottom?: Falsifiable<Distance>;
     /** Component's left and right margin. */
-    marginHorizontal?: Distance;
+    marginHorizontal?: Falsifiable<Distance>;
     /** Component's left margin. */
-    marginLeft?: Distance;
+    marginLeft?: Falsifiable<Distance>;
     /** Component's right margin. */
-    marginRight?: Distance;
+    marginRight?: Falsifiable<Distance>;
     /** Component's top margin. */
-    marginTop?: Distance;
+    marginTop?: Falsifiable<Distance>;
     /** Component's top and bottom margin. */
-    marginVertical?: Distance;
+    marginVertical?: Falsifiable<Distance>;
 }
 export interface MarginStyleProps {
     'data-margin-bottom': AbsoluteSize;
