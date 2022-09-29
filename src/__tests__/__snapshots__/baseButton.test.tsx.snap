@@ -10,6 +10,7 @@ exports[`<BaseButton /> should have the basic css settings 1`] = `
   border: none;
   cursor: pointer;
   background-color: transparent;
+  background-color: transparent;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;

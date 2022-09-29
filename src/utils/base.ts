@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { EasyFlexContext, themeColors, themeSizes } from '../constants';
+import { EasyFlexContext, themeColors, themeSizeNames, themeSizes } from '../constants';
 import {
 	AbsoluteSize,
 	BorderRadius,
@@ -22,6 +22,8 @@ import {
 	Size,
 	ThemeColor,
 	ThemeSize,
+	ThemeSizeName,
+	ThemeSizeX,
 	Vh,
 	ViewportThreshold,
 	Vw,
@@ -45,7 +47,13 @@ export const mergeDeep = <T>(a: T, b: DeepPartial<T>): T => {
 
 export const isThemeColor = (color: Color): color is ThemeColor => themeColors.includes(color);
 
-export const isThemeSize = (size: unknown): size is ThemeSize => typeof size === 'string' && themeSizes.includes(size);
+export const isThemeSizeX = (size: unknown): size is ThemeSizeX =>
+	typeof size === 'string' && themeSizes.includes(size);
+
+export const isThemeSizeName = (size: unknown): size is ThemeSizeName =>
+	typeof size === 'string' && themeSizeNames.includes(size);
+
+export const isThemeSize = (size: unknown): size is ThemeSize => isThemeSizeX(size) || isThemeSizeName(size);
 
 export const isPercent = (value: unknown): value is Px => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?%$/);
 
@@ -193,11 +201,11 @@ export const useDimension = (): { height: number; width: number } => {
 	}>(() => ({ height, width }), [height, width]);
 };
 
-export const useViewport = (): Record<ThemeSize | 'default', boolean> => {
+export const useViewport = (): Record<ThemeSizeX | 'default', boolean> => {
 	const theme = useEasyFlexTheme();
 	const { width } = useDimension();
 
-	return useMemo<Record<ThemeSize | 'default', boolean>>(
+	return useMemo<Record<ThemeSizeX | 'default', boolean>>(
 		() => ({
 			default: width >= theme.viewport.defaultThreshold,
 			'8xs': width >= getViewportThreshold(theme, '8xs'),

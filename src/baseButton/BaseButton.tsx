@@ -28,6 +28,7 @@ const StyledButton = styled.button<
 	display: flex;
 	border: none;
 	cursor: pointer;
+	background-color: transparent;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}

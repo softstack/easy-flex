@@ -9,11 +9,11 @@ export interface RowProps extends Omit<BaseFlexProps, 'direction'> {
 	/** Sets what happens if the content shall be flipped. */
 	flipDirection?: Falsifiable<FlipDirection>;
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
-	viewportThreshold?: Falsifiable<ViewportThreshold>;
+	viewport?: Falsifiable<ViewportThreshold>;
 }
 
 export const Row = forwardRef<HTMLDivElement, RowProps>(
-	({ children, flip, flipDirection, viewportThreshold, ...props }, ref) => {
+	({ children, flip, flipDirection, viewport, ...props }, ref) => {
 		const theme = useEasyFlexTheme();
 		const { width } = useDimension();
 
@@ -23,8 +23,8 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
 				flipDirection !== undefined &&
 				(flip ||
 					(flip === undefined &&
-						(viewportThreshold !== false && viewportThreshold !== undefined
-							? width < getViewportThreshold(theme, viewportThreshold)
+						(viewport !== false && viewport !== undefined
+							? width < getViewportThreshold(theme, viewport)
 							: width < theme.viewport.defaultThreshold)))
 			) {
 				switch (flipDirection) {
@@ -37,7 +37,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
 				}
 			}
 			return 'row';
-		}, [flip, flipDirection, theme, viewportThreshold, width]);
+		}, [flip, flipDirection, theme, viewport, width]);
 
 		return (
 			<BaseFlex direction={direction} ref={ref} {...props}>

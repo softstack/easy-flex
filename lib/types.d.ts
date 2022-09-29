@@ -35,16 +35,18 @@ export declare type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'vis
 export declare type TextAlign = GlobalValue | 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 export declare type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 export declare type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 'normal';
-export declare type ThemeSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
+export declare type ThemeSizeX = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
+export declare type ThemeSizeName = 'primary' | 'secondary' | 'tertiary' | 'decline' | 'error' | 'footer' | 'header' | 'info' | 'modal' | 'rise' | 'warning';
+export declare type ThemeSize = ThemeSizeX | ThemeSizeName;
 export declare type BaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type BaseGridElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type BorderRadius = Size | ThemeSize;
 export declare type BorderWidth = AbsoluteSize | ThemeSize;
-export declare type ThemeColor = 'primary' | 'secondary' | 'tertiary' | 'warning' | 'error' | 'header' | 'footer' | 'modal' | 'rise' | 'decline' | 'brand1' | 'brand2' | 'brand3' | 'brand4' | 'brand5' | 'brand6' | 'brand7' | 'brand8' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'warningText' | 'errorText' | 'headerText' | 'footerText' | 'modalText' | 'riseText' | 'declineText' | 'text1' | 'text2' | 'text3' | 'text4' | 'text5' | 'text6' | 'text7' | 'text8' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'warningBackground' | 'errorBackground' | 'headerBackground' | 'footerBackground' | 'modalBackground' | 'riseBackground' | 'declineBackground' | 'background1' | 'background2' | 'background3' | 'background4' | 'background5' | 'background6' | 'background7' | 'background8' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onWarning' | 'onError' | 'onHeader' | 'onFooter' | 'onModal' | 'onRise' | 'onDecline' | 'onBrand1' | 'onBrand2' | 'onBrand3' | 'onBrand4' | 'onBrand5' | 'onBrand6' | 'onBrand7' | 'onBrand8' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'warningBorder' | 'errorBorder' | 'headerBorder' | 'footerBorder' | 'modalBorder' | 'riseBorder' | 'declineBorder' | 'border1' | 'border2' | 'border3' | 'border4' | 'border5' | 'border6' | 'border7' | 'border8';
+export declare type ThemeColor = 'primary' | 'secondary' | 'tertiary' | 'decline' | 'error' | 'footer' | 'header' | 'info' | 'modal' | 'rise' | 'warning' | 'brand1' | 'brand2' | 'brand3' | 'brand4' | 'brand5' | 'brand6' | 'brand7' | 'brand8' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'declineText' | 'errorText' | 'footerText' | 'headerText' | 'infoText' | 'modalText' | 'riseText' | 'warningText' | 'text1' | 'text2' | 'text3' | 'text4' | 'text5' | 'text6' | 'text7' | 'text8' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'declineBackground' | 'errorBackground' | 'footerBackground' | 'headerBackground' | 'infoBackground' | 'modalBackground' | 'riseBackground' | 'warningBackground' | 'background1' | 'background2' | 'background3' | 'background4' | 'background5' | 'background6' | 'background7' | 'background8' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onDecline' | 'onError' | 'onFooter' | 'onHeader' | 'onInfo' | 'onModal' | 'onRise' | 'onWarning' | 'onBrand1' | 'onBrand2' | 'onBrand3' | 'onBrand4' | 'onBrand5' | 'onBrand6' | 'onBrand7' | 'onBrand8' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'declineBorder' | 'errorBorder' | 'footerBorder' | 'headerBorder' | 'infoBorder' | 'modalBorder' | 'riseBorder' | 'warningBorder' | 'border1' | 'border2' | 'border3' | 'border4' | 'border5' | 'border6' | 'border7' | 'border8';
 export declare type Color = CssColor | ThemeColor;
 export declare type Distance = AbsoluteSize | ThemeSize;
 export declare type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
-export declare type FontFamily = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' | 'senary' | 'warning' | 'error' | 'header' | 'footer' | 'modal';
+export declare type FontFamily = ThemeSizeName;
 export declare type FontSize = Size | ThemeSize;
 export declare type FontStyle = 'italic' | 'normal';
 export declare type FontWeight = 'thin' | 'extraLight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extraBold' | 'black' | 'extraBlack';
@@ -53,7 +55,7 @@ export declare type LineHeight = CssLineHeight | ThemeSize;
 export declare type StyleElement = 'b' | 'cite' | 'code' | 'em' | 'i' | 'kbd' | 'mark' | 's' | 'samp' | 'small' | 'span' | 'strong' | 'sub' | 'sup' | 'u' | 'var';
 export declare type TextDecoration = 'none' | 'underline';
 export declare type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
-export declare type ViewportThreshold = ThemeSize | number;
+export declare type ViewportThreshold = ThemeSizeX | number;
 export declare type Width = ElementSize | ThemeSize;
 export interface EasyFlexTheme {
     border: {
@@ -76,12 +78,12 @@ export interface EasyFlexTheme {
         containerElementId: string;
     };
     size: {
-        height: Record<ThemeSize, AbsoluteSize>;
-        width: Record<ThemeSize, AbsoluteSize>;
+        height: Record<ThemeSize, ElementSize>;
+        width: Record<ThemeSize, ElementSize>;
     };
     viewport: {
         defaultThreshold: number;
-        threshold: Record<ThemeSize, number>;
+        threshold: Record<ThemeSizeX, number>;
     };
 }
 export declare type PartialEasyFlexTheme = DeepPartial<EasyFlexTheme>;

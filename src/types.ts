@@ -262,7 +262,7 @@ export type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 
 
 // Theme start
 
-export type ThemeSize =
+export type ThemeSizeX =
 	| '8xs'
 	| '7xs'
 	| '6xs'
@@ -282,6 +282,21 @@ export type ThemeSize =
 	| '6xl'
 	| '7xl'
 	| '8xl';
+
+export type ThemeSizeName =
+	| 'primary'
+	| 'secondary'
+	| 'tertiary'
+	| 'decline'
+	| 'error'
+	| 'footer'
+	| 'header'
+	| 'info'
+	| 'modal'
+	| 'rise'
+	| 'warning';
+
+export type ThemeSize = ThemeSizeX | ThemeSizeName;
 
 export type BaseFlexElement =
 	| 'article'
@@ -315,13 +330,14 @@ export type ThemeColor =
 	| 'primary'
 	| 'secondary'
 	| 'tertiary'
-	| 'warning'
+	| 'decline'
 	| 'error'
-	| 'header'
 	| 'footer'
+	| 'header'
+	| 'info'
 	| 'modal'
 	| 'rise'
-	| 'decline'
+	| 'warning'
 	| 'brand1'
 	| 'brand2'
 	| 'brand3'
@@ -333,13 +349,14 @@ export type ThemeColor =
 	| 'primaryText'
 	| 'secondaryText'
 	| 'tertiaryText'
-	| 'warningText'
+	| 'declineText'
 	| 'errorText'
-	| 'headerText'
 	| 'footerText'
+	| 'headerText'
+	| 'infoText'
 	| 'modalText'
 	| 'riseText'
-	| 'declineText'
+	| 'warningText'
 	| 'text1'
 	| 'text2'
 	| 'text3'
@@ -351,13 +368,14 @@ export type ThemeColor =
 	| 'primaryBackground'
 	| 'secondaryBackground'
 	| 'tertiaryBackground'
-	| 'warningBackground'
+	| 'declineBackground'
 	| 'errorBackground'
-	| 'headerBackground'
 	| 'footerBackground'
+	| 'headerBackground'
+	| 'infoBackground'
 	| 'modalBackground'
 	| 'riseBackground'
-	| 'declineBackground'
+	| 'warningBackground'
 	| 'background1'
 	| 'background2'
 	| 'background3'
@@ -369,13 +387,14 @@ export type ThemeColor =
 	| 'onPrimary'
 	| 'onSecondary'
 	| 'onTertiary'
-	| 'onWarning'
+	| 'onDecline'
 	| 'onError'
-	| 'onHeader'
 	| 'onFooter'
+	| 'onHeader'
+	| 'onInfo'
 	| 'onModal'
 	| 'onRise'
-	| 'onDecline'
+	| 'onWarning'
 	| 'onBrand1'
 	| 'onBrand2'
 	| 'onBrand3'
@@ -387,13 +406,14 @@ export type ThemeColor =
 	| 'primaryBorder'
 	| 'secondaryBorder'
 	| 'tertiaryBorder'
-	| 'warningBorder'
+	| 'declineBorder'
 	| 'errorBorder'
-	| 'headerBorder'
 	| 'footerBorder'
+	| 'headerBorder'
+	| 'infoBorder'
 	| 'modalBorder'
 	| 'riseBorder'
-	| 'declineBorder'
+	| 'warningBorder'
 	| 'border1'
 	| 'border2'
 	| 'border3'
@@ -409,18 +429,7 @@ export type Distance = AbsoluteSize | ThemeSize;
 
 export type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
-export type FontFamily =
-	| 'primary'
-	| 'secondary'
-	| 'tertiary'
-	| 'quaternary'
-	| 'quinary'
-	| 'senary'
-	| 'warning'
-	| 'error'
-	| 'header'
-	| 'footer'
-	| 'modal';
+export type FontFamily = ThemeSizeName;
 
 export type FontSize = Size | ThemeSize;
 
@@ -464,7 +473,7 @@ export type TextDecoration = 'none' | 'underline';
 
 export type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
-export type ViewportThreshold = ThemeSize | number;
+export type ViewportThreshold = ThemeSizeX | number;
 
 export type Width = ElementSize | ThemeSize;
 
@@ -489,12 +498,12 @@ export interface EasyFlexTheme {
 		containerElementId: string;
 	};
 	size: {
-		height: Record<ThemeSize, AbsoluteSize>;
-		width: Record<ThemeSize, AbsoluteSize>;
+		height: Record<ThemeSize, ElementSize>;
+		width: Record<ThemeSize, ElementSize>;
 	};
 	viewport: {
 		defaultThreshold: number;
-		threshold: Record<ThemeSize, number>;
+		threshold: Record<ThemeSizeX, number>;
 	};
 }
 

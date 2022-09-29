@@ -23,7 +23,7 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 	/** Enables flipping. */
 	flipEnabled?: boolean;
 	/** Sets the viewport threshold. The content will be flipped if the viewport's width is smaller than the threshold. If no threshold is set, the default threshold is used. */
-	viewportThreshold?: Falsifiable<ViewportThreshold>;
+	viewport?: Falsifiable<ViewportThreshold>;
 	/** Component's height. */
 	height?: Falsifiable<Distance>;
 	/** Component's width. */
@@ -31,7 +31,7 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
-	({ flip, flipEnabled = false, viewportThreshold, height, width, ...props }, ref) => {
+	({ flip, flipEnabled = false, viewport, height, width, ...props }, ref) => {
 		const theme = useEasyFlexTheme();
 		const { width: displayWidth } = useDimension();
 
@@ -40,12 +40,12 @@ export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
 				flipEnabled &&
 				(flip ||
 					(flip === undefined &&
-						(viewportThreshold !== false && viewportThreshold !== undefined
-							? displayWidth < getViewportThreshold(theme, viewportThreshold)
+						(viewport !== false && viewport !== undefined
+							? displayWidth < getViewportThreshold(theme, viewport)
 							: displayWidth < theme.viewport.defaultThreshold)))
 					? getDistance(theme, defalsify(width) ?? '0px')
 					: getDistance(theme, defalsify(height) ?? '0px'),
-			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
+			[displayWidth, flip, flipEnabled, height, theme, viewport, width]
 		);
 
 		const processedWidth = useMemo<AbsoluteSize>(
@@ -53,12 +53,12 @@ export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
 				flipEnabled &&
 				(flip ||
 					(flip === undefined &&
-						(viewportThreshold !== false && viewportThreshold !== undefined
-							? displayWidth < getViewportThreshold(theme, viewportThreshold)
+						(viewport !== false && viewport !== undefined
+							? displayWidth < getViewportThreshold(theme, viewport)
 							: displayWidth < theme.viewport.defaultThreshold)))
 					? getDistance(theme, defalsify(height) ?? '0px')
 					: getDistance(theme, defalsify(width) ?? '0px'),
-			[displayWidth, flip, flipEnabled, height, theme, viewportThreshold, width]
+			[displayWidth, flip, flipEnabled, height, theme, viewport, width]
 		);
 
 		return <StyledDiv data-height={processedHeight} data-width={processedWidth} ref={ref} {...props} />;
