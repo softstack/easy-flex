@@ -35,40 +35,39 @@ export declare type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'vis
 export declare type TextAlign = GlobalValue | 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 export declare type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 export declare type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 'normal';
+export declare type CustomName = `_${string}`;
 export declare type ThemeSizeX = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
-export declare type ThemeSizeName = 'primary' | 'secondary' | 'tertiary' | 'decline' | 'error' | 'footer' | 'header' | 'info' | 'modal' | 'rise' | 'warning';
-export declare type ThemeSize = ThemeSizeX | ThemeSizeName;
+export declare type ThemeSize<T extends CustomName> = ThemeSizeX | T;
 export declare type BaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type BaseGridElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
-export declare type BorderRadius = Size | ThemeSize;
-export declare type BorderWidth = AbsoluteSize | ThemeSize;
-export declare type ThemeColor = `_${string}`;
-export declare type Color<T extends ThemeColor> = CssColor | T;
-export declare type Distance = AbsoluteSize | ThemeSize;
+export declare type BorderRadius = Size | ThemeSizeX;
+export declare type BorderWidth = AbsoluteSize | ThemeSizeX;
+export declare type Color<T extends CustomName> = CssColor | T;
+export declare type Distance = AbsoluteSize | ThemeSizeX;
 export declare type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
-export declare type FontFamily = ThemeSizeName;
-export declare type FontSize = Size | ThemeSize;
+export declare type FontFamily<T extends CustomName> = T;
+export declare type FontSize = Size | ThemeSizeX;
 export declare type FontStyle = 'italic' | 'normal';
 export declare type FontWeight = 'thin' | 'extraLight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extraBold' | 'black' | 'extraBlack';
-export declare type Height = ElementSize | ThemeSize;
-export declare type LineHeight = CssLineHeight | ThemeSize;
+export declare type Height<CustomHeight extends CustomName> = ElementSize | ThemeSize<CustomHeight>;
+export declare type LineHeight = CssLineHeight | ThemeSizeX;
 export declare type StyleElement = 'b' | 'cite' | 'code' | 'em' | 'i' | 'kbd' | 'mark' | 's' | 'samp' | 'small' | 'span' | 'strong' | 'sub' | 'sup' | 'u' | 'var';
 export declare type TextDecoration = 'none' | 'underline';
 export declare type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 export declare type ViewportThreshold = ThemeSizeX | number;
-export declare type Width = ElementSize | ThemeSize;
-export interface EasyFlexTheme<T extends ThemeColor> {
+export declare type Width<CustomWidth extends CustomName> = ElementSize | ThemeSize<CustomWidth>;
+export interface EasyFlexTheme<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> {
     border: {
         defaultStyle: BorderStyle;
-        radius: Record<ThemeSize, AbsoluteSize>;
-        width: Record<ThemeSize, AbsoluteSize>;
+        radius: Record<ThemeSizeX, AbsoluteSize>;
+        width: Record<ThemeSizeX, AbsoluteSize>;
     };
-    color: Record<T, CssColor>;
-    distance: Record<ThemeSize, AbsoluteSize>;
+    color: Record<CustomColor, CssColor>;
+    distance: Record<ThemeSizeX, AbsoluteSize>;
     font: {
-        family: Record<FontFamily, string>;
-        lineHeight: Record<ThemeSize, CssLineHeight>;
-        size: Record<ThemeSize, Size>;
+        family: Record<FontFamily<CustomFontFamily>, string>;
+        lineHeight: Record<ThemeSizeX, CssLineHeight>;
+        size: Record<ThemeSizeX, Size>;
         weight: Record<FontWeight, CssFontWeight>;
     };
     modal: {
@@ -78,12 +77,12 @@ export interface EasyFlexTheme<T extends ThemeColor> {
         containerElementId: string;
     };
     size: {
-        height: Record<ThemeSize, ElementSize>;
-        width: Record<ThemeSize, ElementSize>;
+        height: Record<ThemeSize<CustomHeight>, ElementSize>;
+        width: Record<ThemeSize<CustomWidth>, ElementSize>;
     };
     viewport: {
         defaultThreshold: number;
         threshold: Record<ThemeSizeX, number>;
     };
 }
-export declare type PartialEasyFlexTheme<T extends ThemeColor> = DeepPartial<EasyFlexTheme<T>>;
+export declare type PartialEasyFlexTheme<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> = DeepPartial<EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>;

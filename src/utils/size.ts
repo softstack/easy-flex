@@ -1,25 +1,25 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { ElementSize, Falsifiable, Height, Width } from '../types';
+import { CustomName, ElementSize, Falsifiable, Height, Width } from '../types';
 import { getHeight, getWidth, ifDefined, useEasyFlexTheme } from './base';
 
-export interface SizeProps {
+export interface SizeProps<CustomHeight extends CustomName, CustomWidth extends CustomName> {
 	/** Sets the component's height to 100% if true. */
 	fullHeight?: boolean;
 	/** Sets the component's width to 100% if true. */
 	fullWidth?: boolean;
 	/** Component's height. */
-	height?: Falsifiable<Height>;
+	height?: Falsifiable<Height<CustomHeight>>;
 	/** Component's maximum height. */
-	maxHeight?: Falsifiable<Height>;
+	maxHeight?: Falsifiable<Height<CustomHeight>>;
 	/** Component's maximum width. */
-	maxWidth?: Falsifiable<Width>;
+	maxWidth?: Falsifiable<Width<CustomWidth>>;
 	/** Component's miniumum height. */
-	minHeight?: Falsifiable<Height>;
+	minHeight?: Falsifiable<Height<CustomHeight>>;
 	/** Component's minimum width. */
-	minWidth?: Falsifiable<Width>;
+	minWidth?: Falsifiable<Width<CustomWidth>>;
 	/** Component's width. */
-	width?: Falsifiable<Width>;
+	width?: Falsifiable<Width<CustomWidth>>;
 }
 
 export interface SizeStyleProps {
@@ -31,7 +31,7 @@ export interface SizeStyleProps {
 	'data-width-min'?: ElementSize;
 }
 
-export const useSize = ({
+export const useSize = <CustomHeight extends CustomName, CustomWidth extends CustomName>({
 	fullHeight = false,
 	fullWidth = false,
 	height,
@@ -40,7 +40,7 @@ export const useSize = ({
 	minHeight,
 	minWidth,
 	width,
-}: SizeProps): {
+}: SizeProps<CustomHeight, CustomWidth>): {
 	height: ElementSize | undefined;
 	maxHeight: ElementSize | undefined;
 	maxWidth: ElementSize | undefined;
@@ -100,7 +100,9 @@ export const useSize = ({
 	);
 };
 
-export const useSizeStyleProps = (props: SizeProps): SizeStyleProps => {
+export const useSizeStyleProps = <CustomHeight extends CustomName, CustomWidth extends CustomName>(
+	props: SizeProps<CustomHeight, CustomWidth>
+): SizeStyleProps => {
 	const size = useSize(props);
 
 	return useMemo<SizeStyleProps>(

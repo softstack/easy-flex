@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
 export * from './baseGrid/BaseGrid';
@@ -21,3 +22,19 @@ export * from './utils/font';
 export * from './utils/margin';
 export * from './utils/padding';
 export * from './utils/size';
+export declare const createComponents: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>() => {
+    BaseButton: import("react").ForwardRefExoticComponent<Omit<import("react").ButtonHTMLAttributes<HTMLButtonElement>, "color"> & import("./utils/border").BorderProps<CustomColor> & import("./utils/color").ColorProps<CustomColor> & import("./utils/margin").MarginProps & import("./utils/padding").PaddingProps & import("./utils/flexContainer").FlexContainerProps & import("./utils/flexItem").FlexItemProps & import("./utils/font").FontProps<CustomColor, CustomFontFamily> & import("./utils/overflow").OverflowProps & import("./utils/size").SizeProps<CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLButtonElement>>;
+    BaseFlex: import("react").ForwardRefExoticComponent<import("./baseFlex/BaseFlex").BaseFlexProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLDivElement>>;
+    BaseGrid: import("react").ForwardRefExoticComponent<import("./baseGrid/BaseGrid").BaseGridProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLDivElement>>;
+    BaseInput: import("react").ForwardRefExoticComponent<import("./baseInput/BaseInput").BaseInputProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLInputElement>>;
+    BaseTextArea: import("react").ForwardRefExoticComponent<import("./baseTextArea/BaseTextArea").BaseTextAreaProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLTextAreaElement>>;
+    Col: import("react").ForwardRefExoticComponent<import("./col/Col").ColProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLDivElement>>;
+    EasyFlexProvider: import("react").FC<import("./easyFlexProvider/EasyFlexProvider").EasyFlexProviderProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>;
+    Img: import("react").ForwardRefExoticComponent<import("./img/Img").ImgProps<CustomColor, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLImageElement>>;
+    Link: import("react").ForwardRefExoticComponent<import("./link/Link").LinkProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLAnchorElement>>;
+    Modal: import("react").FC<import("./modal/Modal").ModalProps<CustomColor>>;
+    Row: import("react").ForwardRefExoticComponent<import("./row/Row").RowProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLDivElement>>;
+    Spacing: import("react").ForwardRefExoticComponent<import("./spacing/Spacing").SpacingProps & import("react").RefAttributes<HTMLDivElement>>;
+    Style: import("react").ForwardRefExoticComponent<import("./style/Style").StyleProps<CustomColor, CustomFontFamily> & import("react").RefAttributes<HTMLParagraphElement>>;
+    Text: import("react").ForwardRefExoticComponent<import("./text/Text").TextProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & import("react").RefAttributes<HTMLParagraphElement>>;
+};

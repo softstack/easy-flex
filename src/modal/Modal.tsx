@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { AbsoluteSize, Color, CssColor, Falsifiable, ThemeColor } from '../types';
+import { AbsoluteSize, Color, CssColor, CustomName, Falsifiable } from '../types';
 import { defalsify, isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
 
@@ -23,8 +23,8 @@ const Background = styled.div<{
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 `;
 
-export interface ModalProps<T extends ThemeColor> extends HTMLAttributes<HTMLDivElement> {
-	backgroundColor?: Falsifiable<Color<T>>;
+export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement> {
+	backgroundColor?: Falsifiable<Color<CustomColor>>;
 	/** Sets blur for the content covered by the modal background. */
 	blur?: AbsoluteSize | boolean;
 	blurElementId?: Falsifiable<string>;
@@ -33,8 +33,8 @@ export interface ModalProps<T extends ThemeColor> extends HTMLAttributes<HTMLDiv
 	onClose: () => void;
 }
 
-export const createModal = <T extends ThemeColor>() => {
-	const Modal: FC<ModalProps<T>> = ({
+export const createModal = <CustomColor extends CustomName>() => {
+	const Modal: FC<ModalProps<CustomColor>> = ({
 		children,
 		backgroundColor,
 		blur,

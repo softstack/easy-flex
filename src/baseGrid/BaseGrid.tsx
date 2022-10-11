@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { AbsoluteSize, BaseGridElement, Distance, Falsifiable, ThemeColor } from '../types';
+import { AbsoluteSize, BaseGridElement, CustomName, Distance, Falsifiable } from '../types';
 import { getDistance, ifDefined, useEasyFlexTheme } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
@@ -72,22 +72,31 @@ const StyledSummary = styled.summary`
 	${style}
 `;
 
-export interface BaseGridProps<T extends ThemeColor>
-	extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
-		BorderProps<T>,
-		ColorProps<T>,
+export interface BaseGridProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
+		BorderProps<CustomColor>,
+		ColorProps<CustomColor>,
 		FlexItemProps,
-		FontProps<T>,
+		FontProps<CustomColor, CustomFontFamily>,
 		DistanceProps,
-		SizeProps {
+		SizeProps<CustomHeight, CustomWidth> {
 	columnGap?: Falsifiable<Distance>;
 	/** Component's html tag. */
 	element?: Falsifiable<BaseGridElement>;
 	rowGap?: Falsifiable<Distance>;
 }
 
-export const createBaseGrid = <T extends ThemeColor>() => {
-	const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps<T>>(
+export const createBaseGrid = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
+	const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
 		(
 			{
 				alignSelf,

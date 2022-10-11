@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import { BaseFlexElement, Falsifiable, ThemeColor } from '../types';
+import { BaseFlexElement, CustomName, Falsifiable } from '../types';
 import { BorderProps } from '../utils/border';
 import { ColorProps } from '../utils/color';
 import { DistanceProps } from '../utils/distance';
@@ -8,8 +8,8 @@ import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { OverflowProps } from '../utils/overflow';
 import { SizeProps } from '../utils/size';
-export interface BaseFlexProps<T extends ThemeColor> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<T>, ColorProps<T>, FlexContainerProps, FlexItemProps, FontProps<T>, DistanceProps, OverflowProps, SizeProps {
+export interface BaseFlexProps<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomColor>, ColorProps<CustomColor>, FlexContainerProps, FlexItemProps, FontProps<CustomColor, CustomFontFamily>, DistanceProps, OverflowProps, SizeProps<CustomHeight, CustomWidth> {
     /** Component's html tag. */
     element?: Falsifiable<BaseFlexElement>;
 }
-export declare const createBaseFlex: <T extends `_${string}`>() => React.ForwardRefExoticComponent<BaseFlexProps<T> & React.RefAttributes<HTMLDivElement>>;
+export declare const createBaseFlex: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>() => React.ForwardRefExoticComponent<BaseFlexProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & React.RefAttributes<HTMLDivElement>>;

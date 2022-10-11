@@ -1,6 +1,6 @@
 import React, { forwardRef, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { Falsifiable, ObjectFit, ThemeColor } from '../types';
+import { CustomName, Falsifiable, ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
@@ -20,16 +20,23 @@ const StyledImg = styled.img<
 	${sizeStyle}
 `;
 
-export interface ImgProps<T extends ThemeColor>
-	extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'height' | 'width'>,
-		BorderProps<T>,
+export interface ImgProps<
+	CustomColor extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'height' | 'width'>,
+		BorderProps<CustomColor>,
 		MarginProps,
-		SizeProps {
+		SizeProps<CustomHeight, CustomWidth> {
 	objectFit?: Falsifiable<ObjectFit>;
 }
 
-export const createImg = <T extends ThemeColor>() => {
-	const Img = forwardRef<HTMLImageElement, ImgProps<T>>(
+export const createImg = <
+	CustomColor extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
+	const Img = forwardRef<HTMLImageElement, ImgProps<CustomColor, CustomHeight, CustomWidth>>(
 		(
 			{
 				borderColor,

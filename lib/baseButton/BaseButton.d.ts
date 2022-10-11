@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import { ThemeColor } from '../types';
+import { CustomName } from '../types';
 import { BorderProps } from '../utils/border';
 import { ColorProps } from '../utils/color';
 import { DistanceProps } from '../utils/distance';
@@ -8,6 +8,6 @@ import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { OverflowProps } from '../utils/overflow';
 import { SizeProps } from '../utils/size';
-export declare type BaseButtonProps<T extends ThemeColor> = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> & BorderProps<T> & ColorProps<T> & DistanceProps & FlexContainerProps & FlexItemProps & FontProps<T> & OverflowProps & SizeProps;
-export declare type ExternalBaseButtonProps<T extends ThemeColor> = Omit<BaseButtonProps<T>, 'align' | 'backgroundColor' | 'borderColor' | 'borderRadius' | 'borderStyle' | 'borderWidth' | 'color' | 'direction' | 'fontFamily' | 'fontSize' | 'fontWeight' | 'gap' | 'italic' | 'justify' | 'lineHeight' | 'overflow' | 'overflowX' | 'overflowY' | 'padding' | 'paddingBottom' | 'paddingHorizontal' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingVertical' | 'round' | 'underline' | 'underlineColor'>;
-export declare const createBaseButton: <T extends `_${string}`>() => React.ForwardRefExoticComponent<Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> & BorderProps<T> & ColorProps<T> & import("..").MarginProps & import("..").PaddingProps & FlexContainerProps & FlexItemProps & FontProps<T> & OverflowProps & SizeProps & React.RefAttributes<HTMLButtonElement>>;
+export declare type BaseButtonProps<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> & BorderProps<CustomColor> & ColorProps<CustomColor> & DistanceProps & FlexContainerProps & FlexItemProps & FontProps<CustomColor, CustomFontFamily> & OverflowProps & SizeProps<CustomHeight, CustomWidth>;
+export declare type ExternalBaseButtonProps<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> = Omit<BaseButtonProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>, 'align' | 'backgroundColor' | 'borderColor' | 'borderRadius' | 'borderStyle' | 'borderWidth' | 'color' | 'direction' | 'fontFamily' | 'fontSize' | 'fontWeight' | 'gap' | 'italic' | 'justify' | 'lineHeight' | 'overflow' | 'overflowX' | 'overflowY' | 'padding' | 'paddingBottom' | 'paddingHorizontal' | 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingVertical' | 'round' | 'underline' | 'underlineColor'>;
+export declare const createBaseButton: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>() => React.ForwardRefExoticComponent<Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> & BorderProps<CustomColor> & ColorProps<CustomColor> & import("..").MarginProps & import("..").PaddingProps & FlexContainerProps & FlexItemProps & FontProps<CustomColor, CustomFontFamily> & OverflowProps & SizeProps<CustomHeight, CustomWidth> & React.RefAttributes<HTMLButtonElement>>;

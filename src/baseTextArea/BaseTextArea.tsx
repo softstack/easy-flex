@@ -1,6 +1,6 @@
 import React, { forwardRef, TextareaHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { Color, CssColor, Falsifiable, ThemeColor } from '../types';
+import { Color, CssColor, CustomName, Falsifiable } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -30,19 +30,31 @@ const StyledTextArea = styled.textarea<
 	}
 `;
 
-export interface BaseTextAreaProps<T extends ThemeColor>
-	extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'color'>,
-		BorderProps<T>,
-		ColorProps<T>,
+export interface BaseTextAreaProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'color'>,
+		BorderProps<CustomColor>,
+		ColorProps<CustomColor>,
 		DistanceProps,
 		FlexItemProps,
-		FontProps<T>,
-		SizeProps {
-	placeholderColor?: Falsifiable<Color<T>>;
+		FontProps<CustomColor, CustomFontFamily>,
+		SizeProps<CustomHeight, CustomWidth> {
+	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }
 
-export const createBaseTextArea = <T extends ThemeColor>() => {
-	const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps<T>>(
+export const createBaseTextArea = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
+	const BaseTextArea = forwardRef<
+		HTMLTextAreaElement,
+		BaseTextAreaProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>
+	>(
 		(
 			{
 				alignSelf,

@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
-import { AbsoluteSize, Color, Falsifiable, ThemeColor } from '../types';
-export interface ModalProps<T extends ThemeColor> extends HTMLAttributes<HTMLDivElement> {
-    backgroundColor?: Falsifiable<Color<T>>;
+import { AbsoluteSize, Color, CustomName, Falsifiable } from '../types';
+export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement> {
+    backgroundColor?: Falsifiable<Color<CustomColor>>;
     /** Sets blur for the content covered by the modal background. */
     blur?: AbsoluteSize | boolean;
     blurElementId?: Falsifiable<string>;
@@ -9,4 +9,4 @@ export interface ModalProps<T extends ThemeColor> extends HTMLAttributes<HTMLDiv
     /** Called if the modal background is clicked. */
     onClose: () => void;
 }
-export declare const createModal: <T extends `_${string}`>() => React.FC<ModalProps<T>>;
+export declare const createModal: <CustomColor extends `_${string}`>() => React.FC<ModalProps<CustomColor>>;

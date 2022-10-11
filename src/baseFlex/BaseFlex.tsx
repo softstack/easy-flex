@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BaseFlexElement, Falsifiable, ThemeColor } from '../types';
+import { BaseFlexElement, CustomName, Falsifiable } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -77,22 +77,31 @@ const StyledSummary = styled.summary`
 	${style}
 `;
 
-export interface BaseFlexProps<T extends ThemeColor>
-	extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
-		BorderProps<T>,
-		ColorProps<T>,
+export interface BaseFlexProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
+		BorderProps<CustomColor>,
+		ColorProps<CustomColor>,
 		FlexContainerProps,
 		FlexItemProps,
-		FontProps<T>,
+		FontProps<CustomColor, CustomFontFamily>,
 		DistanceProps,
 		OverflowProps,
-		SizeProps {
+		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's html tag. */
 	element?: Falsifiable<BaseFlexElement>;
 }
 
-export const createBaseFlex = <T extends ThemeColor>() => {
-	const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps<T>>(
+export const createBaseFlex = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
+	const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
 		(
 			{
 				align,

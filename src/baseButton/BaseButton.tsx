@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
-import { ThemeColor } from '../types';
+import { CustomName } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -48,18 +48,28 @@ const StyledButton = styled.button<
 	}
 `;
 
-export type BaseButtonProps<T extends ThemeColor> = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
-	BorderProps<T> &
-	ColorProps<T> &
+export type BaseButtonProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
+	BorderProps<CustomColor> &
+	ColorProps<CustomColor> &
 	DistanceProps &
 	FlexContainerProps &
 	FlexItemProps &
-	FontProps<T> &
+	FontProps<CustomColor, CustomFontFamily> &
 	OverflowProps &
-	SizeProps;
+	SizeProps<CustomHeight, CustomWidth>;
 
-export type ExternalBaseButtonProps<T extends ThemeColor> = Omit<
-	BaseButtonProps<T>,
+export type ExternalBaseButtonProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> = Omit<
+	BaseButtonProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
 	| 'align'
 	| 'backgroundColor'
 	| 'borderColor'
@@ -90,8 +100,16 @@ export type ExternalBaseButtonProps<T extends ThemeColor> = Omit<
 	| 'underlineColor'
 >;
 
-export const createBaseButton = <T extends ThemeColor>() => {
-	const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps<T>>(
+export const createBaseButton = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
+	const BaseButton = forwardRef<
+		HTMLButtonElement,
+		BaseButtonProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>
+	>(
 		(
 			{
 				align,

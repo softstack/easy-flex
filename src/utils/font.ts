@@ -5,6 +5,7 @@ import {
 	CssColor,
 	CssFontWeight,
 	CssLineHeight,
+	CustomName,
 	Falsifiable,
 	FontFamily,
 	FontSize,
@@ -13,15 +14,14 @@ import {
 	LineHeight,
 	Size,
 	TextDecoration,
-	ThemeColor,
 	WhiteSpace,
 	WordBreak,
 } from '../types';
 import { getFontSize, getFontWeight, getLineHeight, ifDefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
-export interface FontProps<T extends ThemeColor> {
-	fontFamily?: Falsifiable<FontFamily>;
+export interface FontProps<CustomColor extends CustomName, CustomFontFamily extends CustomName> {
+	fontFamily?: Falsifiable<FontFamily<CustomFontFamily>>;
 	/** Component's font size. */
 	fontSize?: Falsifiable<FontSize>;
 	/** Component's font weight. */
@@ -30,7 +30,7 @@ export interface FontProps<T extends ThemeColor> {
 	italic?: boolean;
 	lineHeight?: Falsifiable<LineHeight>;
 	underline?: boolean;
-	underlineColor?: Falsifiable<Color<T>>;
+	underlineColor?: Falsifiable<Color<CustomColor>>;
 	whiteSpace?: Falsifiable<WhiteSpace>;
 	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
 	wordBreak?: Falsifiable<WordBreak>;
@@ -48,7 +48,7 @@ export interface FontStyleProps {
 	'data-word-break'?: Falsifiable<WordBreak>;
 }
 
-export const useFont = <T extends ThemeColor>({
+export const useFont = <CustomColor extends CustomName, CustomFontFamily extends CustomName>({
 	fontFamily,
 	fontSize,
 	fontWeight,
@@ -58,7 +58,7 @@ export const useFont = <T extends ThemeColor>({
 	underlineColor,
 	whiteSpace,
 	wordBreak,
-}: FontProps<T>): {
+}: FontProps<CustomColor, CustomFontFamily>): {
 	family: string | undefined;
 	size: Size | undefined;
 	weight: CssFontWeight | undefined;
@@ -139,7 +139,9 @@ export const useFont = <T extends ThemeColor>({
 	);
 };
 
-export const useFontStyleProps = <T extends ThemeColor>(props: FontProps<T>): FontStyleProps => {
+export const useFontStyleProps = <CustomColor extends CustomName, CustomFontFamily extends CustomName>(
+	props: FontProps<CustomColor, CustomFontFamily>
+): FontStyleProps => {
 	const font = useFont(props);
 
 	return useMemo<FontStyleProps>(

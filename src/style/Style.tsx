@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Falsifiable, StyleElement, ThemeColor } from '../types';
+import { CustomName, Falsifiable, StyleElement } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 
@@ -74,16 +74,16 @@ const StyledVar = styled.var`
 	${style}
 `;
 
-export interface StyleProps<T extends ThemeColor>
+export interface StyleProps<CustomColor extends CustomName, CustomFontFamily extends CustomName>
 	extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>,
-		ColorProps<T>,
-		FontProps<T> {
+		ColorProps<CustomColor>,
+		FontProps<CustomColor, CustomFontFamily> {
 	/** Component's html tag. */
 	element?: Falsifiable<StyleElement>;
 }
 
-export const createStyle = <T extends ThemeColor>() => {
-	const Style = forwardRef<HTMLParagraphElement, StyleProps<T>>(
+export const createStyle = <CustomColor extends CustomName, CustomFontFamily extends CustomName>() => {
+	const Style = forwardRef<HTMLParagraphElement, StyleProps<CustomColor, CustomFontFamily>>(
 		(
 			{
 				backgroundColor,

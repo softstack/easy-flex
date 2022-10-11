@@ -1,6 +1,6 @@
 import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { Color, CssColor, Falsifiable, ThemeColor } from '../types';
+import { Color, CssColor, CustomName, Falsifiable } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
@@ -30,21 +30,30 @@ const StyledA = styled.a<
 	}
 `;
 
-export interface LinkProps<T extends ThemeColor>
-	extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
-		ColorProps<T>,
+export interface LinkProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
+		ColorProps<CustomColor>,
 		FlexItemProps,
-		FontProps<T>,
+		FontProps<CustomColor, CustomFontFamily>,
 		MarginProps,
-		SizeProps {
+		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's hover color. */
-	hoverColor?: Falsifiable<Color<T>>;
+	hoverColor?: Falsifiable<Color<CustomColor>>;
 	/** If true, the link is opened in a new tab. */
 	newTab?: boolean;
 }
 
-export const createLink = <T extends ThemeColor>() => {
-	const Link = forwardRef<HTMLAnchorElement, LinkProps<T>>(
+export const createLink = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
+	const Link = forwardRef<HTMLAnchorElement, LinkProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
 		(
 			{
 				alignSelf,

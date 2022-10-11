@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Falsifiable, TextAlign, TextElement, ThemeColor } from '../types';
+import { CustomName, Falsifiable, TextAlign, TextElement } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -60,23 +60,32 @@ const StyledP = styled.p`
 	${style}
 `;
 
-export interface TextProps<T extends ThemeColor>
-	extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>,
-		BorderProps<T>,
-		ColorProps<T>,
+export interface TextProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>,
+		BorderProps<CustomColor>,
+		ColorProps<CustomColor>,
 		DistanceProps,
 		FlexItemProps,
-		FontProps<T>,
+		FontProps<CustomColor, CustomFontFamily>,
 		OverflowProps,
-		SizeProps {
+		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's text alignment. */
 	align?: Falsifiable<TextAlign>;
 	/** Component's html tag. */
 	element?: Falsifiable<TextElement>;
 }
 
-export const createText = <T extends ThemeColor>() => {
-	const Text = forwardRef<HTMLParagraphElement, TextProps<T>>(
+export const createText = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
+	const Text = forwardRef<HTMLParagraphElement, TextProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
 		(
 			{
 				align,

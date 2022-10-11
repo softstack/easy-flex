@@ -1,9 +1,14 @@
 import React, { forwardRef, useMemo } from 'react';
 import { BaseFlexProps, createBaseFlex } from '../baseFlex/BaseFlex';
-import { Falsifiable, FlexDirection, FlipDirection, ThemeColor, ViewportThreshold } from '../types';
+import { CustomName, Falsifiable, FlexDirection, FlipDirection, ViewportThreshold } from '../types';
 import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
-export interface RowProps<T extends ThemeColor> extends Omit<BaseFlexProps<T>, 'direction'> {
+export interface RowProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> extends Omit<BaseFlexProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>, 'direction'> {
 	/** Flips the content in the direction set by flipDirection. */
 	flip?: boolean;
 	/** Sets what happens if the content shall be flipped. */
@@ -12,40 +17,47 @@ export interface RowProps<T extends ThemeColor> extends Omit<BaseFlexProps<T>, '
 	viewport?: Falsifiable<ViewportThreshold>;
 }
 
-export const createRow = <T extends ThemeColor>() => {
+export const createRow = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>() => {
 	const BaseFlex = createBaseFlex();
-	const Row = forwardRef<HTMLDivElement, RowProps<T>>(({ children, flip, flipDirection, viewport, ...props }, ref) => {
-		const theme = useEasyFlexTheme();
-		const { width } = useDimension();
+	const Row = forwardRef<HTMLDivElement, RowProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
+		({ children, flip, flipDirection, viewport, ...props }, ref) => {
+			const theme = useEasyFlexTheme();
+			const { width } = useDimension();
 
-		const direction = useMemo<FlexDirection>(() => {
-			if (
-				flipDirection !== false &&
-				flipDirection !== undefined &&
-				(flip ||
-					(flip === undefined &&
-						(viewport !== false && viewport !== undefined
-							? width < getViewportThreshold(theme, viewport)
-							: width < theme.viewport.defaultThreshold)))
-			) {
-				switch (flipDirection) {
-					case 'flip':
-						return 'column';
-					case 'reverse':
-						return 'row-reverse';
-					case 'flip-reverse':
-						return 'column-reverse';
+			const direction = useMemo<FlexDirection>(() => {
+				if (
+					flipDirection !== false &&
+					flipDirection !== undefined &&
+					(flip ||
+						(flip === undefined &&
+							(viewport !== false && viewport !== undefined
+								? width < getViewportThreshold(theme, viewport)
+								: width < theme.viewport.defaultThreshold)))
+				) {
+					switch (flipDirection) {
+						case 'flip':
+							return 'column';
+						case 'reverse':
+							return 'row-reverse';
+						case 'flip-reverse':
+							return 'column-reverse';
+					}
 				}
-			}
-			return 'row';
-		}, [flip, flipDirection, theme, viewport, width]);
+				return 'row';
+			}, [flip, flipDirection, theme, viewport, width]);
 
-		return (
-			<BaseFlex direction={direction} ref={ref} {...props}>
-				{children}
-			</BaseFlex>
-		);
-	});
+			return (
+				<BaseFlex direction={direction} ref={ref} {...props}>
+					{children}
+				</BaseFlex>
+			);
+		}
+	);
 	Row.displayName = 'Row';
 	return Row;
 };

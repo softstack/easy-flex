@@ -1,15 +1,15 @@
-import { Color, CssColor, Falsifiable, ThemeColor } from '../types';
-export interface ColorProps<T extends ThemeColor> {
+import { Color, CssColor, CustomName, Falsifiable } from '../types';
+export interface ColorProps<CustomColor extends CustomName> {
     /** Component's background color. */
-    backgroundColor?: Falsifiable<Color<T>>;
+    backgroundColor?: Falsifiable<Color<CustomColor>>;
     /** Component's color. */
-    color?: Falsifiable<Color<T>>;
+    color?: Falsifiable<Color<CustomColor>>;
 }
 export interface ColorStyleProps {
     'data-background-color'?: CssColor;
     'data-color'?: CssColor;
 }
-export declare const useColor: <T extends `_${string}`>(color: Falsifiable<Color<T>> | undefined) => CssColor | undefined;
-export declare const useDefaultColor: <T extends CssColor | undefined, U extends `_${string}`>(color: Falsifiable<Color<U>> | undefined, defaultColor: T) => T extends CssColor ? CssColor : CssColor | undefined;
-export declare const useColorStyleProps: <T extends `_${string}`>({ backgroundColor, color, }: ColorProps<T>) => ColorStyleProps;
+export declare const useColor: <CustomColor extends `_${string}`>(color: Falsifiable<Color<CustomColor>> | undefined) => CssColor | undefined;
+export declare const useDefaultColor: <T extends CssColor | undefined, CustomColor extends `_${string}`>(color: Falsifiable<Color<CustomColor>> | undefined, defaultColor: T) => T extends CssColor ? CssColor : CssColor | undefined;
+export declare const useColorStyleProps: <CustomColor extends `_${string}`>({ backgroundColor, color, }: ColorProps<CustomColor>) => ColorStyleProps;
 export declare const colorStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<ColorStyleProps, any>>;
