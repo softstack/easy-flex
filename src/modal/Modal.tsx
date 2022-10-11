@@ -1,8 +1,8 @@
-import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor, Falsifiable } from '../types';
-import { defalsify, isAbsoluteSize, useEasyFlexTheme } from '../utils/base';
+import { defalsify, isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
 
 const Background = styled.div<{
@@ -76,10 +76,7 @@ export const Modal: FC<ModalProps> = ({
 		}
 	}, [blur, blurElementId, theme]);
 
-	const container = useMemo<HTMLElement>(
-		() => document.getElementById(defalsify(containerElementId) ?? theme.modal.containerElementId) ?? document.body,
-		[containerElementId, theme]
-	);
+	const container = useModalContainer(containerElementId);
 
 	return createPortal(
 		<Background

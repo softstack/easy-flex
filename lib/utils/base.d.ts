@@ -1,4 +1,4 @@
-import { AbsoluteSize, BorderRadius, BorderWidth, Color, CssColor, CssFontWeight, CssLineHeight, DeepPartial, Distance, EasyFlexTheme, ElementSize, FontSize, FontWeight, Height, LineHeight, Percent, Px, Rem, Size, ThemeColor, ThemeSize, ThemeSizeName, ThemeSizeX, Vh, ViewportThreshold, Vw, Width } from '../types';
+import { AbsoluteSize, BorderRadius, BorderWidth, Color, CssColor, CssFontWeight, CssLineHeight, DeepPartial, Distance, EasyFlexTheme, ElementSize, Falsifiable, FontSize, FontWeight, Height, LineHeight, Percent, Px, Rem, Size, ThemeColor, ThemeSize, ThemeSizeName, ThemeSizeX, Vh, ViewportThreshold, Vw, Width } from '../types';
 export declare const mergeDeep: <T>(a: T, b: DeepPartial<T>) => T;
 export declare const isThemeColor: (color: Color) => color is ThemeColor;
 export declare const isThemeSizeX: (size: unknown) => size is ThemeSizeX;
@@ -40,4 +40,5 @@ export declare const useDimension: () => {
     height: number;
     width: number;
 };
+export declare const useModalContainer: (containerElementId: Falsifiable<string> | undefined) => HTMLElement;
 export declare const useViewport: () => Record<ThemeSizeX | 'default', boolean>;

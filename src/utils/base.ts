@@ -12,6 +12,7 @@ import {
 	Distance,
 	EasyFlexTheme,
 	ElementSize,
+	Falsifiable,
 	FontSize,
 	FontWeight,
 	Height,
@@ -199,6 +200,15 @@ export const useDimension = (): { height: number; width: number } => {
 		height: number;
 		width: number;
 	}>(() => ({ height, width }), [height, width]);
+};
+
+export const useModalContainer = (containerElementId: Falsifiable<string> | undefined): HTMLElement => {
+	const theme = useEasyFlexTheme();
+
+	return useMemo<HTMLElement>(
+		() => document.getElementById(defalsify(containerElementId) ?? theme.modal.containerElementId) ?? document.body,
+		[containerElementId, theme]
+	);
 };
 
 export const useViewport = (): Record<ThemeSizeX | 'default', boolean> => {
