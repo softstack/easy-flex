@@ -264,7 +264,7 @@ export type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 
 
 export type CustomName = `_${string}`;
 
-export type ThemeSizeX =
+export type ThemeSize =
 	| '8xs'
 	| '7xs'
 	| '6xs'
@@ -285,7 +285,7 @@ export type ThemeSizeX =
 	| '7xl'
 	| '8xl';
 
-export type ThemeSize<T extends CustomName> = ThemeSizeX | T;
+export type CustomThemeSize<T extends CustomName> = ThemeSize | T;
 
 export type BaseFlexElement =
 	| 'article'
@@ -311,23 +311,24 @@ export type BaseGridElement =
 	| 'section'
 	| 'summary';
 
-export type BorderRadius = Size | ThemeSizeX;
+export type BorderRadius<CustomBorderRadius extends CustomName> = Size | CustomThemeSize<CustomBorderRadius>;
 
-export type BorderWidth = AbsoluteSize | ThemeSizeX;
+export type BorderWidth<CustomBorderWidth extends CustomName> = AbsoluteSize | CustomThemeSize<CustomBorderWidth>;
 
-export type Color<T extends CustomName> = CssColor | T;
+export type Color<CustomColor extends CustomName> = CssColor | CustomColor;
 
-export type Distance = AbsoluteSize | ThemeSizeX;
+export type Distance<CustomDistance extends CustomName> = AbsoluteSize | CustomThemeSize<CustomDistance>;
 
 export type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
-export type FontFamily<T extends CustomName> = T;
+export type FontFamily<CustomFontFamily extends CustomName> = CustomFontFamily;
 
-export type FontSize = Size | ThemeSizeX;
+export type FontSize<CustomFontSize extends CustomName> = Size | CustomThemeSize<CustomFontSize>;
 
 export type FontStyle = 'italic' | 'normal';
 
-export type FontWeight =
+export type FontWeight<CustomFontWeight extends CustomName> =
+	| CustomFontWeight
 	| 'thin'
 	| 'extraLight'
 	| 'light'
@@ -339,9 +340,9 @@ export type FontWeight =
 	| 'black'
 	| 'extraBlack';
 
-export type Height<CustomHeight extends CustomName> = ElementSize | ThemeSize<CustomHeight>;
+export type Height<CustomHeight extends CustomName> = ElementSize | CustomThemeSize<CustomHeight>;
 
-export type LineHeight = CssLineHeight | ThemeSizeX;
+export type LineHeight<CustomLineHeight extends CustomName> = CssLineHeight | CustomThemeSize<CustomLineHeight>;
 
 export type StyleElement =
 	| 'b'
@@ -365,28 +366,37 @@ export type TextDecoration = 'none' | 'underline';
 
 export type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
-export type ViewportThreshold = ThemeSizeX | number;
+export type ViewportThreshold<CustomViewportThreshold extends CustomName> =
+	| CustomThemeSize<CustomViewportThreshold>
+	| number;
 
-export type Width<CustomWidth extends CustomName> = ElementSize | ThemeSize<CustomWidth>;
+export type Width<CustomWidth extends CustomName> = ElementSize | CustomThemeSize<CustomWidth>;
 
 export interface EasyFlexTheme<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 > {
 	border: {
 		defaultStyle: BorderStyle;
-		radius: Record<ThemeSizeX, AbsoluteSize>;
-		width: Record<ThemeSizeX, AbsoluteSize>;
+		radius: Record<CustomThemeSize<CustomBorderRadius>, AbsoluteSize>;
+		width: Record<CustomThemeSize<CustomBorderWidth>, AbsoluteSize>;
 	};
 	color: Record<CustomColor, CssColor>;
-	distance: Record<ThemeSizeX, AbsoluteSize>;
+	distance: Record<CustomThemeSize<CustomDistance>, AbsoluteSize>;
 	font: {
-		family: Record<FontFamily<CustomFontFamily>, string>;
-		lineHeight: Record<ThemeSizeX, CssLineHeight>;
-		size: Record<ThemeSizeX, Size>;
-		weight: Record<FontWeight, CssFontWeight>;
+		family: Record<CustomFontFamily, string>;
+		lineHeight: Record<CustomThemeSize<CustomLineHeight>, CssLineHeight>;
+		size: Record<CustomThemeSize<CustomFontSize>, Size>;
+		weight: Record<FontWeight<CustomFontWeight>, CssFontWeight>;
 	};
 	modal: {
 		backgroundColor: CssColor;
@@ -395,20 +405,41 @@ export interface EasyFlexTheme<
 		containerElementId: string;
 	};
 	size: {
-		height: Record<ThemeSize<CustomHeight>, ElementSize>;
-		width: Record<ThemeSize<CustomWidth>, ElementSize>;
+		height: Record<CustomThemeSize<CustomHeight>, ElementSize>;
+		width: Record<CustomThemeSize<CustomWidth>, ElementSize>;
 	};
 	viewport: {
 		defaultThreshold: number;
-		threshold: Record<ThemeSizeX, number>;
+		threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
 	};
 }
 
 export type PartialEasyFlexTheme<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
-> = DeepPartial<EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>;
+> = DeepPartial<
+	EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>
+>;
 
 // Theme end

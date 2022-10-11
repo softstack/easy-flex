@@ -61,16 +61,22 @@ const StyledP = styled.p`
 `;
 
 export interface TextProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>,
-		BorderProps<CustomColor>,
+		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
-		DistanceProps,
+		DistanceProps<CustomDistance>,
 		FlexItemProps,
-		FontProps<CustomColor, CustomFontFamily>,
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		OverflowProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's text alignment. */
@@ -80,12 +86,32 @@ export interface TextProps<
 }
 
 export const createText = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const Text = forwardRef<HTMLParagraphElement, TextProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
+	const Text = forwardRef<
+		HTMLParagraphElement,
+		TextProps<
+			CustomBorderRadius,
+			CustomBorderWidth,
+			CustomColor,
+			CustomDistance,
+			CustomFontFamily,
+			CustomFontSize,
+			CustomFontWeight,
+			CustomHeight,
+			CustomLineHeight,
+			CustomWidth
+		>
+	>(
 		(
 			{
 				align,

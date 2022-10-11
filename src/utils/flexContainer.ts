@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, AlignItems, Distance, Falsifiable, FlexDirection, JustifyContent } from '../types';
+import { AbsoluteSize, AlignItems, CustomName, Distance, Falsifiable, FlexDirection, JustifyContent } from '../types';
 import { getDistance, ifDefined, useEasyFlexTheme } from './base';
 
-export interface FlexContainerProps {
+export interface FlexContainerProps<CustomDistance extends CustomName> {
 	/** The alignment of the component's children on the cross axis. */
 	align?: Falsifiable<AlignItems>;
 	/** Component's flex direction. */
 	direction?: Falsifiable<FlexDirection>;
 	/** Sets the gap between the component's children. If colum-gap or row-gap depends on direction. */
-	gap?: Falsifiable<Distance>;
+	gap?: Falsifiable<Distance<CustomDistance>>;
 	/** Sets how the browser distributes space between and around the component's children along the main axis. */
 	justify?: Falsifiable<JustifyContent>;
 }
@@ -22,12 +22,12 @@ export interface FlexContainerStyleProps {
 	'data-justify'?: Falsifiable<JustifyContent>;
 }
 
-export const useGap = ({
+export const useGap = <CustomDistance extends CustomName>({
 	direction,
 	gap,
 }: {
 	direction?: Falsifiable<FlexDirection>;
-	gap?: Falsifiable<Distance>;
+	gap?: Falsifiable<Distance<CustomDistance>>;
 }): { column: AbsoluteSize | undefined; row: AbsoluteSize | undefined } => {
 	const theme = useEasyFlexTheme();
 
@@ -56,12 +56,12 @@ export const useGap = ({
 	);
 };
 
-export const useFlexContainerStyleProps = ({
+export const useFlexContainerStyleProps = <CustomDistance extends CustomName>({
 	align,
 	direction,
 	gap,
 	justify,
-}: FlexContainerProps): FlexContainerStyleProps => {
+}: FlexContainerProps<CustomDistance>): FlexContainerStyleProps => {
 	const processedGap = useGap({ direction, gap });
 
 	return useMemo<FlexContainerStyleProps>(

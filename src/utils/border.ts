@@ -14,14 +14,18 @@ import {
 import { defalsify, getBorderRadius, getBorderWidth, ifDefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
-export interface BorderProps<CustomColor extends CustomName> {
+export interface BorderProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
+	CustomColor extends CustomName
+> {
 	/** Component's border color. */
 	borderColor?: Falsifiable<Color<CustomColor>>;
 	/** Component's border radius. */
-	borderRadius?: Falsifiable<BorderRadius>;
+	borderRadius?: Falsifiable<BorderRadius<CustomBorderRadius>>;
 	borderStyle?: Falsifiable<BorderStyle>;
 	/** Component's border width. */
-	borderWidth?: Falsifiable<BorderWidth>;
+	borderWidth?: Falsifiable<BorderWidth<CustomBorderWidth>>;
 	round?: boolean;
 }
 
@@ -32,13 +36,17 @@ export interface BorderStyleProps {
 	'data-border-width'?: AbsoluteSize;
 }
 
-export const useBorder = <CustomColor extends CustomName>({
+export const useBorder = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
+	CustomColor extends CustomName
+>({
 	borderColor,
 	borderRadius,
 	borderStyle,
 	borderWidth,
 	round,
-}: BorderProps<CustomColor>): {
+}: BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>): {
 	color: CssColor | undefined;
 	radius: Size | undefined;
 	style: BorderStyle | undefined;
@@ -82,8 +90,12 @@ export const useBorder = <CustomColor extends CustomName>({
 	);
 };
 
-export const useBorderStyleProps = <CustomColor extends CustomName>(
-	props: BorderProps<CustomColor>
+export const useBorderStyleProps = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
+	CustomColor extends CustomName
+>(
+	props: BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>
 ): BorderStyleProps => {
 	const border = useBorder(props);
 

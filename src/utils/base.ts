@@ -1,14 +1,17 @@
 import { Context, useContext, useEffect, useMemo, useState } from 'react';
-import { EasyFlexContext, globalValues, themeSizes } from '../constants';
+import { colorKeywords, colorNames, EasyFlexContext, globalValues, themeSizes } from '../constants';
 import {
 	AbsoluteSize,
 	BorderRadius,
 	BorderWidth,
 	Color,
+	ColorKeyword,
+	ColorName,
 	CssColor,
 	CssFontWeight,
 	CssLineHeight,
 	CustomName,
+	CustomThemeSize,
 	DeepPartial,
 	Distance,
 	EasyFlexTheme,
@@ -24,7 +27,6 @@ import {
 	Rem,
 	Size,
 	ThemeSize,
-	ThemeSizeX,
 	Vh,
 	ViewportThreshold,
 	Vw,
@@ -58,22 +60,21 @@ export const isGlobalValue = (value: unknown): value is GlobalValue =>
 
 export const isCustomName = (value: unknown): value is CustomName => typeof value === 'string' && !!value.match(/^_/);
 
-// export const isColorCode = <T extends ThemeColor>(color: Color<T>): color is ColorCode =>
-// 	typeof color === 'string' && !!color.match(/#[0-9a-f]{6}/);
+// export const isColorCode = <CustomColor extends CustomName>(color: Color<CustomColor>): color is ColorCode =>
+// 	!!color.match(/#[0-9a-f]{6}/);
 
-// export const isColorKeyword = <T extends ThemeColor>(color: Color<T>): color is ColorKeyword =>
-// 	typeof color === 'string' && colorKeywords.includes(color);
+export const isColorKeyword = <CustomColor extends CustomName>(color: Color<CustomColor>): color is ColorKeyword =>
+	colorKeywords.includes(color);
 
-// export const isColorName = <T extends ThemeColor>(color: Color<T>): color is ColorName =>
-// 	typeof color === 'string' && colorNames.includes(color);
+export const isColorName = <CustomColor extends CustomName>(color: Color<CustomColor>): color is ColorName =>
+	colorNames.includes(color);
 
-// export const isCssColor = <T extends ThemeColor>(color: Color<T>): color is CssColor =>
+// export const isCssColor = <CustomColor extends CustomName>(color: Color<CustomColor>): color is CssColor =>
 // 	isGlobalValue(color) || isColorCode(color) || isColorKeyword(color) || isColorName(color);
 
-export const isThemeSizeX = (size: unknown): size is ThemeSizeX =>
-	typeof size === 'string' && themeSizes.includes(size);
+export const isThemeSizeX = (size: unknown): size is ThemeSize => typeof size === 'string' && themeSizes.includes(size);
 
-export const isThemeSize = <T extends CustomName>(size: unknown): size is ThemeSize<T> =>
+export const isThemeSize = <T extends CustomName>(size: unknown): size is CustomThemeSize<T> =>
 	isThemeSizeX(size) || isCustomName(size);
 
 export const isPercent = (value: unknown): value is Px => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?%$/);
@@ -171,113 +172,336 @@ export const sizeToNumber = (value: Size): number => {
 };
 
 export const getBorderRadius = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
-	borderRadius: BorderRadius
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	borderRadius: BorderRadius<CustomBorderRadius>
 ): Size => (isThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius);
 
 export const getBorderWidth = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
-	borderWidth: BorderWidth
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	borderWidth: BorderWidth<CustomBorderWidth>
 ): AbsoluteSize => (isThemeSize(borderWidth) ? theme.border.width[borderWidth] : borderWidth);
 
 export const getColor = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
 	color: Color<CustomColor>
 ): CssColor => (isCustomName(color) ? theme.color[color] : color);
 
 export const getDistance = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
-	distance: Distance
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	distance: Distance<CustomDistance>
 ): AbsoluteSize => (isThemeSize(distance) ? theme.distance[distance] : distance);
 
 export const getFontSize = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
-	fontSize: FontSize
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	fontSize: FontSize<CustomFontSize>
 ): Size => (isThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize);
 
 export const getFontWeight = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
-	fontWeight: FontWeight
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	fontWeight: FontWeight<CustomFontWeight>
 ): CssFontWeight => (typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight]);
 
 export const getHeight = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
 	height: Height<CustomHeight>
 ): ElementSize => (isThemeSize(height) ? theme.size.height[height] : height);
 
 export const getLineHeight = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
-	lineHeight: LineHeight
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	lineHeight: LineHeight<CustomLineHeight>
 ): CssLineHeight => (isThemeSize(lineHeight) ? theme.font.lineHeight[lineHeight] : lineHeight);
 
 export const getViewportThreshold = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
-	viewportThreshold: ViewportThreshold
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	viewportThreshold: ViewportThreshold<CustomViewportThreshold>
 ): number => (typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold]);
 
 export const getWidth = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(
-	theme: EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
+	theme: EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
 	width: Width<CustomWidth>
 ): ElementSize => (isThemeSize(width) ? theme.size.width[width] : width);
 
 export const useEasyFlexTheme = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
->(): EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> =>
+>(): EasyFlexTheme<
+	CustomBorderRadius,
+	CustomBorderWidth,
+	CustomColor,
+	CustomDistance,
+	CustomFontFamily,
+	CustomFontSize,
+	CustomFontWeight,
+	CustomHeight,
+	CustomLineHeight,
+	CustomViewportThreshold,
+	CustomWidth
+> =>
 	useContext(
-		EasyFlexContext as unknown as Context<EasyFlexTheme<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>
+		EasyFlexContext as unknown as Context<
+			EasyFlexTheme<
+				CustomBorderRadius,
+				CustomBorderWidth,
+				CustomColor,
+				CustomDistance,
+				CustomFontFamily,
+				CustomFontSize,
+				CustomFontWeight,
+				CustomHeight,
+				CustomLineHeight,
+				CustomViewportThreshold,
+				CustomWidth
+			>
+		>
 	);
 
 export const useDimension = (): { height: number; width: number } => {
@@ -309,11 +533,11 @@ export const useModalContainer = (containerElementId: Falsifiable<string> | unde
 	);
 };
 
-export const useViewport = (): Record<ThemeSizeX | 'default', boolean> => {
+export const useViewport = (): Record<ThemeSize | 'default', boolean> => {
 	const theme = useEasyFlexTheme();
 	const { width } = useDimension();
 
-	return useMemo<Record<ThemeSizeX | 'default', boolean>>(
+	return useMemo<Record<ThemeSize | 'default', boolean>>(
 		() => ({
 			default: width >= theme.viewport.defaultThreshold,
 			'8xs': width >= getViewportThreshold(theme, '8xs'),

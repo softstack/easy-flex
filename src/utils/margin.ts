@@ -1,23 +1,23 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, Distance, Falsifiable } from '../types';
+import { AbsoluteSize, CustomName, Distance, Falsifiable } from '../types';
 import { defalsify, getDistance, useEasyFlexTheme } from './base';
 
-export interface MarginProps {
+export interface MarginProps<CustomDistance extends CustomName> {
 	/** Component's margin of all sides. */
-	margin?: Falsifiable<Distance>;
+	margin?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's bottom margin. */
-	marginBottom?: Falsifiable<Distance>;
+	marginBottom?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's left and right margin. */
-	marginHorizontal?: Falsifiable<Distance>;
+	marginHorizontal?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's left margin. */
-	marginLeft?: Falsifiable<Distance>;
+	marginLeft?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's right margin. */
-	marginRight?: Falsifiable<Distance>;
+	marginRight?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's top margin. */
-	marginTop?: Falsifiable<Distance>;
+	marginTop?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's top and bottom margin. */
-	marginVertical?: Falsifiable<Distance>;
+	marginVertical?: Falsifiable<Distance<CustomDistance>>;
 }
 
 export interface MarginStyleProps {
@@ -27,7 +27,7 @@ export interface MarginStyleProps {
 	'data-margin-top': AbsoluteSize;
 }
 
-export const useMargin = ({
+export const useMargin = <CustomDistance extends CustomName>({
 	margin,
 	marginBottom,
 	marginHorizontal,
@@ -35,7 +35,7 @@ export const useMargin = ({
 	marginRight,
 	marginTop,
 	marginVertical,
-}: MarginProps): {
+}: MarginProps<CustomDistance>): {
 	bottom: AbsoluteSize;
 	left: AbsoluteSize;
 	right: AbsoluteSize;
@@ -79,7 +79,9 @@ export const useMargin = ({
 	);
 };
 
-export const useMarginStyleProps = (props: MarginProps): MarginStyleProps => {
+export const useMarginStyleProps = <CustomDistance extends CustomName>(
+	props: MarginProps<CustomDistance>
+): MarginStyleProps => {
 	const margin = useMargin(props);
 
 	return useMemo<MarginStyleProps>(

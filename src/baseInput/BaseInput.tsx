@@ -31,29 +31,52 @@ const StyledInput = styled.input<
 `;
 
 export interface BaseInputProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > extends Omit<InputHTMLAttributes<HTMLInputElement>, 'color' | 'height' | 'width'>,
-		BorderProps<CustomColor>,
+		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
-		DistanceProps,
+		DistanceProps<CustomDistance>,
 		FlexItemProps,
-		FontProps<CustomColor, CustomFontFamily>,
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		SizeProps<CustomHeight, CustomWidth> {
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }
 
 export const createBaseInput = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
 	const BaseInput = forwardRef<
 		HTMLInputElement,
-		BaseInputProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>
+		BaseInputProps<
+			CustomBorderRadius,
+			CustomBorderWidth,
+			CustomColor,
+			CustomDistance,
+			CustomFontFamily,
+			CustomFontSize,
+			CustomFontWeight,
+			CustomHeight,
+			CustomLineHeight,
+			CustomWidth
+		>
 	>(
 		(
 			{

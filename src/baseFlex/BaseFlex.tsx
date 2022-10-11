@@ -78,17 +78,23 @@ const StyledSummary = styled.summary`
 `;
 
 export interface BaseFlexProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
-		BorderProps<CustomColor>,
+		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
-		FlexContainerProps,
+		FlexContainerProps<CustomDistance>,
 		FlexItemProps,
-		FontProps<CustomColor, CustomFontFamily>,
-		DistanceProps,
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		DistanceProps<CustomDistance>,
 		OverflowProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's html tag. */
@@ -96,12 +102,32 @@ export interface BaseFlexProps<
 }
 
 export const createBaseFlex = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
+	const BaseFlex = forwardRef<
+		HTMLDivElement,
+		BaseFlexProps<
+			CustomBorderRadius,
+			CustomBorderWidth,
+			CustomColor,
+			CustomDistance,
+			CustomFontFamily,
+			CustomFontSize,
+			CustomFontWeight,
+			CustomHeight,
+			CustomLineHeight,
+			CustomWidth
+		>
+	>(
 		(
 			{
 				align,

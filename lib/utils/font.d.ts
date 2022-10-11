@@ -1,13 +1,13 @@
 import { Color, CssColor, CssFontWeight, CssLineHeight, CustomName, Falsifiable, FontFamily, FontSize, FontStyle, FontWeight, LineHeight, Size, TextDecoration, WhiteSpace, WordBreak } from '../types';
-export interface FontProps<CustomColor extends CustomName, CustomFontFamily extends CustomName> {
+export interface FontProps<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomLineHeight extends CustomName> {
     fontFamily?: Falsifiable<FontFamily<CustomFontFamily>>;
     /** Component's font size. */
-    fontSize?: Falsifiable<FontSize>;
+    fontSize?: Falsifiable<FontSize<CustomFontSize>>;
     /** Component's font weight. */
-    fontWeight?: Falsifiable<FontWeight>;
+    fontWeight?: Falsifiable<FontWeight<CustomFontWeight>>;
     /** If true, the text style is set to italic. */
     italic?: boolean;
-    lineHeight?: Falsifiable<LineHeight>;
+    lineHeight?: Falsifiable<LineHeight<CustomLineHeight>>;
     underline?: boolean;
     underlineColor?: Falsifiable<Color<CustomColor>>;
     whiteSpace?: Falsifiable<WhiteSpace>;
@@ -25,7 +25,7 @@ export interface FontStyleProps {
     'data-white-space'?: Falsifiable<WhiteSpace>;
     'data-word-break'?: Falsifiable<WordBreak>;
 }
-export declare const useFont: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`>({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline, underlineColor, whiteSpace, wordBreak, }: FontProps<CustomColor, CustomFontFamily>) => {
+export declare const useFont: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomFontSize extends `_${string}`, CustomFontWeight extends `_${string}`, CustomLineHeight extends `_${string}`>({ fontFamily, fontSize, fontWeight, italic, lineHeight, underline, underlineColor, whiteSpace, wordBreak, }: FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>) => {
     family: string | undefined;
     size: Size | undefined;
     weight: CssFontWeight | undefined;
@@ -36,5 +36,5 @@ export declare const useFont: <CustomColor extends `_${string}`, CustomFontFamil
     whiteSpace: Falsifiable<WhiteSpace> | undefined;
     wordBreak: Falsifiable<WordBreak> | undefined;
 };
-export declare const useFontStyleProps: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`>(props: FontProps<CustomColor, CustomFontFamily>) => FontStyleProps;
+export declare const useFontStyleProps: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomFontSize extends `_${string}`, CustomFontWeight extends `_${string}`, CustomLineHeight extends `_${string}`>(props: FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>) => FontStyleProps;
 export declare const fontStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<FontStyleProps, any>>;

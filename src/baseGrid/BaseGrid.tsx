@@ -73,30 +73,56 @@ const StyledSummary = styled.summary`
 `;
 
 export interface BaseGridProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
-		BorderProps<CustomColor>,
+		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
 		FlexItemProps,
-		FontProps<CustomColor, CustomFontFamily>,
-		DistanceProps,
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		DistanceProps<CustomDistance>,
 		SizeProps<CustomHeight, CustomWidth> {
-	columnGap?: Falsifiable<Distance>;
+	columnGap?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's html tag. */
 	element?: Falsifiable<BaseGridElement>;
-	rowGap?: Falsifiable<Distance>;
+	rowGap?: Falsifiable<Distance<CustomDistance>>;
 }
 
 export const createBaseGrid = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
+	const BaseGrid = forwardRef<
+		HTMLDivElement,
+		BaseGridProps<
+			CustomBorderRadius,
+			CustomBorderWidth,
+			CustomColor,
+			CustomDistance,
+			CustomFontFamily,
+			CustomFontSize,
+			CustomFontWeight,
+			CustomHeight,
+			CustomLineHeight,
+			CustomWidth
+		>
+	>(
 		(
 			{
 				alignSelf,

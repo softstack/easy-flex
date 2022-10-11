@@ -31,29 +31,52 @@ const StyledTextArea = styled.textarea<
 `;
 
 export interface BaseTextAreaProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'color'>,
-		BorderProps<CustomColor>,
+		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
-		DistanceProps,
+		DistanceProps<CustomDistance>,
 		FlexItemProps,
-		FontProps<CustomColor, CustomFontFamily>,
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		SizeProps<CustomHeight, CustomWidth> {
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }
 
 export const createBaseTextArea = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
 	const BaseTextArea = forwardRef<
 		HTMLTextAreaElement,
-		BaseTextAreaProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>
+		BaseTextAreaProps<
+			CustomBorderRadius,
+			CustomBorderWidth,
+			CustomColor,
+			CustomDistance,
+			CustomFontFamily,
+			CustomFontSize,
+			CustomFontWeight,
+			CustomHeight,
+			CustomLineHeight,
+			CustomWidth
+		>
 	>(
 		(
 			{

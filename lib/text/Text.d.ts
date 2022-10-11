@@ -7,10 +7,10 @@ import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { OverflowProps } from '../utils/overflow';
 import { SizeProps } from '../utils/size';
-export interface TextProps<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>, BorderProps<CustomColor>, ColorProps<CustomColor>, DistanceProps, FlexItemProps, FontProps<CustomColor, CustomFontFamily>, OverflowProps, SizeProps<CustomHeight, CustomWidth> {
+export interface TextProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, DistanceProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, OverflowProps, SizeProps<CustomHeight, CustomWidth> {
     /** Component's text alignment. */
     align?: Falsifiable<TextAlign>;
     /** Component's html tag. */
     element?: Falsifiable<TextElement>;
 }
-export declare const createText: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>() => React.ForwardRefExoticComponent<TextProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & React.RefAttributes<HTMLParagraphElement>>;
+export declare const createText: <CustomBorderRadius extends `_${string}`, CustomBorderWidth extends `_${string}`, CustomColor extends `_${string}`, CustomDistance extends `_${string}`, CustomFontFamily extends `_${string}`, CustomFontSize extends `_${string}`, CustomFontWeight extends `_${string}`, CustomHeight extends `_${string}`, CustomLineHeight extends `_${string}`, CustomWidth extends `_${string}`>() => React.ForwardRefExoticComponent<TextProps<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomWidth> & React.RefAttributes<HTMLParagraphElement>>;

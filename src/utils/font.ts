@@ -20,15 +20,21 @@ import {
 import { getFontSize, getFontWeight, getLineHeight, ifDefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
-export interface FontProps<CustomColor extends CustomName, CustomFontFamily extends CustomName> {
+export interface FontProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
+	CustomLineHeight extends CustomName
+> {
 	fontFamily?: Falsifiable<FontFamily<CustomFontFamily>>;
 	/** Component's font size. */
-	fontSize?: Falsifiable<FontSize>;
+	fontSize?: Falsifiable<FontSize<CustomFontSize>>;
 	/** Component's font weight. */
-	fontWeight?: Falsifiable<FontWeight>;
+	fontWeight?: Falsifiable<FontWeight<CustomFontWeight>>;
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
-	lineHeight?: Falsifiable<LineHeight>;
+	lineHeight?: Falsifiable<LineHeight<CustomLineHeight>>;
 	underline?: boolean;
 	underlineColor?: Falsifiable<Color<CustomColor>>;
 	whiteSpace?: Falsifiable<WhiteSpace>;
@@ -48,7 +54,13 @@ export interface FontStyleProps {
 	'data-word-break'?: Falsifiable<WordBreak>;
 }
 
-export const useFont = <CustomColor extends CustomName, CustomFontFamily extends CustomName>({
+export const useFont = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
+	CustomLineHeight extends CustomName
+>({
 	fontFamily,
 	fontSize,
 	fontWeight,
@@ -58,7 +70,7 @@ export const useFont = <CustomColor extends CustomName, CustomFontFamily extends
 	underlineColor,
 	whiteSpace,
 	wordBreak,
-}: FontProps<CustomColor, CustomFontFamily>): {
+}: FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>): {
 	family: string | undefined;
 	size: Size | undefined;
 	weight: CssFontWeight | undefined;
@@ -139,8 +151,14 @@ export const useFont = <CustomColor extends CustomName, CustomFontFamily extends
 	);
 };
 
-export const useFontStyleProps = <CustomColor extends CustomName, CustomFontFamily extends CustomName>(
-	props: FontProps<CustomColor, CustomFontFamily>
+export const useFontStyleProps = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
+	CustomLineHeight extends CustomName
+>(
+	props: FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>
 ): FontStyleProps => {
 	const font = useFont(props);
 

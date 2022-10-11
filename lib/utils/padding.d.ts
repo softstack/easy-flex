@@ -1,19 +1,19 @@
-import { AbsoluteSize, Distance, Falsifiable } from '../types';
-export interface PaddingProps {
+import { AbsoluteSize, CustomName, Distance, Falsifiable } from '../types';
+export interface PaddingProps<CustomDistance extends CustomName> {
     /** Padding of all sides. */
-    padding?: Falsifiable<Distance>;
+    padding?: Falsifiable<Distance<CustomDistance>>;
     /** Component's bottom padding. */
-    paddingBottom?: Falsifiable<Distance>;
+    paddingBottom?: Falsifiable<Distance<CustomDistance>>;
     /** Component's left and right padding. */
-    paddingHorizontal?: Falsifiable<Distance>;
+    paddingHorizontal?: Falsifiable<Distance<CustomDistance>>;
     /** Component's left padding. */
-    paddingLeft?: Falsifiable<Distance>;
+    paddingLeft?: Falsifiable<Distance<CustomDistance>>;
     /** Component's right padding. */
-    paddingRight?: Falsifiable<Distance>;
+    paddingRight?: Falsifiable<Distance<CustomDistance>>;
     /** Component's top padding. */
-    paddingTop?: Falsifiable<Distance>;
+    paddingTop?: Falsifiable<Distance<CustomDistance>>;
     /** Component's top and bottom padding. */
-    paddingVertical?: Falsifiable<Distance>;
+    paddingVertical?: Falsifiable<Distance<CustomDistance>>;
 }
 export interface PaddingStyleProps {
     'data-padding-bottom': AbsoluteSize;
@@ -21,11 +21,11 @@ export interface PaddingStyleProps {
     'data-padding-right': AbsoluteSize;
     'data-padding-top': AbsoluteSize;
 }
-export declare const usePadding: ({ padding, paddingBottom, paddingHorizontal, paddingLeft, paddingRight, paddingTop, paddingVertical, }: PaddingProps) => {
+export declare const usePadding: <CustomDistance extends `_${string}`>({ padding, paddingBottom, paddingHorizontal, paddingLeft, paddingRight, paddingTop, paddingVertical, }: PaddingProps<CustomDistance>) => {
     bottom: AbsoluteSize;
     left: AbsoluteSize;
     right: AbsoluteSize;
     top: AbsoluteSize;
 };
-export declare const usePaddingStyleProps: (props: PaddingProps) => PaddingStyleProps;
+export declare const usePaddingStyleProps: <CustomDistance extends `_${string}`>(props: PaddingProps<CustomDistance>) => PaddingStyleProps;
 export declare const paddingStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<PaddingStyleProps, any>>;

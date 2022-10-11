@@ -49,27 +49,50 @@ const StyledButton = styled.button<
 `;
 
 export type BaseButtonProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
-	BorderProps<CustomColor> &
+	BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor> &
 	ColorProps<CustomColor> &
-	DistanceProps &
-	FlexContainerProps &
+	DistanceProps<CustomDistance> &
+	FlexContainerProps<CustomDistance> &
 	FlexItemProps &
-	FontProps<CustomColor, CustomFontFamily> &
+	FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> &
 	OverflowProps &
 	SizeProps<CustomHeight, CustomWidth>;
 
 export type ExternalBaseButtonProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > = Omit<
-	BaseButtonProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>,
+	BaseButtonProps<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomWidth
+	>,
 	| 'align'
 	| 'backgroundColor'
 	| 'borderColor'
@@ -101,14 +124,31 @@ export type ExternalBaseButtonProps<
 >;
 
 export const createBaseButton = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
 	const BaseButton = forwardRef<
 		HTMLButtonElement,
-		BaseButtonProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>
+		BaseButtonProps<
+			CustomBorderRadius,
+			CustomBorderWidth,
+			CustomColor,
+			CustomDistance,
+			CustomFontFamily,
+			CustomFontSize,
+			CustomFontWeight,
+			CustomHeight,
+			CustomLineHeight,
+			CustomWidth
+		>
 	>(
 		(
 			{

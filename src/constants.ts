@@ -178,7 +178,19 @@ export const themeSizes = [
 	'8xl',
 ];
 
-export const defaultEasyFlexTheme: EasyFlexTheme<never, never, never, never> = {
+export const defaultEasyFlexTheme: EasyFlexTheme<
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never
+> = {
 	border: {
 		defaultStyle: 'solid',
 		radius: {

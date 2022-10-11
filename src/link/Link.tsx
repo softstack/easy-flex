@@ -32,14 +32,18 @@ const StyledA = styled.a<
 
 export interface LinkProps<
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
 		ColorProps<CustomColor>,
 		FlexItemProps,
-		FontProps<CustomColor, CustomFontFamily>,
-		MarginProps,
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		MarginProps<CustomDistance>,
 		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's hover color. */
 	hoverColor?: Falsifiable<Color<CustomColor>>;
@@ -49,11 +53,27 @@ export interface LinkProps<
 
 export const createLink = <
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
 	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const Link = forwardRef<HTMLAnchorElement, LinkProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth>>(
+	const Link = forwardRef<
+		HTMLAnchorElement,
+		LinkProps<
+			CustomColor,
+			CustomDistance,
+			CustomFontFamily,
+			CustomFontSize,
+			CustomFontWeight,
+			CustomHeight,
+			CustomLineHeight,
+			CustomWidth
+		>
+	>(
 		(
 			{
 				alignSelf,

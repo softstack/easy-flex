@@ -1,14 +1,15 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize } from '../types';
+import { AbsoluteSize, CustomName } from '../types';
 import { MarginProps, marginStyle, MarginStyleProps, useMargin } from './margin';
 import { PaddingProps, paddingStyle, PaddingStyleProps, usePadding } from './padding';
 
-export type DistanceProps = MarginProps & PaddingProps;
+export type DistanceProps<CustomDistance extends CustomName> = MarginProps<CustomDistance> &
+	PaddingProps<CustomDistance>;
 
 export type DistanceStyleProps = MarginStyleProps & PaddingStyleProps;
 
-export const useDistance = ({
+export const useDistance = <CustomDistance extends CustomName>({
 	margin,
 	marginBottom,
 	marginHorizontal,
@@ -23,7 +24,7 @@ export const useDistance = ({
 	paddingRight,
 	paddingTop,
 	paddingVertical,
-}: DistanceProps): {
+}: DistanceProps<CustomDistance>): {
 	margin: {
 		bottom: AbsoluteSize;
 		left: AbsoluteSize;
@@ -60,7 +61,9 @@ export const useDistance = ({
 	return useMemo(() => ({ margin: processedMargin, padding: processedPadding }), [processedMargin, processedPadding]);
 };
 
-export const useDistanceStyleProps = (props: DistanceProps): DistanceStyleProps => {
+export const useDistanceStyleProps = <CustomDistance extends CustomName>(
+	props: DistanceProps<CustomDistance>
+): DistanceStyleProps => {
 	const distance = useDistance(props);
 
 	return useMemo<DistanceStyleProps>(

@@ -74,16 +74,30 @@ const StyledVar = styled.var`
 	${style}
 `;
 
-export interface StyleProps<CustomColor extends CustomName, CustomFontFamily extends CustomName>
-	extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>,
+export interface StyleProps<
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
+	CustomLineHeight extends CustomName
+> extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>,
 		ColorProps<CustomColor>,
-		FontProps<CustomColor, CustomFontFamily> {
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> {
 	/** Component's html tag. */
 	element?: Falsifiable<StyleElement>;
 }
 
-export const createStyle = <CustomColor extends CustomName, CustomFontFamily extends CustomName>() => {
-	const Style = forwardRef<HTMLParagraphElement, StyleProps<CustomColor, CustomFontFamily>>(
+export const createStyle = <
+	CustomColor extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
+	CustomLineHeight extends CustomName
+>() => {
+	const Style = forwardRef<
+		HTMLParagraphElement,
+		StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>
+	>(
 		(
 			{
 				backgroundColor,

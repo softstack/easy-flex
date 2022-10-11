@@ -6,10 +6,10 @@ import { DistanceProps } from '../utils/distance';
 import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { SizeProps } from '../utils/size';
-export interface BaseGridProps<CustomColor extends CustomName, CustomFontFamily extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomColor>, ColorProps<CustomColor>, FlexItemProps, FontProps<CustomColor, CustomFontFamily>, DistanceProps, SizeProps<CustomHeight, CustomWidth> {
-    columnGap?: Falsifiable<Distance>;
+export interface BaseGridProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, DistanceProps<CustomDistance>, SizeProps<CustomHeight, CustomWidth> {
+    columnGap?: Falsifiable<Distance<CustomDistance>>;
     /** Component's html tag. */
     element?: Falsifiable<BaseGridElement>;
-    rowGap?: Falsifiable<Distance>;
+    rowGap?: Falsifiable<Distance<CustomDistance>>;
 }
-export declare const createBaseGrid: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>() => React.ForwardRefExoticComponent<BaseGridProps<CustomColor, CustomFontFamily, CustomHeight, CustomWidth> & React.RefAttributes<HTMLDivElement>>;
+export declare const createBaseGrid: <CustomBorderRadius extends `_${string}`, CustomBorderWidth extends `_${string}`, CustomColor extends `_${string}`, CustomDistance extends `_${string}`, CustomFontFamily extends `_${string}`, CustomFontSize extends `_${string}`, CustomFontWeight extends `_${string}`, CustomHeight extends `_${string}`, CustomLineHeight extends `_${string}`, CustomWidth extends `_${string}`>() => React.ForwardRefExoticComponent<BaseGridProps<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomWidth> & React.RefAttributes<HTMLDivElement>>;

@@ -1,23 +1,23 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, Distance, Falsifiable } from '../types';
+import { AbsoluteSize, CustomName, Distance, Falsifiable } from '../types';
 import { defalsify, getDistance, useEasyFlexTheme } from './base';
 
-export interface PaddingProps {
+export interface PaddingProps<CustomDistance extends CustomName> {
 	/** Padding of all sides. */
-	padding?: Falsifiable<Distance>;
+	padding?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's bottom padding. */
-	paddingBottom?: Falsifiable<Distance>;
+	paddingBottom?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's left and right padding. */
-	paddingHorizontal?: Falsifiable<Distance>;
+	paddingHorizontal?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's left padding. */
-	paddingLeft?: Falsifiable<Distance>;
+	paddingLeft?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's right padding. */
-	paddingRight?: Falsifiable<Distance>;
+	paddingRight?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's top padding. */
-	paddingTop?: Falsifiable<Distance>;
+	paddingTop?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's top and bottom padding. */
-	paddingVertical?: Falsifiable<Distance>;
+	paddingVertical?: Falsifiable<Distance<CustomDistance>>;
 }
 
 export interface PaddingStyleProps {
@@ -27,7 +27,7 @@ export interface PaddingStyleProps {
 	'data-padding-top': AbsoluteSize;
 }
 
-export const usePadding = ({
+export const usePadding = <CustomDistance extends CustomName>({
 	padding,
 	paddingBottom,
 	paddingHorizontal,
@@ -35,7 +35,7 @@ export const usePadding = ({
 	paddingRight,
 	paddingTop,
 	paddingVertical,
-}: PaddingProps): {
+}: PaddingProps<CustomDistance>): {
 	bottom: AbsoluteSize;
 	left: AbsoluteSize;
 	right: AbsoluteSize;
@@ -79,7 +79,9 @@ export const usePadding = ({
 	);
 };
 
-export const usePaddingStyleProps = (props: PaddingProps): PaddingStyleProps => {
+export const usePaddingStyleProps = <CustomDistance extends CustomName>(
+	props: PaddingProps<CustomDistance>
+): PaddingStyleProps => {
 	const padding = usePadding(props);
 
 	return useMemo<PaddingStyleProps>(

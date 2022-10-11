@@ -21,22 +21,31 @@ const StyledImg = styled.img<
 `;
 
 export interface ImgProps<
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomHeight extends CustomName,
 	CustomWidth extends CustomName
 > extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'height' | 'width'>,
-		BorderProps<CustomColor>,
-		MarginProps,
+		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
+		MarginProps<CustomDistance>,
 		SizeProps<CustomHeight, CustomWidth> {
 	objectFit?: Falsifiable<ObjectFit>;
 }
 
 export const createImg = <
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const Img = forwardRef<HTMLImageElement, ImgProps<CustomColor, CustomHeight, CustomWidth>>(
+	const Img = forwardRef<
+		HTMLImageElement,
+		ImgProps<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomHeight, CustomWidth>
+	>(
 		(
 			{
 				borderColor,
