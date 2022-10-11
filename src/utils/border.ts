@@ -1,12 +1,22 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Falsifiable, Size } from '../types';
+import {
+	AbsoluteSize,
+	BorderRadius,
+	BorderStyle,
+	BorderWidth,
+	Color,
+	CssColor,
+	Falsifiable,
+	Size,
+	ThemeColor,
+} from '../types';
 import { defalsify, getBorderRadius, getBorderWidth, ifDefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
-export interface BorderProps {
+export interface BorderProps<T extends ThemeColor> {
 	/** Component's border color. */
-	borderColor?: Falsifiable<Color>;
+	borderColor?: Falsifiable<Color<T>>;
 	/** Component's border radius. */
 	borderRadius?: Falsifiable<BorderRadius>;
 	borderStyle?: Falsifiable<BorderStyle>;
@@ -22,13 +32,13 @@ export interface BorderStyleProps {
 	'data-border-width'?: AbsoluteSize;
 }
 
-export const useBorder = ({
+export const useBorder = <T extends ThemeColor>({
 	borderColor,
 	borderRadius,
 	borderStyle,
 	borderWidth,
 	round,
-}: BorderProps): {
+}: BorderProps<T>): {
 	color: CssColor | undefined;
 	radius: Size | undefined;
 	style: BorderStyle | undefined;
@@ -72,7 +82,7 @@ export const useBorder = ({
 	);
 };
 
-export const useBorderStyleProps = (props: BorderProps): BorderStyleProps => {
+export const useBorderStyleProps = <T extends ThemeColor>(props: BorderProps<T>): BorderStyleProps => {
 	const border = useBorder(props);
 
 	return useMemo<BorderStyleProps>(

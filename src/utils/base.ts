@@ -1,5 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { EasyFlexContext, themeColors, themeSizeNames, themeSizes } from '../constants';
+import { Context, useContext, useEffect, useMemo, useState } from 'react';
+import { EasyFlexContext, globalValues, themeSizeNames, themeSizes } from '../constants';
 import {
 	AbsoluteSize,
 	BorderRadius,
@@ -15,6 +15,7 @@ import {
 	Falsifiable,
 	FontSize,
 	FontWeight,
+	GlobalValue,
 	Height,
 	LineHeight,
 	Percent,
@@ -41,12 +42,34 @@ export const mergeDeep = <T>(a: T, b: DeepPartial<T>): T => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			tmp[key] = mergeDeep(a[key], b[key as keyof DeepPartial<T>] as any);
 		}
+
+		// In b can be colors which are not in a
+		for (const [key] of Object.entries(b) as unknown as Array<[keyof T, T]>) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			tmp[key] = mergeDeep(a[key], b[key as keyof DeepPartial<T>] as any);
+		}
+
 		return tmp;
 	}
 	return b as T;
 };
 
-export const isThemeColor = (color: Color): color is ThemeColor => themeColors.includes(color);
+export const isGlobalValue = (value: unknown): value is GlobalValue =>
+	typeof value === 'string' && globalValues.includes(value);
+
+export const isThemeColor = <T extends ThemeColor>(color: Color<T>): color is T => !!color.match(/^_/);
+
+// export const isColorCode = <T extends ThemeColor>(color: Color<T>): color is ColorCode =>
+// 	typeof color === 'string' && !!color.match(/#[0-9a-f]{6}/);
+
+// export const isColorKeyword = <T extends ThemeColor>(color: Color<T>): color is ColorKeyword =>
+// 	typeof color === 'string' && colorKeywords.includes(color);
+
+// export const isColorName = <T extends ThemeColor>(color: Color<T>): color is ColorName =>
+// 	typeof color === 'string' && colorNames.includes(color);
+
+// export const isCssColor = <T extends ThemeColor>(color: Color<T>): color is CssColor =>
+// 	isGlobalValue(color) || isColorCode(color) || isColorKeyword(color) || isColorName(color);
 
 export const isThemeSizeX = (size: unknown): size is ThemeSizeX =>
 	typeof size === 'string' && themeSizes.includes(size);
@@ -150,37 +173,40 @@ export const sizeToNumber = (value: Size): number => {
 	return percentToNumber(value);
 };
 
-export const getBorderRadius = (theme: EasyFlexTheme, borderRadius: BorderRadius): Size =>
+export const getBorderRadius = <T extends ThemeColor>(theme: EasyFlexTheme<T>, borderRadius: BorderRadius): Size =>
 	isThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius;
 
-export const getBorderWidth = (theme: EasyFlexTheme, borderWidth: BorderWidth): AbsoluteSize =>
+export const getBorderWidth = <T extends ThemeColor>(theme: EasyFlexTheme<T>, borderWidth: BorderWidth): AbsoluteSize =>
 	isThemeSize(borderWidth) ? theme.border.width[borderWidth] : borderWidth;
 
-export const getColor = (theme: EasyFlexTheme, color: Color): CssColor =>
+export const getColor = <T extends ThemeColor>(theme: EasyFlexTheme<T>, color: Color<T>): CssColor =>
 	isThemeColor(color) ? theme.color[color] : color;
 
-export const getDistance = (theme: EasyFlexTheme, distance: Distance): AbsoluteSize =>
+export const getDistance = <T extends ThemeColor>(theme: EasyFlexTheme<T>, distance: Distance): AbsoluteSize =>
 	isThemeSize(distance) ? theme.distance[distance] : distance;
 
-export const getFontSize = (theme: EasyFlexTheme, fontSize: FontSize): Size =>
+export const getFontSize = <T extends ThemeColor>(theme: EasyFlexTheme<T>, fontSize: FontSize): Size =>
 	isThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize;
 
-export const getFontWeight = (theme: EasyFlexTheme, fontWeight: FontWeight): CssFontWeight =>
+export const getFontWeight = <T extends ThemeColor>(theme: EasyFlexTheme<T>, fontWeight: FontWeight): CssFontWeight =>
 	typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight];
 
-export const getHeight = (theme: EasyFlexTheme, height: Height): ElementSize =>
+export const getHeight = <T extends ThemeColor>(theme: EasyFlexTheme<T>, height: Height): ElementSize =>
 	isThemeSize(height) ? theme.size.height[height] : height;
 
-export const getLineHeight = (theme: EasyFlexTheme, lineHeight: LineHeight): CssLineHeight =>
+export const getLineHeight = <T extends ThemeColor>(theme: EasyFlexTheme<T>, lineHeight: LineHeight): CssLineHeight =>
 	isThemeSize(lineHeight) ? theme.font.lineHeight[lineHeight] : lineHeight;
 
-export const getViewportThreshold = (theme: EasyFlexTheme, viewportThreshold: ViewportThreshold): number =>
-	typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold];
+export const getViewportThreshold = <T extends ThemeColor>(
+	theme: EasyFlexTheme<T>,
+	viewportThreshold: ViewportThreshold
+): number => (typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold]);
 
-export const getWidth = (theme: EasyFlexTheme, width: Width): ElementSize =>
+export const getWidth = <T extends ThemeColor>(theme: EasyFlexTheme<T>, width: Width): ElementSize =>
 	isThemeSize(width) ? theme.size.width[width] : width;
 
-export const useEasyFlexTheme = (): EasyFlexTheme => useContext(EasyFlexContext);
+export const useEasyFlexTheme = <T extends ThemeColor>(): EasyFlexTheme<T> =>
+	useContext(EasyFlexContext as unknown as Context<EasyFlexTheme<T>>);
 
 export const useDimension = (): { height: number; width: number } => {
 	const [height, setHeight] = useState<number>(document.documentElement.clientHeight);

@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { BaseFlexElement, Falsifiable } from '../types';
+import { BaseFlexElement, Falsifiable, ThemeColor } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -77,13 +77,13 @@ const StyledSummary = styled.summary`
 	${style}
 `;
 
-export interface BaseFlexProps
+export interface BaseFlexProps<T extends ThemeColor>
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
-		BorderProps,
-		ColorProps,
+		BorderProps<T>,
+		ColorProps<T>,
 		FlexContainerProps,
 		FlexItemProps,
-		FontProps,
+		FontProps<T>,
 		DistanceProps,
 		OverflowProps,
 		SizeProps {
@@ -91,156 +91,158 @@ export interface BaseFlexProps
 	element?: Falsifiable<BaseFlexElement>;
 }
 
-export const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps>(
-	(
-		{
-			align,
-			alignSelf,
-			backgroundColor,
-			basis,
-			borderColor,
-			borderRadius,
-			borderStyle,
-			borderWidth,
-			children,
-			color,
-			element = 'div',
-			flex,
-			direction,
-			fontFamily,
-			fontSize,
-			fontWeight,
-			fullHeight,
-			fullWidth,
-			gap,
-			grow,
-			height,
-			italic,
-			justify,
-			lineHeight,
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			overflow,
-			overflowX,
-			overflowY,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-			round,
-			shrink,
-			underline,
-			whiteSpace,
-			width,
-			wordBreak,
-			...props
-		},
-		ref
-	) => {
-		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+export const createBaseFlex = <T extends ThemeColor>() => {
+	const BaseFlex = forwardRef<HTMLDivElement, BaseFlexProps<T>>(
+		(
+			{
+				align,
+				alignSelf,
+				backgroundColor,
+				basis,
+				borderColor,
+				borderRadius,
+				borderStyle,
+				borderWidth,
+				children,
+				color,
+				element = 'div',
+				flex,
+				direction,
+				fontFamily,
+				fontSize,
+				fontWeight,
+				fullHeight,
+				fullWidth,
+				gap,
+				grow,
+				height,
+				italic,
+				justify,
+				lineHeight,
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				overflow,
+				overflowX,
+				overflowY,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+				round,
+				shrink,
+				underline,
+				whiteSpace,
+				width,
+				wordBreak,
+				...props
+			},
+			ref
+		) => {
+			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const distanceStyleProps = useDistanceStyleProps({
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-		});
+			const distanceStyleProps = useDistanceStyleProps({
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+			});
 
-		const fontStyleProps = useFontStyleProps({
-			fontFamily,
-			fontSize,
-			fontWeight,
-			italic,
-			lineHeight,
-			underline,
-			whiteSpace,
-			wordBreak,
-		});
+			const fontStyleProps = useFontStyleProps({
+				fontFamily,
+				fontSize,
+				fontWeight,
+				italic,
+				lineHeight,
+				underline,
+				whiteSpace,
+				wordBreak,
+			});
 
-		const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
+			const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
 
-		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
+			const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
-		const sizeStyleProps = useSizeStyleProps({
-			fullHeight,
-			fullWidth,
-			height,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			width,
-		});
+			const sizeStyleProps = useSizeStyleProps({
+				fullHeight,
+				fullWidth,
+				height,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				width,
+			});
 
-		const Element = useMemo(() => {
-			switch (element) {
-				case 'article':
-					return StyledArticle;
-				case 'aside':
-					return StyledAside;
-				case 'div':
-				case false:
-					return StyledDiv;
-				case 'figure':
-					return StyledFigure;
-				case 'footer':
-					return StyledFooter;
-				case 'header':
-					return StyledHeader;
-				case 'main':
-					return StyledMain;
-				case 'nav':
-					return StyledNav;
-				case 'section':
-					return StyledSection;
-				case 'summary':
-					return StyledSummary;
-			}
-		}, [element]);
+			const Element = useMemo(() => {
+				switch (element) {
+					case 'article':
+						return StyledArticle;
+					case 'aside':
+						return StyledAside;
+					case 'div':
+					case false:
+						return StyledDiv;
+					case 'figure':
+						return StyledFigure;
+					case 'footer':
+						return StyledFooter;
+					case 'header':
+						return StyledHeader;
+					case 'main':
+						return StyledMain;
+					case 'nav':
+						return StyledNav;
+					case 'section':
+						return StyledSection;
+					case 'summary':
+						return StyledSummary;
+				}
+			}, [element]);
 
-		return (
-			<Element
-				{...borderStyleProps}
-				{...colorStyleProps}
-				{...distanceStyleProps}
-				{...fontStyleProps}
-				{...flexContainerStyleProps}
-				{...flexItemStyleProps}
-				{...overflowStyleProps}
-				{...sizeStyleProps}
-				ref={ref}
-				{...props}
-			>
-				{children}
-			</Element>
-		);
-	}
-);
-
-BaseFlex.displayName = 'BaseFlex';
+			return (
+				<Element
+					{...borderStyleProps}
+					{...colorStyleProps}
+					{...distanceStyleProps}
+					{...fontStyleProps}
+					{...flexContainerStyleProps}
+					{...flexItemStyleProps}
+					{...overflowStyleProps}
+					{...sizeStyleProps}
+					ref={ref}
+					{...props}
+				>
+					{children}
+				</Element>
+			);
+		}
+	);
+	BaseFlex.displayName = 'BaseFlex';
+	return BaseFlex;
+};

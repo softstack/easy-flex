@@ -1,9 +1,9 @@
 import React, { forwardRef, useMemo } from 'react';
-import { BaseFlex, BaseFlexProps } from '../baseFlex/BaseFlex';
-import { Falsifiable, FlexDirection, FlipDirection, ViewportThreshold } from '../types';
+import { BaseFlexProps, createBaseFlex } from '../baseFlex/BaseFlex';
+import { Falsifiable, FlexDirection, FlipDirection, ThemeColor, ViewportThreshold } from '../types';
 import { getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
 
-export interface ColProps extends Omit<BaseFlexProps, 'direction'> {
+export interface ColProps<T extends ThemeColor> extends Omit<BaseFlexProps<T>, 'direction'> {
 	/** Flips the content in the direction set by flipDirection. */
 	flip?: boolean;
 	/** Sets what happens if the content shall be flipped. */
@@ -12,8 +12,9 @@ export interface ColProps extends Omit<BaseFlexProps, 'direction'> {
 	viewport?: Falsifiable<ViewportThreshold>;
 }
 
-export const Col = forwardRef<HTMLDivElement, ColProps>(
-	({ children, flip, flipDirection, viewport, ...props }, ref) => {
+export const createCol = <T extends ThemeColor>() => {
+	const BaseFlex = createBaseFlex();
+	const Col = forwardRef<HTMLDivElement, ColProps<T>>(({ children, flip, flipDirection, viewport, ...props }, ref) => {
 		const theme = useEasyFlexTheme();
 		const { width } = useDimension();
 
@@ -44,7 +45,7 @@ export const Col = forwardRef<HTMLDivElement, ColProps>(
 				{children}
 			</BaseFlex>
 		);
-	}
-);
-
-Col.displayName = 'Col';
+	});
+	Col.displayName = 'Col';
+	return Col;
+};

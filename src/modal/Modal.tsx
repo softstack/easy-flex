@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { AbsoluteSize, Color, CssColor, Falsifiable } from '../types';
+import { AbsoluteSize, Color, CssColor, Falsifiable, ThemeColor } from '../types';
 import { defalsify, isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
 
@@ -23,8 +23,8 @@ const Background = styled.div<{
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 `;
 
-export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
-	backgroundColor?: Falsifiable<Color>;
+export interface ModalProps<T extends ThemeColor> extends HTMLAttributes<HTMLDivElement> {
+	backgroundColor?: Falsifiable<Color<T>>;
 	/** Sets blur for the content covered by the modal background. */
 	blur?: AbsoluteSize | boolean;
 	blurElementId?: Falsifiable<string>;
@@ -33,60 +33,63 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 	onClose: () => void;
 }
 
-export const Modal: FC<ModalProps> = ({
-	children,
-	backgroundColor,
-	blur,
-	blurElementId,
-	containerElementId,
-	onClose,
-	...props
-}) => {
-	const theme = useEasyFlexTheme();
+export const createModal = <T extends ThemeColor>() => {
+	const Modal: FC<ModalProps<T>> = ({
+		children,
+		backgroundColor,
+		blur,
+		blurElementId,
+		containerElementId,
+		onClose,
+		...props
+	}) => {
+		const theme = useEasyFlexTheme();
 
-	const backgroundElement = useRef<HTMLDivElement>(null);
+		const backgroundElement = useRef<HTMLDivElement>(null);
 
-	const handleClick = useCallback(
-		(event: MouseEvent<HTMLDivElement>) => {
-			if (event.target === backgroundElement.current) {
-				onClose();
-			}
-		},
-		[onClose]
-	);
+		const handleClick = useCallback(
+			(event: MouseEvent<HTMLDivElement>) => {
+				if (event.target === backgroundElement.current) {
+					onClose();
+				}
+			},
+			[onClose]
+		);
 
-	const processedBackgroundColor = useDefaultColor(backgroundColor, theme.modal.backgroundColor);
+		const processedBackgroundColor = useDefaultColor(backgroundColor, theme.modal.backgroundColor);
 
-	useEffect(() => {
-		if (
-			(defalsify(blurElementId) ?? theme.modal.blurElementId) &&
-			(isAbsoluteSize(blur) || (blur !== false && theme.modal.blur))
-		) {
-			const styleElement = document.createElement('style');
-			styleElement.textContent = `
+		useEffect(() => {
+			if (
+				(defalsify(blurElementId) ?? theme.modal.blurElementId) &&
+				(isAbsoluteSize(blur) || (blur !== false && theme.modal.blur))
+			) {
+				const styleElement = document.createElement('style');
+				styleElement.textContent = `
 				#${defalsify(blurElementId) ?? theme.modal.blurElementId} {
 					filter: blur(${isAbsoluteSize(blur) ? blur : theme.modal.blur});
 				}
 			`;
-			document.head.append(styleElement);
+				document.head.append(styleElement);
 
-			return () => {
-				document.head.removeChild(styleElement);
-			};
-		}
-	}, [blur, blurElementId, theme]);
+				return () => {
+					document.head.removeChild(styleElement);
+				};
+			}
+		}, [blur, blurElementId, theme]);
 
-	const container = useModalContainer(containerElementId);
+		const container = useModalContainer(containerElementId);
 
-	return createPortal(
-		<Background
-			ref={backgroundElement}
-			data-background-color={processedBackgroundColor}
-			onClick={handleClick}
-			{...props}
-		>
-			{children}
-		</Background>,
-		container
-	);
+		return createPortal(
+			<Background
+				ref={backgroundElement}
+				data-background-color={processedBackgroundColor}
+				onClick={handleClick}
+				{...props}
+			>
+				{children}
+			</Background>,
+			container
+		);
+	};
+	return Modal;
 };

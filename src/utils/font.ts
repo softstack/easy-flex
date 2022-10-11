@@ -13,13 +13,14 @@ import {
 	LineHeight,
 	Size,
 	TextDecoration,
+	ThemeColor,
 	WhiteSpace,
 	WordBreak,
 } from '../types';
 import { getFontSize, getFontWeight, getLineHeight, ifDefined, useEasyFlexTheme } from './base';
 import { useColor } from './color';
 
-export interface FontProps {
+export interface FontProps<T extends ThemeColor> {
 	fontFamily?: Falsifiable<FontFamily>;
 	/** Component's font size. */
 	fontSize?: Falsifiable<FontSize>;
@@ -29,7 +30,7 @@ export interface FontProps {
 	italic?: boolean;
 	lineHeight?: Falsifiable<LineHeight>;
 	underline?: boolean;
-	underlineColor?: Falsifiable<Color>;
+	underlineColor?: Falsifiable<Color<T>>;
 	whiteSpace?: Falsifiable<WhiteSpace>;
 	/** Sets whether line breaks appear wherever the text would otherwise oeverflow the component's content box. */
 	wordBreak?: Falsifiable<WordBreak>;
@@ -47,7 +48,7 @@ export interface FontStyleProps {
 	'data-word-break'?: Falsifiable<WordBreak>;
 }
 
-export const useFont = ({
+export const useFont = <T extends ThemeColor>({
 	fontFamily,
 	fontSize,
 	fontWeight,
@@ -57,7 +58,7 @@ export const useFont = ({
 	underlineColor,
 	whiteSpace,
 	wordBreak,
-}: FontProps): {
+}: FontProps<T>): {
 	family: string | undefined;
 	size: Size | undefined;
 	weight: CssFontWeight | undefined;
@@ -138,7 +139,7 @@ export const useFont = ({
 	);
 };
 
-export const useFontStyleProps = (props: FontProps): FontStyleProps => {
+export const useFontStyleProps = <T extends ThemeColor>(props: FontProps<T>): FontStyleProps => {
 	const font = useFont(props);
 
 	return useMemo<FontStyleProps>(

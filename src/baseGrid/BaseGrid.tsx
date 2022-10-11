@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { AbsoluteSize, BaseGridElement, Distance, Falsifiable } from '../types';
+import { AbsoluteSize, BaseGridElement, Distance, Falsifiable, ThemeColor } from '../types';
 import { getDistance, ifDefined, useEasyFlexTheme } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
@@ -72,12 +72,12 @@ const StyledSummary = styled.summary`
 	${style}
 `;
 
-export interface BaseGridProps
+export interface BaseGridProps<T extends ThemeColor>
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
-		BorderProps,
-		ColorProps,
+		BorderProps<T>,
+		ColorProps<T>,
 		FlexItemProps,
-		FontProps,
+		FontProps<T>,
 		DistanceProps,
 		SizeProps {
 	columnGap?: Falsifiable<Distance>;
@@ -86,159 +86,161 @@ export interface BaseGridProps
 	rowGap?: Falsifiable<Distance>;
 }
 
-export const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps>(
-	(
-		{
-			alignSelf,
-			backgroundColor,
-			basis,
-			borderColor,
-			borderRadius,
-			borderStyle,
-			borderWidth,
-			children,
-			color,
-			columnGap,
-			element = 'div',
-			flex,
-			fontFamily,
-			fontSize,
-			fontWeight,
-			fullHeight,
-			fullWidth,
-			grow,
-			height,
-			italic,
-			lineHeight,
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-			round,
-			rowGap,
-			shrink,
-			underline,
-			whiteSpace,
-			width,
-			wordBreak,
-			...props
-		},
-		ref
-	) => {
-		const theme = useEasyFlexTheme();
+export const createBaseGrid = <T extends ThemeColor>() => {
+	const BaseGrid = forwardRef<HTMLDivElement, BaseGridProps<T>>(
+		(
+			{
+				alignSelf,
+				backgroundColor,
+				basis,
+				borderColor,
+				borderRadius,
+				borderStyle,
+				borderWidth,
+				children,
+				color,
+				columnGap,
+				element = 'div',
+				flex,
+				fontFamily,
+				fontSize,
+				fontWeight,
+				fullHeight,
+				fullWidth,
+				grow,
+				height,
+				italic,
+				lineHeight,
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+				round,
+				rowGap,
+				shrink,
+				underline,
+				whiteSpace,
+				width,
+				wordBreak,
+				...props
+			},
+			ref
+		) => {
+			const theme = useEasyFlexTheme();
 
-		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const fontStyleProps = useFontStyleProps({
-			fontFamily,
-			fontSize,
-			fontWeight,
-			italic,
-			lineHeight,
-			underline,
-			whiteSpace,
-			wordBreak,
-		});
+			const fontStyleProps = useFontStyleProps({
+				fontFamily,
+				fontSize,
+				fontWeight,
+				italic,
+				lineHeight,
+				underline,
+				whiteSpace,
+				wordBreak,
+			});
 
-		const distanceStyleProps = useDistanceStyleProps({
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-		});
+			const distanceStyleProps = useDistanceStyleProps({
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+			});
 
-		const sizeStyleProps = useSizeStyleProps({
-			fullHeight,
-			fullWidth,
-			height,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			width,
-		});
+			const sizeStyleProps = useSizeStyleProps({
+				fullHeight,
+				fullWidth,
+				height,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				width,
+			});
 
-		const processedColumnGap = useMemo<AbsoluteSize | undefined>(
-			() => ifDefined(columnGap, (columnGap) => getDistance(theme, columnGap)),
-			[columnGap, theme]
-		);
+			const processedColumnGap = useMemo<AbsoluteSize | undefined>(
+				() => ifDefined(columnGap, (columnGap) => getDistance(theme, columnGap)),
+				[columnGap, theme]
+			);
 
-		const processedRowGap = useMemo<AbsoluteSize | undefined>(
-			() => ifDefined(rowGap, (rowGap) => getDistance(theme, rowGap)),
-			[rowGap, theme]
-		);
+			const processedRowGap = useMemo<AbsoluteSize | undefined>(
+				() => ifDefined(rowGap, (rowGap) => getDistance(theme, rowGap)),
+				[rowGap, theme]
+			);
 
-		const Element = useMemo(() => {
-			switch (element) {
-				case 'article':
-					return StyledArticle;
-				case 'aside':
-					return StyledAside;
-				case 'div':
-				case false:
-					return StyledDiv;
-				case 'figure':
-					return StyledFigure;
-				case 'footer':
-					return StyledFooter;
-				case 'header':
-					return StyledHeader;
-				case 'main':
-					return StyledMain;
-				case 'nav':
-					return StyledNav;
-				case 'section':
-					return StyledSection;
-				case 'summary':
-					return StyledSummary;
-			}
-		}, [element]);
+			const Element = useMemo(() => {
+				switch (element) {
+					case 'article':
+						return StyledArticle;
+					case 'aside':
+						return StyledAside;
+					case 'div':
+					case false:
+						return StyledDiv;
+					case 'figure':
+						return StyledFigure;
+					case 'footer':
+						return StyledFooter;
+					case 'header':
+						return StyledHeader;
+					case 'main':
+						return StyledMain;
+					case 'nav':
+						return StyledNav;
+					case 'section':
+						return StyledSection;
+					case 'summary':
+						return StyledSummary;
+				}
+			}, [element]);
 
-		return (
-			<Element
-				data-column-gap={processedColumnGap}
-				data-row-gap={processedRowGap}
-				{...borderStyleProps}
-				{...colorStyleProps}
-				{...distanceStyleProps}
-				{...flexItemStyleProps}
-				{...fontStyleProps}
-				{...sizeStyleProps}
-				ref={ref}
-				{...props}
-			>
-				{children}
-			</Element>
-		);
-	}
-);
-
-BaseGrid.displayName = 'BaseGrid';
+			return (
+				<Element
+					data-column-gap={processedColumnGap}
+					data-row-gap={processedRowGap}
+					{...borderStyleProps}
+					{...colorStyleProps}
+					{...distanceStyleProps}
+					{...flexItemStyleProps}
+					{...fontStyleProps}
+					{...sizeStyleProps}
+					ref={ref}
+					{...props}
+				>
+					{children}
+				</Element>
+			);
+		}
+	);
+	BaseGrid.displayName = 'BaseGrid';
+	return BaseGrid;
+};

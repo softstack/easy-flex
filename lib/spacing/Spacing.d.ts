@@ -12,4 +12,4 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
     /** Component's width. */
     width?: Falsifiable<Distance>;
 }
-export declare const Spacing: React.ForwardRefExoticComponent<SpacingProps & React.RefAttributes<HTMLDivElement>>;
+export declare const createSpacing: () => React.ForwardRefExoticComponent<SpacingProps & React.RefAttributes<HTMLDivElement>>;

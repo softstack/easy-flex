@@ -1,6 +1,6 @@
 import React, { forwardRef, TextareaHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { Color, CssColor, Falsifiable } from '../types';
+import { Color, CssColor, Falsifiable, ThemeColor } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -30,131 +30,133 @@ const StyledTextArea = styled.textarea<
 	}
 `;
 
-export interface BaseTextAreaProps
+export interface BaseTextAreaProps<T extends ThemeColor>
 	extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'color'>,
-		BorderProps,
-		ColorProps,
+		BorderProps<T>,
+		ColorProps<T>,
 		DistanceProps,
 		FlexItemProps,
-		FontProps,
+		FontProps<T>,
 		SizeProps {
-	placeholderColor?: Falsifiable<Color>;
+	placeholderColor?: Falsifiable<Color<T>>;
 }
 
-export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
-	(
-		{
-			alignSelf,
-			backgroundColor,
-			basis,
-			borderColor,
-			borderRadius,
-			borderStyle,
-			borderWidth,
-			children,
-			color,
-			flex,
-			fontFamily,
-			fontSize,
-			fontWeight,
-			fullHeight,
-			fullWidth,
-			grow,
-			height,
-			italic,
-			lineHeight,
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-			placeholderColor,
-			round,
-			shrink,
-			underline,
-			whiteSpace,
-			width,
-			wordBreak,
-			...props
-		},
-		ref
-	) => {
-		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+export const createBaseTextArea = <T extends ThemeColor>() => {
+	const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps<T>>(
+		(
+			{
+				alignSelf,
+				backgroundColor,
+				basis,
+				borderColor,
+				borderRadius,
+				borderStyle,
+				borderWidth,
+				children,
+				color,
+				flex,
+				fontFamily,
+				fontSize,
+				fontWeight,
+				fullHeight,
+				fullWidth,
+				grow,
+				height,
+				italic,
+				lineHeight,
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+				placeholderColor,
+				round,
+				shrink,
+				underline,
+				whiteSpace,
+				width,
+				wordBreak,
+				...props
+			},
+			ref
+		) => {
+			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const distanceStyleProps = useDistanceStyleProps({
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-		});
+			const distanceStyleProps = useDistanceStyleProps({
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+			});
 
-		const fontStyleProps = useFontStyleProps({
-			fontFamily,
-			fontSize,
-			fontWeight,
-			italic,
-			lineHeight,
-			underline,
-			whiteSpace,
-			wordBreak,
-		});
+			const fontStyleProps = useFontStyleProps({
+				fontFamily,
+				fontSize,
+				fontWeight,
+				italic,
+				lineHeight,
+				underline,
+				whiteSpace,
+				wordBreak,
+			});
 
-		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const sizeStyleProps = useSizeStyleProps({
-			fullHeight,
-			fullWidth,
-			height,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			width,
-		});
+			const sizeStyleProps = useSizeStyleProps({
+				fullHeight,
+				fullWidth,
+				height,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				width,
+			});
 
-		const processedPlaceholderColor = useColor(placeholderColor);
+			const processedPlaceholderColor = useColor(placeholderColor);
 
-		return (
-			<StyledTextArea
-				data-placeholder-color={processedPlaceholderColor}
-				{...borderStyleProps}
-				{...colorStyleProps}
-				{...distanceStyleProps}
-				{...flexItemStyleProps}
-				{...fontStyleProps}
-				{...sizeStyleProps}
-				ref={ref}
-				{...props}
-			>
-				{children}
-			</StyledTextArea>
-		);
-	}
-);
-
-BaseTextArea.displayName = 'BaseTextArea';
+			return (
+				<StyledTextArea
+					data-placeholder-color={processedPlaceholderColor}
+					{...borderStyleProps}
+					{...colorStyleProps}
+					{...distanceStyleProps}
+					{...flexItemStyleProps}
+					{...fontStyleProps}
+					{...sizeStyleProps}
+					ref={ref}
+					{...props}
+				>
+					{children}
+				</StyledTextArea>
+			);
+		}
+	);
+	BaseTextArea.displayName = 'BaseTextArea';
+	return BaseTextArea;
+};

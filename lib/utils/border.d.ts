@@ -1,7 +1,7 @@
-import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Falsifiable, Size } from '../types';
-export interface BorderProps {
+import { AbsoluteSize, BorderRadius, BorderStyle, BorderWidth, Color, CssColor, Falsifiable, Size, ThemeColor } from '../types';
+export interface BorderProps<T extends ThemeColor> {
     /** Component's border color. */
-    borderColor?: Falsifiable<Color>;
+    borderColor?: Falsifiable<Color<T>>;
     /** Component's border radius. */
     borderRadius?: Falsifiable<BorderRadius>;
     borderStyle?: Falsifiable<BorderStyle>;
@@ -15,11 +15,11 @@ export interface BorderStyleProps {
     'data-border-style'?: BorderStyle;
     'data-border-width'?: AbsoluteSize;
 }
-export declare const useBorder: ({ borderColor, borderRadius, borderStyle, borderWidth, round, }: BorderProps) => {
+export declare const useBorder: <T extends `_${string}`>({ borderColor, borderRadius, borderStyle, borderWidth, round, }: BorderProps<T>) => {
     color: CssColor | undefined;
     radius: Size | undefined;
     style: BorderStyle | undefined;
     width: AbsoluteSize | undefined;
 };
-export declare const useBorderStyleProps: (props: BorderProps) => BorderStyleProps;
+export declare const useBorderStyleProps: <T extends `_${string}`>(props: BorderProps<T>) => BorderStyleProps;
 export declare const borderStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<BorderStyleProps, any>>;

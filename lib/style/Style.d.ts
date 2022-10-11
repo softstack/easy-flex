@@ -1,9 +1,9 @@
 import React, { HTMLAttributes } from 'react';
-import { Falsifiable, StyleElement } from '../types';
+import { Falsifiable, StyleElement, ThemeColor } from '../types';
 import { ColorProps } from '../utils/color';
 import { FontProps } from '../utils/font';
-export interface StyleProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>, ColorProps, FontProps {
+export interface StyleProps<T extends ThemeColor> extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>, ColorProps<T>, FontProps<T> {
     /** Component's html tag. */
     element?: Falsifiable<StyleElement>;
 }
-export declare const Style: React.ForwardRefExoticComponent<StyleProps & React.RefAttributes<HTMLParagraphElement>>;
+export declare const createStyle: <T extends `_${string}`>() => React.ForwardRefExoticComponent<StyleProps<T> & React.RefAttributes<HTMLParagraphElement>>;

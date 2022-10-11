@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Falsifiable, StyleElement } from '../types';
+import { Falsifiable, StyleElement, ThemeColor } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 
@@ -74,86 +74,91 @@ const StyledVar = styled.var`
 	${style}
 `;
 
-export interface StyleProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>, ColorProps, FontProps {
+export interface StyleProps<T extends ThemeColor>
+	extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>,
+		ColorProps<T>,
+		FontProps<T> {
 	/** Component's html tag. */
 	element?: Falsifiable<StyleElement>;
 }
 
-export const Style = forwardRef<HTMLParagraphElement, StyleProps>(
-	(
-		{
-			backgroundColor,
-			children,
-			color,
-			element = 'span',
-			fontFamily,
-			fontSize,
-			fontWeight,
-			italic,
-			lineHeight,
-			underline,
-			whiteSpace,
-			wordBreak,
-		},
-		ref
-	) => {
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+export const createStyle = <T extends ThemeColor>() => {
+	const Style = forwardRef<HTMLParagraphElement, StyleProps<T>>(
+		(
+			{
+				backgroundColor,
+				children,
+				color,
+				element = 'span',
+				fontFamily,
+				fontSize,
+				fontWeight,
+				italic,
+				lineHeight,
+				underline,
+				whiteSpace,
+				wordBreak,
+			},
+			ref
+		) => {
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const fontStyleProps = useFontStyleProps({
-			fontFamily,
-			fontSize,
-			fontWeight,
-			italic,
-			lineHeight,
-			underline,
-			whiteSpace,
-			wordBreak,
-		});
+			const fontStyleProps = useFontStyleProps({
+				fontFamily,
+				fontSize,
+				fontWeight,
+				italic,
+				lineHeight,
+				underline,
+				whiteSpace,
+				wordBreak,
+			});
 
-		const Element = useMemo(() => {
-			switch (element) {
-				case 'b':
-					return StyledB;
-				case 'cite':
-					return StyledCite;
-				case 'code':
-					return StyledCode;
-				case 'em':
-					return StyledEm;
-				case 'i':
-					return StyledI;
-				case 'kbd':
-					return StyledKbd;
-				case 'mark':
-					return StyledMark;
-				case 's':
-					return StyledS;
-				case 'samp':
-					return StyledSamp;
-				case 'small':
-					return StyledSmall;
-				case 'span':
-				case false:
-					return StyledSpan;
-				case 'strong':
-					return StyledStrong;
-				case 'sub':
-					return StyledSub;
-				case 'sup':
-					return StyledSup;
-				case 'u':
-					return StyledU;
-				case 'var':
-					return StyledVar;
-			}
-		}, [element]);
+			const Element = useMemo(() => {
+				switch (element) {
+					case 'b':
+						return StyledB;
+					case 'cite':
+						return StyledCite;
+					case 'code':
+						return StyledCode;
+					case 'em':
+						return StyledEm;
+					case 'i':
+						return StyledI;
+					case 'kbd':
+						return StyledKbd;
+					case 'mark':
+						return StyledMark;
+					case 's':
+						return StyledS;
+					case 'samp':
+						return StyledSamp;
+					case 'small':
+						return StyledSmall;
+					case 'span':
+					case false:
+						return StyledSpan;
+					case 'strong':
+						return StyledStrong;
+					case 'sub':
+						return StyledSub;
+					case 'sup':
+						return StyledSup;
+					case 'u':
+						return StyledU;
+					case 'var':
+						return StyledVar;
+				}
+			}, [element]);
 
-		return (
-			<Element {...colorStyleProps} {...fontStyleProps} ref={ref}>
-				{children}
-			</Element>
-		);
-	}
-);
-
-Style.displayName = 'Style';
+			return (
+				<Element {...colorStyleProps} {...fontStyleProps} ref={ref}>
+					{children}
+				</Element>
+			);
+		}
+	);
+	Style.displayName = 'Style';
+	return Style;
+};

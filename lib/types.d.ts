@@ -42,8 +42,8 @@ export declare type BaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | '
 export declare type BaseGridElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type BorderRadius = Size | ThemeSize;
 export declare type BorderWidth = AbsoluteSize | ThemeSize;
-export declare type ThemeColor = 'primary' | 'secondary' | 'tertiary' | 'decline' | 'error' | 'footer' | 'header' | 'info' | 'modal' | 'rise' | 'warning' | 'brand1' | 'brand2' | 'brand3' | 'brand4' | 'brand5' | 'brand6' | 'brand7' | 'brand8' | 'primaryText' | 'secondaryText' | 'tertiaryText' | 'declineText' | 'errorText' | 'footerText' | 'headerText' | 'infoText' | 'modalText' | 'riseText' | 'warningText' | 'text1' | 'text2' | 'text3' | 'text4' | 'text5' | 'text6' | 'text7' | 'text8' | 'primaryBackground' | 'secondaryBackground' | 'tertiaryBackground' | 'declineBackground' | 'errorBackground' | 'footerBackground' | 'headerBackground' | 'infoBackground' | 'modalBackground' | 'riseBackground' | 'warningBackground' | 'background1' | 'background2' | 'background3' | 'background4' | 'background5' | 'background6' | 'background7' | 'background8' | 'onPrimary' | 'onSecondary' | 'onTertiary' | 'onDecline' | 'onError' | 'onFooter' | 'onHeader' | 'onInfo' | 'onModal' | 'onRise' | 'onWarning' | 'onBrand1' | 'onBrand2' | 'onBrand3' | 'onBrand4' | 'onBrand5' | 'onBrand6' | 'onBrand7' | 'onBrand8' | 'primaryBorder' | 'secondaryBorder' | 'tertiaryBorder' | 'declineBorder' | 'errorBorder' | 'footerBorder' | 'headerBorder' | 'infoBorder' | 'modalBorder' | 'riseBorder' | 'warningBorder' | 'border1' | 'border2' | 'border3' | 'border4' | 'border5' | 'border6' | 'border7' | 'border8';
-export declare type Color = CssColor | ThemeColor;
+export declare type ThemeColor = `_${string}`;
+export declare type Color<T extends ThemeColor> = CssColor | T;
 export declare type Distance = AbsoluteSize | ThemeSize;
 export declare type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 export declare type FontFamily = ThemeSizeName;
@@ -57,13 +57,13 @@ export declare type TextDecoration = 'none' | 'underline';
 export declare type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 export declare type ViewportThreshold = ThemeSizeX | number;
 export declare type Width = ElementSize | ThemeSize;
-export interface EasyFlexTheme {
+export interface EasyFlexTheme<T extends ThemeColor> {
     border: {
         defaultStyle: BorderStyle;
         radius: Record<ThemeSize, AbsoluteSize>;
         width: Record<ThemeSize, AbsoluteSize>;
     };
-    color: Record<ThemeColor, CssColor>;
+    color: Record<T, CssColor>;
     distance: Record<ThemeSize, AbsoluteSize>;
     font: {
         family: Record<FontFamily, string>;
@@ -86,4 +86,4 @@ export interface EasyFlexTheme {
         threshold: Record<ThemeSizeX, number>;
     };
 }
-export declare type PartialEasyFlexTheme = DeepPartial<EasyFlexTheme>;
+export declare type PartialEasyFlexTheme<T extends ThemeColor> = DeepPartial<EasyFlexTheme<T>>;

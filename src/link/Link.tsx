@@ -1,6 +1,6 @@
 import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { Color, CssColor, Falsifiable } from '../types';
+import { Color, CssColor, Falsifiable, ThemeColor } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
@@ -30,130 +30,132 @@ const StyledA = styled.a<
 	}
 `;
 
-export interface LinkProps
+export interface LinkProps<T extends ThemeColor>
 	extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
-		ColorProps,
+		ColorProps<T>,
 		FlexItemProps,
-		FontProps,
+		FontProps<T>,
 		MarginProps,
 		SizeProps {
 	/** Component's hover color. */
-	hoverColor?: Falsifiable<Color>;
+	hoverColor?: Falsifiable<Color<T>>;
 	/** If true, the link is opened in a new tab. */
 	newTab?: boolean;
 }
 
-export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-	(
-		{
-			alignSelf,
-			backgroundColor,
-			basis,
-			children,
-			color = 'inherit',
-			flex,
-			fontFamily,
-			fontSize,
-			fontWeight,
-			fullHeight,
-			fullWidth,
-			grow,
-			height,
-			hoverColor,
-			italic,
-			lineHeight,
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			newTab = false,
-			shrink,
-			underline,
-			whiteSpace,
-			width,
-			wordBreak,
-			...props
-		},
-		ref
-	) => {
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+export const createLink = <T extends ThemeColor>() => {
+	const Link = forwardRef<HTMLAnchorElement, LinkProps<T>>(
+		(
+			{
+				alignSelf,
+				backgroundColor,
+				basis,
+				children,
+				color = 'inherit',
+				flex,
+				fontFamily,
+				fontSize,
+				fontWeight,
+				fullHeight,
+				fullWidth,
+				grow,
+				height,
+				hoverColor,
+				italic,
+				lineHeight,
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				newTab = false,
+				shrink,
+				underline,
+				whiteSpace,
+				width,
+				wordBreak,
+				...props
+			},
+			ref
+		) => {
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const processedHoverColor = useColor(hoverColor);
+			const processedHoverColor = useColor(hoverColor);
 
-		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const fontStyleProps = useFontStyleProps({
-			fontFamily,
-			fontSize,
-			fontWeight,
-			italic,
-			lineHeight,
-			underline,
-			whiteSpace,
-			wordBreak,
-		});
+			const fontStyleProps = useFontStyleProps({
+				fontFamily,
+				fontSize,
+				fontWeight,
+				italic,
+				lineHeight,
+				underline,
+				whiteSpace,
+				wordBreak,
+			});
 
-		const marginStyleProps = useMarginStyleProps({
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-		});
+			const marginStyleProps = useMarginStyleProps({
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+			});
 
-		const sizeStyleProps = useSizeStyleProps({
-			fullHeight,
-			fullWidth,
-			height,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			width,
-		});
+			const sizeStyleProps = useSizeStyleProps({
+				fullHeight,
+				fullWidth,
+				height,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				width,
+			});
 
-		const newTabProps = useMemo<
-			| {
-					rel: 'noopener noreferrer';
-					target: '_blank';
-			  }
-			| undefined
-		>(
-			() =>
-				newTab
-					? {
-							rel: 'noopener noreferrer',
-							target: '_blank',
-					  }
-					: undefined,
-			[newTab]
-		);
+			const newTabProps = useMemo<
+				| {
+						rel: 'noopener noreferrer';
+						target: '_blank';
+				  }
+				| undefined
+			>(
+				() =>
+					newTab
+						? {
+								rel: 'noopener noreferrer',
+								target: '_blank',
+						  }
+						: undefined,
+				[newTab]
+			);
 
-		return (
-			<StyledA
-				data-hover-color={processedHoverColor}
-				{...colorStyleProps}
-				{...flexItemStyleProps}
-				{...fontStyleProps}
-				{...marginStyleProps}
-				{...sizeStyleProps}
-				{...newTabProps}
-				ref={ref}
-				{...props}
-			>
-				{children}
-			</StyledA>
-		);
-	}
-);
-
-Link.displayName = 'Link';
+			return (
+				<StyledA
+					data-hover-color={processedHoverColor}
+					{...colorStyleProps}
+					{...flexItemStyleProps}
+					{...fontStyleProps}
+					{...marginStyleProps}
+					{...sizeStyleProps}
+					{...newTabProps}
+					ref={ref}
+					{...props}
+				>
+					{children}
+				</StyledA>
+			);
+		}
+	);
+	Link.displayName = 'Link';
+	return Link;
+};

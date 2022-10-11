@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
+import { ThemeColor } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -47,18 +48,18 @@ const StyledButton = styled.button<
 	}
 `;
 
-export type BaseButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
-	BorderProps &
-	ColorProps &
+export type BaseButtonProps<T extends ThemeColor> = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
+	BorderProps<T> &
+	ColorProps<T> &
 	DistanceProps &
 	FlexContainerProps &
 	FlexItemProps &
-	FontProps &
+	FontProps<T> &
 	OverflowProps &
 	SizeProps;
 
-export type ExternalBaseButtonProps = Omit<
-	BaseButtonProps,
+export type ExternalBaseButtonProps<T extends ThemeColor> = Omit<
+	BaseButtonProps<T>,
 	| 'align'
 	| 'backgroundColor'
 	| 'borderColor'
@@ -89,129 +90,131 @@ export type ExternalBaseButtonProps = Omit<
 	| 'underlineColor'
 >;
 
-export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
-	(
-		{
-			align,
-			alignSelf,
-			backgroundColor = 'transparent',
-			basis,
-			borderColor,
-			borderRadius,
-			borderStyle,
-			borderWidth,
-			children,
-			color,
-			flex,
-			direction = 'row',
-			fontFamily,
-			fontSize,
-			fontWeight,
-			fullHeight,
-			fullWidth,
-			gap,
-			grow,
-			height,
-			italic,
-			justify,
-			lineHeight,
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			overflow,
-			overflowX,
-			overflowY,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-			round,
-			shrink,
-			underline,
-			whiteSpace,
-			width,
-			wordBreak,
-			...props
-		},
-		ref
-	) => {
-		const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+export const createBaseButton = <T extends ThemeColor>() => {
+	const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps<T>>(
+		(
+			{
+				align,
+				alignSelf,
+				backgroundColor = 'transparent',
+				basis,
+				borderColor,
+				borderRadius,
+				borderStyle,
+				borderWidth,
+				children,
+				color,
+				flex,
+				direction = 'row',
+				fontFamily,
+				fontSize,
+				fontWeight,
+				fullHeight,
+				fullWidth,
+				gap,
+				grow,
+				height,
+				italic,
+				justify,
+				lineHeight,
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				overflow,
+				overflowX,
+				overflowY,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+				round,
+				shrink,
+				underline,
+				whiteSpace,
+				width,
+				wordBreak,
+				...props
+			},
+			ref
+		) => {
+			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-		const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
-		const distanceStyleProps = useDistanceStyleProps({
-			margin,
-			marginBottom,
-			marginHorizontal,
-			marginLeft,
-			marginRight,
-			marginTop,
-			marginVertical,
-			padding,
-			paddingBottom,
-			paddingHorizontal,
-			paddingLeft,
-			paddingRight,
-			paddingTop,
-			paddingVertical,
-		});
+			const distanceStyleProps = useDistanceStyleProps({
+				margin,
+				marginBottom,
+				marginHorizontal,
+				marginLeft,
+				marginRight,
+				marginTop,
+				marginVertical,
+				padding,
+				paddingBottom,
+				paddingHorizontal,
+				paddingLeft,
+				paddingRight,
+				paddingTop,
+				paddingVertical,
+			});
 
-		const fontStyleProps = useFontStyleProps({
-			fontFamily,
-			fontSize,
-			fontWeight,
-			italic,
-			lineHeight,
-			underline,
-			whiteSpace,
-			wordBreak,
-		});
+			const fontStyleProps = useFontStyleProps({
+				fontFamily,
+				fontSize,
+				fontWeight,
+				italic,
+				lineHeight,
+				underline,
+				whiteSpace,
+				wordBreak,
+			});
 
-		const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
+			const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
 
-		const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-		const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
+			const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
-		const sizeStyleProps = useSizeStyleProps({
-			fullHeight,
-			fullWidth,
-			height,
-			maxHeight,
-			maxWidth,
-			minHeight,
-			minWidth,
-			width,
-		});
+			const sizeStyleProps = useSizeStyleProps({
+				fullHeight,
+				fullWidth,
+				height,
+				maxHeight,
+				maxWidth,
+				minHeight,
+				minWidth,
+				width,
+			});
 
-		return (
-			<StyledButton
-				{...borderStyleProps}
-				{...colorStyleProps}
-				{...distanceStyleProps}
-				{...flexContainerStyleProps}
-				{...flexItemStyleProps}
-				{...fontStyleProps}
-				{...overflowStyleProps}
-				{...sizeStyleProps}
-				ref={ref}
-				{...props}
-			>
-				{children}
-			</StyledButton>
-		);
-	}
-);
-
-BaseButton.displayName = 'BaseButton';
+			return (
+				<StyledButton
+					{...borderStyleProps}
+					{...colorStyleProps}
+					{...distanceStyleProps}
+					{...flexContainerStyleProps}
+					{...flexItemStyleProps}
+					{...fontStyleProps}
+					{...overflowStyleProps}
+					{...sizeStyleProps}
+					ref={ref}
+					{...props}
+				>
+					{children}
+				</StyledButton>
+			);
+		}
+	);
+	BaseButton.displayName = 'BaseButton';
+	return BaseButton;
+};

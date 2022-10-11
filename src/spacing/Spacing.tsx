@@ -30,39 +30,41 @@ export interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
 	width?: Falsifiable<Distance>;
 }
 
-export const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
-	({ flip, flipEnabled = false, viewport, height, width, ...props }, ref) => {
-		const theme = useEasyFlexTheme();
-		const { width: displayWidth } = useDimension();
+export const createSpacing = () => {
+	const Spacing = forwardRef<HTMLDivElement, SpacingProps>(
+		({ flip, flipEnabled = false, viewport, height, width, ...props }, ref) => {
+			const theme = useEasyFlexTheme();
+			const { width: displayWidth } = useDimension();
 
-		const processedHeight = useMemo<AbsoluteSize>(
-			() =>
-				flipEnabled &&
-				(flip ||
-					(flip === undefined &&
-						(viewport !== false && viewport !== undefined
-							? displayWidth < getViewportThreshold(theme, viewport)
-							: displayWidth < theme.viewport.defaultThreshold)))
-					? getDistance(theme, defalsify(width) ?? '0px')
-					: getDistance(theme, defalsify(height) ?? '0px'),
-			[displayWidth, flip, flipEnabled, height, theme, viewport, width]
-		);
+			const processedHeight = useMemo<AbsoluteSize>(
+				() =>
+					flipEnabled &&
+					(flip ||
+						(flip === undefined &&
+							(viewport !== false && viewport !== undefined
+								? displayWidth < getViewportThreshold(theme, viewport)
+								: displayWidth < theme.viewport.defaultThreshold)))
+						? getDistance(theme, defalsify(width) ?? '0px')
+						: getDistance(theme, defalsify(height) ?? '0px'),
+				[displayWidth, flip, flipEnabled, height, theme, viewport, width]
+			);
 
-		const processedWidth = useMemo<AbsoluteSize>(
-			() =>
-				flipEnabled &&
-				(flip ||
-					(flip === undefined &&
-						(viewport !== false && viewport !== undefined
-							? displayWidth < getViewportThreshold(theme, viewport)
-							: displayWidth < theme.viewport.defaultThreshold)))
-					? getDistance(theme, defalsify(height) ?? '0px')
-					: getDistance(theme, defalsify(width) ?? '0px'),
-			[displayWidth, flip, flipEnabled, height, theme, viewport, width]
-		);
+			const processedWidth = useMemo<AbsoluteSize>(
+				() =>
+					flipEnabled &&
+					(flip ||
+						(flip === undefined &&
+							(viewport !== false && viewport !== undefined
+								? displayWidth < getViewportThreshold(theme, viewport)
+								: displayWidth < theme.viewport.defaultThreshold)))
+						? getDistance(theme, defalsify(height) ?? '0px')
+						: getDistance(theme, defalsify(width) ?? '0px'),
+				[displayWidth, flip, flipEnabled, height, theme, viewport, width]
+			);
 
-		return <StyledDiv data-height={processedHeight} data-width={processedWidth} ref={ref} {...props} />;
-	}
-);
-
-Spacing.displayName = 'Spacing';
+			return <StyledDiv data-height={processedHeight} data-width={processedWidth} ref={ref} {...props} />;
+		}
+	);
+	Spacing.displayName = 'Spacing';
+	return Spacing;
+};

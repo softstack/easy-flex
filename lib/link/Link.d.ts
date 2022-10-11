@@ -1,14 +1,14 @@
 import React, { AnchorHTMLAttributes } from 'react';
-import { Color, Falsifiable } from '../types';
+import { Color, Falsifiable, ThemeColor } from '../types';
 import { ColorProps } from '../utils/color';
 import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { MarginProps } from '../utils/margin';
 import { SizeProps } from '../utils/size';
-export interface LinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>, ColorProps, FlexItemProps, FontProps, MarginProps, SizeProps {
+export interface LinkProps<T extends ThemeColor> extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>, ColorProps<T>, FlexItemProps, FontProps<T>, MarginProps, SizeProps {
     /** Component's hover color. */
-    hoverColor?: Falsifiable<Color>;
+    hoverColor?: Falsifiable<Color<T>>;
     /** If true, the link is opened in a new tab. */
     newTab?: boolean;
 }
-export declare const Link: React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>;
+export declare const createLink: <T extends `_${string}`>() => React.ForwardRefExoticComponent<LinkProps<T> & React.RefAttributes<HTMLAnchorElement>>;
