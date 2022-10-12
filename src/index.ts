@@ -12,7 +12,8 @@ import { createRow } from './row/Row';
 import { createSpacing } from './spacing/Spacing';
 import { createStyle } from './style/Style';
 import { createText } from './text/Text';
-import { CustomName } from './types';
+import { CustomName, EasyFlexTheme } from './types';
+import { useEasyFlexTheme } from './utils/base';
 
 export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
@@ -38,7 +39,7 @@ export * from './utils/margin';
 export * from './utils/padding';
 export * from './utils/size';
 
-export const createComponents = <
+export const createEasyFlex = <
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -176,4 +177,17 @@ export const createComponents = <
 		CustomLineHeight,
 		CustomWidth
 	>(),
+	useEasyFlexTheme: ((): (() => EasyFlexTheme<
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>) => useEasyFlexTheme)(),
 });
