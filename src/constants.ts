@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { EasyFlexTheme } from './types';
+import { NeverEasyFlexTheme } from './types';
 
 export const globalValues = ['inherit', 'initial', 'revert', 'revert-layer', 'unset'];
 
@@ -178,19 +178,7 @@ export const themeSizes = [
 	'8xl',
 ];
 
-export const defaultEasyFlexTheme: EasyFlexTheme<
-	never,
-	never,
-	never,
-	never,
-	never,
-	never,
-	never,
-	never,
-	never,
-	never,
-	never
-> = {
+export const defaultEasyFlexTheme: NeverEasyFlexTheme = {
 	border: {
 		defaultStyle: 'solid',
 		radius: {

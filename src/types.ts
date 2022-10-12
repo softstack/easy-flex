@@ -285,7 +285,7 @@ export type ThemeSize =
 	| '7xl'
 	| '8xl';
 
-export type CustomThemeSize<T extends CustomName> = ThemeSize | T;
+export type CustomThemeSize<T extends CustomName> = T | ThemeSize;
 
 export type BaseFlexElement =
 	| 'article'
@@ -311,7 +311,7 @@ export type BaseGridElement =
 	| 'section'
 	| 'summary';
 
-export type BorderRadius<CustomBorderRadius extends CustomName> = Size | CustomThemeSize<CustomBorderRadius>;
+export type BorderRadius<CustomBorderRadius extends CustomName> = CustomThemeSize<CustomBorderRadius> | Size;
 
 export type BorderWidth<CustomBorderWidth extends CustomName> = AbsoluteSize | CustomThemeSize<CustomBorderWidth>;
 
@@ -323,7 +323,7 @@ export type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
 export type FontFamily<CustomFontFamily extends CustomName> = CustomFontFamily;
 
-export type FontSize<CustomFontSize extends CustomName> = Size | CustomThemeSize<CustomFontSize>;
+export type FontSize<CustomFontSize extends CustomName> = CustomThemeSize<CustomFontSize> | Size;
 
 export type FontStyle = 'italic' | 'normal';
 
@@ -340,7 +340,7 @@ export type FontWeight<CustomFontWeight extends CustomName> =
 	| 'black'
 	| 'extraBlack';
 
-export type Height<CustomHeight extends CustomName> = ElementSize | CustomThemeSize<CustomHeight>;
+export type Height<CustomHeight extends CustomName> = CustomThemeSize<CustomHeight> | ElementSize;
 
 export type LineHeight<CustomLineHeight extends CustomName> = CssLineHeight | CustomThemeSize<CustomLineHeight>;
 
@@ -370,7 +370,7 @@ export type ViewportThreshold<CustomViewportThreshold extends CustomName> =
 	| CustomThemeSize<CustomViewportThreshold>
 	| number;
 
-export type Width<CustomWidth extends CustomName> = ElementSize | CustomThemeSize<CustomWidth>;
+export type Width<CustomWidth extends CustomName> = CustomThemeSize<CustomWidth> | ElementSize;
 
 export interface EasyFlexTheme<
 	CustomBorderRadius extends CustomName,
@@ -440,6 +440,20 @@ export type PartialEasyFlexTheme<
 		CustomViewportThreshold,
 		CustomWidth
 	>
+>;
+
+export type NeverEasyFlexTheme = EasyFlexTheme<
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never,
+	never
 >;
 
 // Theme end

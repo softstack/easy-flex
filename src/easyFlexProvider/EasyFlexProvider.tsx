@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useMemo } from 'react';
 import { defaultEasyFlexTheme, EasyFlexContext } from '../constants';
 import { CustomName, DeepPartial, EasyFlexTheme } from '../types';
-import { mergeDeep } from '../utils/base';
+import { mergeEasyFlexThemes } from '../utils/base';
 
 export interface EasyFlexProviderProps<
 	CustomBorderRadius extends CustomName,
@@ -80,7 +80,7 @@ export const createEasyFlexProvider = <
 			>
 		>(
 			() =>
-				mergeDeep(
+				mergeEasyFlexThemes(
 					defaultEasyFlexTheme as EasyFlexTheme<
 						CustomBorderRadius,
 						CustomBorderWidth,

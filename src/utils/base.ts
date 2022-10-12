@@ -33,7 +33,7 @@ import {
 	Width,
 } from '../types';
 
-export const mergeDeep = <T>(a: T, b: DeepPartial<T>): T => {
+export const mergeEasyFlexThemes = <T>(a: T, b: DeepPartial<T>): T => {
 	if (b === undefined) {
 		return a;
 	} else if (typeof b === 'object') {
@@ -41,13 +41,13 @@ export const mergeDeep = <T>(a: T, b: DeepPartial<T>): T => {
 		const tmp: any = {};
 		for (const [key] of Object.entries(a) as unknown as Array<[keyof T, T]>) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			tmp[key] = mergeDeep(a[key], b[key as keyof DeepPartial<T>] as any);
+			tmp[key] = mergeEasyFlexThemes(a[key], b[key as keyof DeepPartial<T>] as any);
 		}
 
-		// In b can be colors which are not in a
+		// In b can be members which are not in a
 		for (const [key] of Object.entries(b) as unknown as Array<[keyof T, T]>) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			tmp[key] = mergeDeep(a[key], b[key as keyof DeepPartial<T>] as any);
+			tmp[key] = mergeEasyFlexThemes(a[key], b[key as keyof DeepPartial<T>] as any);
 		}
 
 		return tmp;
