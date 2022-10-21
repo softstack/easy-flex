@@ -11,8 +11,8 @@ import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../util
 
 const style = css<
 	{
-		'data-column-gap'?: AbsoluteSize;
-		'data-row-gap'?: AbsoluteSize;
+		'data-column-gap': AbsoluteSize | undefined;
+		'data-row-gap': AbsoluteSize | undefined;
 	} & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -157,6 +157,7 @@ export const createBaseGrid = <
 				maxWidth,
 				minHeight,
 				minWidth,
+				opacity,
 				padding,
 				paddingBottom,
 				paddingHorizontal,
@@ -179,7 +180,7 @@ export const createBaseGrid = <
 
 			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

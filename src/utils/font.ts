@@ -43,15 +43,15 @@ export interface FontProps<
 }
 
 export interface FontStyleProps {
-	'data-font-family'?: string;
-	'data-font-size'?: Size;
-	'data-font-weight'?: CssFontWeight;
-	'data-font-style'?: FontStyle;
-	'data-line-height'?: CssLineHeight;
-	'data-text-decoration'?: TextDecoration;
-	'data-text-decoration-color'?: CssColor;
-	'data-white-space'?: Falsifiable<WhiteSpace>;
-	'data-word-break'?: Falsifiable<WordBreak>;
+	'data-font-family': string | undefined;
+	'data-font-size': Size | undefined;
+	'data-font-weight': CssFontWeight | undefined;
+	'data-font-style': FontStyle | undefined;
+	'data-line-height': CssLineHeight | undefined;
+	'data-text-decoration': TextDecoration | undefined;
+	'data-text-decoration-color': CssColor | undefined;
+	'data-white-space': Falsifiable<WhiteSpace> | undefined;
+	'data-word-break': Falsifiable<WordBreak> | undefined;
 }
 
 export const useFont = <

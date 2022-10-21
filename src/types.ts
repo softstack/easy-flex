@@ -241,6 +241,8 @@ export type CssLineHeight = GlobalValue | Percent | number | 'normal';
 
 export type ObjectFit = GlobalValue | 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 
+export type Opacity = GlobalValue | Percent | number;
+
 export type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'visible';
 
 export type TextAlign =

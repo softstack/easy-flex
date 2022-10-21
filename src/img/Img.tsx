@@ -7,7 +7,7 @@ import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../util
 
 const StyledImg = styled.img<
 	{
-		'data-object-fit'?: Falsifiable<ObjectFit>;
+		'data-object-fit': Falsifiable<ObjectFit> | undefined;
 	} & BorderStyleProps &
 		MarginStyleProps &
 		SizeStyleProps

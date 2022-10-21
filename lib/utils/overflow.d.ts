@@ -8,9 +8,9 @@ export interface OverflowProps {
     overflowY?: Falsifiable<Overflow>;
 }
 export interface OverflowStyleProps {
-    'data-overflow'?: Falsifiable<Overflow>;
-    'data-overflow-x'?: Falsifiable<Overflow>;
-    'data-overflow-y'?: Falsifiable<Overflow>;
+    'data-overflow': Falsifiable<Overflow> | undefined;
+    'data-overflow-x': Falsifiable<Overflow> | undefined;
+    'data-overflow-y': Falsifiable<Overflow> | undefined;
 }
 export declare const useOverflowStyleProps: (props: OverflowProps) => OverflowStyleProps;
 export declare const overflowStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<OverflowStyleProps, any>>;

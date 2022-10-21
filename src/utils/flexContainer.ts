@@ -15,11 +15,11 @@ export interface FlexContainerProps<CustomDistance extends CustomName> {
 }
 
 export interface FlexContainerStyleProps {
-	'data-align'?: Falsifiable<AlignItems>;
-	'data-direction'?: Falsifiable<FlexDirection>;
-	'data-column-gap'?: Falsifiable<AbsoluteSize>;
-	'data-row-gap'?: Falsifiable<AbsoluteSize>;
-	'data-justify'?: Falsifiable<JustifyContent>;
+	'data-align': Falsifiable<AlignItems> | undefined;
+	'data-direction': Falsifiable<FlexDirection> | undefined;
+	'data-column-gap': Falsifiable<AbsoluteSize> | undefined;
+	'data-row-gap': Falsifiable<AbsoluteSize> | undefined;
+	'data-justify': Falsifiable<JustifyContent> | undefined;
 }
 
 export const useGap = <CustomDistance extends CustomName>({

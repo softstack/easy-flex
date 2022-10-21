@@ -18,12 +18,12 @@
 		"clean_node_modules": "rm ./node_modules/react ./node_modules/react-dom ./node_modules/styled-components -rf",
 		"test": "jest",
 		"build": "tsc",
-		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
+		"prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
 		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
 		"prepare": "rm ./lib/* -rf && npm run build",
 		"prepublishOnly": "npm test && npm run lint",
 		"preversion": "npm run lint",
-		"version": "npm run format && git add -A src",
+		"version": "npm run prettier && git add -A src",
 		"postversion": "git push && git push --tags"
 	},
 	"peerDependencies": {

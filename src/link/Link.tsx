@@ -9,7 +9,7 @@ import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../util
 
 const StyledA = styled.a<
 	{
-		'data-hover-color'?: CssColor;
+		'data-hover-color': CssColor | undefined;
 	} & ColorStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
@@ -104,6 +104,7 @@ export const createLink = <
 				minHeight,
 				minWidth,
 				newTab = false,
+				opacity,
 				shrink,
 				underline,
 				whiteSpace,
@@ -113,7 +114,7 @@ export const createLink = <
 			},
 			ref
 		) => {
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const processedHoverColor = useColor(hoverColor);
 

@@ -14,11 +14,11 @@ export interface FlexItemProps {
 }
 
 export interface FlexItemStyleProps {
-	'data-align-self'?: Falsifiable<AlignSelf>;
-	'data-basis'?: Falsifiable<FlexBasis>;
-	'data-flex'?: Falsifiable<Flex>;
-	'data-grow'?: Falsifiable<number>;
-	'data-shrink'?: Falsifiable<number>;
+	'data-align-self': Falsifiable<AlignSelf> | undefined;
+	'data-basis': Falsifiable<FlexBasis> | undefined;
+	'data-flex': Falsifiable<Flex> | undefined;
+	'data-grow': Falsifiable<number> | undefined;
+	'data-shrink': Falsifiable<number> | undefined;
 }
 
 export const useFlexItemStyleProps = ({ alignSelf, basis, flex, grow, shrink }: FlexItemProps): FlexItemStyleProps => {

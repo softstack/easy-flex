@@ -30,10 +30,10 @@ export interface BorderProps<
 }
 
 export interface BorderStyleProps {
-	'data-border-color'?: CssColor;
-	'data-border-radius'?: Size;
-	'data-border-style'?: BorderStyle;
-	'data-border-width'?: AbsoluteSize;
+	'data-border-color': CssColor | undefined;
+	'data-border-radius': Size | undefined;
+	'data-border-style': BorderStyle | undefined;
+	'data-border-width': AbsoluteSize | undefined;
 }
 
 export const useBorder = <

@@ -9,7 +9,7 @@ import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../util
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledTextArea = styled.textarea<
-	{ 'data-placeholder-color'?: CssColor } & BorderStyleProps &
+	{ 'data-placeholder-color': CssColor | undefined } & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
 		FlexItemStyleProps &
@@ -110,6 +110,7 @@ export const createBaseTextArea = <
 				maxWidth,
 				minHeight,
 				minWidth,
+				opacity,
 				padding,
 				paddingBottom,
 				paddingHorizontal,
@@ -130,7 +131,7 @@ export const createBaseTextArea = <
 		) => {
 			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const distanceStyleProps = useDistanceStyleProps({
 				margin,

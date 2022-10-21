@@ -109,13 +109,14 @@ export const createStyle = <
 				fontWeight,
 				italic,
 				lineHeight,
+				opacity,
 				underline,
 				whiteSpace,
 				wordBreak,
 			},
 			ref
 		) => {
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const fontStyleProps = useFontStyleProps({
 				fontFamily,

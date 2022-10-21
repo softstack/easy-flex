@@ -10,11 +10,11 @@ export interface FlexContainerProps<CustomDistance extends CustomName> {
     justify?: Falsifiable<JustifyContent>;
 }
 export interface FlexContainerStyleProps {
-    'data-align'?: Falsifiable<AlignItems>;
-    'data-direction'?: Falsifiable<FlexDirection>;
-    'data-column-gap'?: Falsifiable<AbsoluteSize>;
-    'data-row-gap'?: Falsifiable<AbsoluteSize>;
-    'data-justify'?: Falsifiable<JustifyContent>;
+    'data-align': Falsifiable<AlignItems> | undefined;
+    'data-direction': Falsifiable<FlexDirection> | undefined;
+    'data-column-gap': Falsifiable<AbsoluteSize> | undefined;
+    'data-row-gap': Falsifiable<AbsoluteSize> | undefined;
+    'data-justify': Falsifiable<JustifyContent> | undefined;
 }
 export declare const useGap: <CustomDistance extends `_${string}`>({ direction, gap, }: {
     direction?: Falsifiable<FlexDirection> | undefined;

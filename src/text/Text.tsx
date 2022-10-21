@@ -11,7 +11,7 @@ import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../util
 
 const style = css<
 	{
-		'data-align'?: Falsifiable<TextAlign>;
+		'data-align': Falsifiable<TextAlign> | undefined;
 	} & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
@@ -146,6 +146,7 @@ export const createText = <
 				maxWidth,
 				minHeight,
 				minWidth,
+				opacity,
 				overflow,
 				overflowX,
 				overflowY,
@@ -168,7 +169,7 @@ export const createText = <
 		) => {
 			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

@@ -186,6 +186,7 @@ export const createBaseButton = <
 				maxWidth,
 				minHeight,
 				minWidth,
+				opacity,
 				overflow,
 				overflowX,
 				overflowY,
@@ -208,7 +209,7 @@ export const createBaseButton = <
 		) => {
 			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const distanceStyleProps = useDistanceStyleProps({
 				margin,

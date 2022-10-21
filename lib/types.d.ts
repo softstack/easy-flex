@@ -31,6 +31,7 @@ export declare type CssFontWeight = GlobalValue | number | 'bold' | 'bolder' | '
 export declare type JustifyContent = GlobalValue | 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly';
 export declare type CssLineHeight = GlobalValue | Percent | number | 'normal';
 export declare type ObjectFit = GlobalValue | 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+export declare type Opacity = GlobalValue | Percent | number;
 export declare type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'visible';
 export declare type TextAlign = GlobalValue | 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 export declare type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';

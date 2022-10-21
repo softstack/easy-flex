@@ -10,10 +10,10 @@ export interface BorderProps<CustomBorderRadius extends CustomName, CustomBorder
     round?: boolean;
 }
 export interface BorderStyleProps {
-    'data-border-color'?: CssColor;
-    'data-border-radius'?: Size;
-    'data-border-style'?: BorderStyle;
-    'data-border-width'?: AbsoluteSize;
+    'data-border-color': CssColor | undefined;
+    'data-border-radius': Size | undefined;
+    'data-border-style': BorderStyle | undefined;
+    'data-border-width': AbsoluteSize | undefined;
 }
 export declare const useBorder: <CustomBorderRadius extends `_${string}`, CustomBorderWidth extends `_${string}`, CustomColor extends `_${string}`>({ borderColor, borderRadius, borderStyle, borderWidth, round, }: BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>) => {
     color: CssColor | undefined;

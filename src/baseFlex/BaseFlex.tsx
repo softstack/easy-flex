@@ -165,6 +165,7 @@ export const createBaseFlex = <
 				maxWidth,
 				minHeight,
 				minWidth,
+				opacity,
 				overflow,
 				overflowX,
 				overflowY,
@@ -187,7 +188,7 @@ export const createBaseFlex = <
 		) => {
 			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const distanceStyleProps = useDistanceStyleProps({
 				margin,

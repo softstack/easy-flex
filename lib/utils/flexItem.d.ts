@@ -10,11 +10,11 @@ export interface FlexItemProps {
     shrink?: Falsifiable<number>;
 }
 export interface FlexItemStyleProps {
-    'data-align-self'?: Falsifiable<AlignSelf>;
-    'data-basis'?: Falsifiable<FlexBasis>;
-    'data-flex'?: Falsifiable<Flex>;
-    'data-grow'?: Falsifiable<number>;
-    'data-shrink'?: Falsifiable<number>;
+    'data-align-self': Falsifiable<AlignSelf> | undefined;
+    'data-basis': Falsifiable<FlexBasis> | undefined;
+    'data-flex': Falsifiable<Flex> | undefined;
+    'data-grow': Falsifiable<number> | undefined;
+    'data-shrink': Falsifiable<number> | undefined;
 }
 export declare const useFlexItemStyleProps: ({ alignSelf, basis, flex, grow, shrink }: FlexItemProps) => FlexItemStyleProps;
 export declare const flexItemStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<FlexItemStyleProps, any>>;

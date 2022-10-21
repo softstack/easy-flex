@@ -12,9 +12,9 @@ export interface OverflowProps {
 }
 
 export interface OverflowStyleProps {
-	'data-overflow'?: Falsifiable<Overflow>;
-	'data-overflow-x'?: Falsifiable<Overflow>;
-	'data-overflow-y'?: Falsifiable<Overflow>;
+	'data-overflow': Falsifiable<Overflow> | undefined;
+	'data-overflow-x': Falsifiable<Overflow> | undefined;
+	'data-overflow-y': Falsifiable<Overflow> | undefined;
 }
 
 export const useOverflowStyleProps = (props: OverflowProps): OverflowStyleProps => {

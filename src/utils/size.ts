@@ -23,12 +23,12 @@ export interface SizeProps<CustomHeight extends CustomName, CustomWidth extends 
 }
 
 export interface SizeStyleProps {
-	'data-height'?: ElementSize;
-	'data-height-max'?: ElementSize;
-	'data-height-min'?: ElementSize;
-	'data-width'?: ElementSize;
-	'data-width-max'?: ElementSize;
-	'data-width-min'?: ElementSize;
+	'data-height': ElementSize | undefined;
+	'data-height-max': ElementSize | undefined;
+	'data-height-min': ElementSize | undefined;
+	'data-width': ElementSize | undefined;
+	'data-width-max': ElementSize | undefined;
+	'data-width-min': ElementSize | undefined;
 }
 
 export const useSize = <CustomHeight extends CustomName, CustomWidth extends CustomName>({
