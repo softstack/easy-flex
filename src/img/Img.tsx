@@ -2,6 +2,7 @@ import React, { forwardRef, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { CustomName, Falsifiable, ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
+import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
@@ -9,6 +10,7 @@ const StyledImg = styled.img<
 	{
 		'data-object-fit': Falsifiable<ObjectFit> | undefined;
 	} & BorderStyleProps &
+		ColorStyleProps &
 		MarginStyleProps &
 		SizeStyleProps
 >`
@@ -16,6 +18,7 @@ const StyledImg = styled.img<
 	display: flex;
 	object-fit: ${({ 'data-object-fit': objectFit }) => objectFit};
 	${borderStyle}
+	${colorStyle}
 	${marginStyle}
 	${sizeStyle}
 `;
@@ -27,8 +30,9 @@ export interface ImgProps<
 	CustomDistance extends CustomName,
 	CustomHeight extends CustomName,
 	CustomWidth extends CustomName
-> extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'height' | 'width'>,
+> extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'color' | 'height' | 'width'>,
 		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
+		ColorProps<CustomColor>,
 		MarginProps<CustomDistance>,
 		SizeProps<CustomHeight, CustomWidth> {
 	objectFit?: Falsifiable<ObjectFit>;
@@ -48,10 +52,12 @@ export const createImg = <
 	>(
 		(
 			{
+				backgroundColor,
 				borderColor,
 				borderRadius,
 				borderStyle,
 				borderWidth,
+				color,
 				fullHeight,
 				fullWidth,
 				height,
@@ -67,6 +73,7 @@ export const createImg = <
 				minHeight,
 				minWidth,
 				objectFit,
+				opacity,
 				round,
 				width,
 				...props
@@ -74,6 +81,8 @@ export const createImg = <
 			ref
 		) => {
 			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+
+			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
 			const marginStyleProps = useMarginStyleProps({
 				margin,
@@ -100,6 +109,7 @@ export const createImg = <
 				<StyledImg
 					data-object-fit={objectFit}
 					{...borderStyleProps}
+					{...colorStyleProps}
 					{...marginStyleProps}
 					{...sizeStyleProps}
 					ref={ref}
