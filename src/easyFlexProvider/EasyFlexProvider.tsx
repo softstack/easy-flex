@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { memo, ReactNode, useMemo } from 'react';
 import { defaultEasyFlexTheme, EasyFlexContext } from '../constants';
 import { CustomName, DeepPartial, EasyFlexTheme } from '../types';
 import { mergeEasyFlexThemes } from '../utils/base';
@@ -49,7 +49,7 @@ export const createEasyFlexProvider = <
 	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const EasyFlexProvider: FC<
+	const EasyFlexProvider = memo<
 		EasyFlexProviderProps<
 			CustomBorderRadius,
 			CustomBorderWidth,
@@ -63,7 +63,7 @@ export const createEasyFlexProvider = <
 			CustomViewportThreshold,
 			CustomWidth
 		>
-	> = ({ children, theme }) => {
+	>(({ children, theme }) => {
 		const mergedTheme = useMemo<
 			EasyFlexTheme<
 				CustomBorderRadius,
@@ -100,6 +100,7 @@ export const createEasyFlexProvider = <
 		);
 
 		return <EasyFlexContext.Provider value={mergedTheme}>{children}</EasyFlexContext.Provider>;
-	};
+	});
+	EasyFlexProvider.displayName = 'EasyFlexProvider';
 	return EasyFlexProvider;
 };

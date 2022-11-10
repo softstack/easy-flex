@@ -12,4 +12,4 @@ export interface SpacingProps<CustomDistance extends CustomName, CustomViewportT
     /** Component's width. */
     width?: Falsifiable<Distance<CustomDistance>>;
 }
-export declare const createSpacing: <CustomDistance extends `_${string}`, CustomViewportThreshold extends `_${string}`>() => React.ForwardRefExoticComponent<SpacingProps<CustomDistance, CustomViewportThreshold> & React.RefAttributes<HTMLDivElement>>;
+export declare const createSpacing: <CustomDistance extends `_${string}`, CustomViewportThreshold extends `_${string}`>() => React.MemoExoticComponent<React.ForwardRefExoticComponent<SpacingProps<CustomDistance, CustomViewportThreshold> & React.RefAttributes<HTMLDivElement>>>;

@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, useMemo } from 'react';
+import React, { forwardRef, HTMLAttributes, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { CustomName, Falsifiable, TextAlign, TextElement } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
@@ -97,160 +97,162 @@ export const createText = <
 	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const Text = forwardRef<
-		HTMLParagraphElement,
-		TextProps<
-			CustomBorderRadius,
-			CustomBorderWidth,
-			CustomColor,
-			CustomDistance,
-			CustomFontFamily,
-			CustomFontSize,
-			CustomFontWeight,
-			CustomHeight,
-			CustomLineHeight,
-			CustomWidth
-		>
-	>(
-		(
-			{
-				align,
-				alignSelf,
-				backgroundColor,
-				basis,
-				borderColor,
-				borderRadius,
-				borderStyle,
-				borderWidth,
-				children,
-				color,
-				element = 'p',
-				flex,
-				fontFamily,
-				fontSize,
-				fontWeight,
-				fullHeight,
-				fullWidth,
-				grow,
-				height,
-				italic,
-				lineHeight,
-				margin,
-				marginBottom,
-				marginHorizontal,
-				marginLeft,
-				marginRight,
-				marginTop,
-				marginVertical,
-				maxHeight,
-				maxWidth,
-				minHeight,
-				minWidth,
-				opacity,
-				overflow,
-				overflowX,
-				overflowY,
-				padding,
-				paddingBottom,
-				paddingHorizontal,
-				paddingLeft,
-				paddingRight,
-				paddingTop,
-				paddingVertical,
-				round,
-				shrink,
-				underline,
-				whiteSpace,
-				width,
-				wordBreak,
-				...props
-			},
-			ref
-		) => {
-			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+	const Text = memo(
+		forwardRef<
+			HTMLParagraphElement,
+			TextProps<
+				CustomBorderRadius,
+				CustomBorderWidth,
+				CustomColor,
+				CustomDistance,
+				CustomFontFamily,
+				CustomFontSize,
+				CustomFontWeight,
+				CustomHeight,
+				CustomLineHeight,
+				CustomWidth
+			>
+		>(
+			(
+				{
+					align,
+					alignSelf,
+					backgroundColor,
+					basis,
+					borderColor,
+					borderRadius,
+					borderStyle,
+					borderWidth,
+					children,
+					color,
+					element = 'p',
+					flex,
+					fontFamily,
+					fontSize,
+					fontWeight,
+					fullHeight,
+					fullWidth,
+					grow,
+					height,
+					italic,
+					lineHeight,
+					margin,
+					marginBottom,
+					marginHorizontal,
+					marginLeft,
+					marginRight,
+					marginTop,
+					marginVertical,
+					maxHeight,
+					maxWidth,
+					minHeight,
+					minWidth,
+					opacity,
+					overflow,
+					overflowX,
+					overflowY,
+					padding,
+					paddingBottom,
+					paddingHorizontal,
+					paddingLeft,
+					paddingRight,
+					paddingTop,
+					paddingVertical,
+					round,
+					shrink,
+					underline,
+					whiteSpace,
+					width,
+					wordBreak,
+					...props
+				},
+				ref
+			) => {
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
-			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-			const fontStyleProps = useFontStyleProps({
-				fontFamily,
-				fontSize,
-				fontWeight,
-				italic,
-				lineHeight,
-				underline,
-				whiteSpace,
-				wordBreak,
-			});
+				const fontStyleProps = useFontStyleProps({
+					fontFamily,
+					fontSize,
+					fontWeight,
+					italic,
+					lineHeight,
+					underline,
+					whiteSpace,
+					wordBreak,
+				});
 
-			const distanceStyleProps = useDistanceStyleProps({
-				margin,
-				marginBottom,
-				marginHorizontal,
-				marginLeft,
-				marginRight,
-				marginTop,
-				marginVertical,
-				padding,
-				paddingBottom,
-				paddingHorizontal,
-				paddingLeft,
-				paddingRight,
-				paddingTop,
-				paddingVertical,
-			});
+				const distanceStyleProps = useDistanceStyleProps({
+					margin,
+					marginBottom,
+					marginHorizontal,
+					marginLeft,
+					marginRight,
+					marginTop,
+					marginVertical,
+					padding,
+					paddingBottom,
+					paddingHorizontal,
+					paddingLeft,
+					paddingRight,
+					paddingTop,
+					paddingVertical,
+				});
 
-			const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
+				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
-			const sizeStyleProps = useSizeStyleProps({
-				fullHeight,
-				fullWidth,
-				height,
-				maxHeight,
-				maxWidth,
-				minHeight,
-				minWidth,
-				width,
-			});
+				const sizeStyleProps = useSizeStyleProps({
+					fullHeight,
+					fullWidth,
+					height,
+					maxHeight,
+					maxWidth,
+					minHeight,
+					minWidth,
+					width,
+				});
 
-			const Element = useMemo(() => {
-				switch (element) {
-					case 'h1':
-						return StyledH1;
-					case 'h2':
-						return StyledH2;
-					case 'h3':
-						return StyledH3;
-					case 'h4':
-						return StyledH4;
-					case 'h5':
-						return StyledH5;
-					case 'h6':
-						return StyledH6;
-					case 'p':
-					case false:
-						return StyledP;
-				}
-			}, [element]);
+				const Element = useMemo(() => {
+					switch (element) {
+						case 'h1':
+							return StyledH1;
+						case 'h2':
+							return StyledH2;
+						case 'h3':
+							return StyledH3;
+						case 'h4':
+							return StyledH4;
+						case 'h5':
+							return StyledH5;
+						case 'h6':
+							return StyledH6;
+						case 'p':
+						case false:
+							return StyledP;
+					}
+				}, [element]);
 
-			return (
-				<Element
-					data-align={align}
-					{...borderStyleProps}
-					{...colorStyleProps}
-					{...distanceStyleProps}
-					{...flexItemStyleProps}
-					{...fontStyleProps}
-					{...overflowStyleProps}
-					{...sizeStyleProps}
-					ref={ref}
-					{...props}
-				>
-					{children}
-				</Element>
-			);
-		}
+				return (
+					<Element
+						data-align={align}
+						{...borderStyleProps}
+						{...colorStyleProps}
+						{...distanceStyleProps}
+						{...flexItemStyleProps}
+						{...fontStyleProps}
+						{...overflowStyleProps}
+						{...sizeStyleProps}
+						ref={ref}
+						{...props}
+					>
+						{children}
+					</Element>
+				);
+			}
+		)
 	);
 	Text.displayName = 'Text';
 	return Text;

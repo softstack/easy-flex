@@ -9,4 +9,4 @@ export interface ModalProps<CustomColor extends CustomName> extends HTMLAttribut
     /** Called if the modal background is clicked. */
     onClose: () => void;
 }
-export declare const createModal: <CustomColor extends `_${string}`>() => React.FC<ModalProps<CustomColor>>;
+export declare const createModal: <CustomColor extends `_${string}`>() => React.NamedExoticComponent<ModalProps<CustomColor>>;

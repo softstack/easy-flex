@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, MouseEvent, useCallback, useEffect, useRef } from 'react';
+import React, { HTMLAttributes, memo, MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor, CustomName, Falsifiable } from '../types';
@@ -34,62 +34,57 @@ export interface ModalProps<CustomColor extends CustomName> extends HTMLAttribut
 }
 
 export const createModal = <CustomColor extends CustomName>() => {
-	const Modal: FC<ModalProps<CustomColor>> = ({
-		children,
-		backgroundColor,
-		blur,
-		blurElementId,
-		containerElementId,
-		onClose,
-		...props
-	}) => {
-		const theme = useEasyFlexTheme();
+	const Modal = memo<ModalProps<CustomColor>>(
+		({ children, backgroundColor, blur, blurElementId, containerElementId, onClose, ...props }) => {
+			const theme = useEasyFlexTheme();
 
-		const backgroundElement = useRef<HTMLDivElement>(null);
+			const backgroundElement = useRef<HTMLDivElement>(null);
 
-		const handleClick = useCallback(
-			(event: MouseEvent<HTMLDivElement>) => {
-				if (event.target === backgroundElement.current) {
-					onClose();
-				}
-			},
-			[onClose]
-		);
+			const handleClick = useCallback(
+				(event: MouseEvent<HTMLDivElement>) => {
+					if (event.target === backgroundElement.current) {
+						onClose();
+					}
+				},
+				[onClose]
+			);
 
-		const processedBackgroundColor = useDefaultColor(backgroundColor, theme.modal.backgroundColor);
+			const processedBackgroundColor = useDefaultColor(backgroundColor, theme.modal.backgroundColor);
 
-		useEffect(() => {
-			if (
-				(defalsify(blurElementId) ?? theme.modal.blurElementId) &&
-				(isAbsoluteSize(blur) || (blur !== false && theme.modal.blur))
-			) {
-				const styleElement = document.createElement('style');
-				styleElement.textContent = `
+			useEffect(() => {
+				if (
+					(defalsify(blurElementId) ?? theme.modal.blurElementId) &&
+					(isAbsoluteSize(blur) || (blur !== false && theme.modal.blur))
+				) {
+					const styleElement = document.createElement('style');
+					styleElement.textContent = `
 				#${defalsify(blurElementId) ?? theme.modal.blurElementId} {
 					filter: blur(${isAbsoluteSize(blur) ? blur : theme.modal.blur});
 				}
 			`;
-				document.head.append(styleElement);
+					document.head.append(styleElement);
 
-				return () => {
-					document.head.removeChild(styleElement);
-				};
-			}
-		}, [blur, blurElementId, theme]);
+					return () => {
+						document.head.removeChild(styleElement);
+					};
+				}
+			}, [blur, blurElementId, theme]);
 
-		const container = useModalContainer(containerElementId);
+			const container = useModalContainer(containerElementId);
 
-		return createPortal(
-			<Background
-				ref={backgroundElement}
-				data-background-color={processedBackgroundColor}
-				onClick={handleClick}
-				{...props}
-			>
-				{children}
-			</Background>,
-			container
-		);
-	};
+			return createPortal(
+				<Background
+					ref={backgroundElement}
+					data-background-color={processedBackgroundColor}
+					onClick={handleClick}
+					{...props}
+				>
+					{children}
+				</Background>,
+				container
+			);
+		}
+	);
+	Modal.displayName = 'Modal';
 	return Modal;
 };

@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, forwardRef, useMemo } from 'react';
+import React, { AnchorHTMLAttributes, forwardRef, memo, useMemo } from 'react';
 import styled from 'styled-components';
 import { Color, CssColor, CustomName, Falsifiable } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
@@ -61,130 +61,132 @@ export const createLink = <
 	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const Link = forwardRef<
-		HTMLAnchorElement,
-		LinkProps<
-			CustomColor,
-			CustomDistance,
-			CustomFontFamily,
-			CustomFontSize,
-			CustomFontWeight,
-			CustomHeight,
-			CustomLineHeight,
-			CustomWidth
-		>
-	>(
-		(
-			{
-				alignSelf,
-				backgroundColor,
-				basis,
-				children,
-				color = 'inherit',
-				flex,
-				fontFamily,
-				fontSize,
-				fontWeight,
-				fullHeight,
-				fullWidth,
-				grow,
-				height,
-				hoverColor,
-				italic,
-				lineHeight,
-				margin,
-				marginBottom,
-				marginHorizontal,
-				marginLeft,
-				marginRight,
-				marginTop,
-				marginVertical,
-				maxHeight,
-				maxWidth,
-				minHeight,
-				minWidth,
-				newTab = false,
-				opacity,
-				shrink,
-				underline,
-				whiteSpace,
-				width,
-				wordBreak,
-				...props
-			},
-			ref
-		) => {
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+	const Link = memo(
+		forwardRef<
+			HTMLAnchorElement,
+			LinkProps<
+				CustomColor,
+				CustomDistance,
+				CustomFontFamily,
+				CustomFontSize,
+				CustomFontWeight,
+				CustomHeight,
+				CustomLineHeight,
+				CustomWidth
+			>
+		>(
+			(
+				{
+					alignSelf,
+					backgroundColor,
+					basis,
+					children,
+					color = 'inherit',
+					flex,
+					fontFamily,
+					fontSize,
+					fontWeight,
+					fullHeight,
+					fullWidth,
+					grow,
+					height,
+					hoverColor,
+					italic,
+					lineHeight,
+					margin,
+					marginBottom,
+					marginHorizontal,
+					marginLeft,
+					marginRight,
+					marginTop,
+					marginVertical,
+					maxHeight,
+					maxWidth,
+					minHeight,
+					minWidth,
+					newTab = false,
+					opacity,
+					shrink,
+					underline,
+					whiteSpace,
+					width,
+					wordBreak,
+					...props
+				},
+				ref
+			) => {
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
-			const processedHoverColor = useColor(hoverColor);
+				const processedHoverColor = useColor(hoverColor);
 
-			const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-			const fontStyleProps = useFontStyleProps({
-				fontFamily,
-				fontSize,
-				fontWeight,
-				italic,
-				lineHeight,
-				underline,
-				whiteSpace,
-				wordBreak,
-			});
+				const fontStyleProps = useFontStyleProps({
+					fontFamily,
+					fontSize,
+					fontWeight,
+					italic,
+					lineHeight,
+					underline,
+					whiteSpace,
+					wordBreak,
+				});
 
-			const marginStyleProps = useMarginStyleProps({
-				margin,
-				marginBottom,
-				marginHorizontal,
-				marginLeft,
-				marginRight,
-				marginTop,
-				marginVertical,
-			});
+				const marginStyleProps = useMarginStyleProps({
+					margin,
+					marginBottom,
+					marginHorizontal,
+					marginLeft,
+					marginRight,
+					marginTop,
+					marginVertical,
+				});
 
-			const sizeStyleProps = useSizeStyleProps({
-				fullHeight,
-				fullWidth,
-				height,
-				maxHeight,
-				maxWidth,
-				minHeight,
-				minWidth,
-				width,
-			});
+				const sizeStyleProps = useSizeStyleProps({
+					fullHeight,
+					fullWidth,
+					height,
+					maxHeight,
+					maxWidth,
+					minHeight,
+					minWidth,
+					width,
+				});
 
-			const newTabProps = useMemo<
-				| {
-						rel: 'noopener noreferrer';
-						target: '_blank';
-				  }
-				| undefined
-			>(
-				() =>
-					newTab
-						? {
-								rel: 'noopener noreferrer',
-								target: '_blank',
-						  }
-						: undefined,
-				[newTab]
-			);
+				const newTabProps = useMemo<
+					| {
+							rel: 'noopener noreferrer';
+							target: '_blank';
+					  }
+					| undefined
+				>(
+					() =>
+						newTab
+							? {
+									rel: 'noopener noreferrer',
+									target: '_blank',
+							  }
+							: undefined,
+					[newTab]
+				);
 
-			return (
-				<StyledA
-					data-hover-color={processedHoverColor}
-					{...colorStyleProps}
-					{...flexItemStyleProps}
-					{...fontStyleProps}
-					{...marginStyleProps}
-					{...sizeStyleProps}
-					{...newTabProps}
-					ref={ref}
-					{...props}
-				>
-					{children}
-				</StyledA>
-			);
-		}
+				return (
+					<StyledA
+						data-hover-color={processedHoverColor}
+						{...colorStyleProps}
+						{...flexItemStyleProps}
+						{...fontStyleProps}
+						{...marginStyleProps}
+						{...sizeStyleProps}
+						{...newTabProps}
+						ref={ref}
+						{...props}
+					>
+						{children}
+					</StyledA>
+				);
+			}
+		)
 	);
 	Link.displayName = 'Link';
 	return Link;

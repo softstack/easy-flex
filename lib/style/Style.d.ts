@@ -6,4 +6,4 @@ export interface StyleProps<CustomColor extends CustomName, CustomFontFamily ext
     /** Component's html tag. */
     element?: Falsifiable<StyleElement>;
 }
-export declare const createStyle: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomFontSize extends `_${string}`, CustomFontWeight extends `_${string}`, CustomLineHeight extends `_${string}`>() => React.ForwardRefExoticComponent<StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> & React.RefAttributes<HTMLParagraphElement>>;
+export declare const createStyle: <CustomColor extends `_${string}`, CustomFontFamily extends `_${string}`, CustomFontSize extends `_${string}`, CustomFontWeight extends `_${string}`, CustomLineHeight extends `_${string}`>() => React.MemoExoticComponent<React.ForwardRefExoticComponent<StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> & React.RefAttributes<HTMLParagraphElement>>>;

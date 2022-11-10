@@ -1,4 +1,4 @@
-import React, { forwardRef, ImgHTMLAttributes } from 'react';
+import React, { forwardRef, ImgHTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
 import { CustomName, Falsifiable, ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
@@ -46,77 +46,79 @@ export const createImg = <
 	CustomHeight extends CustomName,
 	CustomWidth extends CustomName
 >() => {
-	const Img = forwardRef<
-		HTMLImageElement,
-		ImgProps<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomHeight, CustomWidth>
-	>(
-		(
-			{
-				backgroundColor,
-				borderColor,
-				borderRadius,
-				borderStyle,
-				borderWidth,
-				color,
-				fullHeight,
-				fullWidth,
-				height,
-				margin,
-				marginBottom,
-				marginHorizontal,
-				marginLeft,
-				marginRight,
-				marginTop,
-				marginVertical,
-				maxHeight,
-				maxWidth,
-				minHeight,
-				minWidth,
-				objectFit,
-				opacity,
-				round,
-				width,
-				...props
-			},
-			ref
-		) => {
-			const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+	const Img = memo(
+		forwardRef<
+			HTMLImageElement,
+			ImgProps<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomHeight, CustomWidth>
+		>(
+			(
+				{
+					backgroundColor,
+					borderColor,
+					borderRadius,
+					borderStyle,
+					borderWidth,
+					color,
+					fullHeight,
+					fullWidth,
+					height,
+					margin,
+					marginBottom,
+					marginHorizontal,
+					marginLeft,
+					marginRight,
+					marginTop,
+					marginVertical,
+					maxHeight,
+					maxWidth,
+					minHeight,
+					minWidth,
+					objectFit,
+					opacity,
+					round,
+					width,
+					...props
+				},
+				ref
+			) => {
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-			const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
 
-			const marginStyleProps = useMarginStyleProps({
-				margin,
-				marginBottom,
-				marginHorizontal,
-				marginLeft,
-				marginRight,
-				marginTop,
-				marginVertical,
-			});
+				const marginStyleProps = useMarginStyleProps({
+					margin,
+					marginBottom,
+					marginHorizontal,
+					marginLeft,
+					marginRight,
+					marginTop,
+					marginVertical,
+				});
 
-			const sizeStyleProps = useSizeStyleProps({
-				fullHeight,
-				fullWidth,
-				height,
-				maxHeight,
-				maxWidth,
-				minHeight,
-				minWidth,
-				width,
-			});
+				const sizeStyleProps = useSizeStyleProps({
+					fullHeight,
+					fullWidth,
+					height,
+					maxHeight,
+					maxWidth,
+					minHeight,
+					minWidth,
+					width,
+				});
 
-			return (
-				<StyledImg
-					data-object-fit={objectFit}
-					{...borderStyleProps}
-					{...colorStyleProps}
-					{...marginStyleProps}
-					{...sizeStyleProps}
-					ref={ref}
-					{...props}
-				/>
-			);
-		}
+				return (
+					<StyledImg
+						data-object-fit={objectFit}
+						{...borderStyleProps}
+						{...colorStyleProps}
+						{...marginStyleProps}
+						{...sizeStyleProps}
+						ref={ref}
+						{...props}
+					/>
+				);
+			}
+		)
 	);
 	Img.displayName = 'Img';
 	return Img;

@@ -20,5 +20,6 @@ module.exports = {
 		quotes: ['error', 'single', { avoidEscape: true }],
 		semi: ['error', 'always'],
 		'no-mixed-spaces-and-tabs': 'off',
+		'react/prop-types': 'off',
 	},
 };
