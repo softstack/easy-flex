@@ -4,7 +4,6 @@ export interface ModalProps<CustomColor extends CustomName> extends HTMLAttribut
     backgroundColor?: Falsifiable<Color<CustomColor>>;
     /** Sets blur for the content covered by the modal background. */
     blur?: AbsoluteSize | boolean;
-    blurElementId?: Falsifiable<string>;
     containerElementId?: Falsifiable<string>;
     /** Called if the modal background is clicked. */
     onClose: () => void;

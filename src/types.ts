@@ -403,7 +403,6 @@ export interface EasyFlexTheme<
 	modal: {
 		backgroundColor: CssColor;
 		blur: AbsoluteSize;
-		blurElementId: string;
 		containerElementId: string;
 	};
 	size: {

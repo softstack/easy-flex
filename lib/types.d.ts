@@ -74,7 +74,6 @@ export interface EasyFlexTheme<CustomBorderRadius extends CustomName, CustomBord
     modal: {
         backgroundColor: CssColor;
         blur: AbsoluteSize;
-        blurElementId: string;
         containerElementId: string;
     };
     size: {

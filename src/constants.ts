@@ -318,7 +318,6 @@ export const defaultEasyFlexTheme: NeverEasyFlexTheme = {
 	modal: {
 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		blur: '0px',
-		blurElementId: 'root',
 		containerElementId: '',
 	},
 	size: {

@@ -1,12 +1,13 @@
-import React, { HTMLAttributes, memo, MouseEvent, useCallback, useEffect, useRef } from 'react';
+import React, { HTMLAttributes, memo, MouseEvent, useCallback, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor, CustomName, Falsifiable } from '../types';
-import { defalsify, isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
+import { isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
 
 const Background = styled.div<{
 	'data-background-color': CssColor;
+	'data-blur': AbsoluteSize | undefined;
 }>`
 	box-sizing: border-box;
 	position: fixed;
@@ -21,13 +22,13 @@ const Background = styled.div<{
 	align-items: center;
 	justify-content: center;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
+	backdrop-filter: ${({ 'data-blur': blur }) => `blur(${blur})`};
 `;
 
 export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement> {
 	backgroundColor?: Falsifiable<Color<CustomColor>>;
 	/** Sets blur for the content covered by the modal background. */
 	blur?: AbsoluteSize | boolean;
-	blurElementId?: Falsifiable<string>;
 	containerElementId?: Falsifiable<string>;
 	/** Called if the modal background is clicked. */
 	onClose: () => void;
@@ -35,7 +36,7 @@ export interface ModalProps<CustomColor extends CustomName> extends HTMLAttribut
 
 export const createModal = <CustomColor extends CustomName>() => {
 	const Modal = memo<ModalProps<CustomColor>>(
-		({ children, backgroundColor, blur, blurElementId, containerElementId, onClose, ...props }) => {
+		({ children, backgroundColor, blur, containerElementId, onClose, ...props }) => {
 			const theme = useEasyFlexTheme();
 
 			const backgroundElement = useRef<HTMLDivElement>(null);
@@ -51,24 +52,7 @@ export const createModal = <CustomColor extends CustomName>() => {
 
 			const processedBackgroundColor = useDefaultColor(backgroundColor, theme.modal.backgroundColor);
 
-			useEffect(() => {
-				if (
-					(defalsify(blurElementId) ?? theme.modal.blurElementId) &&
-					(isAbsoluteSize(blur) || (blur !== false && theme.modal.blur))
-				) {
-					const styleElement = document.createElement('style');
-					styleElement.textContent = `
-				#${defalsify(blurElementId) ?? theme.modal.blurElementId} {
-					filter: blur(${isAbsoluteSize(blur) ? blur : theme.modal.blur});
-				}
-			`;
-					document.head.append(styleElement);
-
-					return () => {
-						document.head.removeChild(styleElement);
-					};
-				}
-			}, [blur, blurElementId, theme]);
+			const processedBlur = useMemo(() => (isAbsoluteSize(blur) ? blur : theme.modal.blur), [blur, theme]);
 
 			const container = useModalContainer(containerElementId);
 
@@ -76,6 +60,7 @@ export const createModal = <CustomColor extends CustomName>() => {
 				<Background
 					ref={backgroundElement}
 					data-background-color={processedBackgroundColor}
+					data-blur={processedBlur}
 					onClick={handleClick}
 					{...props}
 				>
