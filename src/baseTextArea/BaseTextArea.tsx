@@ -6,6 +6,7 @@ import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps }
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledTextArea = styled.textarea<
@@ -14,6 +15,7 @@ const StyledTextArea = styled.textarea<
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		MiscStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
@@ -23,6 +25,7 @@ const StyledTextArea = styled.textarea<
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${miscStyle}
 	${sizeStyle}
 
 	&::placeholder {
@@ -47,6 +50,7 @@ export interface BaseTextAreaProps<
 		DistanceProps<CustomDistance>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }
@@ -90,6 +94,7 @@ export const createBaseTextArea = <
 					borderWidth,
 					children,
 					color,
+					displayNone,
 					flex,
 					fontFamily,
 					fontSize,
@@ -123,6 +128,7 @@ export const createBaseTextArea = <
 					round,
 					shrink,
 					underline,
+					visibility,
 					whiteSpace,
 					width,
 					wordBreak,
@@ -164,6 +170,8 @@ export const createBaseTextArea = <
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+
 				const sizeStyleProps = useSizeStyleProps({
 					fullHeight,
 					fullWidth,
@@ -185,6 +193,7 @@ export const createBaseTextArea = <
 						{...distanceStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...miscStyleProps}
 						{...sizeStyleProps}
 						ref={ref}
 						{...props}

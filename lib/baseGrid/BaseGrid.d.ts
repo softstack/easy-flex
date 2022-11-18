@@ -5,8 +5,9 @@ import { ColorProps } from '../utils/color';
 import { DistanceProps } from '../utils/distance';
 import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
+import { MiscProps } from '../utils/misc';
 import { SizeProps } from '../utils/size';
-export interface BaseGridProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, DistanceProps<CustomDistance>, SizeProps<CustomHeight, CustomWidth> {
+export interface BaseGridProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, DistanceProps<CustomDistance>, MiscProps, SizeProps<CustomHeight, CustomWidth> {
     columnGap?: Falsifiable<Distance<CustomDistance>>;
     /** Component's html tag. */
     element?: Falsifiable<BaseGridElement>;

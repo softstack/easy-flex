@@ -7,6 +7,7 @@ import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
@@ -18,6 +19,7 @@ const style = css<
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		MiscStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
@@ -29,6 +31,7 @@ const style = css<
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${miscStyle}
 	${sizeStyle}
 `;
 
@@ -89,6 +92,7 @@ export interface BaseGridProps<
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		DistanceProps<CustomDistance>,
+		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	columnGap?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's html tag. */
@@ -136,6 +140,7 @@ export const createBaseGrid = <
 					children,
 					color,
 					columnGap,
+					displayNone,
 					element = 'div',
 					flex,
 					fontFamily,
@@ -170,6 +175,7 @@ export const createBaseGrid = <
 					rowGap,
 					shrink,
 					underline,
+					visibility,
 					whiteSpace,
 					width,
 					wordBreak,
@@ -212,6 +218,8 @@ export const createBaseGrid = <
 					paddingTop,
 					paddingVertical,
 				});
+
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
 					fullHeight,
@@ -269,6 +277,7 @@ export const createBaseGrid = <
 						{...distanceStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...miscStyleProps}
 						{...sizeStyleProps}
 						ref={ref}
 						{...props}

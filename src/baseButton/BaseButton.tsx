@@ -12,6 +12,7 @@ import {
 } from '../utils/flexContainer';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
@@ -22,6 +23,7 @@ const StyledButton = styled.button<
 		FlexContainerStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		MiscStyleProps &
 		OverflowStyleProps &
 		SizeStyleProps
 >`
@@ -36,6 +38,7 @@ const StyledButton = styled.button<
 	${flexContainerStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${miscStyle}
 	${overflowStyle}
 	${sizeStyle}
 	
@@ -66,6 +69,7 @@ export type BaseButtonProps<
 	FlexContainerProps<CustomDistance> &
 	FlexItemProps &
 	FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> &
+	MiscProps &
 	OverflowProps &
 	SizeProps<CustomHeight, CustomWidth>;
 
@@ -163,8 +167,9 @@ export const createBaseButton = <
 					borderWidth,
 					children,
 					color,
-					flex,
 					direction = 'row',
+					displayNone,
+					flex,
 					fontFamily,
 					fontSize,
 					fontWeight,
@@ -201,6 +206,7 @@ export const createBaseButton = <
 					round,
 					shrink,
 					underline,
+					visibility,
 					whiteSpace,
 					width,
 					wordBreak,
@@ -244,6 +250,8 @@ export const createBaseButton = <
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
 				const sizeStyleProps = useSizeStyleProps({
@@ -265,6 +273,7 @@ export const createBaseButton = <
 						{...flexContainerStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...miscStyleProps}
 						{...overflowStyleProps}
 						{...sizeStyleProps}
 						ref={ref}

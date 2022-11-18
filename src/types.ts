@@ -256,6 +256,8 @@ export type TextAlign =
 	| 'right'
 	| 'start';
 
+export type Visibility = GlobalValue | 'collapse' | 'hidden' | 'visible';
+
 export type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 
 export type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 'normal';

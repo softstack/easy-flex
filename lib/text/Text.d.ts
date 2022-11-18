@@ -5,9 +5,10 @@ import { ColorProps } from '../utils/color';
 import { DistanceProps } from '../utils/distance';
 import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
+import { MiscProps } from '../utils/misc';
 import { OverflowProps } from '../utils/overflow';
 import { SizeProps } from '../utils/size';
-export interface TextProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, DistanceProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, OverflowProps, SizeProps<CustomHeight, CustomWidth> {
+export interface TextProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLParagraphElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, DistanceProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, MiscProps, OverflowProps, SizeProps<CustomHeight, CustomWidth> {
     /** Component's text alignment. */
     align?: Falsifiable<TextAlign>;
     /** Component's html tag. */

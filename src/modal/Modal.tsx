@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor, CustomName, Falsifiable } from '../types';
 import { isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
+import { MiscProps, useMiscStyleProps } from '../utils/misc';
 
 const Background = styled.div<{
 	'data-background-color': CssColor;
@@ -25,7 +26,7 @@ const Background = styled.div<{
 	backdrop-filter: ${({ 'data-blur': blur }) => `blur(${blur})`};
 `;
 
-export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement> {
+export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement>, MiscProps {
 	backgroundColor?: Falsifiable<Color<CustomColor>>;
 	/** Sets blur for the content covered by the modal background. */
 	blur?: AbsoluteSize | boolean;
@@ -36,8 +37,10 @@ export interface ModalProps<CustomColor extends CustomName> extends HTMLAttribut
 
 export const createModal = <CustomColor extends CustomName>() => {
 	const Modal = memo<ModalProps<CustomColor>>(
-		({ children, backgroundColor, blur, containerElementId, onClose, ...props }) => {
+		({ backgroundColor, blur, children, containerElementId, displayNone, onClose, visibility, ...props }) => {
 			const theme = useEasyFlexTheme();
+
+			const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 			const backgroundElement = useRef<HTMLDivElement>(null);
 
@@ -62,6 +65,7 @@ export const createModal = <CustomColor extends CustomName>() => {
 					data-background-color={processedBackgroundColor}
 					data-blur={processedBlur}
 					onClick={handleClick}
+					{...miscStyleProps}
 					{...props}
 				>
 					{children}

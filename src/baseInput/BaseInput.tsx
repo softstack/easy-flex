@@ -6,6 +6,7 @@ import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps }
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledInput = styled.input<
@@ -14,6 +15,7 @@ const StyledInput = styled.input<
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		MiscStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
@@ -23,6 +25,7 @@ const StyledInput = styled.input<
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${miscStyle}
 	${sizeStyle}
 
 	&::placeholder {
@@ -47,6 +50,7 @@ export interface BaseInputProps<
 		DistanceProps<CustomDistance>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }
@@ -89,6 +93,7 @@ export const createBaseInput = <
 					borderStyle,
 					borderWidth,
 					color,
+					displayNone,
 					flex,
 					fontFamily,
 					fontSize,
@@ -122,6 +127,7 @@ export const createBaseInput = <
 					round,
 					shrink,
 					underline,
+					visibility,
 					whiteSpace,
 					width,
 					wordBreak,
@@ -163,6 +169,8 @@ export const createBaseInput = <
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+
 				const sizeStyleProps = useSizeStyleProps({
 					fullHeight,
 					fullWidth,
@@ -184,6 +192,7 @@ export const createBaseInput = <
 						{...distanceStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...miscStyleProps}
 						{...sizeStyleProps}
 						ref={ref}
 						{...props}

@@ -6,9 +6,10 @@ import { DistanceProps } from '../utils/distance';
 import { FlexContainerProps } from '../utils/flexContainer';
 import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
+import { MiscProps } from '../utils/misc';
 import { OverflowProps } from '../utils/overflow';
 import { SizeProps } from '../utils/size';
-export interface BaseFlexProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, FlexContainerProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, DistanceProps<CustomDistance>, OverflowProps, SizeProps<CustomHeight, CustomWidth> {
+export interface BaseFlexProps<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, DistanceProps<CustomDistance>, FlexContainerProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, MiscProps, OverflowProps, SizeProps<CustomHeight, CustomWidth> {
     /** Component's html tag. */
     element?: Falsifiable<BaseFlexElement>;
 }

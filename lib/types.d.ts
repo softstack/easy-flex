@@ -34,6 +34,7 @@ export declare type ObjectFit = GlobalValue | 'contain' | 'cover' | 'fill' | 'no
 export declare type Opacity = GlobalValue | Percent | number;
 export declare type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'visible';
 export declare type TextAlign = GlobalValue | 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
+export declare type Visibility = GlobalValue | 'collapse' | 'hidden' | 'visible';
 export declare type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 export declare type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 'normal';
 export declare type CustomName = `_${string}`;

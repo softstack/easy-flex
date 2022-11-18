@@ -4,6 +4,7 @@ import { CustomName, Falsifiable, ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledImg = styled.img<
@@ -12,6 +13,7 @@ const StyledImg = styled.img<
 	} & BorderStyleProps &
 		ColorStyleProps &
 		MarginStyleProps &
+		MiscStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
@@ -20,6 +22,7 @@ const StyledImg = styled.img<
 	${borderStyle}
 	${colorStyle}
 	${marginStyle}
+	${miscStyle}
 	${sizeStyle}
 `;
 
@@ -34,6 +37,7 @@ export interface ImgProps<
 		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
 		MarginProps<CustomDistance>,
+		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	objectFit?: Falsifiable<ObjectFit>;
 }
@@ -59,6 +63,7 @@ export const createImg = <
 					borderStyle,
 					borderWidth,
 					color,
+					displayNone,
 					fullHeight,
 					fullWidth,
 					height,
@@ -76,6 +81,7 @@ export const createImg = <
 					objectFit,
 					opacity,
 					round,
+					visibility,
 					width,
 					...props
 				},
@@ -95,6 +101,8 @@ export const createImg = <
 					marginVertical,
 				});
 
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+
 				const sizeStyleProps = useSizeStyleProps({
 					fullHeight,
 					fullWidth,
@@ -112,6 +120,7 @@ export const createImg = <
 						{...borderStyleProps}
 						{...colorStyleProps}
 						{...marginStyleProps}
+						{...miscStyleProps}
 						{...sizeStyleProps}
 						ref={ref}
 						{...props}

@@ -36,6 +36,7 @@ export * from './utils/border';
 export * from './utils/distance';
 export * from './utils/font';
 export * from './utils/margin';
+export * from './utils/misc';
 export * from './utils/padding';
 export * from './utils/size';
 

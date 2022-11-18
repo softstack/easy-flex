@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { AbsoluteSize, Color, CustomName, Falsifiable } from '../types';
-export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement> {
+import { MiscProps } from '../utils/misc';
+export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement>, MiscProps {
     backgroundColor?: Falsifiable<Color<CustomColor>>;
     /** Sets blur for the content covered by the modal background. */
     blur?: AbsoluteSize | boolean;

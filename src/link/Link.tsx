@@ -5,6 +5,7 @@ import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps }
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledA = styled.a<
@@ -14,6 +15,7 @@ const StyledA = styled.a<
 		FlexItemStyleProps &
 		FontStyleProps &
 		MarginStyleProps &
+		MiscStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
@@ -23,6 +25,7 @@ const StyledA = styled.a<
 	${flexItemStyle}
 	${fontStyle}
 	${marginStyle}
+	${miscStyle}
 	${sizeStyle}
 
 	&:hover {
@@ -44,6 +47,7 @@ export interface LinkProps<
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		MarginProps<CustomDistance>,
+		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's hover color. */
 	hoverColor?: Falsifiable<Color<CustomColor>>;
@@ -82,6 +86,7 @@ export const createLink = <
 					basis,
 					children,
 					color = 'inherit',
+					displayNone,
 					flex,
 					fontFamily,
 					fontSize,
@@ -108,6 +113,7 @@ export const createLink = <
 					opacity,
 					shrink,
 					underline,
+					visibility,
 					whiteSpace,
 					width,
 					wordBreak,
@@ -141,6 +147,8 @@ export const createLink = <
 					marginTop,
 					marginVertical,
 				});
+
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
 					fullHeight,
@@ -177,6 +185,7 @@ export const createLink = <
 						{...flexItemStyleProps}
 						{...fontStyleProps}
 						{...marginStyleProps}
+						{...miscStyleProps}
 						{...sizeStyleProps}
 						{...newTabProps}
 						ref={ref}

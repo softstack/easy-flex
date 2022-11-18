@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { CustomName, Distance, Falsifiable, ViewportThreshold } from '../types';
-export interface SpacingProps<CustomDistance extends CustomName, CustomViewportThreshold extends CustomName> extends HTMLAttributes<HTMLDivElement> {
+import { MiscProps } from '../utils/misc';
+export interface SpacingProps<CustomDistance extends CustomName, CustomViewportThreshold extends CustomName> extends HTMLAttributes<HTMLDivElement>, MiscProps {
     /** If true, height and width are flipped if flipping has been enabled. */
     flip?: boolean;
     /** Enables flipping. */

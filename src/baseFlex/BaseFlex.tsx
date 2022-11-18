@@ -12,6 +12,7 @@ import {
 } from '../utils/flexContainer';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
@@ -22,6 +23,7 @@ const style = css<
 		FlexContainerStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		MiscStyleProps &
 		OverflowStyleProps &
 		SizeStyleProps
 >`
@@ -33,6 +35,7 @@ const style = css<
 	${flexContainerStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${miscStyle}
 	${overflowStyle}
 	${sizeStyle}
 `;
@@ -91,10 +94,11 @@ export interface BaseFlexProps<
 > extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
 		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
+		DistanceProps<CustomDistance>,
 		FlexContainerProps<CustomDistance>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
-		DistanceProps<CustomDistance>,
+		MiscProps,
 		OverflowProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's html tag. */
@@ -141,6 +145,7 @@ export const createBaseFlex = <
 					borderWidth,
 					children,
 					color,
+					displayNone,
 					element = 'div',
 					flex,
 					direction,
@@ -180,6 +185,7 @@ export const createBaseFlex = <
 					round,
 					shrink,
 					underline,
+					visibility,
 					whiteSpace,
 					width,
 					wordBreak,
@@ -222,6 +228,8 @@ export const createBaseFlex = <
 				const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
+
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
@@ -270,6 +278,7 @@ export const createBaseFlex = <
 						{...fontStyleProps}
 						{...flexContainerStyleProps}
 						{...flexItemStyleProps}
+						{...miscStyleProps}
 						{...overflowStyleProps}
 						{...sizeStyleProps}
 						ref={ref}

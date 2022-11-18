@@ -6,6 +6,7 @@ import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
@@ -17,17 +18,18 @@ const style = css<
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		MiscStyleProps &
 		OverflowStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
 	text-align: ${({ 'data-align': align }) => align};
-
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${miscStyle}
 	${overflowStyle}
 	${sizeStyle}
 `;
@@ -77,6 +79,7 @@ export interface TextProps<
 		DistanceProps<CustomDistance>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		MiscProps,
 		OverflowProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	/** Component's text alignment. */
@@ -125,6 +128,7 @@ export const createText = <
 					borderWidth,
 					children,
 					color,
+					displayNone,
 					element = 'p',
 					flex,
 					fontFamily,
@@ -161,6 +165,7 @@ export const createText = <
 					round,
 					shrink,
 					underline,
+					visibility,
 					whiteSpace,
 					width,
 					wordBreak,
@@ -201,6 +206,8 @@ export const createText = <
 					paddingTop,
 					paddingVertical,
 				});
+
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
@@ -243,6 +250,7 @@ export const createText = <
 						{...distanceStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...miscStyleProps}
 						{...overflowStyleProps}
 						{...sizeStyleProps}
 						ref={ref}

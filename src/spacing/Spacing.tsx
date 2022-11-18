@@ -2,8 +2,9 @@ import React, { forwardRef, HTMLAttributes, memo, useMemo } from 'react';
 import styled from 'styled-components';
 import { AbsoluteSize, CustomName, Distance, Falsifiable, ViewportThreshold } from '../types';
 import { defalsify, getDistance, getViewportThreshold, useDimension, useEasyFlexTheme } from '../utils/base';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 
-const StyledDiv = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize }>`
+const StyledDiv = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize } & MiscStyleProps>`
 	box-sizing: border-box;
 	display: flex;
 	background-color: transparent;
@@ -15,10 +16,12 @@ const StyledDiv = styled.div<{ 'data-height': AbsoluteSize; 'data-width': Absolu
 	min-width: ${({ 'data-width': width }) => width};
 	width: ${({ 'data-width': width }) => width};
 	max-width: ${({ 'data-width': width }) => width};
+	${miscStyle}
 `;
 
 export interface SpacingProps<CustomDistance extends CustomName, CustomViewportThreshold extends CustomName>
-	extends HTMLAttributes<HTMLDivElement> {
+	extends HTMLAttributes<HTMLDivElement>,
+		MiscProps {
 	/** If true, height and width are flipped if flipping has been enabled. */
 	flip?: boolean;
 	/** Enables flipping. */
@@ -34,7 +37,7 @@ export interface SpacingProps<CustomDistance extends CustomName, CustomViewportT
 export const createSpacing = <CustomDistance extends CustomName, CustomViewportThreshold extends CustomName>() => {
 	const Spacing = memo(
 		forwardRef<HTMLDivElement, SpacingProps<CustomDistance, CustomViewportThreshold>>(
-			({ flip, flipEnabled = false, viewport, height, width, ...props }, ref) => {
+			({ displayNone, flip, flipEnabled = false, viewport, height, visibility, width, ...props }, ref) => {
 				const theme = useEasyFlexTheme();
 				const { width: displayWidth } = useDimension();
 
@@ -51,6 +54,8 @@ export const createSpacing = <CustomDistance extends CustomName, CustomViewportT
 					[displayWidth, flip, flipEnabled, height, theme, viewport, width]
 				);
 
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+
 				const processedWidth = useMemo<AbsoluteSize>(
 					() =>
 						flipEnabled &&
@@ -64,7 +69,15 @@ export const createSpacing = <CustomDistance extends CustomName, CustomViewportT
 					[displayWidth, flip, flipEnabled, height, theme, viewport, width]
 				);
 
-				return <StyledDiv data-height={processedHeight} data-width={processedWidth} ref={ref} {...props} />;
+				return (
+					<StyledDiv
+						data-height={processedHeight}
+						data-width={processedWidth}
+						{...miscStyleProps}
+						ref={ref}
+						{...props}
+					/>
+				);
 			}
 		)
 	);

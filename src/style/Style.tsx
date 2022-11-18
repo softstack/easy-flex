@@ -3,11 +3,13 @@ import styled, { css } from 'styled-components';
 import { CustomName, Falsifiable, StyleElement } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 
-const style = css<ColorStyleProps & FontStyleProps>`
+const style = css<ColorStyleProps & FontStyleProps & MiscStyleProps>`
 	box-sizing: border-box;
 	${colorStyle}
 	${fontStyle}
+	${miscStyle}
 `;
 
 const StyledB = styled.b`
@@ -82,7 +84,8 @@ export interface StyleProps<
 	CustomLineHeight extends CustomName
 > extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>,
 		ColorProps<CustomColor>,
-		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> {
+		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		MiscProps {
 	/** Component's html tag. */
 	element?: Falsifiable<StyleElement>;
 }
@@ -104,6 +107,7 @@ export const createStyle = <
 					backgroundColor,
 					children,
 					color,
+					displayNone,
 					element = 'span',
 					fontFamily,
 					fontSize,
@@ -112,6 +116,7 @@ export const createStyle = <
 					lineHeight,
 					opacity,
 					underline,
+					visibility,
 					whiteSpace,
 					wordBreak,
 				},
@@ -129,6 +134,8 @@ export const createStyle = <
 					whiteSpace,
 					wordBreak,
 				});
+
+				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const Element = useMemo(() => {
 					switch (element) {
@@ -169,7 +176,7 @@ export const createStyle = <
 				}, [element]);
 
 				return (
-					<Element {...colorStyleProps} {...fontStyleProps} ref={ref}>
+					<Element {...colorStyleProps} {...fontStyleProps} {...miscStyleProps} ref={ref}>
 						{children}
 					</Element>
 				);
