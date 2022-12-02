@@ -1,36 +1,57 @@
 import React, { forwardRef, HTMLAttributes, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { AbsoluteSize, BaseGridElement, CustomName, Distance, Falsifiable } from '../types';
+import {
+	AbsoluteSize,
+	AlignContent,
+	AlignItems,
+	BaseGridElement,
+	CustomName,
+	Distance,
+	Falsifiable,
+	JustifyContent,
+	JustifyItems,
+} from '../types';
 import { getDistance, ifDefined, useEasyFlexTheme } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
 	{
+		'data-align-content': AlignContent | undefined;
+		'data-align-items': AlignItems | undefined;
 		'data-column-gap': AbsoluteSize | undefined;
+		'data-justify-content': JustifyContent | undefined;
+		'data-justify-items': JustifyItems | undefined;
 		'data-row-gap': AbsoluteSize | undefined;
 	} & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		GridItemStyleProps &
 		MiscStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
 	display: grid;
+	align-content: ${({ 'data-align-content': alignContent }) => alignContent};
+	align-items: ${({ 'data-align-items': alignItems }) => alignItems};
 	column-gap: ${({ 'data-column-gap': columnGap }) => columnGap};
+	justify-content: ${({ 'data-justify-content': justifyContent }) => justifyContent};
+	justify-items: ${({ 'data-justify-items': justifyItems }) => justifyItems};
 	row-gap: ${({ 'data-row-gap': rowGap }) => rowGap};
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${gridItemStyle}
 	${miscStyle}
 	${sizeStyle}
 `;
@@ -92,11 +113,16 @@ export interface BaseGridProps<
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		DistanceProps<CustomDistance>,
+		GridItemProps,
 		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
+	alignContent?: Falsifiable<AlignContent>;
+	alignItems?: Falsifiable<AlignItems>;
 	columnGap?: Falsifiable<Distance<CustomDistance>>;
 	/** Component's html tag. */
 	element?: Falsifiable<BaseGridElement>;
+	justifyContent?: Falsifiable<JustifyContent>;
+	justifyItems?: Falsifiable<JustifyItems>;
 	rowGap?: Falsifiable<Distance<CustomDistance>>;
 }
 
@@ -130,6 +156,8 @@ export const createBaseGrid = <
 		>(
 			(
 				{
+					alignContent,
+					alignItems,
 					alignSelf,
 					backgroundColor,
 					basis,
@@ -151,6 +179,9 @@ export const createBaseGrid = <
 					grow,
 					height,
 					italic,
+					justifyContent,
+					justifyItems,
+					justifySelf,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -219,6 +250,8 @@ export const createBaseGrid = <
 					paddingVertical,
 				});
 
+				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
+
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
@@ -232,9 +265,29 @@ export const createBaseGrid = <
 					width,
 				});
 
+				const processedAlignContent = useMemo<AlignContent | undefined>(
+					() => ifDefined(alignContent, (alignContent) => alignContent),
+					[alignContent]
+				);
+
+				const processedAlignItems = useMemo<AlignItems | undefined>(
+					() => ifDefined(alignItems, (alignItems) => alignItems),
+					[alignItems]
+				);
+
 				const processedColumnGap = useMemo<AbsoluteSize | undefined>(
 					() => ifDefined(columnGap, (columnGap) => getDistance(theme, columnGap)),
 					[columnGap, theme]
+				);
+
+				const processedJustifyContent = useMemo<JustifyContent | undefined>(
+					() => ifDefined(justifyContent, (justifyContent) => justifyContent),
+					[justifyContent]
+				);
+
+				const processedJustifyItems = useMemo<JustifyItems | undefined>(
+					() => ifDefined(justifyItems, (justifyItems) => justifyItems),
+					[justifyItems]
 				);
 
 				const processedRowGap = useMemo<AbsoluteSize | undefined>(
@@ -270,13 +323,18 @@ export const createBaseGrid = <
 
 				return (
 					<Element
+						data-align-content={processedAlignContent}
+						data-align-items={processedAlignItems}
 						data-column-gap={processedColumnGap}
+						data-justify-content={processedJustifyContent}
+						data-justify-items={processedJustifyItems}
 						data-row-gap={processedRowGap}
 						{...borderStyleProps}
 						{...colorStyleProps}
 						{...distanceStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...gridItemStyleProps}
 						{...miscStyleProps}
 						{...sizeStyleProps}
 						ref={ref}

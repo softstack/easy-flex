@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CustomName, Falsifiable, ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
+import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
@@ -12,6 +13,7 @@ const StyledImg = styled.img<
 		'data-object-fit': Falsifiable<ObjectFit> | undefined;
 	} & BorderStyleProps &
 		ColorStyleProps &
+		GridItemStyleProps &
 		MarginStyleProps &
 		MiscStyleProps &
 		SizeStyleProps
@@ -21,6 +23,7 @@ const StyledImg = styled.img<
 	object-fit: ${({ 'data-object-fit': objectFit }) => objectFit};
 	${borderStyle}
 	${colorStyle}
+	${gridItemStyle}
 	${marginStyle}
 	${miscStyle}
 	${sizeStyle}
@@ -36,6 +39,7 @@ export interface ImgProps<
 > extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'color' | 'height' | 'width'>,
 		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
+		GridItemProps,
 		MarginProps<CustomDistance>,
 		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
@@ -67,6 +71,7 @@ export const createImg = <
 					fullHeight,
 					fullWidth,
 					height,
+					justifySelf,
 					margin,
 					marginBottom,
 					marginHorizontal,
@@ -90,6 +95,8 @@ export const createImg = <
 				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+
+				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
 				const marginStyleProps = useMarginStyleProps({
 					margin,
@@ -119,6 +126,7 @@ export const createImg = <
 						data-object-fit={objectFit}
 						{...borderStyleProps}
 						{...colorStyleProps}
+						{...gridItemStyleProps}
 						{...marginStyleProps}
 						{...miscStyleProps}
 						{...sizeStyleProps}

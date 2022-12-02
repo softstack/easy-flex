@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor, CustomName, Falsifiable } from '../types';
 import { isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
-import { MiscProps, useMiscStyleProps } from '../utils/misc';
+import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 
-const Background = styled.div<{
-	'data-background-color': CssColor;
-	'data-blur': AbsoluteSize | undefined;
-}>`
+const Background = styled.div<
+	{
+		'data-background-color': CssColor;
+		'data-blur': AbsoluteSize | undefined;
+	} & MiscStyleProps
+>`
 	box-sizing: border-box;
 	position: fixed;
 	top: 0;
@@ -24,6 +26,7 @@ const Background = styled.div<{
 	justify-content: center;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	backdrop-filter: ${({ 'data-blur': blur }) => `blur(${blur})`};
+	${miscStyle}
 `;
 
 export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement>, MiscProps {

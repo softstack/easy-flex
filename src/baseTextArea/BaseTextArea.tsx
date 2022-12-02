@@ -6,6 +6,7 @@ import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps }
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
@@ -15,6 +16,7 @@ const StyledTextArea = styled.textarea<
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		GridItemStyleProps &
 		MiscStyleProps &
 		SizeStyleProps
 >`
@@ -25,6 +27,7 @@ const StyledTextArea = styled.textarea<
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${gridItemStyle}
 	${miscStyle}
 	${sizeStyle}
 
@@ -50,6 +53,7 @@ export interface BaseTextAreaProps<
 		DistanceProps<CustomDistance>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		GridItemProps,
 		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
@@ -104,6 +108,7 @@ export const createBaseTextArea = <
 					grow,
 					height,
 					italic,
+					justifySelf,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -170,6 +175,8 @@ export const createBaseTextArea = <
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
+				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
+
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
@@ -193,6 +200,7 @@ export const createBaseTextArea = <
 						{...distanceStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...gridItemStyleProps}
 						{...miscStyleProps}
 						{...sizeStyleProps}
 						ref={ref}

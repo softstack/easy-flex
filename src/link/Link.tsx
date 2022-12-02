@@ -4,6 +4,7 @@ import { Color, CssColor, CustomName, Falsifiable } from '../types';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
@@ -14,6 +15,7 @@ const StyledA = styled.a<
 	} & ColorStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		GridItemStyleProps &
 		MarginStyleProps &
 		MiscStyleProps &
 		SizeStyleProps
@@ -24,6 +26,7 @@ const StyledA = styled.a<
 	${colorStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${gridItemStyle}
 	${marginStyle}
 	${miscStyle}
 	${sizeStyle}
@@ -46,6 +49,7 @@ export interface LinkProps<
 		ColorProps<CustomColor>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		GridItemProps,
 		MarginProps<CustomDistance>,
 		MiscProps,
 		SizeProps<CustomHeight, CustomWidth> {
@@ -97,6 +101,7 @@ export const createLink = <
 					height,
 					hoverColor,
 					italic,
+					justifySelf,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -137,6 +142,8 @@ export const createLink = <
 					whiteSpace,
 					wordBreak,
 				});
+
+				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
 				const marginStyleProps = useMarginStyleProps({
 					margin,
@@ -184,6 +191,7 @@ export const createLink = <
 						{...colorStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...gridItemStyleProps}
 						{...marginStyleProps}
 						{...miscStyleProps}
 						{...sizeStyleProps}

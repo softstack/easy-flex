@@ -6,6 +6,7 @@ import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
+import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
@@ -18,6 +19,7 @@ const style = css<
 		DistanceStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
+		GridItemStyleProps &
 		MiscStyleProps &
 		OverflowStyleProps &
 		SizeStyleProps
@@ -29,6 +31,7 @@ const style = css<
 	${distanceStyle}
 	${flexItemStyle}
 	${fontStyle}
+	${gridItemStyle}
 	${miscStyle}
 	${overflowStyle}
 	${sizeStyle}
@@ -79,6 +82,7 @@ export interface TextProps<
 		DistanceProps<CustomDistance>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
+		GridItemProps,
 		MiscProps,
 		OverflowProps,
 		SizeProps<CustomHeight, CustomWidth> {
@@ -139,6 +143,7 @@ export const createText = <
 					grow,
 					height,
 					italic,
+					justifySelf,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -207,6 +212,8 @@ export const createText = <
 					paddingVertical,
 				});
 
+				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
+
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
@@ -250,6 +257,7 @@ export const createText = <
 						{...distanceStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
+						{...gridItemStyleProps}
 						{...miscStyleProps}
 						{...overflowStyleProps}
 						{...sizeStyleProps}

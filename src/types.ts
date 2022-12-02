@@ -30,9 +30,29 @@ export type Size = AbsoluteSize | Percent;
 
 export type ElementSize = GlobalValue | Size | 'fit-content';
 
-export type AlignItems = GlobalValue | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+// grid only
+export type AlignContent = 'center' | 'end' | 'space-around' | 'space-between' | 'space-evenly' | 'start' | 'stretch';
 
-export type AlignSelf = GlobalValue | 'auto' | 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+export type AlignItems =
+	| GlobalValue
+	| 'baseline'
+	| 'center'
+	| 'end' // grid only
+	| 'flex-end'
+	| 'flex-start'
+	| 'start' // grid only
+	| 'stretch';
+
+export type AlignSelf =
+	| GlobalValue
+	| 'auto'
+	| 'baseline'
+	| 'center'
+	| 'end' // grid only
+	| 'flex-end'
+	| 'flex-start'
+	| 'start' // grid only
+	| 'stretch';
 
 export type BorderStyle =
 	| GlobalValue
@@ -228,14 +248,22 @@ export type FlexDirection = GlobalValue | 'column' | 'column-reverse' | 'row' | 
 
 export type CssFontWeight = GlobalValue | number | 'bold' | 'bolder' | 'lighter' | 'normal';
 
+// grid only
 export type JustifyContent =
 	| GlobalValue
 	| 'center'
+	| 'end' // grid only
 	| 'flex-end'
 	| 'flex-start'
 	| 'space-around'
 	| 'space-between'
-	| 'space-evenly';
+	| 'space-evenly'
+	| 'start'; // grid only
+
+// grid only
+export type JustifyItems = GlobalValue | 'end' | 'center' | 'start' | 'stretch';
+
+export type JustifySelf = GlobalValue | 'center' | 'end' | 'start' | 'stretch';
 
 export type CssLineHeight = GlobalValue | Percent | number | 'normal';
 
