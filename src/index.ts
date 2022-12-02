@@ -123,7 +123,6 @@ export const createEasyFlex = <
 		CustomFontWeight,
 		CustomHeight,
 		CustomLineHeight,
-		CustomViewportThreshold,
 		CustomWidth
 	>(),
 	EasyFlexProvider: createEasyFlexProvider<
@@ -161,10 +160,9 @@ export const createEasyFlex = <
 		CustomFontWeight,
 		CustomHeight,
 		CustomLineHeight,
-		CustomViewportThreshold,
 		CustomWidth
 	>(),
-	Spacing: createSpacing<CustomDistance, CustomViewportThreshold>(),
+	Spacing: createSpacing<CustomDistance>(),
 	Style: createStyle<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>(),
 	Text: createText<
 		CustomBorderRadius,

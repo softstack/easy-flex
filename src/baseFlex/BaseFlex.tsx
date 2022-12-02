@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { BaseFlexElement, CustomName, Falsifiable } from '../types';
+import { defalsify } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -150,7 +151,7 @@ export const createBaseFlex = <
 					children,
 					color,
 					displayNone,
-					element = 'div',
+					element,
 					flex,
 					direction,
 					fontFamily,
@@ -252,13 +253,12 @@ export const createBaseFlex = <
 				});
 
 				const Element = useMemo(() => {
-					switch (element) {
+					switch (defalsify(element) ?? 'div') {
 						case 'article':
 							return StyledArticle;
 						case 'aside':
 							return StyledAside;
 						case 'div':
-						case false:
 							return StyledDiv;
 						case 'figure':
 							return StyledFigure;

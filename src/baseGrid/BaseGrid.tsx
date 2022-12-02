@@ -11,7 +11,7 @@ import {
 	JustifyContent,
 	JustifyItems,
 } from '../types';
-import { getDistance, ifDefined, useEasyFlexTheme } from '../utils/base';
+import { defalsify, getDistance, ifDefined, useEasyFlexTheme } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -169,7 +169,7 @@ export const createBaseGrid = <
 					color,
 					columnGap,
 					displayNone,
-					element = 'div',
+					element,
 					flex,
 					fontFamily,
 					fontSize,
@@ -296,13 +296,12 @@ export const createBaseGrid = <
 				);
 
 				const Element = useMemo(() => {
-					switch (element) {
+					switch (defalsify(element) ?? 'div') {
 						case 'article':
 							return StyledArticle;
 						case 'aside':
 							return StyledAside;
 						case 'div':
-						case false:
 							return StyledDiv;
 						case 'figure':
 							return StyledFigure;

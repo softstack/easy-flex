@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { CustomName, Falsifiable, TextAlign, TextElement } from '../types';
+import { defalsify } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -133,7 +134,7 @@ export const createText = <
 					children,
 					color,
 					displayNone,
-					element = 'p',
+					element,
 					flex,
 					fontFamily,
 					fontSize,
@@ -230,7 +231,7 @@ export const createText = <
 				});
 
 				const Element = useMemo(() => {
-					switch (element) {
+					switch (defalsify(element) ?? 'p') {
 						case 'h1':
 							return StyledH1;
 						case 'h2':
@@ -244,7 +245,6 @@ export const createText = <
 						case 'h6':
 							return StyledH6;
 						case 'p':
-						case false:
 							return StyledP;
 					}
 				}, [element]);

@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, forwardRef, memo } from 'react';
 import styled from 'styled-components';
 import { CustomName } from '../types';
+import { defalsify } from '../utils/base';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -163,7 +164,7 @@ export const createBaseButton = <
 				{
 					align,
 					alignSelf,
-					backgroundColor = 'transparent',
+					backgroundColor,
 					basis,
 					borderColor,
 					borderRadius,
@@ -171,7 +172,7 @@ export const createBaseButton = <
 					borderWidth,
 					children,
 					color,
-					direction = 'row',
+					direction,
 					displayNone,
 					flex,
 					fontFamily,
@@ -221,7 +222,11 @@ export const createBaseButton = <
 			) => {
 				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+				const colorStyleProps = useColorStyleProps({
+					backgroundColor: defalsify(backgroundColor) ?? 'transparent',
+					color,
+					opacity,
+				});
 
 				const distanceStyleProps = useDistanceStyleProps({
 					margin,
@@ -251,7 +256,12 @@ export const createBaseButton = <
 					wordBreak,
 				});
 
-				const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
+				const flexContainerStyleProps = useFlexContainerStyleProps({
+					align,
+					direction: defalsify(direction) ?? 'row',
+					gap,
+					justify,
+				});
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

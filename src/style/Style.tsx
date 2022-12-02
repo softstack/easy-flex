@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { CustomName, Falsifiable, StyleElement } from '../types';
+import { defalsify } from '../utils/base';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
@@ -108,7 +109,7 @@ export const createStyle = <
 					children,
 					color,
 					displayNone,
-					element = 'span',
+					element,
 					fontFamily,
 					fontSize,
 					fontWeight,
@@ -138,7 +139,7 @@ export const createStyle = <
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const Element = useMemo(() => {
-					switch (element) {
+					switch (defalsify(element) ?? 'span') {
 						case 'b':
 							return StyledB;
 						case 'cite':
@@ -160,7 +161,6 @@ export const createStyle = <
 						case 'small':
 							return StyledSmall;
 						case 'span':
-						case false:
 							return StyledSpan;
 						case 'strong':
 							return StyledStrong;

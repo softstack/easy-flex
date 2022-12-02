@@ -1,6 +1,7 @@
 import React, { AnchorHTMLAttributes, forwardRef, memo, useMemo } from 'react';
 import styled from 'styled-components';
 import { Color, CssColor, CustomName, Falsifiable } from '../types';
+import { defalsify } from '../utils/base';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
@@ -89,7 +90,7 @@ export const createLink = <
 					backgroundColor,
 					basis,
 					children,
-					color = 'inherit',
+					color,
 					displayNone,
 					flex,
 					fontFamily,
@@ -126,7 +127,7 @@ export const createLink = <
 				},
 				ref
 			) => {
-				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color: defalsify(color) ?? 'inherit', opacity });
 
 				const processedHoverColor = useColor(hoverColor);
 
