@@ -85,6 +85,7 @@ const StyledSummary = styled.summary`
 `;
 
 export interface BaseFlexProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -105,12 +106,13 @@ export interface BaseFlexProps<
 		GridItemProps,
 		MiscProps,
 		OverflowProps,
-		SizeProps<CustomHeight, CustomWidth> {
+		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	/** Component's html tag. */
 	element?: Falsifiable<BaseFlexElement>;
 }
 
 export const createBaseFlex = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -126,6 +128,7 @@ export const createBaseFlex = <
 		forwardRef<
 			HTMLDivElement,
 			BaseFlexProps<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,
@@ -142,6 +145,7 @@ export const createBaseFlex = <
 				{
 					align,
 					alignSelf,
+					aspectRatio,
 					backgroundColor,
 					basis,
 					borderColor,
@@ -242,6 +246,7 @@ export const createBaseFlex = <
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
 				const sizeStyleProps = useSizeStyleProps({
+					aspectRatio,
 					fullHeight,
 					fullWidth,
 					height,

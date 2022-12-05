@@ -2,11 +2,13 @@ import { Context, useContext, useEffect, useMemo, useState } from 'react';
 import { colorKeywords, colorNames, EasyFlexContext, globalValues, themeSizes } from '../constants';
 import {
 	AbsoluteSize,
+	AspectRatio,
 	BorderRadius,
 	BorderWidth,
 	Color,
 	ColorKeyword,
 	ColorName,
+	CssAspectRatio,
 	CssColor,
 	CssFontWeight,
 	CssLineHeight,
@@ -171,7 +173,8 @@ export const sizeToNumber = (value: Size): number => {
 	return percentToNumber(value);
 };
 
-export const getBorderRadius = <
+export const getAspectRatio = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -185,6 +188,38 @@ export const getBorderRadius = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>,
+	aspectRatio: AspectRatio<CustomAspectRatio>
+): CssAspectRatio => (isCustomName(aspectRatio) ? theme.size.aspectRatio[aspectRatio] : aspectRatio);
+
+export const getBorderRadius = <
+	CustomAspectRatio extends CustomName,
+	CustomBorderRadius extends CustomName,
+	CustomBorderWidth extends CustomName,
+	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
+	CustomFontFamily extends CustomName,
+	CustomFontSize extends CustomName,
+	CustomFontWeight extends CustomName,
+	CustomHeight extends CustomName,
+	CustomLineHeight extends CustomName,
+	CustomViewportThreshold extends CustomName,
+	CustomWidth extends CustomName
+>(
+	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -201,6 +236,7 @@ export const getBorderRadius = <
 ): Size => (isThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius);
 
 export const getBorderWidth = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -214,6 +250,7 @@ export const getBorderWidth = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -230,6 +267,7 @@ export const getBorderWidth = <
 ): AbsoluteSize => (isThemeSize(borderWidth) ? theme.border.width[borderWidth] : borderWidth);
 
 export const getColor = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -243,6 +281,7 @@ export const getColor = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -259,6 +298,7 @@ export const getColor = <
 ): CssColor => (isCustomName(color) ? theme.color[color] : color);
 
 export const getDistance = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -272,6 +312,7 @@ export const getDistance = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -288,6 +329,7 @@ export const getDistance = <
 ): AbsoluteSize => (isThemeSize(distance) ? theme.distance[distance] : distance);
 
 export const getFontSize = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -301,6 +343,7 @@ export const getFontSize = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -317,6 +360,7 @@ export const getFontSize = <
 ): Size => (isThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize);
 
 export const getFontWeight = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -330,6 +374,7 @@ export const getFontWeight = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -346,6 +391,7 @@ export const getFontWeight = <
 ): CssFontWeight => (typeof fontWeight === 'number' ? fontWeight : theme.font.weight[fontWeight]);
 
 export const getHeight = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -359,6 +405,7 @@ export const getHeight = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -375,6 +422,7 @@ export const getHeight = <
 ): ElementSize => (isThemeSize(height) ? theme.size.height[height] : height);
 
 export const getLineHeight = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -388,6 +436,7 @@ export const getLineHeight = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -404,6 +453,7 @@ export const getLineHeight = <
 ): CssLineHeight => (isThemeSize(lineHeight) ? theme.font.lineHeight[lineHeight] : lineHeight);
 
 export const getViewportThreshold = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -417,6 +467,7 @@ export const getViewportThreshold = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -433,6 +484,7 @@ export const getViewportThreshold = <
 ): number => (typeof viewportThreshold === 'number' ? viewportThreshold : theme.viewport.threshold[viewportThreshold]);
 
 export const getWidth = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -446,6 +498,7 @@ export const getWidth = <
 	CustomWidth extends CustomName
 >(
 	theme: EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -462,6 +515,7 @@ export const getWidth = <
 ): ElementSize => (isThemeSize(width) ? theme.size.width[width] : width);
 
 export const useEasyFlexTheme = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -474,6 +528,7 @@ export const useEasyFlexTheme = <
 	CustomViewportThreshold extends CustomName,
 	CustomWidth extends CustomName
 >(): EasyFlexTheme<
+	CustomAspectRatio,
 	CustomBorderRadius,
 	CustomBorderWidth,
 	CustomColor,
@@ -489,6 +544,7 @@ export const useEasyFlexTheme = <
 	useContext(
 		EasyFlexContext as unknown as Context<
 			EasyFlexTheme<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,

@@ -1,5 +1,6 @@
-import { CustomName, ElementSize, Falsifiable, Height, Width } from '../types';
-export interface SizeProps<CustomHeight extends CustomName, CustomWidth extends CustomName> {
+import { AspectRatio, CssAspectRatio, CustomName, ElementSize, Falsifiable, Height, Width } from '../types';
+export interface SizeProps<CustomAspectRatio extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> {
+    aspectRatio?: Falsifiable<AspectRatio<CustomAspectRatio>>;
     /** Sets the component's height to 100% if true. */
     fullHeight?: boolean;
     /** Sets the component's width to 100% if true. */
@@ -18,6 +19,7 @@ export interface SizeProps<CustomHeight extends CustomName, CustomWidth extends 
     width?: Falsifiable<Width<CustomWidth>>;
 }
 export interface SizeStyleProps {
+    'data-aspect-ratio': CssAspectRatio | undefined;
     'data-height': ElementSize | undefined;
     'data-height-max': ElementSize | undefined;
     'data-height-min': ElementSize | undefined;
@@ -25,7 +27,8 @@ export interface SizeStyleProps {
     'data-width-max': ElementSize | undefined;
     'data-width-min': ElementSize | undefined;
 }
-export declare const useSize: <CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>({ fullHeight, fullWidth, height, maxHeight, maxWidth, minHeight, minWidth, width, }: SizeProps<CustomHeight, CustomWidth>) => {
+export declare const useSize: <CustomAspectRatio extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>({ aspectRatio, fullHeight, fullWidth, height, maxHeight, maxWidth, minHeight, minWidth, width, }: SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>) => {
+    aspectRatio: CssAspectRatio | undefined;
     height: ElementSize | undefined;
     maxHeight: ElementSize | undefined;
     maxWidth: ElementSize | undefined;
@@ -33,5 +36,5 @@ export declare const useSize: <CustomHeight extends `_${string}`, CustomWidth ex
     minWidth: ElementSize | undefined;
     width: ElementSize | undefined;
 };
-export declare const useSizeStyleProps: <CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>(props: SizeProps<CustomHeight, CustomWidth>) => SizeStyleProps;
+export declare const useSizeStyleProps: <CustomAspectRatio extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>(props: SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>) => SizeStyleProps;
 export declare const sizeStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<SizeStyleProps, any>>;

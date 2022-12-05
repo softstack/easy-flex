@@ -56,6 +56,7 @@ const StyledButton = styled.button<
 `;
 
 export type BaseButtonProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -76,9 +77,10 @@ export type BaseButtonProps<
 	GridItemProps &
 	MiscProps &
 	OverflowProps &
-	SizeProps<CustomHeight, CustomWidth>;
+	SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>;
 
 export type ExternalBaseButtonProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -91,6 +93,7 @@ export type ExternalBaseButtonProps<
 	CustomWidth extends CustomName
 > = Omit<
 	BaseButtonProps<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -133,6 +136,7 @@ export type ExternalBaseButtonProps<
 >;
 
 export const createBaseButton = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -148,6 +152,7 @@ export const createBaseButton = <
 		forwardRef<
 			HTMLButtonElement,
 			BaseButtonProps<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,
@@ -164,6 +169,7 @@ export const createBaseButton = <
 				{
 					align,
 					alignSelf,
+					aspectRatio,
 					backgroundColor,
 					basis,
 					borderColor,
@@ -272,6 +278,7 @@ export const createBaseButton = <
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
 				const sizeStyleProps = useSizeStyleProps({
+					aspectRatio,
 					fullHeight,
 					fullWidth,
 					height,

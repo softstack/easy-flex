@@ -97,6 +97,7 @@ const StyledSummary = styled.summary`
 `;
 
 export interface BaseGridProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -115,7 +116,7 @@ export interface BaseGridProps<
 		DistanceProps<CustomDistance>,
 		GridItemProps,
 		MiscProps,
-		SizeProps<CustomHeight, CustomWidth> {
+		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	alignContent?: Falsifiable<AlignContent>;
 	alignItems?: Falsifiable<AlignItems>;
 	columnGap?: Falsifiable<Distance<CustomDistance>>;
@@ -127,6 +128,7 @@ export interface BaseGridProps<
 }
 
 export const createBaseGrid = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -142,6 +144,7 @@ export const createBaseGrid = <
 		forwardRef<
 			HTMLDivElement,
 			BaseGridProps<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,
@@ -159,6 +162,7 @@ export const createBaseGrid = <
 					alignContent,
 					alignItems,
 					alignSelf,
+					aspectRatio,
 					backgroundColor,
 					basis,
 					borderColor,
@@ -255,6 +259,7 @@ export const createBaseGrid = <
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
+					aspectRatio,
 					fullHeight,
 					fullWidth,
 					height,

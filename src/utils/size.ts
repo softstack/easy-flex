@@ -1,9 +1,14 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { CustomName, ElementSize, Falsifiable, Height, Width } from '../types';
-import { getHeight, getWidth, ifDefined, useEasyFlexTheme } from './base';
+import { AspectRatio, CssAspectRatio, CustomName, ElementSize, Falsifiable, Height, Width } from '../types';
+import { getAspectRatio, getHeight, getWidth, ifDefined, useEasyFlexTheme } from './base';
 
-export interface SizeProps<CustomHeight extends CustomName, CustomWidth extends CustomName> {
+export interface SizeProps<
+	CustomAspectRatio extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+> {
+	aspectRatio?: Falsifiable<AspectRatio<CustomAspectRatio>>;
 	/** Sets the component's height to 100% if true. */
 	fullHeight?: boolean;
 	/** Sets the component's width to 100% if true. */
@@ -23,6 +28,7 @@ export interface SizeProps<CustomHeight extends CustomName, CustomWidth extends 
 }
 
 export interface SizeStyleProps {
+	'data-aspect-ratio': CssAspectRatio | undefined;
 	'data-height': ElementSize | undefined;
 	'data-height-max': ElementSize | undefined;
 	'data-height-min': ElementSize | undefined;
@@ -31,7 +37,12 @@ export interface SizeStyleProps {
 	'data-width-min': ElementSize | undefined;
 }
 
-export const useSize = <CustomHeight extends CustomName, CustomWidth extends CustomName>({
+export const useSize = <
+	CustomAspectRatio extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>({
+	aspectRatio,
 	fullHeight = false,
 	fullWidth = false,
 	height,
@@ -40,7 +51,8 @@ export const useSize = <CustomHeight extends CustomName, CustomWidth extends Cus
 	minHeight,
 	minWidth,
 	width,
-}: SizeProps<CustomHeight, CustomWidth>): {
+}: SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>): {
+	aspectRatio: CssAspectRatio | undefined;
 	height: ElementSize | undefined;
 	maxHeight: ElementSize | undefined;
 	maxWidth: ElementSize | undefined;
@@ -49,6 +61,11 @@ export const useSize = <CustomHeight extends CustomName, CustomWidth extends Cus
 	width: ElementSize | undefined;
 } => {
 	const theme = useEasyFlexTheme();
+
+	const processedAspectRatio = useMemo<CssAspectRatio | undefined>(
+		() => ifDefined(aspectRatio, (aspectRatio) => getAspectRatio(theme, aspectRatio)),
+		[aspectRatio, theme]
+	);
 
 	const processedHeight = useMemo<ElementSize | undefined>(
 		() => (fullHeight ? '100%' : ifDefined(height, (height) => getHeight(theme, height))),
@@ -81,6 +98,7 @@ export const useSize = <CustomHeight extends CustomName, CustomWidth extends Cus
 	);
 
 	return useMemo<{
+		aspectRatio: CssAspectRatio | undefined;
 		height: ElementSize | undefined;
 		maxHeight: ElementSize | undefined;
 		maxWidth: ElementSize | undefined;
@@ -89,6 +107,7 @@ export const useSize = <CustomHeight extends CustomName, CustomWidth extends Cus
 		width: ElementSize | undefined;
 	}>(
 		() => ({
+			aspectRatio: processedAspectRatio,
 			height: processedHeight,
 			maxHeight: processedMaxHeight,
 			maxWidth: processedMaxWidth,
@@ -96,17 +115,30 @@ export const useSize = <CustomHeight extends CustomName, CustomWidth extends Cus
 			minWidth: processedMinWidth,
 			width: processedWidth,
 		}),
-		[processedHeight, processedMaxHeight, processedMaxWidth, processedMinHeight, processedMinWidth, processedWidth]
+		[
+			processedAspectRatio,
+			processedHeight,
+			processedMaxHeight,
+			processedMaxWidth,
+			processedMinHeight,
+			processedMinWidth,
+			processedWidth,
+		]
 	);
 };
 
-export const useSizeStyleProps = <CustomHeight extends CustomName, CustomWidth extends CustomName>(
-	props: SizeProps<CustomHeight, CustomWidth>
+export const useSizeStyleProps = <
+	CustomAspectRatio extends CustomName,
+	CustomHeight extends CustomName,
+	CustomWidth extends CustomName
+>(
+	props: SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>
 ): SizeStyleProps => {
 	const size = useSize(props);
 
 	return useMemo<SizeStyleProps>(
 		() => ({
+			'data-aspect-ratio': size.aspectRatio,
 			'data-height': size.height,
 			'data-height-max': size.maxHeight,
 			'data-height-min': size.minHeight,
@@ -119,6 +151,7 @@ export const useSizeStyleProps = <CustomHeight extends CustomName, CustomWidth e
 };
 
 export const sizeStyle = css<SizeStyleProps>`
+	aspect-ratio: ${({ 'data-aspect-ratio': aspectRatio }) => aspectRatio};
 	height: ${({ 'data-height': height }) => height};
 	max-height: ${({ 'data-height-max': heightMax }) => heightMax};
 	min-height: ${({ 'data-height-min': heightMin }) => heightMin};

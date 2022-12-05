@@ -4,6 +4,7 @@ import { CustomName, FlexDirection } from '../types';
 import { defalsify } from '../utils/base';
 
 export type RowProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -15,6 +16,7 @@ export type RowProps<
 	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > = BaseFlexProps<
+	CustomAspectRatio,
 	CustomBorderRadius,
 	CustomBorderWidth,
 	CustomColor,
@@ -28,6 +30,7 @@ export type RowProps<
 >;
 
 export const createRow = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -44,6 +47,7 @@ export const createRow = <
 		forwardRef<
 			HTMLDivElement,
 			RowProps<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,

@@ -54,6 +54,8 @@ export type AlignSelf =
 	| 'start' // grid only
 	| 'stretch';
 
+export type CssAspectRatio = GlobalValue | `${number} / ${number}` | number | 'auto';
+
 export type BorderStyle =
 	| GlobalValue
 	| 'dashed'
@@ -319,6 +321,8 @@ export type ThemeSize =
 
 export type CustomThemeSize<T extends CustomName> = T | ThemeSize;
 
+export type AspectRatio<CustomAspectRatio extends CustomName> = CssAspectRatio | CustomAspectRatio;
+
 export type BaseFlexElement =
 	| 'article'
 	| 'aside'
@@ -350,8 +354,6 @@ export type BorderWidth<CustomBorderWidth extends CustomName> = AbsoluteSize | C
 export type Color<CustomColor extends CustomName> = CssColor | CustomColor;
 
 export type Distance<CustomDistance extends CustomName> = AbsoluteSize | CustomThemeSize<CustomDistance>;
-
-export type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 
 export type FontFamily<CustomFontFamily extends CustomName> = CustomFontFamily;
 
@@ -405,6 +407,7 @@ export type ViewportThreshold<CustomViewportThreshold extends CustomName> =
 export type Width<CustomWidth extends CustomName> = CustomThemeSize<CustomWidth> | ElementSize;
 
 export interface EasyFlexTheme<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -436,6 +439,7 @@ export interface EasyFlexTheme<
 		containerElementId: string;
 	};
 	size: {
+		aspectRatio: Record<CustomAspectRatio, CssAspectRatio>;
 		height: Record<CustomThemeSize<CustomHeight>, ElementSize>;
 		width: Record<CustomThemeSize<CustomWidth>, ElementSize>;
 	};
@@ -446,6 +450,7 @@ export interface EasyFlexTheme<
 }
 
 export type PartialEasyFlexTheme<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -459,6 +464,7 @@ export type PartialEasyFlexTheme<
 	CustomWidth extends CustomName
 > = DeepPartial<
 	EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -474,6 +480,7 @@ export type PartialEasyFlexTheme<
 >;
 
 export type NeverEasyFlexTheme = EasyFlexTheme<
+	never,
 	never,
 	never,
 	never,

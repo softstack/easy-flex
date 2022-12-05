@@ -41,6 +41,7 @@ export * from './utils/padding';
 export * from './utils/size';
 
 export const createEasyFlex = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -54,6 +55,7 @@ export const createEasyFlex = <
 	CustomWidth extends CustomName
 >() => ({
 	BaseButton: createBaseButton<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -66,6 +68,7 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	BaseFlex: createBaseFlex<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -78,6 +81,7 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	BaseGrid: createBaseGrid<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -90,6 +94,7 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	BaseInput: createBaseInput<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -102,6 +107,7 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	BaseTextArea: createBaseTextArea<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -114,6 +120,7 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	Col: createCol<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -126,6 +133,7 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	EasyFlexProvider: createEasyFlexProvider<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -138,8 +146,17 @@ export const createEasyFlex = <
 		CustomViewportThreshold,
 		CustomWidth
 	>(),
-	Img: createImg<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomHeight, CustomWidth>(),
+	Img: createImg<
+		CustomAspectRatio,
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomHeight,
+		CustomWidth
+	>(),
 	Link: createLink<
+		CustomAspectRatio,
 		CustomColor,
 		CustomDistance,
 		CustomFontFamily,
@@ -151,6 +168,7 @@ export const createEasyFlex = <
 	>(),
 	Modal: createModal<CustomColor>(),
 	Row: createRow<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -165,6 +183,7 @@ export const createEasyFlex = <
 	Spacing: createSpacing<CustomDistance>(),
 	Style: createStyle<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>(),
 	Text: createText<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,
@@ -177,6 +196,7 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	useEasyFlexTheme: ((): (() => EasyFlexTheme<
+		CustomAspectRatio,
 		CustomBorderRadius,
 		CustomBorderWidth,
 		CustomColor,

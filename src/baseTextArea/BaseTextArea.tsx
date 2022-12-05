@@ -37,6 +37,7 @@ const StyledTextArea = styled.textarea<
 `;
 
 export interface BaseTextAreaProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -55,11 +56,12 @@ export interface BaseTextAreaProps<
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		GridItemProps,
 		MiscProps,
-		SizeProps<CustomHeight, CustomWidth> {
+		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }
 
 export const createBaseTextArea = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -75,6 +77,7 @@ export const createBaseTextArea = <
 		forwardRef<
 			HTMLTextAreaElement,
 			BaseTextAreaProps<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,
@@ -90,6 +93,7 @@ export const createBaseTextArea = <
 			(
 				{
 					alignSelf,
+					aspectRatio,
 					backgroundColor,
 					basis,
 					borderColor,
@@ -180,6 +184,7 @@ export const createBaseTextArea = <
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
+					aspectRatio,
 					fullHeight,
 					fullWidth,
 					height,

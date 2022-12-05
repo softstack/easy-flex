@@ -67,6 +67,7 @@ const StyledP = styled.p`
 `;
 
 export interface TextProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -86,7 +87,7 @@ export interface TextProps<
 		GridItemProps,
 		MiscProps,
 		OverflowProps,
-		SizeProps<CustomHeight, CustomWidth> {
+		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	/** Component's text alignment. */
 	align?: Falsifiable<TextAlign>;
 	/** Component's html tag. */
@@ -94,6 +95,7 @@ export interface TextProps<
 }
 
 export const createText = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -109,6 +111,7 @@ export const createText = <
 		forwardRef<
 			HTMLParagraphElement,
 			TextProps<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,
@@ -125,6 +128,7 @@ export const createText = <
 				{
 					align,
 					alignSelf,
+					aspectRatio,
 					backgroundColor,
 					basis,
 					borderColor,
@@ -220,6 +224,7 @@ export const createText = <
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 
 				const sizeStyleProps = useSizeStyleProps({
+					aspectRatio,
 					fullHeight,
 					fullWidth,
 					height,

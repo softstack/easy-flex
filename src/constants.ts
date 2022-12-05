@@ -321,6 +321,7 @@ export const defaultEasyFlexTheme: NeverEasyFlexTheme = {
 		containerElementId: '',
 	},
 	size: {
+		aspectRatio: {},
 		height: {
 			'8xs': '1px',
 			'7xs': '2px',

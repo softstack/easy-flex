@@ -30,6 +30,7 @@ const StyledImg = styled.img<
 `;
 
 export interface ImgProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -42,11 +43,12 @@ export interface ImgProps<
 		GridItemProps,
 		MarginProps<CustomDistance>,
 		MiscProps,
-		SizeProps<CustomHeight, CustomWidth> {
+		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	objectFit?: Falsifiable<ObjectFit>;
 }
 
 export const createImg = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -57,10 +59,19 @@ export const createImg = <
 	const Img = memo(
 		forwardRef<
 			HTMLImageElement,
-			ImgProps<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomHeight, CustomWidth>
+			ImgProps<
+				CustomAspectRatio,
+				CustomBorderRadius,
+				CustomBorderWidth,
+				CustomColor,
+				CustomDistance,
+				CustomHeight,
+				CustomWidth
+			>
 		>(
 			(
 				{
+					aspectRatio,
 					backgroundColor,
 					borderColor,
 					borderRadius,
@@ -111,6 +122,7 @@ export const createImg = <
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
+					aspectRatio,
 					fullHeight,
 					fullWidth,
 					height,

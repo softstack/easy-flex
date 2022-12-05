@@ -16,6 +16,7 @@ export declare type ElementSize = GlobalValue | Size | 'fit-content';
 export declare type AlignContent = 'center' | 'end' | 'space-around' | 'space-between' | 'space-evenly' | 'start' | 'stretch';
 export declare type AlignItems = GlobalValue | 'baseline' | 'center' | 'end' | 'flex-end' | 'flex-start' | 'start' | 'stretch';
 export declare type AlignSelf = GlobalValue | 'auto' | 'baseline' | 'center' | 'end' | 'flex-end' | 'flex-start' | 'start' | 'stretch';
+export declare type CssAspectRatio = GlobalValue | `${number} / ${number}` | number | 'auto';
 export declare type BorderStyle = GlobalValue | 'dashed' | 'dotted' | 'double' | 'groove' | 'hidden' | 'inset' | 'none' | 'outset' | 'ridge' | 'solid';
 export declare type HslName = 'hsl' | 'hsla';
 export declare type RgbName = 'rgb' | 'rgba';
@@ -43,13 +44,13 @@ export declare type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep
 export declare type CustomName = `_${string}`;
 export declare type ThemeSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
 export declare type CustomThemeSize<T extends CustomName> = T | ThemeSize;
+export declare type AspectRatio<CustomAspectRatio extends CustomName> = CssAspectRatio | CustomAspectRatio;
 export declare type BaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type BaseGridElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type BorderRadius<CustomBorderRadius extends CustomName> = CustomThemeSize<CustomBorderRadius> | Size;
 export declare type BorderWidth<CustomBorderWidth extends CustomName> = AbsoluteSize | CustomThemeSize<CustomBorderWidth>;
 export declare type Color<CustomColor extends CustomName> = CssColor | CustomColor;
 export declare type Distance<CustomDistance extends CustomName> = AbsoluteSize | CustomThemeSize<CustomDistance>;
-export declare type FlipDirection = 'flip' | 'flip-reverse' | 'reverse';
 export declare type FontFamily<CustomFontFamily extends CustomName> = CustomFontFamily;
 export declare type FontSize<CustomFontSize extends CustomName> = CustomThemeSize<CustomFontSize> | Size;
 export declare type FontStyle = 'italic' | 'normal';
@@ -61,7 +62,7 @@ export declare type TextDecoration = 'none' | 'underline';
 export declare type TextElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 export declare type ViewportThreshold<CustomViewportThreshold extends CustomName> = CustomThemeSize<CustomViewportThreshold> | number;
 export declare type Width<CustomWidth extends CustomName> = CustomThemeSize<CustomWidth> | ElementSize;
-export interface EasyFlexTheme<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomViewportThreshold extends CustomName, CustomWidth extends CustomName> {
+export interface EasyFlexTheme<CustomAspectRatio extends CustomName, CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomViewportThreshold extends CustomName, CustomWidth extends CustomName> {
     border: {
         defaultStyle: BorderStyle;
         radius: Record<CustomThemeSize<CustomBorderRadius>, AbsoluteSize>;
@@ -81,6 +82,7 @@ export interface EasyFlexTheme<CustomBorderRadius extends CustomName, CustomBord
         containerElementId: string;
     };
     size: {
+        aspectRatio: Record<CustomAspectRatio, CssAspectRatio>;
         height: Record<CustomThemeSize<CustomHeight>, ElementSize>;
         width: Record<CustomThemeSize<CustomWidth>, ElementSize>;
     };
@@ -89,5 +91,5 @@ export interface EasyFlexTheme<CustomBorderRadius extends CustomName, CustomBord
         threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
     };
 }
-export declare type PartialEasyFlexTheme<CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomViewportThreshold extends CustomName, CustomWidth extends CustomName> = DeepPartial<EasyFlexTheme<CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomViewportThreshold, CustomWidth>>;
-export declare type NeverEasyFlexTheme = EasyFlexTheme<never, never, never, never, never, never, never, never, never, never, never>;
+export declare type PartialEasyFlexTheme<CustomAspectRatio extends CustomName, CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomViewportThreshold extends CustomName, CustomWidth extends CustomName> = DeepPartial<EasyFlexTheme<CustomAspectRatio, CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomViewportThreshold, CustomWidth>>;
+export declare type NeverEasyFlexTheme = EasyFlexTheme<never, never, never, never, never, never, never, never, never, never, never, never>;

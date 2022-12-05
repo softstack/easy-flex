@@ -38,6 +38,7 @@ const StyledA = styled.a<
 `;
 
 export interface LinkProps<
+	CustomAspectRatio extends CustomName,
 	CustomColor extends CustomName,
 	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
@@ -53,7 +54,7 @@ export interface LinkProps<
 		GridItemProps,
 		MarginProps<CustomDistance>,
 		MiscProps,
-		SizeProps<CustomHeight, CustomWidth> {
+		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	/** Component's hover color. */
 	hoverColor?: Falsifiable<Color<CustomColor>>;
 	/** If true, the link is opened in a new tab. */
@@ -61,6 +62,7 @@ export interface LinkProps<
 }
 
 export const createLink = <
+	CustomAspectRatio extends CustomName,
 	CustomColor extends CustomName,
 	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
@@ -74,6 +76,7 @@ export const createLink = <
 		forwardRef<
 			HTMLAnchorElement,
 			LinkProps<
+				CustomAspectRatio,
 				CustomColor,
 				CustomDistance,
 				CustomFontFamily,
@@ -87,6 +90,7 @@ export const createLink = <
 			(
 				{
 					alignSelf,
+					aspectRatio,
 					backgroundColor,
 					basis,
 					children,
@@ -159,6 +163,7 @@ export const createLink = <
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
+					aspectRatio,
 					fullHeight,
 					fullWidth,
 					height,

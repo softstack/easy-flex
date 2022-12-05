@@ -4,6 +4,7 @@ import { CustomName, DeepPartial, EasyFlexTheme } from '../types';
 import { mergeEasyFlexThemes } from '../utils/base';
 
 export interface EasyFlexProviderProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -21,6 +22,7 @@ export interface EasyFlexProviderProps<
 	/** Gets merged with the default theme. */
 	theme: DeepPartial<
 		EasyFlexTheme<
+			CustomAspectRatio,
 			CustomBorderRadius,
 			CustomBorderWidth,
 			CustomColor,
@@ -37,6 +39,7 @@ export interface EasyFlexProviderProps<
 }
 
 export const createEasyFlexProvider = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -51,6 +54,7 @@ export const createEasyFlexProvider = <
 >() => {
 	const EasyFlexProvider = memo<
 		EasyFlexProviderProps<
+			CustomAspectRatio,
 			CustomBorderRadius,
 			CustomBorderWidth,
 			CustomColor,
@@ -66,6 +70,7 @@ export const createEasyFlexProvider = <
 	>(({ children, theme }) => {
 		const mergedTheme = useMemo<
 			EasyFlexTheme<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,
@@ -82,6 +87,7 @@ export const createEasyFlexProvider = <
 			() =>
 				mergeEasyFlexThemes(
 					defaultEasyFlexTheme as EasyFlexTheme<
+						CustomAspectRatio,
 						CustomBorderRadius,
 						CustomBorderWidth,
 						CustomColor,

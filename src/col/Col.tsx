@@ -4,6 +4,7 @@ import { CustomName, FlexDirection } from '../types';
 import { defalsify } from '../utils/base';
 
 export type ColProps<
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -15,6 +16,7 @@ export type ColProps<
 	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
 > = BaseFlexProps<
+	CustomAspectRatio,
 	CustomBorderRadius,
 	CustomBorderWidth,
 	CustomColor,
@@ -28,6 +30,7 @@ export type ColProps<
 >;
 
 export const createCol = <
+	CustomAspectRatio extends CustomName,
 	CustomBorderRadius extends CustomName,
 	CustomBorderWidth extends CustomName,
 	CustomColor extends CustomName,
@@ -44,6 +47,7 @@ export const createCol = <
 		forwardRef<
 			HTMLDivElement,
 			ColProps<
+				CustomAspectRatio,
 				CustomBorderRadius,
 				CustomBorderWidth,
 				CustomColor,
