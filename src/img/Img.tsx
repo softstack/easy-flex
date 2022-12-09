@@ -105,7 +105,7 @@ export const createImg = <
 			) => {
 				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
@@ -119,7 +119,7 @@ export const createImg = <
 					marginVertical,
 				});
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,

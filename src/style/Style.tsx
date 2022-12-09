@@ -123,7 +123,7 @@ export const createStyle = <
 				},
 				ref
 			) => {
-				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 				const fontStyleProps = useFontStyleProps({
 					fontFamily,
@@ -136,7 +136,7 @@ export const createStyle = <
 					wordBreak,
 				});
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
 
 				const Element = useMemo(() => {
 					switch (defalsify(element) ?? 'span') {

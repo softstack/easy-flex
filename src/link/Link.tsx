@@ -131,7 +131,7 @@ export const createLink = <
 				},
 				ref
 			) => {
-				const colorStyleProps = useColorStyleProps({ backgroundColor, color: defalsify(color) ?? 'inherit', opacity });
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color: defalsify(color) ?? 'inherit' });
 
 				const processedHoverColor = useColor(hoverColor);
 
@@ -160,7 +160,7 @@ export const createLink = <
 					marginVertical,
 				});
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,

@@ -231,7 +231,6 @@ export const createBaseButton = <
 				const colorStyleProps = useColorStyleProps({
 					backgroundColor: defalsify(backgroundColor) ?? 'transparent',
 					color,
-					opacity,
 				});
 
 				const distanceStyleProps = useDistanceStyleProps({
@@ -273,7 +272,7 @@ export const createBaseButton = <
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 

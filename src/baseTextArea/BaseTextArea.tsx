@@ -147,7 +147,7 @@ export const createBaseTextArea = <
 			) => {
 				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
 
-				const colorStyleProps = useColorStyleProps({ backgroundColor, color, opacity });
+				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
 				const distanceStyleProps = useDistanceStyleProps({
 					margin,
@@ -181,7 +181,7 @@ export const createBaseTextArea = <
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
