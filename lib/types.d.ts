@@ -12,7 +12,8 @@ export declare type Vh = `${number}vh`;
 export declare type Vw = `${number}vw`;
 export declare type AbsoluteSize = Px | Rem | Vh | Vw;
 export declare type Size = AbsoluteSize | Percent;
-export declare type ElementSize = GlobalValue | Size | 'fit-content';
+export declare type ExtSize = GlobalValue | Size;
+export declare type ElementSize = ExtSize | 'fit-content' | 'max-content' | 'min-content';
 export declare type AlignContent = 'center' | 'end' | 'space-around' | 'space-between' | 'space-evenly' | 'start' | 'stretch';
 export declare type AlignItems = GlobalValue | 'baseline' | 'center' | 'end' | 'flex-end' | 'flex-start' | 'start' | 'stretch';
 export declare type AlignSelf = GlobalValue | 'auto' | 'baseline' | 'center' | 'end' | 'flex-end' | 'flex-start' | 'start' | 'stretch';
@@ -52,7 +53,7 @@ export declare type BorderWidth<CustomBorderWidth extends CustomName> = Absolute
 export declare type Color<CustomColor extends CustomName> = CssColor | CustomColor;
 export declare type Distance<CustomDistance extends CustomName> = AbsoluteSize | CustomThemeSize<CustomDistance>;
 export declare type FontFamily<CustomFontFamily extends CustomName> = CustomFontFamily;
-export declare type FontSize<CustomFontSize extends CustomName> = CustomThemeSize<CustomFontSize> | Size;
+export declare type FontSize<CustomFontSize extends CustomName> = CustomThemeSize<CustomFontSize> | ExtSize;
 export declare type FontStyle = 'italic' | 'normal';
 export declare type FontWeight<CustomFontWeight extends CustomName> = CustomFontWeight | 'thin' | 'extraLight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extraBold' | 'black' | 'extraBlack';
 export declare type Height<CustomHeight extends CustomName> = CustomThemeSize<CustomHeight> | ElementSize;
@@ -73,7 +74,7 @@ export interface EasyFlexTheme<CustomAspectRatio extends CustomName, CustomBorde
     font: {
         family: Record<CustomFontFamily, string>;
         lineHeight: Record<CustomThemeSize<CustomLineHeight>, CssLineHeight>;
-        size: Record<CustomThemeSize<CustomFontSize>, Size>;
+        size: Record<CustomThemeSize<CustomFontSize>, ExtSize>;
         weight: Record<FontWeight<CustomFontWeight>, CssFontWeight>;
     };
     modal: {

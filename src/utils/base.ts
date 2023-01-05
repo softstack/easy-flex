@@ -18,6 +18,7 @@ import {
 	Distance,
 	EasyFlexTheme,
 	ElementSize,
+	ExtSize,
 	Falsifiable,
 	FontSize,
 	FontWeight,
@@ -357,7 +358,7 @@ export const getFontSize = <
 		CustomWidth
 	>,
 	fontSize: FontSize<CustomFontSize>
-): Size => (isThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize);
+): ExtSize => (isThemeSize(fontSize) ? theme.font.size[fontSize] : fontSize);
 
 export const getFontWeight = <
 	CustomAspectRatio extends CustomName,

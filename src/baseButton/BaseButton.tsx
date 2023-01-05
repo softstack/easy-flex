@@ -35,6 +35,7 @@ const StyledButton = styled.button<
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
+	font-size: inherit;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}

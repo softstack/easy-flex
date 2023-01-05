@@ -28,7 +28,9 @@ export type AbsoluteSize = Px | Rem | Vh | Vw;
 
 export type Size = AbsoluteSize | Percent;
 
-export type ElementSize = GlobalValue | Size | 'fit-content';
+export type ExtSize = GlobalValue | Size;
+
+export type ElementSize = ExtSize | 'fit-content' | 'max-content' | 'min-content';
 
 // grid only
 export type AlignContent = 'center' | 'end' | 'space-around' | 'space-between' | 'space-evenly' | 'start' | 'stretch';
@@ -357,7 +359,7 @@ export type Distance<CustomDistance extends CustomName> = AbsoluteSize | CustomT
 
 export type FontFamily<CustomFontFamily extends CustomName> = CustomFontFamily;
 
-export type FontSize<CustomFontSize extends CustomName> = CustomThemeSize<CustomFontSize> | Size;
+export type FontSize<CustomFontSize extends CustomName> = CustomThemeSize<CustomFontSize> | ExtSize;
 
 export type FontStyle = 'italic' | 'normal';
 
@@ -430,7 +432,7 @@ export interface EasyFlexTheme<
 	font: {
 		family: Record<CustomFontFamily, string>;
 		lineHeight: Record<CustomThemeSize<CustomLineHeight>, CssLineHeight>;
-		size: Record<CustomThemeSize<CustomFontSize>, Size>;
+		size: Record<CustomThemeSize<CustomFontSize>, ExtSize>;
 		weight: Record<FontWeight<CustomFontWeight>, CssFontWeight>;
 	};
 	modal: {

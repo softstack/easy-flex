@@ -6,13 +6,13 @@ import {
 	CssFontWeight,
 	CssLineHeight,
 	CustomName,
+	ExtSize,
 	Falsifiable,
 	FontFamily,
 	FontSize,
 	FontStyle,
 	FontWeight,
 	LineHeight,
-	Size,
 	TextDecoration,
 	WhiteSpace,
 	WordBreak,
@@ -44,7 +44,7 @@ export interface FontProps<
 
 export interface FontStyleProps {
 	'data-font-family': string | undefined;
-	'data-font-size': Size | undefined;
+	'data-font-size': ExtSize | undefined;
 	'data-font-weight': CssFontWeight | undefined;
 	'data-font-style': FontStyle | undefined;
 	'data-line-height': CssLineHeight | undefined;
@@ -72,7 +72,7 @@ export const useFont = <
 	wordBreak,
 }: FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>): {
 	family: string | undefined;
-	size: Size | undefined;
+	size: ExtSize | undefined;
 	weight: CssFontWeight | undefined;
 	style: FontStyle | undefined;
 	lineHeight: CssLineHeight | undefined;
@@ -88,7 +88,7 @@ export const useFont = <
 		[fontFamily, theme]
 	);
 
-	const processedFontSize = useMemo<Size | undefined>(
+	const processedFontSize = useMemo<ExtSize | undefined>(
 		() => ifDefined(fontSize, (fontSize) => getFontSize(theme, fontSize)),
 		[fontSize, theme]
 	);
@@ -117,7 +117,7 @@ export const useFont = <
 
 	return useMemo<{
 		family: string | undefined;
-		size: Size | undefined;
+		size: ExtSize | undefined;
 		weight: CssFontWeight | undefined;
 		style: FontStyle | undefined;
 		lineHeight: CssLineHeight | undefined;

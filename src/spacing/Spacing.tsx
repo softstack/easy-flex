@@ -2,9 +2,12 @@ import React, { forwardRef, HTMLAttributes, memo, useMemo } from 'react';
 import styled from 'styled-components';
 import { AbsoluteSize, CustomName, Distance, Falsifiable } from '../types';
 import { defalsify, getDistance, useEasyFlexTheme } from '../utils/base';
+import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 
-const StyledDiv = styled.div<{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize } & MiscStyleProps>`
+const StyledDiv = styled.div<
+	{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize } & FlexItemStyleProps & MiscStyleProps
+>`
 	box-sizing: border-box;
 	display: flex;
 	background-color: transparent;
@@ -16,10 +19,14 @@ const StyledDiv = styled.div<{ 'data-height': AbsoluteSize; 'data-width': Absolu
 	min-width: ${({ 'data-width': width }) => width};
 	width: ${({ 'data-width': width }) => width};
 	max-width: ${({ 'data-width': width }) => width};
+	${flexItemStyle}
 	${miscStyle}
 `;
 
-export interface SpacingProps<CustomDistance extends CustomName> extends HTMLAttributes<HTMLDivElement>, MiscProps {
+export interface SpacingProps<CustomDistance extends CustomName>
+	extends HTMLAttributes<HTMLDivElement>,
+		FlexItemProps,
+		MiscProps {
 	flip?: boolean;
 	/** Component's height. */
 	height?: Falsifiable<Distance<CustomDistance>>;
@@ -30,7 +37,7 @@ export interface SpacingProps<CustomDistance extends CustomName> extends HTMLAtt
 export const createSpacing = <CustomDistance extends CustomName>() => {
 	const Spacing = memo(
 		forwardRef<HTMLDivElement, SpacingProps<CustomDistance>>(
-			({ displayNone, flip, height, visibility, width, ...props }, ref) => {
+			({ alignSelf, basis, displayNone, flex, flip, grow, height, shrink, visibility, width, ...props }, ref) => {
 				const theme = useEasyFlexTheme();
 
 				const processedHeight = useMemo<AbsoluteSize>(
@@ -40,6 +47,8 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 							: getDistance(theme, defalsify(width) ?? '0px'),
 					[flip, height, theme, width]
 				);
+
+				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
 				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
 
@@ -55,6 +64,7 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 					<StyledDiv
 						data-height={processedHeight}
 						data-width={processedWidth}
+						{...flexItemStyleProps}
 						{...miscStyleProps}
 						ref={ref}
 						{...props}
