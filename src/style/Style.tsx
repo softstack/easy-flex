@@ -106,6 +106,7 @@ export const createStyle = <
 			(
 				{
 					backgroundColor,
+					bottom,
 					children,
 					color,
 					displayNone,
@@ -114,8 +115,12 @@ export const createStyle = <
 					fontSize,
 					fontWeight,
 					italic,
+					left,
 					lineHeight,
 					opacity,
+					position,
+					right,
+					top,
 					underline,
 					visibility,
 					whiteSpace,
@@ -136,7 +141,16 @@ export const createStyle = <
 					wordBreak,
 				});
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const Element = useMemo(() => {
 					switch (defalsify(element) ?? 'span') {

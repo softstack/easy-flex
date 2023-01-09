@@ -152,12 +152,13 @@ export const createBaseFlex = <
 					borderRadius,
 					borderStyle,
 					borderWidth,
+					bottom,
 					children,
 					color,
+					direction,
 					displayNone,
 					element,
 					flex,
-					direction,
 					fontFamily,
 					fontSize,
 					fontWeight,
@@ -169,6 +170,7 @@ export const createBaseFlex = <
 					italic,
 					justify,
 					justifySelf,
+					left,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -192,8 +194,11 @@ export const createBaseFlex = <
 					paddingRight,
 					paddingTop,
 					paddingVertical,
+					position,
+					right,
 					round,
 					shrink,
+					top,
 					underline,
 					visibility,
 					whiteSpace,
@@ -241,7 +246,16 @@ export const createBaseFlex = <
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 

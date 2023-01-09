@@ -163,8 +163,10 @@ export const absoluteSizeToNumber = (value: AbsoluteSize): number => {
 		return remToNumber(value);
 	} else if (isVh(value)) {
 		return vhToNumber(value);
+	} else if (isVw(value)) {
+		return vwToNumber(value);
 	}
-	return vwToNumber(value);
+	return Number(value);
 };
 
 export const sizeToNumber = (value: Size): number => {

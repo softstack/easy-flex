@@ -24,7 +24,7 @@ export type Vh = `${number}vh`;
 
 export type Vw = `${number}vw`;
 
-export type AbsoluteSize = Px | Rem | Vh | Vw;
+export type AbsoluteSize = Px | Rem | Vh | Vw | '0' | 0;
 
 export type Size = AbsoluteSize | Percent;
 
@@ -252,6 +252,8 @@ export type FlexDirection = GlobalValue | 'column' | 'column-reverse' | 'row' | 
 
 export type CssFontWeight = GlobalValue | number | 'bold' | 'bolder' | 'lighter' | 'normal';
 
+export type Inset = GlobalValue | Size | 'auto';
+
 // grid only
 export type JustifyContent =
 	| GlobalValue
@@ -276,6 +278,8 @@ export type ObjectFit = GlobalValue | 'contain' | 'cover' | 'fill' | 'none' | 's
 export type Opacity = GlobalValue | Percent | number;
 
 export type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'visible';
+
+export type Position = GlobalValue | 'absolute' | 'fixed' | 'relative' | 'static' | 'sticky';
 
 export type TextAlign =
 	| GlobalValue

@@ -100,6 +100,7 @@ export const createBaseTextArea = <
 					borderRadius,
 					borderStyle,
 					borderWidth,
+					bottom,
 					children,
 					color,
 					displayNone,
@@ -113,6 +114,7 @@ export const createBaseTextArea = <
 					height,
 					italic,
 					justifySelf,
+					left,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -134,8 +136,11 @@ export const createBaseTextArea = <
 					paddingTop,
 					paddingVertical,
 					placeholderColor,
+					position,
+					right,
 					round,
 					shrink,
+					top,
 					underline,
 					visibility,
 					whiteSpace,
@@ -181,7 +186,16 @@ export const createBaseTextArea = <
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,

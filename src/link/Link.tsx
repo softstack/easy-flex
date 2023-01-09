@@ -93,6 +93,7 @@ export const createLink = <
 					aspectRatio,
 					backgroundColor,
 					basis,
+					bottom,
 					children,
 					color,
 					displayNone,
@@ -107,6 +108,7 @@ export const createLink = <
 					hoverColor,
 					italic,
 					justifySelf,
+					left,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -121,7 +123,10 @@ export const createLink = <
 					minWidth,
 					newTab = false,
 					opacity,
+					position,
+					right,
 					shrink,
+					top,
 					underline,
 					visibility,
 					whiteSpace,
@@ -160,7 +165,16 @@ export const createLink = <
 					marginVertical,
 				});
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,

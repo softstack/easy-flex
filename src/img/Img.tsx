@@ -77,12 +77,14 @@ export const createImg = <
 					borderRadius,
 					borderStyle,
 					borderWidth,
+					bottom,
 					color,
 					displayNone,
 					fullHeight,
 					fullWidth,
 					height,
 					justifySelf,
+					left,
 					margin,
 					marginBottom,
 					marginHorizontal,
@@ -96,7 +98,10 @@ export const createImg = <
 					minWidth,
 					objectFit,
 					opacity,
+					position,
+					right,
 					round,
+					top,
 					visibility,
 					width,
 					...props
@@ -119,7 +124,16 @@ export const createImg = <
 					marginVertical,
 				});
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,

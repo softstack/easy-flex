@@ -37,7 +37,27 @@ export interface SpacingProps<CustomDistance extends CustomName>
 export const createSpacing = <CustomDistance extends CustomName>() => {
 	const Spacing = memo(
 		forwardRef<HTMLDivElement, SpacingProps<CustomDistance>>(
-			({ alignSelf, basis, displayNone, flex, flip, grow, height, shrink, visibility, width, ...props }, ref) => {
+			(
+				{
+					alignSelf,
+					basis,
+					bottom,
+					displayNone,
+					flex,
+					flip,
+					grow,
+					height,
+					left,
+					position,
+					right,
+					shrink,
+					top,
+					visibility,
+					width,
+					...props
+				},
+				ref
+			) => {
 				const theme = useEasyFlexTheme();
 
 				const processedHeight = useMemo<AbsoluteSize>(
@@ -50,7 +70,7 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+				const miscStyleProps = useMiscStyleProps({ bottom, displayNone, left, position, right, top, visibility });
 
 				const processedWidth = useMemo<AbsoluteSize>(
 					() =>

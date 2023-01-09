@@ -100,6 +100,7 @@ export const createBaseInput = <
 					borderRadius,
 					borderStyle,
 					borderWidth,
+					bottom,
 					color,
 					displayNone,
 					flex,
@@ -112,6 +113,7 @@ export const createBaseInput = <
 					height,
 					italic,
 					justifySelf,
+					left,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -133,8 +135,11 @@ export const createBaseInput = <
 					paddingTop,
 					paddingVertical,
 					placeholderColor,
+					position,
+					right,
 					round,
 					shrink,
+					top,
 					underline,
 					visibility,
 					whiteSpace,
@@ -180,7 +185,16 @@ export const createBaseInput = <
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,

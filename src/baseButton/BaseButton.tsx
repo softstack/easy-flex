@@ -177,6 +177,7 @@ export const createBaseButton = <
 					borderRadius,
 					borderStyle,
 					borderWidth,
+					bottom,
 					children,
 					color,
 					direction,
@@ -193,6 +194,7 @@ export const createBaseButton = <
 					italic,
 					justify,
 					justifySelf,
+					left,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -216,8 +218,11 @@ export const createBaseButton = <
 					paddingRight,
 					paddingTop,
 					paddingVertical,
+					position,
+					right,
 					round,
 					shrink,
+					top,
 					underline,
 					visibility,
 					whiteSpace,
@@ -273,7 +278,16 @@ export const createBaseButton = <
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
 

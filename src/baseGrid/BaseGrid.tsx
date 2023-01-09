@@ -169,6 +169,7 @@ export const createBaseGrid = <
 					borderRadius,
 					borderStyle,
 					borderWidth,
+					bottom,
 					children,
 					color,
 					columnGap,
@@ -186,6 +187,7 @@ export const createBaseGrid = <
 					justifyContent,
 					justifyItems,
 					justifySelf,
+					left,
 					lineHeight,
 					margin,
 					marginBottom,
@@ -206,9 +208,12 @@ export const createBaseGrid = <
 					paddingRight,
 					paddingTop,
 					paddingVertical,
+					position,
+					right,
 					round,
 					rowGap,
 					shrink,
+					top,
 					underline,
 					visibility,
 					whiteSpace,
@@ -256,7 +261,16 @@ export const createBaseGrid = <
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
-				const miscStyleProps = useMiscStyleProps({ displayNone, opacity, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					opacity,
+					position,
+					right,
+					top,
+					visibility,
+				});
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
