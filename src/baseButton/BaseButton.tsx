@@ -36,6 +36,7 @@ const StyledButton = styled.button<
 	cursor: pointer;
 	background-color: transparent;
 	font-size: inherit;
+	color: inherit; /* For Safari on iOS */
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
