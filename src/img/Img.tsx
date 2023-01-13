@@ -80,8 +80,6 @@ export const createImg = <
 					bottom,
 					color,
 					displayNone,
-					fullHeight,
-					fullWidth,
 					height,
 					justifySelf,
 					left,
@@ -100,7 +98,6 @@ export const createImg = <
 					opacity,
 					position,
 					right,
-					round,
 					top,
 					visibility,
 					width,
@@ -108,7 +105,7 @@ export const createImg = <
 				},
 				ref
 			) => {
-				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
@@ -137,8 +134,6 @@ export const createImg = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,

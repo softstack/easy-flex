@@ -201,6 +201,7 @@ export const defaultEasyFlexTheme: NeverEasyFlexTheme = {
 			'6xl': '0px',
 			'7xl': '0px',
 			'8xl': '0px',
+			round: '99999px',
 		},
 		width: {
 			'8xs': '1px',

@@ -327,6 +327,8 @@ export type ThemeSize =
 
 export type CustomThemeSize<T extends CustomName> = T | ThemeSize;
 
+export type CustomBorderRadiusSize<T extends CustomName> = CustomThemeSize<T> | 'round';
+
 export type AspectRatio<CustomAspectRatio extends CustomName> = CssAspectRatio | CustomAspectRatio;
 
 export type BaseFlexElement =
@@ -353,7 +355,7 @@ export type BaseGridElement =
 	| 'section'
 	| 'summary';
 
-export type BorderRadius<CustomBorderRadius extends CustomName> = CustomThemeSize<CustomBorderRadius> | Size;
+export type BorderRadius<CustomBorderRadius extends CustomName> = CustomThemeSize<CustomBorderRadius> | Size | 'round';
 
 export type BorderWidth<CustomBorderWidth extends CustomName> = AbsoluteSize | CustomThemeSize<CustomBorderWidth>;
 
@@ -428,7 +430,7 @@ export interface EasyFlexTheme<
 > {
 	border: {
 		defaultStyle: BorderStyle;
-		radius: Record<CustomThemeSize<CustomBorderRadius>, AbsoluteSize>;
+		radius: Record<CustomBorderRadiusSize<CustomBorderRadius>, AbsoluteSize>;
 		width: Record<CustomThemeSize<CustomBorderWidth>, AbsoluteSize>;
 	};
 	color: Record<CustomColor, CssColor>;

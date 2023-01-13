@@ -26,7 +26,6 @@ export interface BorderProps<
 	borderStyle?: Falsifiable<BorderStyle>;
 	/** Component's border width. */
 	borderWidth?: Falsifiable<BorderWidth<CustomBorderWidth>>;
-	round?: boolean;
 }
 
 export interface BorderStyleProps {
@@ -45,7 +44,6 @@ export const useBorder = <
 	borderRadius,
 	borderStyle,
 	borderWidth,
-	round,
 }: BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>): {
 	color: CssColor | undefined;
 	radius: Size | undefined;
@@ -57,8 +55,8 @@ export const useBorder = <
 	const processedBorderColor = useColor(borderColor);
 
 	const processedBorderRadius = useMemo<Size | undefined>(
-		() => (round ? '99999px' : ifDefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius))),
-		[borderRadius, round, theme]
+		() => ifDefined(borderRadius, (borderRadius) => getBorderRadius(theme, borderRadius)),
+		[borderRadius, theme]
 	);
 
 	const processedBorderStyle = useMemo<BorderStyle | undefined>(

@@ -1,4 +1,4 @@
-import { AbsoluteSize, AspectRatio, BorderRadius, BorderWidth, Color, ColorKeyword, ColorName, CssAspectRatio, CssColor, CssFontWeight, CssLineHeight, CustomThemeSize, DeepPartial, Distance, EasyFlexTheme, ElementSize, ExtSize, Falsifiable, FontSize, FontWeight, GlobalValue, Height, LineHeight, Percent, Px, Rem, Size, ThemeSize, Vh, ViewportThreshold, Vw, Width } from '../types';
+import { AbsoluteSize, AspectRatio, BorderRadius, BorderWidth, Color, ColorKeyword, ColorName, CssAspectRatio, CssColor, CssFontWeight, CssLineHeight, CustomBorderRadiusSize, CustomThemeSize, DeepPartial, Distance, EasyFlexTheme, ElementSize, ExtSize, Falsifiable, FontSize, FontWeight, GlobalValue, Height, LineHeight, Percent, Px, Rem, Size, ThemeSize, Vh, ViewportThreshold, Vw, Width } from '../types';
 export declare const mergeEasyFlexThemes: <T>(a: T, b: DeepPartial<T>) => T;
 export declare const isGlobalValue: (value: unknown) => value is GlobalValue;
 export declare const isCustomName: (value: unknown) => value is `_${string}`;
@@ -6,6 +6,7 @@ export declare const isColorKeyword: <CustomColor extends `_${string}`>(color: C
 export declare const isColorName: <CustomColor extends `_${string}`>(color: Color<CustomColor>) => color is ColorName;
 export declare const isThemeSizeX: (size: unknown) => size is ThemeSize;
 export declare const isThemeSize: <T extends `_${string}`>(size: unknown) => size is CustomThemeSize<T>;
+export declare const isBorderRadiusSize: <T extends `_${string}`>(size: unknown) => size is CustomBorderRadiusSize<T>;
 export declare const isPercent: (value: unknown) => value is `${number}px`;
 export declare const isPx: (value: unknown) => value is `${number}px`;
 export declare const isRem: (value: unknown) => value is `${number}rem`;

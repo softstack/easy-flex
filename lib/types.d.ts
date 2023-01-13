@@ -47,10 +47,11 @@ export declare type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep
 export declare type CustomName = `_${string}`;
 export declare type ThemeSize = '8xs' | '7xs' | '6xs' | '5xs' | '4xs' | '3xs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl';
 export declare type CustomThemeSize<T extends CustomName> = T | ThemeSize;
+export declare type CustomBorderRadiusSize<T extends CustomName> = CustomThemeSize<T> | 'round';
 export declare type AspectRatio<CustomAspectRatio extends CustomName> = CssAspectRatio | CustomAspectRatio;
 export declare type BaseFlexElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
 export declare type BaseGridElement = 'article' | 'aside' | 'div' | 'figure' | 'footer' | 'header' | 'main' | 'nav' | 'section' | 'summary';
-export declare type BorderRadius<CustomBorderRadius extends CustomName> = CustomThemeSize<CustomBorderRadius> | Size;
+export declare type BorderRadius<CustomBorderRadius extends CustomName> = CustomThemeSize<CustomBorderRadius> | Size | 'round';
 export declare type BorderWidth<CustomBorderWidth extends CustomName> = AbsoluteSize | CustomThemeSize<CustomBorderWidth>;
 export declare type Color<CustomColor extends CustomName> = CssColor | CustomColor;
 export declare type Distance<CustomDistance extends CustomName> = AbsoluteSize | CustomThemeSize<CustomDistance>;
@@ -68,7 +69,7 @@ export declare type Width<CustomWidth extends CustomName> = CustomThemeSize<Cust
 export interface EasyFlexTheme<CustomAspectRatio extends CustomName, CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomViewportThreshold extends CustomName, CustomWidth extends CustomName> {
     border: {
         defaultStyle: BorderStyle;
-        radius: Record<CustomThemeSize<CustomBorderRadius>, AbsoluteSize>;
+        radius: Record<CustomBorderRadiusSize<CustomBorderRadius>, AbsoluteSize>;
         width: Record<CustomThemeSize<CustomBorderWidth>, AbsoluteSize>;
     };
     color: Record<CustomColor, CssColor>;

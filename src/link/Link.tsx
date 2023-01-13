@@ -101,8 +101,6 @@ export const createLink = <
 					fontFamily,
 					fontSize,
 					fontWeight,
-					fullHeight,
-					fullWidth,
 					grow,
 					height,
 					hoverColor,
@@ -178,8 +176,6 @@ export const createLink = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,

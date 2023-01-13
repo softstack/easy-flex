@@ -187,8 +187,6 @@ export const createBaseButton = <
 					fontFamily,
 					fontSize,
 					fontWeight,
-					fullHeight,
-					fullWidth,
 					gap,
 					grow,
 					height,
@@ -221,7 +219,6 @@ export const createBaseButton = <
 					paddingVertical,
 					position,
 					right,
-					round,
 					shrink,
 					top,
 					underline,
@@ -233,7 +230,7 @@ export const createBaseButton = <
 				},
 				ref
 			) => {
-				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({
 					backgroundColor: defalsify(backgroundColor) ?? 'transparent',
@@ -294,8 +291,6 @@ export const createBaseButton = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,

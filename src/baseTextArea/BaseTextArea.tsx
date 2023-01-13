@@ -108,8 +108,6 @@ export const createBaseTextArea = <
 					fontFamily,
 					fontSize,
 					fontWeight,
-					fullHeight,
-					fullWidth,
 					grow,
 					height,
 					italic,
@@ -138,7 +136,6 @@ export const createBaseTextArea = <
 					placeholderColor,
 					position,
 					right,
-					round,
 					shrink,
 					top,
 					underline,
@@ -150,7 +147,7 @@ export const createBaseTextArea = <
 				},
 				ref
 			) => {
-				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
@@ -199,8 +196,6 @@ export const createBaseTextArea = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,

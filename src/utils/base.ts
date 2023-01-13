@@ -12,6 +12,7 @@ import {
 	CssColor,
 	CssFontWeight,
 	CssLineHeight,
+	CustomBorderRadiusSize,
 	CustomName,
 	CustomThemeSize,
 	DeepPartial,
@@ -79,6 +80,9 @@ export const isThemeSizeX = (size: unknown): size is ThemeSize => typeof size ==
 
 export const isThemeSize = <T extends CustomName>(size: unknown): size is CustomThemeSize<T> =>
 	isThemeSizeX(size) || isCustomName(size);
+
+export const isBorderRadiusSize = <T extends CustomName>(size: unknown): size is CustomBorderRadiusSize<T> =>
+	isThemeSize(size) || size === 'round';
 
 export const isPercent = (value: unknown): value is Px => typeof value === 'string' && !!value.match(/^\d+(\.\d+)?%$/);
 
@@ -236,7 +240,7 @@ export const getBorderRadius = <
 		CustomWidth
 	>,
 	borderRadius: BorderRadius<CustomBorderRadius>
-): Size => (isThemeSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius);
+): Size => (isBorderRadiusSize(borderRadius) ? theme.border.radius[borderRadius] : borderRadius);
 
 export const getBorderWidth = <
 	CustomAspectRatio extends CustomName,

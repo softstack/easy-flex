@@ -9,10 +9,6 @@ export interface SizeProps<
 	CustomWidth extends CustomName
 > {
 	aspectRatio?: Falsifiable<AspectRatio<CustomAspectRatio>>;
-	/** Sets the component's height to 100% if true. */
-	fullHeight?: boolean;
-	/** Sets the component's width to 100% if true. */
-	fullWidth?: boolean;
 	/** Component's height. */
 	height?: Falsifiable<Height<CustomHeight>>;
 	/** Component's maximum height. */
@@ -43,8 +39,6 @@ export const useSize = <
 	CustomWidth extends CustomName
 >({
 	aspectRatio,
-	fullHeight = false,
-	fullWidth = false,
 	height,
 	maxHeight,
 	maxWidth,
@@ -68,8 +62,8 @@ export const useSize = <
 	);
 
 	const processedHeight = useMemo<ElementSize | undefined>(
-		() => (fullHeight ? '100%' : ifDefined(height, (height) => getHeight(theme, height))),
-		[fullHeight, height, theme]
+		() => ifDefined(height, (height) => getHeight(theme, height)),
+		[height, theme]
 	);
 
 	const processedMaxHeight = useMemo<ElementSize | undefined>(
@@ -93,8 +87,8 @@ export const useSize = <
 	);
 
 	const processedWidth = useMemo<ElementSize | undefined>(
-		() => (fullWidth ? '100%' : ifDefined(width, (width) => getWidth(theme, width))),
-		[fullWidth, theme, width]
+		() => ifDefined(width, (width) => getWidth(theme, width)),
+		[theme, width]
 	);
 
 	return useMemo<{

@@ -1,10 +1,6 @@
 import { AspectRatio, CssAspectRatio, CustomName, ElementSize, Falsifiable, Height, Width } from '../types';
 export interface SizeProps<CustomAspectRatio extends CustomName, CustomHeight extends CustomName, CustomWidth extends CustomName> {
     aspectRatio?: Falsifiable<AspectRatio<CustomAspectRatio>>;
-    /** Sets the component's height to 100% if true. */
-    fullHeight?: boolean;
-    /** Sets the component's width to 100% if true. */
-    fullWidth?: boolean;
     /** Component's height. */
     height?: Falsifiable<Height<CustomHeight>>;
     /** Component's maximum height. */
@@ -27,7 +23,7 @@ export interface SizeStyleProps {
     'data-width-max': ElementSize | undefined;
     'data-width-min': ElementSize | undefined;
 }
-export declare const useSize: <CustomAspectRatio extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>({ aspectRatio, fullHeight, fullWidth, height, maxHeight, maxWidth, minHeight, minWidth, width, }: SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>) => {
+export declare const useSize: <CustomAspectRatio extends `_${string}`, CustomHeight extends `_${string}`, CustomWidth extends `_${string}`>({ aspectRatio, height, maxHeight, maxWidth, minHeight, minWidth, width, }: SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>) => {
     aspectRatio: CssAspectRatio | undefined;
     height: ElementSize | undefined;
     maxHeight: ElementSize | undefined;

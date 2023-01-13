@@ -162,8 +162,6 @@ export const createBaseFlex = <
 					fontFamily,
 					fontSize,
 					fontWeight,
-					fullHeight,
-					fullWidth,
 					gap,
 					grow,
 					height,
@@ -196,7 +194,6 @@ export const createBaseFlex = <
 					paddingVertical,
 					position,
 					right,
-					round,
 					shrink,
 					top,
 					underline,
@@ -208,7 +205,7 @@ export const createBaseFlex = <
 				},
 				ref
 			) => {
-				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
@@ -261,8 +258,6 @@ export const createBaseFlex = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,

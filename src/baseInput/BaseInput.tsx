@@ -107,8 +107,6 @@ export const createBaseInput = <
 					fontFamily,
 					fontSize,
 					fontWeight,
-					fullHeight,
-					fullWidth,
 					grow,
 					height,
 					italic,
@@ -137,7 +135,6 @@ export const createBaseInput = <
 					placeholderColor,
 					position,
 					right,
-					round,
 					shrink,
 					top,
 					underline,
@@ -149,7 +146,7 @@ export const createBaseInput = <
 				},
 				ref
 			) => {
-				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
@@ -198,8 +195,6 @@ export const createBaseInput = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,

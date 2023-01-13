@@ -144,8 +144,6 @@ export const createText = <
 					fontFamily,
 					fontSize,
 					fontWeight,
-					fullHeight,
-					fullWidth,
 					grow,
 					height,
 					italic,
@@ -176,7 +174,6 @@ export const createText = <
 					paddingVertical,
 					position,
 					right,
-					round,
 					shrink,
 					top,
 					underline,
@@ -188,7 +185,7 @@ export const createText = <
 				},
 				ref
 			) => {
-				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
@@ -239,8 +236,6 @@ export const createText = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,

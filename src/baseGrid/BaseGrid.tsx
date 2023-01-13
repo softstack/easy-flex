@@ -179,8 +179,6 @@ export const createBaseGrid = <
 					fontFamily,
 					fontSize,
 					fontWeight,
-					fullHeight,
-					fullWidth,
 					grow,
 					height,
 					italic,
@@ -210,7 +208,6 @@ export const createBaseGrid = <
 					paddingVertical,
 					position,
 					right,
-					round,
 					rowGap,
 					shrink,
 					top,
@@ -225,7 +222,7 @@ export const createBaseGrid = <
 			) => {
 				const theme = useEasyFlexTheme();
 
-				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth, round });
+				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
 
@@ -274,8 +271,6 @@ export const createBaseGrid = <
 
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
-					fullHeight,
-					fullWidth,
 					height,
 					maxHeight,
 					maxWidth,
