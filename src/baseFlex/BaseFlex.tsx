@@ -201,6 +201,8 @@ export const createBaseFlex = <
 					whiteSpace,
 					width,
 					wordBreak,
+					wrap,
+					wrapGap,
 					...props
 				},
 				ref
@@ -237,7 +239,7 @@ export const createBaseFlex = <
 					wordBreak,
 				});
 
-				const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify });
+				const flexContainerStyleProps = useFlexContainerStyleProps({ align, direction, gap, justify, wrap, wrapGap });
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 

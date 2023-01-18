@@ -226,6 +226,8 @@ export const createBaseButton = <
 					whiteSpace,
 					width,
 					wordBreak,
+					wrap,
+					wrapGap,
 					...props
 				},
 				ref
@@ -270,6 +272,8 @@ export const createBaseButton = <
 					direction: defalsify(direction) ?? 'row',
 					gap,
 					justify,
+					wrap,
+					wrapGap,
 				});
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });

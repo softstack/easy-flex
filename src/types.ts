@@ -250,6 +250,8 @@ export type FlexBasis = GlobalValue | AbsoluteSize | Percent | 'auto';
 
 export type FlexDirection = GlobalValue | 'column' | 'column-reverse' | 'row' | 'row-reverse';
 
+export type FlexWrap = GlobalValue | 'nowrap' | 'wrap' | 'wrap-reverse';
+
 export type CssFontWeight = GlobalValue | number | 'bold' | 'bolder' | 'lighter' | 'normal';
 
 export type Inset = GlobalValue | Size | 'auto';

@@ -30,6 +30,7 @@ export declare type CssColor = ColorCode | ColorKeyword | ColorName | GlobalValu
 export declare type Flex = GlobalValue | AbsoluteSize | Percent | number | 'auto' | 'none';
 export declare type FlexBasis = GlobalValue | AbsoluteSize | Percent | 'auto';
 export declare type FlexDirection = GlobalValue | 'column' | 'column-reverse' | 'row' | 'row-reverse';
+export declare type FlexWrap = GlobalValue | 'nowrap' | 'wrap' | 'wrap-reverse';
 export declare type CssFontWeight = GlobalValue | number | 'bold' | 'bolder' | 'lighter' | 'normal';
 export declare type Inset = GlobalValue | Size | 'auto';
 export declare type JustifyContent = GlobalValue | 'center' | 'end' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly' | 'start';

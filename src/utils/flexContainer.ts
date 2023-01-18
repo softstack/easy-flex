@@ -1,6 +1,15 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { AbsoluteSize, AlignItems, CustomName, Distance, Falsifiable, FlexDirection, JustifyContent } from '../types';
+import {
+	AbsoluteSize,
+	AlignItems,
+	CustomName,
+	Distance,
+	Falsifiable,
+	FlexDirection,
+	FlexWrap,
+	JustifyContent,
+} from '../types';
 import { getDistance, ifDefined, useEasyFlexTheme } from './base';
 
 export interface FlexContainerProps<CustomDistance extends CustomName> {
@@ -12,6 +21,8 @@ export interface FlexContainerProps<CustomDistance extends CustomName> {
 	gap?: Falsifiable<Distance<CustomDistance>>;
 	/** Sets how the browser distributes space between and around the component's children along the main axis. */
 	justify?: Falsifiable<JustifyContent>;
+	wrap?: Falsifiable<FlexWrap>;
+	wrapGap?: Falsifiable<Distance<CustomDistance>>;
 }
 
 export interface FlexContainerStyleProps {
@@ -20,14 +31,17 @@ export interface FlexContainerStyleProps {
 	'data-column-gap': Falsifiable<AbsoluteSize> | undefined;
 	'data-row-gap': Falsifiable<AbsoluteSize> | undefined;
 	'data-justify': Falsifiable<JustifyContent> | undefined;
+	'data-wrap': Falsifiable<FlexWrap> | undefined;
 }
 
 export const useGap = <CustomDistance extends CustomName>({
 	direction,
 	gap,
+	wrapGap,
 }: {
 	direction?: Falsifiable<FlexDirection>;
 	gap?: Falsifiable<Distance<CustomDistance>>;
+	wrapGap?: Falsifiable<Distance<CustomDistance>>;
 }): { column: AbsoluteSize | undefined; row: AbsoluteSize | undefined } => {
 	const theme = useEasyFlexTheme();
 
@@ -35,16 +49,22 @@ export const useGap = <CustomDistance extends CustomName>({
 		() =>
 			ifDefined(gap, (gap) =>
 				direction === 'row' || direction === 'row-reverse' ? getDistance(theme, gap) : undefined
+			) ??
+			ifDefined(wrapGap, (wrapGap) =>
+				direction === 'column' || direction === 'column-reverse' ? getDistance(theme, wrapGap) : undefined
 			),
-		[direction, gap, theme]
+		[direction, gap, theme, wrapGap]
 	);
 
 	const rowGap = useMemo<AbsoluteSize | undefined>(
 		() =>
 			ifDefined(gap, (gap) =>
 				direction === 'column' || direction === 'column-reverse' ? getDistance(theme, gap) : undefined
+			) ??
+			ifDefined(wrapGap, (wrapGap) =>
+				direction === 'row' || direction === 'row-reverse' ? getDistance(theme, wrapGap) : undefined
 			),
-		[direction, gap, theme]
+		[direction, gap, theme, wrapGap]
 	);
 
 	return useMemo<{ column: AbsoluteSize | undefined; row: AbsoluteSize | undefined }>(
@@ -61,8 +81,10 @@ export const useFlexContainerStyleProps = <CustomDistance extends CustomName>({
 	direction,
 	gap,
 	justify,
+	wrap,
+	wrapGap,
 }: FlexContainerProps<CustomDistance>): FlexContainerStyleProps => {
-	const processedGap = useGap({ direction, gap });
+	const processedGap = useGap({ direction, gap, wrapGap });
 
 	return useMemo<FlexContainerStyleProps>(
 		() => ({
@@ -71,8 +93,9 @@ export const useFlexContainerStyleProps = <CustomDistance extends CustomName>({
 			'data-column-gap': processedGap.column,
 			'data-row-gap': processedGap.row,
 			'data-justify': justify,
+			'data-wrap': wrap,
 		}),
-		[align, direction, justify, processedGap]
+		[align, direction, justify, processedGap, wrap]
 	);
 };
 
@@ -82,4 +105,5 @@ export const flexContainerStyle = css<FlexContainerStyleProps>`
 	column-gap: ${({ 'data-column-gap': columnGap }) => columnGap};
 	row-gap: ${({ 'data-row-gap': rowGap }) => rowGap};
 	justify-content: ${({ 'data-justify': justify }) => justify};
+	flex-wrap: ${({ 'data-wrap': wrap }) => wrap};
 `;
