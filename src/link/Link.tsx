@@ -126,6 +126,7 @@ export const createLink = <
 					shrink,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					width,
@@ -171,6 +172,7 @@ export const createLink = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

@@ -138,6 +138,7 @@ export const createBaseInput = <
 					shrink,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					width,
@@ -190,6 +191,7 @@ export const createBaseInput = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

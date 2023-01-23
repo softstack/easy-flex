@@ -99,6 +99,7 @@ export const createImg = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 					width,
 					...props
@@ -129,6 +130,7 @@ export const createImg = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

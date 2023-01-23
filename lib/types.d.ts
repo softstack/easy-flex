@@ -42,6 +42,7 @@ export declare type Opacity = GlobalValue | Percent | number;
 export declare type Overflow = GlobalValue | 'auto' | 'hidden' | 'scroll' | 'visible';
 export declare type Position = GlobalValue | 'absolute' | 'fixed' | 'relative' | 'static' | 'sticky';
 export declare type TextAlign = GlobalValue | 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
+export declare type UserSelect = GlobalValue | 'all' | 'auto' | 'contain' | 'none' | 'text';
 export declare type Visibility = GlobalValue | 'collapse' | 'hidden' | 'visible';
 export declare type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 export declare type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 'normal';

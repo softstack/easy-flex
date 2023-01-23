@@ -122,6 +122,7 @@ export const createStyle = <
 					right,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					wordBreak,
@@ -149,6 +150,7 @@ export const createStyle = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { Falsifiable, Inset, Opacity, Position, Visibility } from '../types';
+import { Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
 import { ifDefined } from './base';
 
 export interface MiscProps {
@@ -11,6 +11,7 @@ export interface MiscProps {
 	position?: Falsifiable<Position>;
 	right?: Falsifiable<Inset>;
 	top?: Falsifiable<Inset>;
+	userSelect?: Falsifiable<UserSelect>;
 	visibility?: Falsifiable<Visibility>;
 }
 
@@ -22,6 +23,7 @@ export interface MiscStyleProps {
 	'data-position': Position | undefined;
 	'data-right': Inset | undefined;
 	'data-top': Inset | undefined;
+	'data-user-select': UserSelect | undefined;
 	'data-visibility': Visibility | undefined;
 }
 
@@ -33,6 +35,7 @@ export const useMiscStyleProps = ({
 	position,
 	right,
 	top,
+	userSelect,
 	visibility,
 }: MiscProps): MiscStyleProps => {
 	const processedBottom = useMemo<Inset | undefined>(() => ifDefined(bottom, (bottom) => bottom), [bottom]);
@@ -52,6 +55,11 @@ export const useMiscStyleProps = ({
 
 	const processedTop = useMemo<Inset | undefined>(() => ifDefined(top, (top) => top), [top]);
 
+	const processedUserSelect = useMemo<UserSelect | undefined>(
+		() => ifDefined(userSelect, (userSelect) => userSelect),
+		[userSelect]
+	);
+
 	const processedVisibility = useMemo<Visibility | undefined>(
 		() => ifDefined(visibility, (visibility) => visibility),
 		[visibility]
@@ -66,6 +74,7 @@ export const useMiscStyleProps = ({
 			'data-position': processedPosition,
 			'data-right': processedRight,
 			'data-top': processedTop,
+			'data-user-select': processedUserSelect,
 			'data-visibility': processedVisibility,
 		}),
 		[
@@ -76,6 +85,7 @@ export const useMiscStyleProps = ({
 			processedPosition,
 			processedRight,
 			processedTop,
+			processedUserSelect,
 			processedVisibility,
 		]
 	);
@@ -89,5 +99,6 @@ export const miscStyle = css<MiscStyleProps>`
 	position: ${({ 'data-position': position }) => position};
 	right: ${({ 'data-right': right }) => right};
 	top: ${({ 'data-top': top }) => top};
+	user-select: ${({ 'data-user-select': userSelect }) => userSelect};
 	visibility: ${({ 'data-visibility': visibility }) => visibility};
 `;

@@ -294,6 +294,8 @@ export type TextAlign =
 	| 'right'
 	| 'start';
 
+export type UserSelect = GlobalValue | 'all' | 'auto' | 'contain' | 'none' | 'text';
+
 export type Visibility = GlobalValue | 'collapse' | 'hidden' | 'visible';
 
 export type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';

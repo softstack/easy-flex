@@ -197,6 +197,7 @@ export const createBaseFlex = <
 					shrink,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					width,
@@ -253,6 +254,7 @@ export const createBaseFlex = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

@@ -52,6 +52,7 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 					right,
 					shrink,
 					top,
+					userSelect,
 					visibility,
 					width,
 					...props
@@ -70,7 +71,16 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
-				const miscStyleProps = useMiscStyleProps({ bottom, displayNone, left, position, right, top, visibility });
+				const miscStyleProps = useMiscStyleProps({
+					bottom,
+					displayNone,
+					left,
+					position,
+					right,
+					top,
+					userSelect,
+					visibility,
+				});
 
 				const processedWidth = useMemo<AbsoluteSize>(
 					() =>

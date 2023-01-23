@@ -139,6 +139,7 @@ export const createBaseTextArea = <
 					shrink,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					width,
@@ -191,6 +192,7 @@ export const createBaseTextArea = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

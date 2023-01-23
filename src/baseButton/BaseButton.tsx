@@ -222,6 +222,7 @@ export const createBaseButton = <
 					shrink,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					width,
@@ -288,6 +289,7 @@ export const createBaseButton = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

@@ -212,6 +212,7 @@ export const createBaseGrid = <
 					shrink,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					width,
@@ -266,6 +267,7 @@ export const createBaseGrid = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 

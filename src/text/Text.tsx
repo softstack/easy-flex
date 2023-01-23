@@ -177,6 +177,7 @@ export const createText = <
 					shrink,
 					top,
 					underline,
+					userSelect,
 					visibility,
 					whiteSpace,
 					width,
@@ -229,6 +230,7 @@ export const createText = <
 					position,
 					right,
 					top,
+					userSelect,
 					visibility,
 				});
 
