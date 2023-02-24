@@ -46,3 +46,11 @@ export declare const useDimension: () => {
 };
 export declare const useModalContainer: (containerElementId: Falsifiable<string> | undefined) => HTMLElement;
 export declare const useViewport: () => Record<ThemeSize | 'default', boolean>;
+export declare const atMedia: <CustomViewportThreshold extends `_${string}`>(width: CustomThemeSize<CustomViewportThreshold>) => (props: {
+    theme: {
+        viewport: Pick<{
+            defaultThreshold: number;
+            threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
+        }, "threshold">;
+    };
+}) => string;

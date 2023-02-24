@@ -12,8 +12,8 @@ import { createRow } from './row/Row';
 import { createSpacing } from './spacing/Spacing';
 import { createStyle } from './style/Style';
 import { createText } from './text/Text';
-import { CustomName, EasyFlexTheme } from './types';
-import { useEasyFlexTheme } from './utils/base';
+import { CustomName, CustomThemeSize, EasyFlexTheme } from './types';
+import { atMedia, useEasyFlexTheme } from './utils/base';
 
 export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
@@ -195,6 +195,27 @@ export const createEasyFlex = <
 		CustomLineHeight,
 		CustomWidth
 	>(),
+	atMedia: ((): ((width: CustomThemeSize<CustomViewportThreshold>) => (props: {
+		theme: {
+			viewport: Pick<
+				EasyFlexTheme<
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					CustomViewportThreshold,
+					never
+				>['viewport'],
+				'threshold'
+			>;
+		};
+	}) => string) => atMedia)(),
 	useEasyFlexTheme: ((): (() => EasyFlexTheme<
 		CustomAspectRatio,
 		CustomBorderRadius,

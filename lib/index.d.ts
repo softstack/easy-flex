@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { EasyFlexTheme } from './types';
+import { CustomThemeSize, EasyFlexTheme } from './types';
 export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
 export * from './baseGrid/BaseGrid';
@@ -39,5 +39,13 @@ export declare const createEasyFlex: <CustomAspectRatio extends `_${string}`, Cu
     Spacing: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./spacing/Spacing").SpacingProps<CustomDistance> & import("react").RefAttributes<HTMLDivElement>>>;
     Style: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./style/Style").StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> & import("react").RefAttributes<HTMLParagraphElement>>>;
     Text: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./text/Text").TextProps<CustomAspectRatio, CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomWidth> & import("react").RefAttributes<HTMLParagraphElement>>>;
+    atMedia: (width: CustomThemeSize<CustomViewportThreshold>) => (props: {
+        theme: {
+            viewport: Pick<{
+                defaultThreshold: number;
+                threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
+            }, "threshold">;
+        };
+    }) => string;
     useEasyFlexTheme: () => EasyFlexTheme<CustomAspectRatio, CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomViewportThreshold, CustomWidth>;
 };

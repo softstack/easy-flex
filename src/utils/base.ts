@@ -626,3 +626,52 @@ export const useViewport = (): Record<ThemeSize | 'default', boolean> => {
 		[theme, width]
 	);
 };
+
+export const atMedia =
+	<CustomViewportThreshold extends CustomName>(
+		width: CustomThemeSize<CustomViewportThreshold>
+	): ((props: {
+		theme: {
+			viewport: Pick<
+				EasyFlexTheme<
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					CustomViewportThreshold,
+					never
+				>['viewport'],
+				'threshold'
+			>;
+		};
+	}) => string) =>
+	({
+		theme,
+	}: {
+		theme: {
+			viewport: Pick<
+				EasyFlexTheme<
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					CustomViewportThreshold,
+					never
+				>['viewport'],
+				'threshold'
+			>;
+		};
+	}) =>
+		`@media (max-width: ${toPx(theme.viewport.threshold[width] - 1)})`;
