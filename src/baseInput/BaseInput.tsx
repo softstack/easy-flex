@@ -22,6 +22,7 @@ const StyledInput = styled.input<
 >`
 	border: none;
 	box-sizing: border-box;
+	font-family: inherit;
 	font-size: inherit;
 	${borderStyle}
 	${colorStyle}
