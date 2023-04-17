@@ -20,8 +20,8 @@ const StyledInput = styled.input<
 		MiscStyleProps &
 		SizeStyleProps
 >`
-	box-sizing: border-box;
 	border: none;
+	box-sizing: border-box;
 	font-size: inherit;
 	${borderStyle}
 	${colorStyle}

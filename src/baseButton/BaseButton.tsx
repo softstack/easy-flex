@@ -30,13 +30,14 @@ const StyledButton = styled.button<
 		OverflowStyleProps &
 		SizeStyleProps
 >`
-	box-sizing: border-box;
-	display: flex;
-	border: none;
-	cursor: pointer;
 	background-color: transparent;
-	font-size: inherit;
+	border: none;
+	box-sizing: border-box;
 	color: inherit; /* For Safari on iOS */
+	cursor: pointer;
+	display: flex;
+	font-family: inherit;
+	font-size: inherit;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}

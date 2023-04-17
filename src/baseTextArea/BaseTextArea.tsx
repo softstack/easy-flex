@@ -20,8 +20,8 @@ const StyledTextArea = styled.textarea<
 		MiscStyleProps &
 		SizeStyleProps
 >`
-	box-sizing: border-box;
 	border: none;
+	box-sizing: border-box;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}

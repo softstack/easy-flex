@@ -22,8 +22,8 @@ const StyledA = styled.a<
 		SizeStyleProps
 >`
 	box-sizing: border-box;
-	text-decoration: none;
 	padding: 0;
+	text-decoration: none;
 	${colorStyle}
 	${flexItemStyle}
 	${fontStyle}

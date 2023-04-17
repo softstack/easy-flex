@@ -12,18 +12,15 @@ const Background = styled.div<
 		'data-blur': AbsoluteSize | undefined;
 	} & MiscStyleProps
 >`
+	align-items: center;
 	box-sizing: border-box;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: 0;
-	padding: 0;
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	inset: 0;
 	justify-content: center;
+	margin: 0;
+	padding: 0;
+	position: fixed;
 	background-color: ${({ 'data-background-color': backgroundColor }) => backgroundColor};
 	backdrop-filter: ${({ 'data-blur': blur }) => `blur(${blur})`};
 	${miscStyle}

@@ -8,9 +8,9 @@ import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../util
 const StyledDiv = styled.div<
 	{ 'data-height': AbsoluteSize; 'data-width': AbsoluteSize } & FlexItemStyleProps & MiscStyleProps
 >`
+	background-color: transparent;
 	box-sizing: border-box;
 	display: flex;
-	background-color: transparent;
 	margin: 0;
 	padding: 0;
 	min-height: ${({ 'data-height': height }) => height};
