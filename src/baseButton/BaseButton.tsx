@@ -38,6 +38,7 @@ const StyledButton = styled.button<
 	display: flex;
 	font-family: inherit;
 	font-size: inherit;
+	font-weight: inherit;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}

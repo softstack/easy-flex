@@ -24,6 +24,7 @@ const StyledInput = styled.input<
 	box-sizing: border-box;
 	font-family: inherit;
 	font-size: inherit;
+	font-weight: inherit;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
