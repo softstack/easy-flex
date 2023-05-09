@@ -100,7 +100,7 @@ export const createStyle = <
 >() => {
 	const Style = memo(
 		forwardRef<
-			HTMLParagraphElement,
+			HTMLSpanElement,
 			StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>
 		>(
 			(

@@ -37,7 +37,7 @@ export declare const createEasyFlex: <CustomAspectRatio extends `_${string}`, Cu
     Modal: import("react").NamedExoticComponent<import("./modal/Modal").ModalProps<CustomColor>>;
     Row: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./row/Row").RowProps<CustomAspectRatio, CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomWidth> & import("react").RefAttributes<HTMLDivElement>>>;
     Spacing: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./spacing/Spacing").SpacingProps<CustomDistance> & import("react").RefAttributes<HTMLDivElement>>>;
-    Style: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./style/Style").StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> & import("react").RefAttributes<HTMLParagraphElement>>>;
+    Style: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./style/Style").StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> & import("react").RefAttributes<HTMLSpanElement>>>;
     Text: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./text/Text").TextProps<CustomAspectRatio, CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomWidth> & import("react").RefAttributes<HTMLParagraphElement>>>;
     atMedia: (width: CustomThemeSize<CustomViewportThreshold>) => (props: {
         theme: {
