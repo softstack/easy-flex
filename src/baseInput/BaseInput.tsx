@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
-import { Color, CssColor, CustomName, Falsifiable } from '../types';
+import { Color, CssColor, CustomName, Falsifiable, TextAlign } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
 import { DistanceProps, distanceStyle, DistanceStyleProps, useDistanceStyleProps } from '../utils/distance';
@@ -11,7 +11,10 @@ import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../util
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const StyledInput = styled.input<
-	{ 'data-placeholder-color': CssColor | undefined } & BorderStyleProps &
+	{
+		'data-align': Falsifiable<TextAlign> | undefined;
+		'data-placeholder-color': CssColor | undefined;
+	} & BorderStyleProps &
 		ColorStyleProps &
 		DistanceStyleProps &
 		FlexItemStyleProps &
@@ -25,6 +28,7 @@ const StyledInput = styled.input<
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: inherit;
+	text-align: ${({ 'data-align': align }) => align};
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
@@ -60,6 +64,7 @@ export interface BaseInputProps<
 		GridItemProps,
 		MiscProps,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
+	align?: Falsifiable<TextAlign>;
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }
 
@@ -95,6 +100,7 @@ export const createBaseInput = <
 		>(
 			(
 				{
+					align,
 					alignSelf,
 					aspectRatio,
 					backgroundColor,
@@ -212,6 +218,7 @@ export const createBaseInput = <
 
 				return (
 					<StyledInput
+						data-align={align}
 						data-placeholder-color={processedPlaceholderColor}
 						{...borderStyleProps}
 						{...colorStyleProps}
