@@ -126,6 +126,7 @@ export const createStyle = <
 					visibility,
 					whiteSpace,
 					wordBreak,
+					...props
 				},
 				ref
 			) => {
@@ -192,7 +193,7 @@ export const createStyle = <
 				}, [element]);
 
 				return (
-					<Element {...colorStyleProps} {...fontStyleProps} {...miscStyleProps} ref={ref}>
+					<Element {...colorStyleProps} {...fontStyleProps} {...miscStyleProps} ref={ref} {...props}>
 						{children}
 					</Element>
 				);
