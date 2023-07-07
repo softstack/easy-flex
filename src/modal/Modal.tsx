@@ -2,7 +2,7 @@ import React, { HTMLAttributes, memo, MouseEvent, useCallback, useMemo, useRef }
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AbsoluteSize, Color, CssColor, CustomName, Falsifiable } from '../types';
-import { isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
+import { defalsify, isAbsoluteSize, useEasyFlexTheme, useModalContainer } from '../utils/base';
 import { useDefaultColor } from '../utils/color';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
 
@@ -14,7 +14,6 @@ const Background = styled.div<
 >`
 	align-items: center;
 	box-sizing: border-box;
-	display: flex;
 	flex-direction: row;
 	inset: 0;
 	justify-content: center;
@@ -37,10 +36,10 @@ export interface ModalProps<CustomColor extends CustomName> extends HTMLAttribut
 
 export const createModal = <CustomColor extends CustomName>() => {
 	const Modal = memo<ModalProps<CustomColor>>(
-		({ backgroundColor, blur, children, containerElementId, displayNone, onClose, visibility, ...props }) => {
+		({ backgroundColor, blur, children, containerElementId, display, onClose, visibility, ...props }) => {
 			const theme = useEasyFlexTheme();
 
-			const miscStyleProps = useMiscStyleProps({ displayNone, visibility });
+			const miscStyleProps = useMiscStyleProps({ display: defalsify(display) ?? 'flex', visibility });
 
 			const backgroundElement = useRef<HTMLDivElement>(null);
 

@@ -14,6 +14,7 @@ import {
 	FontWeight,
 	LineHeight,
 	TextDecoration,
+	TextOverflow,
 	WhiteSpace,
 	WordBreak,
 } from '../types';
@@ -35,6 +36,7 @@ export interface FontProps<
 	/** If true, the text style is set to italic. */
 	italic?: boolean;
 	lineHeight?: Falsifiable<LineHeight<CustomLineHeight>>;
+	textOverflow?: Falsifiable<TextOverflow>;
 	underline?: boolean;
 	underlineColor?: Falsifiable<Color<CustomColor>>;
 	whiteSpace?: Falsifiable<WhiteSpace>;
@@ -50,6 +52,7 @@ export interface FontStyleProps {
 	'data-line-height': CssLineHeight | undefined;
 	'data-text-decoration': TextDecoration | undefined;
 	'data-text-decoration-color': CssColor | undefined;
+	'data-text-overflow': Falsifiable<TextOverflow> | undefined;
 	'data-white-space': Falsifiable<WhiteSpace> | undefined;
 	'data-word-break': Falsifiable<WordBreak> | undefined;
 }
@@ -66,6 +69,7 @@ export const useFont = <
 	fontWeight,
 	italic,
 	lineHeight,
+	textOverflow,
 	underline,
 	underlineColor,
 	whiteSpace,
@@ -78,6 +82,7 @@ export const useFont = <
 	lineHeight: CssLineHeight | undefined;
 	textDecoration: TextDecoration | undefined;
 	textDecorationColor: CssColor | undefined;
+	textOverflow: Falsifiable<TextOverflow> | undefined;
 	whiteSpace: Falsifiable<WhiteSpace> | undefined;
 	wordBreak: Falsifiable<WordBreak> | undefined;
 } => {
@@ -123,6 +128,7 @@ export const useFont = <
 		lineHeight: CssLineHeight | undefined;
 		textDecoration: TextDecoration | undefined;
 		textDecorationColor: CssColor | undefined;
+		textOverflow: Falsifiable<TextOverflow> | undefined;
 		whiteSpace: Falsifiable<WhiteSpace> | undefined;
 		wordBreak: Falsifiable<WordBreak> | undefined;
 	}>(
@@ -134,6 +140,7 @@ export const useFont = <
 			lineHeight: processedLineHeight,
 			textDecoration: processedUnderline,
 			textDecorationColor: processedUnderlineColor,
+			textOverflow,
 			whiteSpace,
 			wordBreak,
 		}),
@@ -145,6 +152,7 @@ export const useFont = <
 			processedLineHeight,
 			processedUnderline,
 			processedUnderlineColor,
+			textOverflow,
 			whiteSpace,
 			wordBreak,
 		]
@@ -171,6 +179,7 @@ export const useFontStyleProps = <
 			'data-line-height': font.lineHeight,
 			'data-text-decoration': font.textDecoration,
 			'data-text-decoration-color': font.textDecorationColor,
+			'data-text-overflow': font.textOverflow,
 			'data-white-space': font.whiteSpace,
 			'data-word-break': font.wordBreak,
 		}),
@@ -186,6 +195,7 @@ export const fontStyle = css<FontStyleProps>`
 	line-height: ${({ 'data-line-height': lineHeight }) => lineHeight};
 	text-decoration: ${({ 'data-text-decoration': textDecoration }) => textDecoration};
 	text-decoration-color: ${({ 'data-text-decoration-color': textDecorationColor }) => textDecorationColor};
+	text-overflow: ${({ 'data-text-overflow': textOverflow }) => textOverflow};
 	white-space: ${({ 'data-white-space': whiteSpace }) => whiteSpace};
 	word-break: ${({ 'data-word-break': wordBreak }) => wordBreak};
 `;

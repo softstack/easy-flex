@@ -31,7 +31,6 @@ const style = css<
 		SizeStyleProps
 >`
 	box-sizing: border-box;
-	display: flex;
 	${borderStyle}
 	${colorStyle}
 	${distanceStyle}
@@ -156,7 +155,7 @@ export const createBaseFlex = <
 					children,
 					color,
 					direction,
-					displayNone,
+					display,
 					element,
 					flex,
 					fontFamily,
@@ -195,6 +194,7 @@ export const createBaseFlex = <
 					position,
 					right,
 					shrink,
+					textOverflow,
 					top,
 					underline,
 					userSelect,
@@ -235,6 +235,7 @@ export const createBaseFlex = <
 					fontWeight,
 					italic,
 					lineHeight,
+					textOverflow,
 					underline,
 					whiteSpace,
 					wordBreak,
@@ -248,7 +249,7 @@ export const createBaseFlex = <
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display: defalsify(display) ?? 'flex',
 					left,
 					opacity,
 					position,

@@ -10,7 +10,6 @@ const StyledDiv = styled.div<
 >`
 	background-color: transparent;
 	box-sizing: border-box;
-	display: flex;
 	margin: 0;
 	padding: 0;
 	min-height: ${({ 'data-height': height }) => height};
@@ -42,7 +41,7 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 					alignSelf,
 					basis,
 					bottom,
-					displayNone,
+					display,
 					flex,
 					flip,
 					grow,
@@ -73,7 +72,7 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display: defalsify(display) ?? 'flex',
 					left,
 					position,
 					right,

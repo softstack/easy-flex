@@ -111,7 +111,7 @@ export const createBaseInput = <
 					borderWidth,
 					bottom,
 					color,
-					displayNone,
+					display,
 					flex,
 					fontFamily,
 					fontSize,
@@ -145,6 +145,7 @@ export const createBaseInput = <
 					position,
 					right,
 					shrink,
+					textOverflow,
 					top,
 					underline,
 					userSelect,
@@ -183,6 +184,7 @@ export const createBaseInput = <
 					fontWeight,
 					italic,
 					lineHeight,
+					textOverflow,
 					underline,
 					whiteSpace,
 					wordBreak,
@@ -194,7 +196,7 @@ export const createBaseInput = <
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display,
 					left,
 					opacity,
 					position,

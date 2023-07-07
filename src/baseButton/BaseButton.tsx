@@ -35,7 +35,6 @@ const StyledButton = styled.button<
 	box-sizing: border-box;
 	color: inherit; /* For Safari on iOS */
 	cursor: pointer;
-	display: flex;
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: inherit;
@@ -184,7 +183,7 @@ export const createBaseButton = <
 					children,
 					color,
 					direction,
-					displayNone,
+					display,
 					flex,
 					fontFamily,
 					fontSize,
@@ -222,6 +221,7 @@ export const createBaseButton = <
 					position,
 					right,
 					shrink,
+					textOverflow,
 					top,
 					underline,
 					userSelect,
@@ -259,17 +259,6 @@ export const createBaseButton = <
 					paddingVertical,
 				});
 
-				const fontStyleProps = useFontStyleProps({
-					fontFamily,
-					fontSize,
-					fontWeight,
-					italic,
-					lineHeight,
-					underline,
-					whiteSpace,
-					wordBreak,
-				});
-
 				const flexContainerStyleProps = useFlexContainerStyleProps({
 					align,
 					direction: defalsify(direction) ?? 'row',
@@ -281,11 +270,23 @@ export const createBaseButton = <
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
+				const fontStyleProps = useFontStyleProps({
+					fontFamily,
+					fontSize,
+					fontWeight,
+					italic,
+					lineHeight,
+					textOverflow,
+					underline,
+					whiteSpace,
+					wordBreak,
+				});
+
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display: defalsify(display) ?? 'flex',
 					left,
 					opacity,
 					position,

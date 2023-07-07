@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import { Color, CssColor, CustomName, Falsifiable } from '../types';
 import { defalsify } from '../utils/base';
 import { ColorProps, colorStyle, ColorStyleProps, useColor, useColorStyleProps } from '../utils/color';
+import {
+	FlexContainerProps,
+	flexContainerStyle,
+	FlexContainerStyleProps,
+	useFlexContainerStyleProps,
+} from '../utils/flexContainer';
 import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
@@ -14,6 +20,7 @@ const StyledA = styled.a<
 	{
 		'data-hover-color': CssColor | undefined;
 	} & ColorStyleProps &
+		FlexContainerStyleProps &
 		FlexItemStyleProps &
 		FontStyleProps &
 		GridItemStyleProps &
@@ -25,6 +32,7 @@ const StyledA = styled.a<
 	padding: 0;
 	text-decoration: none;
 	${colorStyle}
+	${flexContainerStyle}
 	${flexItemStyle}
 	${fontStyle}
 	${gridItemStyle}
@@ -49,6 +57,7 @@ export interface LinkProps<
 	CustomWidth extends CustomName
 > extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
 		ColorProps<CustomColor>,
+		FlexContainerProps<CustomDistance>,
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		GridItemProps,
@@ -89,6 +98,7 @@ export const createLink = <
 		>(
 			(
 				{
+					align,
 					alignSelf,
 					aspectRatio,
 					backgroundColor,
@@ -96,15 +106,18 @@ export const createLink = <
 					bottom,
 					children,
 					color,
-					displayNone,
+					display,
+					direction,
 					flex,
 					fontFamily,
 					fontSize,
 					fontWeight,
+					gap,
 					grow,
 					height,
 					hoverColor,
 					italic,
+					justify,
 					justifySelf,
 					left,
 					lineHeight,
@@ -124,6 +137,7 @@ export const createLink = <
 					position,
 					right,
 					shrink,
+					textOverflow,
 					top,
 					underline,
 					userSelect,
@@ -131,6 +145,8 @@ export const createLink = <
 					whiteSpace,
 					width,
 					wordBreak,
+					wrap,
+					wrapGap,
 					...props
 				},
 				ref
@@ -138,6 +154,15 @@ export const createLink = <
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color: defalsify(color) ?? 'inherit' });
 
 				const processedHoverColor = useColor(hoverColor);
+
+				const flexContainerStyleProps = useFlexContainerStyleProps({
+					align,
+					direction,
+					gap,
+					justify,
+					wrap,
+					wrapGap,
+				});
 
 				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
@@ -147,6 +172,7 @@ export const createLink = <
 					fontWeight,
 					italic,
 					lineHeight,
+					textOverflow,
 					underline,
 					whiteSpace,
 					wordBreak,
@@ -166,7 +192,7 @@ export const createLink = <
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display,
 					left,
 					opacity,
 					position,
@@ -207,6 +233,7 @@ export const createLink = <
 					<StyledA
 						data-hover-color={processedHoverColor}
 						{...colorStyleProps}
+						{...flexContainerStyleProps}
 						{...flexItemStyleProps}
 						{...fontStyleProps}
 						{...gridItemStyleProps}

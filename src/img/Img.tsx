@@ -19,7 +19,6 @@ const StyledImg = styled.img<
 		SizeStyleProps
 >`
 	box-sizing: border-box;
-	display: flex;
 	object-fit: ${({ 'data-object-fit': objectFit }) => objectFit};
 	${borderStyle}
 	${colorStyle}
@@ -79,7 +78,7 @@ export const createImg = <
 					borderWidth,
 					bottom,
 					color,
-					displayNone,
+					display,
 					height,
 					justifySelf,
 					left,
@@ -124,7 +123,7 @@ export const createImg = <
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display,
 					left,
 					opacity,
 					position,

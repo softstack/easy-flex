@@ -1,7 +1,7 @@
-import { Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
+import { Display, Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
 export interface MiscProps {
     bottom?: Falsifiable<Inset>;
-    displayNone?: boolean;
+    display?: Falsifiable<Display>;
     left?: Falsifiable<Inset>;
     opacity?: Falsifiable<Opacity>;
     position?: Falsifiable<Position>;
@@ -12,7 +12,7 @@ export interface MiscProps {
 }
 export interface MiscStyleProps {
     'data-bottom': Inset | undefined;
-    'data-display-none': string | undefined;
+    'data-display': Display | undefined;
     'data-left': Inset | undefined;
     'data-opacity': Opacity | undefined;
     'data-position': Position | undefined;
@@ -21,5 +21,5 @@ export interface MiscStyleProps {
     'data-user-select': UserSelect | undefined;
     'data-visibility': Visibility | undefined;
 }
-export declare const useMiscStyleProps: ({ bottom, displayNone, left, opacity, position, right, top, userSelect, visibility, }: MiscProps) => MiscStyleProps;
+export declare const useMiscStyleProps: ({ bottom, display, left, opacity, position, right, top, userSelect, visibility, }: MiscProps) => MiscStyleProps;
 export declare const miscStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<MiscStyleProps, any>>;

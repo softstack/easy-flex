@@ -103,7 +103,7 @@ export const createBaseTextArea = <
 					bottom,
 					children,
 					color,
-					displayNone,
+					display,
 					flex,
 					fontFamily,
 					fontSize,
@@ -137,6 +137,7 @@ export const createBaseTextArea = <
 					position,
 					right,
 					shrink,
+					textOverflow,
 					top,
 					underline,
 					userSelect,
@@ -175,6 +176,7 @@ export const createBaseTextArea = <
 					fontWeight,
 					italic,
 					lineHeight,
+					textOverflow,
 					underline,
 					whiteSpace,
 					wordBreak,
@@ -186,7 +188,7 @@ export const createBaseTextArea = <
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display,
 					left,
 					opacity,
 					position,

@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
-import { ifDefined } from './base';
+import { Display, Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
+import { defalsify } from './base';
 
 export interface MiscProps {
 	bottom?: Falsifiable<Inset>;
-	displayNone?: boolean;
+	display?: Falsifiable<Display>;
 	left?: Falsifiable<Inset>;
 	opacity?: Falsifiable<Opacity>;
 	position?: Falsifiable<Position>;
@@ -17,7 +17,7 @@ export interface MiscProps {
 
 export interface MiscStyleProps {
 	'data-bottom': Inset | undefined;
-	'data-display-none': string | undefined;
+	'data-display': Display | undefined;
 	'data-left': Inset | undefined;
 	'data-opacity': Opacity | undefined;
 	'data-position': Position | undefined;
@@ -29,7 +29,7 @@ export interface MiscStyleProps {
 
 export const useMiscStyleProps = ({
 	bottom,
-	displayNone,
+	display,
 	left,
 	opacity,
 	position,
@@ -38,37 +38,28 @@ export const useMiscStyleProps = ({
 	userSelect,
 	visibility,
 }: MiscProps): MiscStyleProps => {
-	const processedBottom = useMemo<Inset | undefined>(() => ifDefined(bottom, (bottom) => bottom), [bottom]);
+	const processedBottom = useMemo<Inset | undefined>(() => defalsify(bottom), [bottom]);
 
-	const processedDisplayNone = useMemo<'none' | undefined>(() => (displayNone ? 'none' : undefined), [displayNone]);
+	const processedDisplay = useMemo<Display | undefined>(() => defalsify(display), [display]);
 
-	const processedLeft = useMemo<Inset | undefined>(() => ifDefined(left, (left) => left), [left]);
+	const processedLeft = useMemo<Inset | undefined>(() => defalsify(left), [left]);
 
-	const processedOpacity = useMemo<Opacity | undefined>(() => ifDefined(opacity, (opacity) => opacity), [opacity]);
+	const processedOpacity = useMemo<Opacity | undefined>(() => defalsify(opacity), [opacity]);
 
-	const processedPosition = useMemo<Position | undefined>(
-		() => ifDefined(position, (position) => position),
-		[position]
-	);
+	const processedPosition = useMemo<Position | undefined>(() => defalsify(position), [position]);
 
-	const processedRight = useMemo<Inset | undefined>(() => ifDefined(right, (right) => right), [right]);
+	const processedRight = useMemo<Inset | undefined>(() => defalsify(right), [right]);
 
-	const processedTop = useMemo<Inset | undefined>(() => ifDefined(top, (top) => top), [top]);
+	const processedTop = useMemo<Inset | undefined>(() => defalsify(top), [top]);
 
-	const processedUserSelect = useMemo<UserSelect | undefined>(
-		() => ifDefined(userSelect, (userSelect) => userSelect),
-		[userSelect]
-	);
+	const processedUserSelect = useMemo<UserSelect | undefined>(() => defalsify(userSelect), [userSelect]);
 
-	const processedVisibility = useMemo<Visibility | undefined>(
-		() => ifDefined(visibility, (visibility) => visibility),
-		[visibility]
-	);
+	const processedVisibility = useMemo<Visibility | undefined>(() => defalsify(visibility), [visibility]);
 
 	return useMemo<MiscStyleProps>(
 		() => ({
 			'data-bottom': processedBottom,
-			'data-display-none': processedDisplayNone,
+			'data-display': processedDisplay,
 			'data-left': processedLeft,
 			'data-opacity': processedOpacity,
 			'data-position': processedPosition,
@@ -79,7 +70,7 @@ export const useMiscStyleProps = ({
 		}),
 		[
 			processedBottom,
-			processedDisplayNone,
+			processedDisplay,
 			processedLeft,
 			processedOpacity,
 			processedPosition,
@@ -93,7 +84,7 @@ export const useMiscStyleProps = ({
 
 export const miscStyle = css<MiscStyleProps>`
 	bottom: ${({ 'data-bottom': bottom }) => bottom};
-	display: ${({ 'data-display-none': displayNone }) => displayNone};
+	display: ${({ 'data-display': display }) => display};
 	left: ${({ 'data-left': left }) => left};
 	opacity: ${({ 'data-opacity': opacity }) => opacity};
 	position: ${({ 'data-position': position }) => position};

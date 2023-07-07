@@ -244,6 +244,19 @@ export type ColorName =
 
 export type CssColor = ColorCode | ColorKeyword | ColorName | GlobalValue;
 
+export type Display =
+	| GlobalValue
+	| 'block'
+	| 'contents'
+	| 'flex'
+	| 'flow-root'
+	| 'grid'
+	| 'inline'
+	| 'inline-block'
+	| 'inline-flex'
+	| 'inline-grid'
+	| 'none';
+
 export type Flex = GlobalValue | AbsoluteSize | Percent | number | 'auto' | 'none';
 
 export type FlexBasis = GlobalValue | AbsoluteSize | Percent | 'auto';
@@ -293,6 +306,8 @@ export type TextAlign =
 	| 'match-parent'
 	| 'right'
 	| 'start';
+
+export type TextOverflow = GlobalValue | 'clip' | 'ellipsis';
 
 export type UserSelect = GlobalValue | 'all' | 'auto' | 'contain' | 'none' | 'text';
 

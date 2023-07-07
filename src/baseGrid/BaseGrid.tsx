@@ -39,7 +39,6 @@ const style = css<
 		SizeStyleProps
 >`
 	box-sizing: border-box;
-	display: grid;
 	align-content: ${({ 'data-align-content': alignContent }) => alignContent};
 	align-items: ${({ 'data-align-items': alignItems }) => alignItems};
 	column-gap: ${({ 'data-column-gap': columnGap }) => columnGap};
@@ -173,7 +172,7 @@ export const createBaseGrid = <
 					children,
 					color,
 					columnGap,
-					displayNone,
+					display,
 					element,
 					flex,
 					fontFamily,
@@ -210,6 +209,7 @@ export const createBaseGrid = <
 					right,
 					rowGap,
 					shrink,
+					textOverflow,
 					top,
 					underline,
 					userSelect,
@@ -235,6 +235,7 @@ export const createBaseGrid = <
 					fontWeight,
 					italic,
 					lineHeight,
+					textOverflow,
 					underline,
 					whiteSpace,
 					wordBreak,
@@ -261,7 +262,7 @@ export const createBaseGrid = <
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display: defalsify(display) ?? 'grid',
 					left,
 					opacity,
 					position,
@@ -281,15 +282,9 @@ export const createBaseGrid = <
 					width,
 				});
 
-				const processedAlignContent = useMemo<AlignContent | undefined>(
-					() => ifDefined(alignContent, (alignContent) => alignContent),
-					[alignContent]
-				);
+				const processedAlignContent = useMemo<AlignContent | undefined>(() => defalsify(alignContent), [alignContent]);
 
-				const processedAlignItems = useMemo<AlignItems | undefined>(
-					() => ifDefined(alignItems, (alignItems) => alignItems),
-					[alignItems]
-				);
+				const processedAlignItems = useMemo<AlignItems | undefined>(() => defalsify(alignItems), [alignItems]);
 
 				const processedColumnGap = useMemo<AbsoluteSize | undefined>(
 					() => ifDefined(columnGap, (columnGap) => getDistance(theme, columnGap)),
@@ -297,14 +292,11 @@ export const createBaseGrid = <
 				);
 
 				const processedJustifyContent = useMemo<JustifyContent | undefined>(
-					() => ifDefined(justifyContent, (justifyContent) => justifyContent),
+					() => defalsify(justifyContent),
 					[justifyContent]
 				);
 
-				const processedJustifyItems = useMemo<JustifyItems | undefined>(
-					() => ifDefined(justifyItems, (justifyItems) => justifyItems),
-					[justifyItems]
-				);
+				const processedJustifyItems = useMemo<JustifyItems | undefined>(() => defalsify(justifyItems), [justifyItems]);
 
 				const processedRowGap = useMemo<AbsoluteSize | undefined>(
 					() => ifDefined(rowGap, (rowGap) => getDistance(theme, rowGap)),

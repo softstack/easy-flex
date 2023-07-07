@@ -138,7 +138,7 @@ export const createText = <
 					bottom,
 					children,
 					color,
-					displayNone,
+					display,
 					element,
 					flex,
 					fontFamily,
@@ -175,6 +175,7 @@ export const createText = <
 					position,
 					right,
 					shrink,
+					textOverflow,
 					top,
 					underline,
 					userSelect,
@@ -198,6 +199,7 @@ export const createText = <
 					fontWeight,
 					italic,
 					lineHeight,
+					textOverflow,
 					underline,
 					whiteSpace,
 					wordBreak,
@@ -224,7 +226,7 @@ export const createText = <
 
 				const miscStyleProps = useMiscStyleProps({
 					bottom,
-					displayNone,
+					display,
 					left,
 					opacity,
 					position,
