@@ -166,7 +166,7 @@ export const createEasyFlex = <
 		CustomLineHeight,
 		CustomWidth
 	>(),
-	Modal: createModal<CustomColor>(),
+	Modal: createModal<CustomColor, CustomDistance>(),
 	Row: createRow<
 		CustomAspectRatio,
 		CustomBorderRadius,
@@ -181,7 +181,14 @@ export const createEasyFlex = <
 		CustomWidth
 	>(),
 	Spacing: createSpacing<CustomDistance>(),
-	Style: createStyle<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>(),
+	Style: createStyle<
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomLineHeight
+	>(),
 	Text: createText<
 		CustomAspectRatio,
 		CustomBorderRadius,

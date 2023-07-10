@@ -62,7 +62,7 @@ export interface LinkProps<
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		GridItemProps,
 		MarginProps<CustomDistance>,
-		MiscProps,
+		MiscProps<CustomDistance>,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	/** Component's hover color. */
 	hoverColor?: Falsifiable<Color<CustomColor>>;

@@ -85,7 +85,7 @@ export interface TextProps<
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		GridItemProps,
-		MiscProps,
+		MiscProps<CustomDistance>,
 		OverflowProps,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	/** Component's text alignment. */

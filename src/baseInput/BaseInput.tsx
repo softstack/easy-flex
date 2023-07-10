@@ -62,7 +62,7 @@ export interface BaseInputProps<
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		GridItemProps,
-		MiscProps,
+		MiscProps<CustomDistance>,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	align?: Falsifiable<TextAlign>;
 	placeholderColor?: Falsifiable<Color<CustomColor>>;

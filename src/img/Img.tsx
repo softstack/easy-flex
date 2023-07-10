@@ -41,7 +41,7 @@ export interface ImgProps<
 		ColorProps<CustomColor>,
 		GridItemProps,
 		MarginProps<CustomDistance>,
-		MiscProps,
+		MiscProps<CustomDistance>,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	objectFit?: Falsifiable<ObjectFit>;
 }

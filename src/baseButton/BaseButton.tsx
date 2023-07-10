@@ -78,7 +78,7 @@ export type BaseButtonProps<
 	FlexItemProps &
 	FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> &
 	GridItemProps &
-	MiscProps &
+	MiscProps<CustomDistance> &
 	OverflowProps &
 	SizeProps<CustomAspectRatio, CustomHeight, CustomWidth>;
 

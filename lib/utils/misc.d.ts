@@ -1,25 +1,25 @@
-import { Display, Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
-export interface MiscProps {
-    bottom?: Falsifiable<Inset>;
+import { CssInset, CustomName, Display, Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
+export interface MiscProps<CustomDistance extends CustomName> {
+    bottom?: Falsifiable<Inset<CustomDistance>>;
     display?: Falsifiable<Display>;
-    left?: Falsifiable<Inset>;
+    left?: Falsifiable<Inset<CustomDistance>>;
     opacity?: Falsifiable<Opacity>;
     position?: Falsifiable<Position>;
-    right?: Falsifiable<Inset>;
-    top?: Falsifiable<Inset>;
+    right?: Falsifiable<Inset<CustomDistance>>;
+    top?: Falsifiable<Inset<CustomDistance>>;
     userSelect?: Falsifiable<UserSelect>;
     visibility?: Falsifiable<Visibility>;
 }
 export interface MiscStyleProps {
-    'data-bottom': Inset | undefined;
+    'data-bottom': CssInset | undefined;
     'data-display': Display | undefined;
-    'data-left': Inset | undefined;
+    'data-left': CssInset | undefined;
     'data-opacity': Opacity | undefined;
     'data-position': Position | undefined;
-    'data-right': Inset | undefined;
-    'data-top': Inset | undefined;
+    'data-right': CssInset | undefined;
+    'data-top': CssInset | undefined;
     'data-user-select': UserSelect | undefined;
     'data-visibility': Visibility | undefined;
 }
-export declare const useMiscStyleProps: ({ bottom, display, left, opacity, position, right, top, userSelect, visibility, }: MiscProps) => MiscStyleProps;
+export declare const useMiscStyleProps: <CustomDistance extends `_${string}`>({ bottom, display, left, opacity, position, right, top, userSelect, visibility, }: MiscProps<CustomDistance>) => MiscStyleProps;
 export declare const miscStyle: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<MiscStyleProps, any>>;

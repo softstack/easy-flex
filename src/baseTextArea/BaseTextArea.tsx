@@ -55,7 +55,7 @@ export interface BaseTextAreaProps<
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		GridItemProps,
-		MiscProps,
+		MiscProps<CustomDistance>,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	placeholderColor?: Falsifiable<Color<CustomColor>>;
 }

@@ -267,7 +267,7 @@ export type FlexWrap = GlobalValue | 'nowrap' | 'wrap' | 'wrap-reverse';
 
 export type CssFontWeight = GlobalValue | number | 'bold' | 'bolder' | 'lighter' | 'normal';
 
-export type Inset = GlobalValue | Size | 'auto';
+export type CssInset = GlobalValue | Size | 'auto';
 
 // grid only
 export type JustifyContent =
@@ -402,6 +402,8 @@ export type FontWeight<CustomFontWeight extends CustomName> =
 	| 'extraBlack';
 
 export type Height<CustomHeight extends CustomName> = CustomThemeSize<CustomHeight> | ElementSize;
+
+export type Inset<CustomDistance extends CustomName> = CustomThemeSize<CustomDistance> | CssInset;
 
 export type LineHeight<CustomLineHeight extends CustomName> = CssLineHeight | CustomThemeSize<CustomLineHeight>;
 

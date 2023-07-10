@@ -114,7 +114,7 @@ export interface BaseGridProps<
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		DistanceProps<CustomDistance>,
 		GridItemProps,
-		MiscProps,
+		MiscProps<CustomDistance>,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	alignContent?: Falsifiable<AlignContent>;
 	alignItems?: Falsifiable<AlignItems>;

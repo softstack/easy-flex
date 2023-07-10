@@ -25,7 +25,7 @@ const StyledDiv = styled.div<
 export interface SpacingProps<CustomDistance extends CustomName>
 	extends HTMLAttributes<HTMLDivElement>,
 		FlexItemProps,
-		MiscProps {
+		MiscProps<CustomDistance> {
 	flip?: boolean;
 	/** Component's height. */
 	height?: Falsifiable<Distance<CustomDistance>>;

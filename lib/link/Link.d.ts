@@ -8,7 +8,7 @@ import { GridItemProps } from '../utils/gridItem';
 import { MarginProps } from '../utils/margin';
 import { MiscProps } from '../utils/misc';
 import { SizeProps } from '../utils/size';
-export interface LinkProps<CustomAspectRatio extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>, ColorProps<CustomColor>, FlexContainerProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, GridItemProps, MarginProps<CustomDistance>, MiscProps, SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
+export interface LinkProps<CustomAspectRatio extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>, ColorProps<CustomColor>, FlexContainerProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, GridItemProps, MarginProps<CustomDistance>, MiscProps<CustomDistance>, SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
     /** Component's hover color. */
     hoverColor?: Falsifiable<Color<CustomColor>>;
     /** If true, the link is opened in a new tab. */

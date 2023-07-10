@@ -25,7 +25,9 @@ const Background = styled.div<
 	${miscStyle}
 `;
 
-export interface ModalProps<CustomColor extends CustomName> extends HTMLAttributes<HTMLDivElement>, MiscProps {
+export interface ModalProps<CustomColor extends CustomName, CustomDistance extends CustomName>
+	extends HTMLAttributes<HTMLDivElement>,
+		MiscProps<CustomDistance> {
 	backgroundColor?: Falsifiable<Color<CustomColor>>;
 	/** Sets blur for the content covered by the modal background. */
 	blur?: AbsoluteSize | boolean;
@@ -34,8 +36,8 @@ export interface ModalProps<CustomColor extends CustomName> extends HTMLAttribut
 	onClose: () => void;
 }
 
-export const createModal = <CustomColor extends CustomName>() => {
-	const Modal = memo<ModalProps<CustomColor>>(
+export const createModal = <CustomColor extends CustomName, CustomDistance extends CustomName>() => {
+	const Modal = memo<ModalProps<CustomColor, CustomDistance>>(
 		({ backgroundColor, blur, children, containerElementId, display, onClose, visibility, ...props }) => {
 			const theme = useEasyFlexTheme();
 

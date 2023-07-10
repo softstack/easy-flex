@@ -103,7 +103,7 @@ export interface BaseFlexProps<
 		FlexItemProps,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
 		GridItemProps,
-		MiscProps,
+		MiscProps<CustomDistance>,
 		OverflowProps,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	/** Component's html tag. */

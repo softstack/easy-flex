@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { CustomName, Distance, Falsifiable } from '../types';
 import { FlexItemProps } from '../utils/flexItem';
 import { MiscProps } from '../utils/misc';
-export interface SpacingProps<CustomDistance extends CustomName> extends HTMLAttributes<HTMLDivElement>, FlexItemProps, MiscProps {
+export interface SpacingProps<CustomDistance extends CustomName> extends HTMLAttributes<HTMLDivElement>, FlexItemProps, MiscProps<CustomDistance> {
     flip?: boolean;
     /** Component's height. */
     height?: Falsifiable<Distance<CustomDistance>>;

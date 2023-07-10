@@ -79,6 +79,7 @@ const StyledVar = styled.var`
 
 export interface StyleProps<
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
 	CustomFontSize extends CustomName,
 	CustomFontWeight extends CustomName,
@@ -86,13 +87,14 @@ export interface StyleProps<
 > extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'>,
 		ColorProps<CustomColor>,
 		FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>,
-		MiscProps {
+		MiscProps<CustomDistance> {
 	/** Component's html tag. */
 	element?: Falsifiable<StyleElement>;
 }
 
 export const createStyle = <
 	CustomColor extends CustomName,
+	CustomDistance extends CustomName,
 	CustomFontFamily extends CustomName,
 	CustomFontSize extends CustomName,
 	CustomFontWeight extends CustomName,
@@ -101,7 +103,7 @@ export const createStyle = <
 	const Style = memo(
 		forwardRef<
 			HTMLSpanElement,
-			StyleProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>
+			StyleProps<CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>
 		>(
 			(
 				{
