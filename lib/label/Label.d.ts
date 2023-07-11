@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { LabelHTMLAttributes } from 'react';
 import { CustomName, Falsifiable, TextAlign } from '../types';
 import { BorderProps } from '../utils/border';
 import { ColorProps } from '../utils/color';
@@ -9,7 +9,7 @@ import { GridItemProps } from '../utils/gridItem';
 import { MiscProps } from '../utils/misc';
 import { OverflowProps } from '../utils/overflow';
 import { SizeProps } from '../utils/size';
-export interface LabelProps<CustomAspectRatio extends CustomName, CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLLabelElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, DistanceProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, GridItemProps, MiscProps<CustomDistance>, OverflowProps, SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
+export interface LabelProps<CustomAspectRatio extends CustomName, CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, DistanceProps<CustomDistance>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, GridItemProps, MiscProps<CustomDistance>, OverflowProps, SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
     /** Component's text alignment. */
     align?: Falsifiable<TextAlign>;
 }

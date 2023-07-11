@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, memo } from 'react';
+import React, { forwardRef, LabelHTMLAttributes, memo } from 'react';
 import styled from 'styled-components';
 import { CustomName, Falsifiable, TextAlign } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
@@ -49,7 +49,7 @@ export interface LabelProps<
 	CustomHeight extends CustomName,
 	CustomLineHeight extends CustomName,
 	CustomWidth extends CustomName
-> extends Omit<HTMLAttributes<HTMLLabelElement>, 'color'>,
+> extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'color'>,
 		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
 		DistanceProps<CustomDistance>,
