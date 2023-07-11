@@ -6,6 +6,7 @@ import { createBaseTextArea } from './baseTextArea/BaseTextArea';
 import { createCol } from './col/Col';
 import { createEasyFlexProvider } from './easyFlexProvider/EasyFlexProvider';
 import { createImg } from './img/Img';
+import { createLabel } from './label/Label';
 import { createLink } from './link/Link';
 import { createModal } from './modal/Modal';
 import { createRow } from './row/Row';
@@ -153,6 +154,19 @@ export const createEasyFlex = <
 		CustomColor,
 		CustomDistance,
 		CustomHeight,
+		CustomWidth
+	>(),
+	Label: createLabel<
+		CustomAspectRatio,
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
 		CustomWidth
 	>(),
 	Link: createLink<
