@@ -96,7 +96,6 @@ export interface EasyFlexTheme<CustomAspectRatio extends CustomName, CustomBorde
         width: Record<CustomThemeSize<CustomWidth>, ElementSize>;
     };
     viewport: {
-        defaultThreshold: number;
         threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
     };
 }

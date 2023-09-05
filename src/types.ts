@@ -473,7 +473,6 @@ export interface EasyFlexTheme<
 		width: Record<CustomThemeSize<CustomWidth>, ElementSize>;
 	};
 	viewport: {
-		defaultThreshold: number;
 		threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
 	};
 }

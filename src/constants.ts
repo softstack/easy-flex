@@ -355,7 +355,6 @@ export const defaultEasyFlexTheme: NeverEasyFlexTheme = {
 		},
 	},
 	viewport: {
-		defaultThreshold: 0,
 		threshold: {
 			'8xs': 429,
 			'7xs': 429,

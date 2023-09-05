@@ -596,35 +596,37 @@ export const useModalContainer = (containerElementId: Falsifiable<string> | unde
 	);
 };
 
-export const useViewport = (): Record<ThemeSize | 'default', boolean> => {
-	const theme = useEasyFlexTheme();
+export const useViewport = <CustomViewportThreshold extends CustomName>(): Record<
+	CustomThemeSize<CustomViewportThreshold>,
+	boolean
+> => {
+	const theme = useEasyFlexTheme<
+		never,
+		never,
+		never,
+		never,
+		never,
+		never,
+		never,
+		never,
+		never,
+		never,
+		CustomViewportThreshold,
+		never
+	>();
 	const { width } = useDimension();
 
-	return useMemo<Record<ThemeSize | 'default', boolean>>(
-		() => ({
-			default: width >= theme.viewport.defaultThreshold,
-			'8xs': width >= getViewportThreshold(theme, '8xs'),
-			'7xs': width >= getViewportThreshold(theme, '7xs'),
-			'6xs': width >= getViewportThreshold(theme, '6xs'),
-			'5xs': width >= getViewportThreshold(theme, '5xs'),
-			'4xs': width >= getViewportThreshold(theme, '4xs'),
-			'3xs': width >= getViewportThreshold(theme, '3xs'),
-			xxs: width >= getViewportThreshold(theme, 'xxs'),
-			xs: width >= getViewportThreshold(theme, 'xs'),
-			s: width >= getViewportThreshold(theme, 's'),
-			m: width >= getViewportThreshold(theme, 'm'),
-			l: width >= getViewportThreshold(theme, 'l'),
-			xl: width >= getViewportThreshold(theme, 'xl'),
-			xxl: width >= getViewportThreshold(theme, 'xxl'),
-			'3xl': width >= getViewportThreshold(theme, '3xl'),
-			'4xl': width >= getViewportThreshold(theme, '4xl'),
-			'5xl': width >= getViewportThreshold(theme, '5xl'),
-			'6xl': width >= getViewportThreshold(theme, '6xl'),
-			'7xl': width >= getViewportThreshold(theme, '7xl'),
-			'8xl': width >= getViewportThreshold(theme, '8xl'),
-		}),
-		[theme, width]
-	);
+	return useMemo<Record<CustomThemeSize<CustomViewportThreshold>, boolean>>(() => {
+		const viewport: Record<CustomThemeSize<CustomViewportThreshold>, boolean> = {} as Record<
+			CustomThemeSize<CustomViewportThreshold>,
+			boolean
+		>;
+		for (const key in theme.viewport.threshold) {
+			viewport[key as CustomThemeSize<CustomViewportThreshold>] =
+				width >= getViewportThreshold(theme, key as CustomThemeSize<CustomViewportThreshold>);
+		}
+		return viewport;
+	}, [theme, width]);
 };
 
 export const atMedia =

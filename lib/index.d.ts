@@ -43,10 +43,10 @@ export declare const createEasyFlex: <CustomAspectRatio extends `_${string}`, Cu
     atMedia: (width: CustomThemeSize<CustomViewportThreshold>) => (props: {
         theme: {
             viewport: Pick<{
-                defaultThreshold: number;
                 threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
             }, "threshold">;
         };
     }) => string;
     useEasyFlexTheme: () => EasyFlexTheme<CustomAspectRatio, CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomViewportThreshold, CustomWidth>;
+    useViewport: () => Record<CustomThemeSize<CustomViewportThreshold>, boolean>;
 };

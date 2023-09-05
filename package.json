@@ -3,12 +3,12 @@
 	"version": "2.0.0-alpha.3",
 	"description": "",
 	"license": "MIT",
-	"author": "Softstack GmbH <hello@softstack.de> (https://softstack.de)",
+	"author": "Softstack GmbH <hello@softstack.io> (https://softstack.io)",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/chainsulting/easy-flex"
+		"url": "https://github.com/softstackhq/joi-bigint"
 	},
-	"homepage": "https://github.com/chainsulting/easy-flex#readme",
+	"homepage": "https://github.com/softstackhq/joi-bigint#readme",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"files": [

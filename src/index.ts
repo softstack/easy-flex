@@ -14,7 +14,7 @@ import { createSpacing } from './spacing/Spacing';
 import { createStyle } from './style/Style';
 import { createText } from './text/Text';
 import { CustomName, CustomThemeSize, EasyFlexTheme } from './types';
-import { atMedia, useEasyFlexTheme } from './utils/base';
+import { atMedia, useEasyFlexTheme, useViewport } from './utils/base';
 
 export * from './baseButton/BaseButton';
 export * from './baseFlex/BaseFlex';
@@ -251,4 +251,5 @@ export const createEasyFlex = <
 		CustomViewportThreshold,
 		CustomWidth
 	>) => useEasyFlexTheme)(),
+	useViewport: ((): (() => Record<CustomThemeSize<CustomViewportThreshold>, boolean>) => useViewport)(),
 });
