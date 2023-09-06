@@ -46,7 +46,14 @@ export declare const useDimension: () => {
 };
 export declare const useModalContainer: (containerElementId: Falsifiable<string> | undefined) => HTMLElement;
 export declare const useViewport: <CustomViewportThreshold extends `_${string}`>() => Record<CustomThemeSize<CustomViewportThreshold>, boolean>;
-export declare const atMedia: <CustomViewportThreshold extends `_${string}`>(width: CustomThemeSize<CustomViewportThreshold>) => (props: {
+export declare const viewportAtLeast: <CustomViewportThreshold extends `_${string}`>(width: CustomThemeSize<CustomViewportThreshold>) => (props: {
+    theme: {
+        viewport: Pick<{
+            threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
+        }, "threshold">;
+    };
+}) => string;
+export declare const viewportLessThan: <CustomViewportThreshold extends `_${string}`>(width: CustomThemeSize<CustomViewportThreshold>) => (props: {
     theme: {
         viewport: Pick<{
             threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;

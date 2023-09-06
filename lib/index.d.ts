@@ -40,7 +40,14 @@ export declare const createEasyFlex: <CustomAspectRatio extends `_${string}`, Cu
     Spacing: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./spacing/Spacing").SpacingProps<CustomDistance> & import("react").RefAttributes<HTMLDivElement>>>;
     Style: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./style/Style").StyleProps<CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight> & import("react").RefAttributes<HTMLSpanElement>>>;
     Text: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<import("./text/Text").TextProps<CustomAspectRatio, CustomBorderRadius, CustomBorderWidth, CustomColor, CustomDistance, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomHeight, CustomLineHeight, CustomWidth> & import("react").RefAttributes<HTMLParagraphElement>>>;
-    atMedia: (width: CustomThemeSize<CustomViewportThreshold>) => (props: {
+    viewportAtLeast: (width: CustomThemeSize<CustomViewportThreshold>) => (props: {
+        theme: {
+            viewport: Pick<{
+                threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;
+            }, "threshold">;
+        };
+    }) => string;
+    viewportLessThan: (width: CustomThemeSize<CustomViewportThreshold>) => (props: {
         theme: {
             viewport: Pick<{
                 threshold: Record<CustomThemeSize<CustomViewportThreshold>, number>;

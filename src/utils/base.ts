@@ -629,7 +629,7 @@ export const useViewport = <CustomViewportThreshold extends CustomName>(): Recor
 	}, [theme, width]);
 };
 
-export const atMedia =
+export const viewportAtLeast =
 	<CustomViewportThreshold extends CustomName>(
 		width: CustomThemeSize<CustomViewportThreshold>
 	): ((props: {
@@ -676,4 +676,53 @@ export const atMedia =
 			>;
 		};
 	}) =>
-		`@media (max-width: ${toPx(theme.viewport.threshold[width] - 1)})`;
+		`@media (width >= ${toPx(theme.viewport.threshold[width])})`;
+
+export const viewportLessThan =
+	<CustomViewportThreshold extends CustomName>(
+		width: CustomThemeSize<CustomViewportThreshold>
+	): ((props: {
+		theme: {
+			viewport: Pick<
+				EasyFlexTheme<
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					CustomViewportThreshold,
+					never
+				>['viewport'],
+				'threshold'
+			>;
+		};
+	}) => string) =>
+	({
+		theme,
+	}: {
+		theme: {
+			viewport: Pick<
+				EasyFlexTheme<
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					never,
+					CustomViewportThreshold,
+					never
+				>['viewport'],
+				'threshold'
+			>;
+		};
+	}) =>
+		`@media (width  < ${toPx(theme.viewport.threshold[width])})`;
