@@ -38,7 +38,7 @@ import {
 } from '../types';
 
 export const mergeEasyFlexThemes = <T>(weak: T, strong: DeepPartial<T>): T => {
-	if (typeof weak === 'object' && typeof strong === 'object') {
+	if (weak !== null && strong !== null && typeof weak === 'object' && typeof strong === 'object') {
 		const tmp: T = {} as T;
 		for (const key in weak) {
 			const newWeak = weak[key];
@@ -50,6 +50,20 @@ export const mergeEasyFlexThemes = <T>(weak: T, strong: DeepPartial<T>): T => {
 			} else {
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				tmp[key] = mergeEasyFlexThemes(newWeak, newStrong as any);
+			}
+		}
+
+		// In strong can be members which are not in weak
+		for (const key in strong) {
+			const newWeak = weak[key as Extract<keyof T, string>];
+			const newStrong = strong[key];
+			if (newStrong === undefined) {
+				tmp[key as Extract<keyof T, string>] = newWeak;
+			} else if (newWeak === undefined) {
+				tmp[key as Extract<keyof T, string>] = newStrong as unknown as T[Extract<keyof T, string>];
+			} else {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				tmp[key as Extract<keyof T, string>] = mergeEasyFlexThemes(newWeak, newStrong as any);
 			}
 		}
 		return tmp;
