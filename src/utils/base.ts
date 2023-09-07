@@ -37,26 +37,60 @@ import {
 	Width,
 } from '../types';
 
-export const mergeEasyFlexThemes = <T>(a: T, b: DeepPartial<T>): T => {
-	if (b === undefined) {
-		return a;
-	} else if (typeof b === 'object') {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const tmp: any = {};
-		for (const [key] of Object.entries(a) as unknown as Array<[keyof T, T]>) {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			tmp[key] = mergeEasyFlexThemes(a[key], b[key as keyof DeepPartial<T>] as any);
+export const mergeEasyFlexThemes = <T>(weak: T, strong: DeepPartial<T>): T => {
+	if (typeof weak === 'object' && typeof strong === 'object') {
+		const tmp: T = {} as T;
+		for (const key in weak) {
+			const newWeak = weak[key];
+			const newStrong = strong[key];
+			if (newStrong === undefined) {
+				tmp[key] = newWeak;
+			} else if (newWeak === undefined) {
+				tmp[key] = newStrong as T[Extract<keyof T, string>];
+			} else {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				tmp[key] = mergeEasyFlexThemes(newWeak, newStrong as any);
+			}
 		}
-
-		// In b can be members which are not in a
-		for (const [key] of Object.entries(b) as unknown as Array<[keyof T, T]>) {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			tmp[key] = mergeEasyFlexThemes(a[key], b[key as keyof DeepPartial<T>] as any);
-		}
-
 		return tmp;
 	}
-	return b as T;
+	return strong as T;
+};
+
+export const mergePartialEasyFlexThemes = <T>(weak: DeepPartial<T>, strong: DeepPartial<T>): DeepPartial<T> => {
+	if (typeof weak === 'object' && typeof strong === 'object') {
+		const tmp: DeepPartial<T> = {} as DeepPartial<T>;
+		for (const key in weak) {
+			const newWeak = weak[key as unknown as keyof DeepPartial<T>];
+			const newStrong = strong[key as unknown as keyof DeepPartial<T>];
+			if (newStrong === undefined) {
+				tmp[key] = newWeak as DeepPartial<T>[Extract<keyof DeepPartial<T>, string>];
+			} else if (newWeak === undefined) {
+				tmp[key] = newStrong as DeepPartial<T>[Extract<keyof DeepPartial<T>, string>];
+			} else {
+				tmp[key as unknown as keyof DeepPartial<T>] = mergePartialEasyFlexThemes(
+					newWeak as unknown as DeepPartial<T>,
+					newStrong as unknown as DeepPartial<T>
+				) as unknown as DeepPartial<T>[Extract<keyof DeepPartial<T>, string>];
+			}
+		}
+		for (const key in strong) {
+			const newWeak = weak[key as unknown as keyof DeepPartial<T>];
+			const newStrong = strong[key as unknown as keyof DeepPartial<T>];
+			if (newStrong === undefined) {
+				tmp[key] = newWeak as DeepPartial<T>[Extract<keyof DeepPartial<T>, string>];
+			} else if (newWeak === undefined) {
+				tmp[key] = newStrong as DeepPartial<T>[Extract<keyof DeepPartial<T>, string>];
+			} else {
+				tmp[key as unknown as keyof DeepPartial<T>] = mergePartialEasyFlexThemes(
+					newWeak as unknown as DeepPartial<T>,
+					newStrong as unknown as DeepPartial<T>
+				) as unknown as DeepPartial<T>[Extract<keyof DeepPartial<T>, string>];
+			}
+		}
+		return tmp;
+	}
+	return strong;
 };
 
 export const isGlobalValue = (value: unknown): value is GlobalValue =>

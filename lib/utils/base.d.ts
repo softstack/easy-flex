@@ -1,5 +1,6 @@
 import { AbsoluteSize, AspectRatio, BorderRadius, BorderWidth, Color, ColorKeyword, ColorName, CssAspectRatio, CssColor, CssFontWeight, CssLineHeight, CustomBorderRadiusSize, CustomThemeSize, DeepPartial, Distance, EasyFlexTheme, ElementSize, ExtSize, Falsifiable, FontSize, FontWeight, GlobalValue, Height, LineHeight, Percent, Px, Rem, Size, ThemeSize, Vh, ViewportThreshold, Vw, Width } from '../types';
-export declare const mergeEasyFlexThemes: <T>(a: T, b: DeepPartial<T>) => T;
+export declare const mergeEasyFlexThemes: <T>(weak: T, strong: DeepPartial<T>) => T;
+export declare const mergePartialEasyFlexThemes: <T>(weak: DeepPartial<T>, strong: DeepPartial<T>) => DeepPartial<T>;
 export declare const isGlobalValue: (value: unknown) => value is GlobalValue;
 export declare const isCustomName: (value: unknown) => value is `_${string}`;
 export declare const isColorKeyword: <CustomColor extends `_${string}`>(color: Color<CustomColor>) => color is ColorKeyword;

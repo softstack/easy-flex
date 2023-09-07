@@ -216,6 +216,21 @@ export const createEasyFlex = <
 		CustomLineHeight,
 		CustomWidth
 	>(),
+	useEasyFlexTheme: ((): (() => EasyFlexTheme<
+		CustomAspectRatio,
+		CustomBorderRadius,
+		CustomBorderWidth,
+		CustomColor,
+		CustomDistance,
+		CustomFontFamily,
+		CustomFontSize,
+		CustomFontWeight,
+		CustomHeight,
+		CustomLineHeight,
+		CustomViewportThreshold,
+		CustomWidth
+	>) => useEasyFlexTheme)(),
+	useViewport: ((): (() => Record<CustomThemeSize<CustomViewportThreshold>, boolean>) => useViewport)(),
 	viewportAtLeast: ((): ((width: CustomThemeSize<CustomViewportThreshold>) => (props: {
 		theme: {
 			viewport: Pick<
@@ -258,19 +273,4 @@ export const createEasyFlex = <
 			>;
 		};
 	}) => string) => viewportLessThan)(),
-	useEasyFlexTheme: ((): (() => EasyFlexTheme<
-		CustomAspectRatio,
-		CustomBorderRadius,
-		CustomBorderWidth,
-		CustomColor,
-		CustomDistance,
-		CustomFontFamily,
-		CustomFontSize,
-		CustomFontWeight,
-		CustomHeight,
-		CustomLineHeight,
-		CustomViewportThreshold,
-		CustomWidth
-	>) => useEasyFlexTheme)(),
-	useViewport: ((): (() => Record<CustomThemeSize<CustomViewportThreshold>, boolean>) => useViewport)(),
 });
