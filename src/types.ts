@@ -279,10 +279,11 @@ export type JustifyContent =
 	| 'space-around'
 	| 'space-between'
 	| 'space-evenly'
-	| 'start'; // grid only
+	| 'start' // grid only
+	| 'stretch';
 
 // grid only
-export type JustifyItems = GlobalValue | 'end' | 'center' | 'start' | 'stretch';
+export type JustifyItems = GlobalValue | 'center' | 'end' | 'start' | 'stretch';
 
 export type JustifySelf = GlobalValue | 'center' | 'end' | 'start' | 'stretch';
 

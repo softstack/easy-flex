@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CustomName, Falsifiable, ObjectFit } from '../types';
 import { BorderProps, borderStyle, BorderStyleProps, useBorderStyleProps } from '../utils/border';
 import { ColorProps, colorStyle, ColorStyleProps, useColorStyleProps } from '../utils/color';
+import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps } from '../utils/flexItem';
 import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
 import { MarginProps, marginStyle, MarginStyleProps, useMarginStyleProps } from '../utils/margin';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
@@ -13,6 +14,7 @@ const StyledImg = styled.img<
 		'data-object-fit': Falsifiable<ObjectFit> | undefined;
 	} & BorderStyleProps &
 		ColorStyleProps &
+		FlexItemStyleProps &
 		GridItemStyleProps &
 		MarginStyleProps &
 		MiscStyleProps &
@@ -22,6 +24,7 @@ const StyledImg = styled.img<
 	object-fit: ${({ 'data-object-fit': objectFit }) => objectFit};
 	${borderStyle}
 	${colorStyle}
+	${flexItemStyle}
 	${gridItemStyle}
 	${marginStyle}
 	${miscStyle}
@@ -39,6 +42,7 @@ export interface ImgProps<
 > extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'color' | 'height' | 'width'>,
 		BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>,
 		ColorProps<CustomColor>,
+		FlexItemProps,
 		GridItemProps,
 		MarginProps<CustomDistance>,
 		MiscProps<CustomDistance>,
@@ -70,8 +74,10 @@ export const createImg = <
 		>(
 			(
 				{
+					alignSelf,
 					aspectRatio,
 					backgroundColor,
+					basis,
 					borderColor,
 					borderRadius,
 					borderStyle,
@@ -79,6 +85,8 @@ export const createImg = <
 					bottom,
 					color,
 					display,
+					flex,
+					grow,
 					height,
 					justifySelf,
 					left,
@@ -97,6 +105,7 @@ export const createImg = <
 					opacity,
 					position,
 					right,
+					shrink,
 					top,
 					userSelect,
 					visibility,
@@ -108,6 +117,8 @@ export const createImg = <
 				const borderStyleProps = useBorderStyleProps({ borderColor, borderRadius, borderStyle, borderWidth });
 
 				const colorStyleProps = useColorStyleProps({ backgroundColor, color });
+
+				const flexItemStyleProps = useFlexItemStyleProps({ alignSelf, basis, flex, grow, shrink });
 
 				const gridItemStyleProps = useGridItemStyleProps({ justifySelf });
 
@@ -148,6 +159,7 @@ export const createImg = <
 						data-object-fit={objectFit}
 						{...borderStyleProps}
 						{...colorStyleProps}
+						{...flexItemStyleProps}
 						{...gridItemStyleProps}
 						{...marginStyleProps}
 						{...miscStyleProps}
