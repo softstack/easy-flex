@@ -7,8 +7,9 @@ import { FlexItemProps } from '../utils/flexItem';
 import { FontProps } from '../utils/font';
 import { GridItemProps } from '../utils/gridItem';
 import { MiscProps } from '../utils/misc';
+import { OverflowProps } from '../utils/overflow';
 import { SizeProps } from '../utils/size';
-export interface BaseGridProps<CustomAspectRatio extends CustomName, CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, DistanceProps<CustomDistance>, GridItemProps, MiscProps<CustomDistance>, SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
+export interface BaseGridProps<CustomAspectRatio extends CustomName, CustomBorderRadius extends CustomName, CustomBorderWidth extends CustomName, CustomColor extends CustomName, CustomDistance extends CustomName, CustomFontFamily extends CustomName, CustomFontSize extends CustomName, CustomFontWeight extends CustomName, CustomHeight extends CustomName, CustomLineHeight extends CustomName, CustomWidth extends CustomName> extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>, BorderProps<CustomBorderRadius, CustomBorderWidth, CustomColor>, ColorProps<CustomColor>, FlexItemProps, FontProps<CustomColor, CustomFontFamily, CustomFontSize, CustomFontWeight, CustomLineHeight>, DistanceProps<CustomDistance>, GridItemProps, MiscProps<CustomDistance>, OverflowProps, SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
     alignContent?: Falsifiable<AlignContent>;
     alignItems?: Falsifiable<AlignItems>;
     columnGap?: Falsifiable<Distance<CustomDistance>>;

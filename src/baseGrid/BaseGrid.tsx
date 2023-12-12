@@ -19,6 +19,7 @@ import { FlexItemProps, flexItemStyle, FlexItemStyleProps, useFlexItemStyleProps
 import { FontProps, fontStyle, FontStyleProps, useFontStyleProps } from '../utils/font';
 import { GridItemProps, gridItemStyle, GridItemStyleProps, useGridItemStyleProps } from '../utils/gridItem';
 import { MiscProps, miscStyle, MiscStyleProps, useMiscStyleProps } from '../utils/misc';
+import { OverflowProps, overflowStyle, OverflowStyleProps, useOverflowStyleProps } from '../utils/overflow';
 import { SizeProps, sizeStyle, SizeStyleProps, useSizeStyleProps } from '../utils/size';
 
 const style = css<
@@ -36,6 +37,7 @@ const style = css<
 		FontStyleProps &
 		GridItemStyleProps &
 		MiscStyleProps &
+		OverflowStyleProps &
 		SizeStyleProps
 >`
 	box-sizing: border-box;
@@ -52,6 +54,7 @@ const style = css<
 	${fontStyle}
 	${gridItemStyle}
 	${miscStyle}
+	${overflowStyle}
 	${sizeStyle}
 `;
 
@@ -115,6 +118,7 @@ export interface BaseGridProps<
 		DistanceProps<CustomDistance>,
 		GridItemProps,
 		MiscProps<CustomDistance>,
+		OverflowProps,
 		SizeProps<CustomAspectRatio, CustomHeight, CustomWidth> {
 	alignContent?: Falsifiable<AlignContent>;
 	alignItems?: Falsifiable<AlignItems>;
@@ -198,6 +202,9 @@ export const createBaseGrid = <
 					minHeight,
 					minWidth,
 					opacity,
+					overflow,
+					overflowX,
+					overflowY,
 					padding,
 					paddingBottom,
 					paddingHorizontal,
@@ -272,6 +279,8 @@ export const createBaseGrid = <
 					visibility,
 				});
 
+				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });
+
 				const sizeStyleProps = useSizeStyleProps({
 					aspectRatio,
 					height,
@@ -343,6 +352,7 @@ export const createBaseGrid = <
 						{...fontStyleProps}
 						{...gridItemStyleProps}
 						{...miscStyleProps}
+						{...overflowStyleProps}
 						{...sizeStyleProps}
 						ref={ref}
 						{...props}
