@@ -1,6 +1,17 @@
 import { useMemo } from 'react';
 import { css } from 'styled-components';
-import { CssInset, CustomName, Display, Falsifiable, Inset, Opacity, Position, UserSelect, Visibility } from '../types';
+import {
+	CssInset,
+	CustomName,
+	Display,
+	Falsifiable,
+	Inset,
+	Opacity,
+	Position,
+	UserSelect,
+	Visibility,
+	ZIndex,
+} from '../types';
 import { defalsify, ifDefined, isThemeSize, useEasyFlexTheme } from './base';
 
 export interface MiscProps<CustomDistance extends CustomName> {
@@ -13,6 +24,7 @@ export interface MiscProps<CustomDistance extends CustomName> {
 	top?: Falsifiable<Inset<CustomDistance>>;
 	userSelect?: Falsifiable<UserSelect>;
 	visibility?: Falsifiable<Visibility>;
+	zIndex?: Falsifiable<ZIndex>;
 }
 
 export interface MiscStyleProps {
@@ -25,6 +37,7 @@ export interface MiscStyleProps {
 	'data-top': CssInset | undefined;
 	'data-user-select': UserSelect | undefined;
 	'data-visibility': Visibility | undefined;
+	'data-z-index': ZIndex | undefined;
 }
 
 export const useMiscStyleProps = <CustomDistance extends CustomName>({
@@ -37,6 +50,7 @@ export const useMiscStyleProps = <CustomDistance extends CustomName>({
 	top,
 	userSelect,
 	visibility,
+	zIndex,
 }: MiscProps<CustomDistance>): MiscStyleProps => {
 	const theme = useEasyFlexTheme();
 
@@ -70,6 +84,8 @@ export const useMiscStyleProps = <CustomDistance extends CustomName>({
 
 	const processedVisibility = useMemo<Visibility | undefined>(() => defalsify(visibility), [visibility]);
 
+	const processedZIndex = useMemo<ZIndex | undefined>(() => defalsify(zIndex), [zIndex]);
+
 	return useMemo<MiscStyleProps>(
 		() => ({
 			'data-bottom': processedBottom,
@@ -81,6 +97,7 @@ export const useMiscStyleProps = <CustomDistance extends CustomName>({
 			'data-top': processedTop,
 			'data-user-select': processedUserSelect,
 			'data-visibility': processedVisibility,
+			'data-z-index': processedZIndex,
 		}),
 		[
 			processedBottom,
@@ -92,6 +109,7 @@ export const useMiscStyleProps = <CustomDistance extends CustomName>({
 			processedTop,
 			processedUserSelect,
 			processedVisibility,
+			processedZIndex,
 		]
 	);
 };
@@ -106,4 +124,5 @@ export const miscStyle = css<MiscStyleProps>`
 	top: ${({ 'data-top': top }) => top};
 	user-select: ${({ 'data-user-select': userSelect }) => userSelect};
 	visibility: ${({ 'data-visibility': visibility }) => visibility};
+	z-index: ${({ 'data-z-index': zIndex }) => zIndex};
 `;

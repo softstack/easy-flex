@@ -30,7 +30,7 @@ export type Size = AbsoluteSize | Percent;
 
 export type ExtSize = GlobalValue | Size;
 
-export type ElementSize = ExtSize | 'fit-content' | 'max-content' | 'min-content';
+export type ElementSize = ExtSize | 'auto' | 'fit-content' | 'max-content' | 'min-content' | 'none';
 
 // grid only
 export type AlignContent = 'center' | 'end' | 'space-around' | 'space-between' | 'space-evenly' | 'start' | 'stretch';
@@ -317,6 +317,8 @@ export type Visibility = GlobalValue | 'collapse' | 'hidden' | 'visible';
 export type WhiteSpace = GlobalValue | 'break-spaces' | 'normal' | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap';
 
 export type WordBreak = GlobalValue | 'break-all' | 'break-word' | 'keep-all' | 'normal';
+
+export type ZIndex = GlobalValue | 'auto' | number;
 
 // CSS end
 
