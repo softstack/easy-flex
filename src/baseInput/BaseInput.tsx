@@ -220,6 +220,7 @@ export const createBaseInput = <
 
 				return (
 					<StyledInput
+						size={1}
 						data-align={align}
 						data-placeholder-color={processedPlaceholderColor}
 						{...borderStyleProps}
