@@ -231,6 +231,7 @@ export const createBaseButton = <
 					wordBreak,
 					wrap,
 					wrapGap,
+					zIndex,
 					...props
 				},
 				ref
@@ -294,6 +295,7 @@ export const createBaseButton = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });

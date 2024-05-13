@@ -151,6 +151,7 @@ export const createLabel = <
 					whiteSpace,
 					width,
 					wordBreak,
+					zIndex,
 					...props
 				},
 				ref
@@ -202,6 +203,7 @@ export const createLabel = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });

@@ -110,6 +110,7 @@ export const createImg = <
 					userSelect,
 					visibility,
 					width,
+					zIndex,
 					...props
 				},
 				ref
@@ -142,6 +143,7 @@ export const createImg = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const sizeStyleProps = useSizeStyleProps({

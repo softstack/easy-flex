@@ -204,6 +204,7 @@ export const createBaseFlex = <
 					wordBreak,
 					wrap,
 					wrapGap,
+					zIndex,
 					...props
 				},
 				ref
@@ -257,6 +258,7 @@ export const createBaseFlex = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });

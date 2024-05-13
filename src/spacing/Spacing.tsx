@@ -54,6 +54,7 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 					userSelect,
 					visibility,
 					width,
+					zIndex,
 					...props
 				},
 				ref
@@ -79,6 +80,7 @@ export const createSpacing = <CustomDistance extends CustomName>() => {
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const processedWidth = useMemo<AbsoluteSize>(

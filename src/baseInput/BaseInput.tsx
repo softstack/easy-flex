@@ -153,6 +153,7 @@ export const createBaseInput = <
 					whiteSpace,
 					width,
 					wordBreak,
+					zIndex,
 					...props
 				},
 				ref
@@ -204,6 +205,7 @@ export const createBaseInput = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const sizeStyleProps = useSizeStyleProps({

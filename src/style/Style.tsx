@@ -129,6 +129,7 @@ export const createStyle = <
 					visibility,
 					whiteSpace,
 					wordBreak,
+					zIndex,
 					...props
 				},
 				ref
@@ -157,6 +158,7 @@ export const createStyle = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const Element = useMemo(() => {

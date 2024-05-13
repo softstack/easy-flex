@@ -183,6 +183,7 @@ export const createText = <
 					whiteSpace,
 					width,
 					wordBreak,
+					zIndex,
 					...props
 				},
 				ref
@@ -234,6 +235,7 @@ export const createText = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });

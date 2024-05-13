@@ -38,10 +38,10 @@ export interface ModalProps<CustomColor extends CustomName, CustomDistance exten
 
 export const createModal = <CustomColor extends CustomName, CustomDistance extends CustomName>() => {
 	const Modal = memo<ModalProps<CustomColor, CustomDistance>>(
-		({ backgroundColor, blur, children, containerElementId, display, onClose, visibility, ...props }) => {
+		({ backgroundColor, blur, children, containerElementId, display, onClose, visibility, zIndex, ...props }) => {
 			const theme = useEasyFlexTheme();
 
-			const miscStyleProps = useMiscStyleProps({ display: defalsify(display) ?? 'flex', visibility });
+			const miscStyleProps = useMiscStyleProps({ display: defalsify(display) ?? 'flex', visibility, zIndex });
 
 			const backgroundElement = useRef<HTMLDivElement>(null);
 

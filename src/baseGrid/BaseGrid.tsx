@@ -224,6 +224,7 @@ export const createBaseGrid = <
 					whiteSpace,
 					width,
 					wordBreak,
+					zIndex,
 					...props
 				},
 				ref
@@ -277,6 +278,7 @@ export const createBaseGrid = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const overflowStyleProps = useOverflowStyleProps({ overflow, overflowX, overflowY });

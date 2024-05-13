@@ -149,6 +149,7 @@ export const createBaseTextArea = <
 					whiteSpace,
 					width,
 					wordBreak,
+					zIndex,
 					...props
 				},
 				ref
@@ -200,6 +201,7 @@ export const createBaseTextArea = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const sizeStyleProps = useSizeStyleProps({

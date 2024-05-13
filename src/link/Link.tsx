@@ -147,6 +147,7 @@ export const createLink = <
 					wordBreak,
 					wrap,
 					wrapGap,
+					zIndex,
 					...props
 				},
 				ref
@@ -200,6 +201,7 @@ export const createLink = <
 					top,
 					userSelect,
 					visibility,
+					zIndex,
 				});
 
 				const sizeStyleProps = useSizeStyleProps({
